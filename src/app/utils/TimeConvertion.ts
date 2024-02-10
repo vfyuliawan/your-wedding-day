@@ -48,7 +48,6 @@ export const TimeConversionTime = (props: TimeConvertionInterface): string => {
   };
 
   const formattedDateTime = date.toLocaleDateString("en-US", options);
-  console.log("dateTime", formattedDateTime.split(",")[2]);
 
   return formattedDateTime.split(",")[2];
 };

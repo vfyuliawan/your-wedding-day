@@ -30,8 +30,6 @@ const InfoView2 = (props: InfoViewInterface) => {
   const targetRef = useRef<any>(null);
   const isVisible = useIntersectionObserver(targetRef);
 
-  console.log("cekProps", props.Info);
-
   useEffect(() => {
     if (isVisible) {
       controls.start(AnimationThemeInstance.FadeHorizon);
