@@ -4,6 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import Galery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+// @ts-ignore
 import OwlCarousel from "react-owl-carousel3";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
