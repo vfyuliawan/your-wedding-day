@@ -214,6 +214,9 @@ const CoverView2 = (props: CoverModelInterface) => {
             <p className="" style={{ fontSize: "1.4rem", color: "white" }}>
               Kepada Bpk/Ibu/Saudara/i
             </p>
+            <p className="" style={{ fontSize: "2rem", color: "white" }}>
+              {props.guest.toLocaleUpperCase()}
+            </p>
             <a
               className="btn btn-lg text-center"
               style={{

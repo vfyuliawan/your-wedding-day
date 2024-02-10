@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export interface CoverModelInterface {
     detailCover : CoverKeyValue
-  
+    guest: string;
     isVisible: boolean;
     setVisible?: Dispatch<SetStateAction<boolean>>;
     onCoverClick: () => void;

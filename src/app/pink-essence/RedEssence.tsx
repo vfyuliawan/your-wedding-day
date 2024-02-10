@@ -31,6 +31,7 @@ import CoverView2 from "./Section/Cover/CoverView2";
 interface RedEssenceInterface {
   details: DocumentData | undefined;
   getDetails: () => void
+  guest:string;
 }
 
 const RedEssence = (props: RedEssenceInterface) => {
@@ -93,10 +94,11 @@ const RedEssence = (props: RedEssenceInterface) => {
         ref={audioRef}
         controls
       >
-        <source src="/music/Payung-Teduh-Akad.mp3" type="audio/mp3" />
+        <source src={`/music/${props?.details?.ThemeSong}.mp3`} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
       <CoverView2
+      guest={props.guest}
         isVisible={coverVisible}
         onCoverClick={handleCoverClick}
         detailCover={props?.details?.Cover}
