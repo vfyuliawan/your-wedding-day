@@ -9,6 +9,7 @@ import AnimationThemeInstance, {
 import {
   TimeConversionTime,
   TimeConvertionDate,
+  TimeConvertionDay,
   TimeConvertionInterface,
 } from "@/app/utils/TimeConvertion";
 
@@ -17,7 +18,7 @@ export interface InfoViewInterface {
 }
 
 export interface InfoViewKeyValue {
-  Date: Date | TimeConvertionInterface;
+  Date: TimeConvertionInterface;
   Judul: string;
   Map: string;
   Photo: string;
@@ -92,10 +93,9 @@ const InfoView2 = (props: InfoViewInterface) => {
                 transition={{ duration: 1.5, delay: index === 0 ? 0.8 : 1.9 }}
                 src={item.Photo}
                 style={{
-                  borderTopRightRadius: index === 1 ? '0%' : '30%',
+                  borderTopRightRadius: index === 1 ? "0%" : "30%",
                   backgroundSize: "cover",
-                borderTopLeftRadius: index === 1 ? '30%' : '0%' ,
-
+                  borderTopLeftRadius: index === 1 ? "30%" : "0%",
                 }}
                 width={"100%"}
                 height={"100%"}
@@ -126,30 +126,61 @@ const InfoView2 = (props: InfoViewInterface) => {
               <motion.div
                 animate={controls}
                 initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: index === 0 ? 0.8 :  2.2 }}
+                transition={{ duration: 1.5, delay: index === 0 ? 0.8 : 2.2 }}
                 className="col-md-9 col-sm-9 col-9 text-center bg-light"
                 style={{ color: "black" }}
               >
-                <h4
-                  style={{
-                    fontSize: "3rem",
-                    fontFamily: "Dancing Script",
-                    fontWeight: 500,
-                    marginTop: "2rem",
-                  }}
-                >
-                  {TimeConvertionDate(item?.Date as TimeConvertionInterface)}
-                </h4>
+                <div className="row">
+                  <div className="col-4">
+                    <h4
+                      style={{
+                        fontSize: "3rem",
+                        fontFamily: "Dancing Script",
+                        fontWeight: 500,
+                        marginTop: "1rem",
+                      }}
+                    >
+                      {
+                        TimeConvertionDay(item?.Date, item.Date as any)
+                          .dayString
+                      }{" "}
+                    </h4>
+                    <h4
+                      style={{
+                        fontSize: "6rem",
+                        fontFamily: "Dancing Script",
+                        fontWeight: 500,
+                      }}
+                    >
+
+                      {TimeConvertionDay(item?.Date, item.Date as any).day}
+                    </h4>
+                  </div>
+                  <div className="col-8 d-flex justify-content-start align-items-end">
+                    <h4
+                      style={{
+                        fontSize: "1.8rem",
+                        fontFamily: "Dancing Script",
+                        fontWeight: 500,
+                        letterSpacing: "1px",
+                        marginTop: "2rem",
+                      }}
+                    >
+                      {TimeConvertionDate(
+                        item?.Date as TimeConvertionInterface
+                      ).dateMonth}
+                    </h4>
+                  </div>
+                </div>
                 <div
                   style={{
                     width: "100%",
-                    height: "2px",
+                    height: "1px",
                     backgroundColor: "black",
-                    marginBottom: "3rem",
-                    marginTop: "3rem",
+                    marginBottom: "1rem",
+                    marginTop: "1rem",
                   }}
                 ></div>
-
                 <span
                   style={{
                     display: "flex",
@@ -163,7 +194,7 @@ const InfoView2 = (props: InfoViewInterface) => {
                     style={{ marginRight: "0.4rem" }}
                   ></i>
                   <p style={{ letterSpacing: "2px", margin: 0 }}>
-                    {TimeConversionTime(item?.Date as TimeConvertionInterface)}
+                    {TimeConversionTime(item?.Date as TimeConvertionInterface)} 
                   </p>
                 </span>
                 <h4 style={{ marginBottom: "2rem", letterSpacing: "1px" }}>
@@ -186,7 +217,7 @@ const InfoView2 = (props: InfoViewInterface) => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        minWidth:'100%'
+                        minWidth: "100%",
                       }}
                       href={item.Map}
                     >

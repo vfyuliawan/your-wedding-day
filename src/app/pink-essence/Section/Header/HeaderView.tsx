@@ -1,9 +1,12 @@
 import { forwardRef } from "react";
 
-const HeaderView = forwardRef<HTMLDivElement, {}>((props, ref) => {
-  return ( 
-        <>
-        
+interface HeaderViewInterface {
+  themeName :string;
+}
+
+const HeaderView = (props : HeaderViewInterface) => {
+  return (
+    <>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Fulan &amp; Fulana Weding</title>
@@ -21,7 +24,10 @@ const HeaderView = forwardRef<HTMLDivElement, {}>((props, ref) => {
         href="https://fonts.googleapis.com/css2?family=Sacramento&family=Work+Sans:ital,wght@0,100;0,300;0,600;1,100;1,600&display=swap"
         rel="stylesheet"
       />
-      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
       {/* FONT */}
 
       {/* simplycountdown */}
@@ -38,10 +44,11 @@ const HeaderView = forwardRef<HTMLDivElement, {}>((props, ref) => {
       />
       {/* AOS */}
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
-      
-      <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
-        </>
-     );
-})
- 
+
+      {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
+      <link rel="stylesheet" href={`/${props.themeName}/assets/css/style.css`} />
+    </>
+  );
+};
+
 export default HeaderView;

@@ -80,15 +80,7 @@ const RedEssence = (props: RedEssenceInterface) => {
     setCoverVisible(false);
     openInvitation();
     enableScroll();
-  };
-
-  // useEffect(() => {
-  //   props.getDetails()
-  //   return () => {
-      
-  //   }
-  // }, [])
-  
+  };  
 
   return (
     <div>
@@ -110,7 +102,7 @@ const RedEssence = (props: RedEssenceInterface) => {
         detailCover={props?.details?.Cover}
       />
       {!coverVisible ? <Navbar2View /> : null}
-      <HeaderView ref={headerRef} />
+      <HeaderView themeName={props?.details?.ThemeName} />
       <div className="hero-home">
         {props?.details?.Hero?.Visible ? (
           <HeroView ref={heroRef} HeroDetail={props?.details?.Hero} />

@@ -102,7 +102,8 @@ const StoryView = (props: StoryViewInterface) => {
                       {" "}
                       {TimeConvertionDate(
                         props?.OurStory?.First.Date as TimeConvertionInterface
-                      )}
+                      ).dateMonth}
+                      {TimeConversionTime(props?.OurStory?.First.Date as TimeConvertionInterface)} 
                     </span>
                   </div>
                   <div className="timeline-body">
@@ -145,7 +146,7 @@ const StoryView = (props: StoryViewInterface) => {
                       {" "}
                       {TimeConvertionDate(
                         props?.OurStory?.Second?.Date as TimeConvertionInterface
-                      )}
+                      ).dateMonth}
                     </span>
                   </div>
                   <div className="timeline-body">
@@ -187,7 +188,7 @@ const StoryView = (props: StoryViewInterface) => {
                       {" "}
                       {TimeConvertionDate(
                         props?.OurStory?.Third?.Date as TimeConvertionInterface
-                      )}
+                      ).dateMonth}
                     </span>
                   </div>
                   <div className="timeline-body">

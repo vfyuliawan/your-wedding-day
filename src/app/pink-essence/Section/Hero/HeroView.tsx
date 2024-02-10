@@ -35,7 +35,7 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
         />
         <main className="inside">
           <h1>{props.HeroDetail.HeroTittle}</h1>
-          <h4>Save The Date |  {TimeConvertionDate(props?.HeroDetail?.HeroDate as TimeConvertionInterface)}</h4>
+          <h4>Save The Date |  {TimeConvertionDate(props?.HeroDetail?.HeroDate as TimeConvertionInterface).dateFull}</h4>
         </main>
         <div className="gradient-overlay" />
 

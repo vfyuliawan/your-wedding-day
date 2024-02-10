@@ -78,7 +78,7 @@ const CoverView2 = (props: CoverModelInterface) => {
           className="cover2-overlay-shadow"
           style={{
             width: "100%",
-            height: "60%",
+            height: "78%",
             position: "absolute",
             bottom: "3%",
             color: "#fff",
@@ -90,7 +90,7 @@ const CoverView2 = (props: CoverModelInterface) => {
           className="cover2-overlay"
           style={{
             width: "100%",
-            height: "60%",
+            height: "78%",
             position: "absolute",
             flexDirection: "row",
             bottom: 0,
@@ -206,7 +206,7 @@ const CoverView2 = (props: CoverModelInterface) => {
             className="cover2-kepada"
             style={{
               position: "absolute",
-              top: "40%",
+              top: "35%",
               left: "50%",
               transform: "translateX(-50%)",
             }}

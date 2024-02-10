@@ -229,7 +229,7 @@ const RsvpView = (props: RSVPViewInterface) => {
               {item.Text}
               <br />
               <span style={{ fontSize: "0.9rem" }}>
-                {TimeConvertionDate(item.Date)}
+                {TimeConvertionDate(item.Date).dateFull}
               </span>
             </p>
           </div>

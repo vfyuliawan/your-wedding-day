@@ -87,7 +87,9 @@ export default function Home() {
     <>
       {loading ? (
         <Loading />
-      ) : themeName == "PinkEssence" ? (
+      ) : themeName == "RedEssence" ? (
+        <RedEssence details={details} getDetails={() => {getMessage()}}/>
+      ) : themeName == "BluePremium" ? (
         <RedEssence details={details} getDetails={() => {getMessage()}}/>
       ) : homePage ? (
         <h1>home</h1>

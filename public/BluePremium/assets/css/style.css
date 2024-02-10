@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Poppins&display=swap');
 :root {
   /* --pink: #f14e95; */
-  --pink: hsl(0, 74%, 18%); 
+  --pink: hsl(225, 92%, 14%); 
   
   /* sama */
   --sec: #dadada;
@@ -153,7 +153,7 @@ p {
 .cover {
   min-height: 100vh;
   position: relative;
-  background-color: var(--pink);
+  background-color:var(--pink);
   display: flex;
   justify-content: center;
   align-items: center;
