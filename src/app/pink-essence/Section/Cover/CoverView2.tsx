@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
 import { HeroViewInterface } from "../Hero/HeroModel";
 import { TimeConvertionDate, TimeConvertionInterface } from "@/app/utils/TimeConvertion";
+import { Timestamp } from "firebase/firestore";
 
 const CoverView2 = (props: CoverModelInterface, ) => {
   const [appear, setAppear] = useState(false);
@@ -15,7 +16,47 @@ const CoverView2 = (props: CoverModelInterface, ) => {
     }, 6000);
   };
 
-  console.log(props.hero?.HeroDate);
+  const calculateTimeRemaining = () => {
+    const now = new Date();
+    const targetDate : Date = new Date(
+      props.hero.HeroDate.toDate()
+      .toISOString().split(".")[0]
+    )
+
+    const difference =
+      typeof targetDate === "number" || targetDate instanceof Date
+        ? +targetDate - now.getTime()
+        : 0;
+
+    if (difference <= 0) {
+      // Countdown reached, do something here
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    return { days, hours, minutes, seconds };
+  };
+
+  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining(calculateTimeRemaining());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+  
   
 
   return !appear ? (
@@ -44,12 +85,9 @@ const CoverView2 = (props: CoverModelInterface, ) => {
           width: "100%",
           top: 0,
           minHeight: "100vh",
-          // backgroundImage: `url('${props.coverImg}')`,
           backgroundRepeat: "no-repeat",
-          // backgroundPosition: "center",
           display: "flex",
           justifyContent: "center",
-          // objectFit: "fill",
         }}
       >
         <img
@@ -64,20 +102,6 @@ const CoverView2 = (props: CoverModelInterface, ) => {
           src={props.detailCover.ImgCover}
           alt="dfasdfsa"
         />
-        {/* <div
-          className="cover2-overlay"
-          style={{
-            backgroundColor:'red',
-            width: "100%",
-            height: "100%",
-            opacity: 0.4,
-            position: "absolute",
-            bottom: 0,
-            color: "#fff",
-            fontSize: "24px",
-            textAlign: "center",
-          }}
-        ></div> */}
         <div
           className="cover2-overlay-shadow"
           style={{
@@ -137,7 +161,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    00
+                    {timeRemaining.days}
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Hari
@@ -148,7 +172,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    00
+                  {timeRemaining.hours}
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Jam
@@ -159,7 +183,8 @@ const CoverView2 = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    00
+                  {timeRemaining.minutes}
+
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Menit
@@ -170,7 +195,8 @@ const CoverView2 = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    00
+                  {timeRemaining.seconds}
+
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Detik
@@ -179,7 +205,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
               </div>
             </div>
             <div className="row mt-2">
-              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.hero?.HeroDate as TimeConvertionInterface).dateFull}</p>
+              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.hero?.HeroDate as any).dateFull}</p>
             </div>
           </div>
         </div>

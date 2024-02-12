@@ -424,7 +424,7 @@ p {
   font-weight: 800 !important;
 }
 
-.info a,
+.info a, .count-down a,
 .cover2 a {
   width: 170px;
   color: white !important;
@@ -442,7 +442,7 @@ p {
   padding: 5px;
 }
 
-.info a:hover {
+.info a, .count-down a:hover {
   /* background-color: white; */
   background: var(--bg) !important;
   color: white !important;
@@ -478,9 +478,14 @@ p {
   background: linear-gradient(to top, var(--pink), var(--bg2));
 }
 
+.iframeContainer{
+  border: 3px solid var(--pink);
+}
+
 .story {
   padding-bottom: 10rem;
   padding-top: 10rem;
+  background-color: 'white';
 }
 
 .story span,

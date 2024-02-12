@@ -22,7 +22,6 @@ const GaleryView2 = () => {
     return () => {};
   }, [animate, isVisible]);
 
-
   const images = [
     {
       original: "/pink-essence/img/prawed/prawed1.jpg",
@@ -38,16 +37,20 @@ const GaleryView2 = () => {
     <section className="galery" id="galery">
       <div className="container">
         <div className="row mt-4 justify-content-center">
-        <div className="col-6 text-end">
+          <div className="col-6 text-end">
             <motion.h2
               ref={targetRef}
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
-              style={{ color: "white", fontWeight:'100', fontFamily:'brilon', fontSize:'4rem'}}
+              style={{
+                color: "white",
+                fontWeight: "100",
+                fontFamily: "brilon",
+                fontSize: "4rem",
+              }}
             >
               Our <br /> Galery
-              
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">
@@ -76,10 +79,104 @@ const GaleryView2 = () => {
             </div>
           </div>
         </div>
+        {firstImage()}
+        <div style={{marginBottom:'3rem'}}></div>
         {ImageGalleryComponent()}
+        {ImageGaleryComponent2()}
       </div>
     </section>
   );
+
+  function firstImage() {
+    return(
+      <div className="col-12 mt-3">
+      <a
+        href="/pink-essence/img/prawed/prawed4.jpg"
+        data-toggle="lightbox"
+        data-caption="This describes the image"
+      >
+        <img
+          src="/pink-essence/img/prawed/prawed4.jpg"
+          style={{ }}
+          className="img-fluid w-100 rounded"
+        />
+      </a>
+    </div>
+    );
+
+  }
+
+  function ImageGaleryComponent2() {
+    return (
+      <div className="row row-cols-md-3 row-cols-sm-2 row-cols-2 justify-content-center">
+        <div className="col mt-3">
+          <a
+            href="/pink-essence/img/prawed/prawed1.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src="/pink-essence/img/prawed/prawed1.jpg"
+              style={{ maxHeight: 376, }}
+              className="img-fluid w-100 rounded"
+            />
+          </a>
+        </div>
+        <div className="col mt-3">
+          <a
+            href="/pink-essence/img/prawed/prawed2.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src="/pink-essence/img/prawed/prawed2.jpg"
+              style={{ maxHeight: 376, }}
+              className="img-fluid w-100 rounded"
+            />
+          </a>
+        </div>
+        <div className="col mt-3">
+          <a
+            href="/pink-essence/img/prawed/prawed3.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src="/pink-essence/img/prawed/prawed3.jpg"
+              style={{ maxHeight: 376, }}
+              className="img-fluid w-100 rounded"
+            />
+          </a>
+        </div>
+        <div className="col mt-3">
+          <a
+            href="/pink-essence/img/prawed/prawed4.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src="/pink-essence/img/prawed/prawed4.jpg"
+              className="img-fluid w-100 rounded"
+              style={{ maxHeight: 376, }}
+            />
+          </a>
+        </div>
+        <div className="col mt-3">
+          <a
+            href="/pink-essence/img/prawed/prawed6.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src="/pink-essence/img/prawed/prawed6.jpg"
+              className="img-fluid w-100 rounded"
+              style={{ maxHeight: 376, }}
+            />
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   function ImageGalleryComponent() {
     return (
@@ -119,7 +216,7 @@ const GaleryView2 = () => {
                   <img src="/pink-essence/img/prawed/prawed6.jpg" alt="" />
                 </div>
               </OwlCarousel>
-              <OwlCarousel
+              {/* <OwlCarousel
                 className="owl-theme rtl"
                 loop
                 margin={10}
@@ -151,7 +248,7 @@ const GaleryView2 = () => {
                 <div>
                   <img src="/pink-essence/img/prawed/prawed6.jpg" alt="" />
                 </div>
-              </OwlCarousel>
+              </OwlCarousel> */}
             </div>
           </div>
         </div>

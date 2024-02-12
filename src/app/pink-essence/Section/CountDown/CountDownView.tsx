@@ -10,7 +10,6 @@ interface CountDownViewInterface {
 }
 
 const CountDownView = (props: CountDownViewInterface) => {
-  
   const calculateTimeRemaining = () => {
     const now = new Date();
 
@@ -35,8 +34,6 @@ const CountDownView = (props: CountDownViewInterface) => {
   };
 
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
-
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,7 +77,7 @@ const CountDownView = (props: CountDownViewInterface) => {
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
               width={"100%"}
               height={"100%"}
-              src="/pink-essence/img/bg-beach.jpg"
+              src="/pink-essence/img/weddingDecor2.jpg"
               alt=""
             />
             <motion.div
@@ -203,8 +200,19 @@ const CountDownView = (props: CountDownViewInterface) => {
               </motion.div>
 
               <div className="row mt-5">
-                <a href="" className="btn btn-lg count-dowm-btn">
-                  Save To Calender
+                <a
+                  className="btn btn-lg text-center"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minWidth: "100%",
+                  }}
+                >
+                  <i className="bi bi-calendar-check-fill">
+                    {" "}
+                    {"      "}Save To Calendar
+                  </i>
                 </a>
               </div>
             </div>

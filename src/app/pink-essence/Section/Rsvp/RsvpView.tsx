@@ -48,7 +48,7 @@ const RsvpView = (props: RSVPViewInterface) => {
           width: "100%",
           height: "auto",
           opacity: 1,
-          backgroundImage: 'url("/pink-essence/img/bg-beach.jpg")',
+          backgroundImage: 'url("/pink-essence/img/weddinigDecor.jpg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
