@@ -44,9 +44,9 @@ const GaleryView2 = () => {
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
-              style={{ color: "white", fontWeight:'100' }}
+              style={{ color: "white", fontWeight:'100', fontFamily:'brilon', fontSize:'4rem'}}
             >
-              Galery <br />
+              Our <br /> Galery
               
             </motion.h2>
           </div>

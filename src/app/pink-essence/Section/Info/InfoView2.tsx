@@ -47,7 +47,7 @@ const InfoView2 = (props: InfoViewInterface) => {
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
-              // style={{ textShadow: "black" }}
+              style={{ fontFamily:'brilon', fontSize:'3.4rem'}}
             >
               Informasi <br />
               Acara

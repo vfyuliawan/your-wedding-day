@@ -54,8 +54,8 @@ const NewHomeView = (props:HomeViewInterface) => {
                     className="home-text"
                     style={{
                       color: "white",
-                      fontFamily: "Sacramento",
-                      fontSize: "5rem",
+                      fontFamily: "Brilon",
+                      fontSize: "3rem",
                     }}
                   >
                     {props?.HomeDetail?.HomeTittle}
@@ -66,7 +66,9 @@ const NewHomeView = (props:HomeViewInterface) => {
                   transition={{duration:1, delay:0.8}}
                     className="home-text"
                     style={{
-                      color: "white",
+                      color:"#ffff",
+                      fontFamily:'Times-new-roman',
+                      fontSize:'14px'
                     }}
                   >
                     {props?.HomeDetail?.HomeQuotes}

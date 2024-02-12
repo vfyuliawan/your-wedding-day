@@ -33,9 +33,9 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
             backgroundPosition: 'center',
           }}
         />
-        <main className="inside">
-          <h1>{props.HeroDetail.HeroTittle}</h1>
-          <h4>Save The Date |  {TimeConvertionDate(props?.HeroDetail?.HeroDate as TimeConvertionInterface).dateFull}</h4>
+        <main className="inside" style={{display:'flex', flexDirection:'column', position:'relative', bottom:-150}}>
+          <h1 style={{fontFamily:'brilon'}}>{props.HeroDetail.HeroTittle}</h1>
+          <h4>  {TimeConvertionDate(props?.HeroDetail?.HeroDate as TimeConvertionInterface).dateFull}</h4>
         </main>
         <div className="gradient-overlay" />
 

@@ -98,6 +98,7 @@ const RedEssence = (props: RedEssenceInterface) => {
         Your browser does not support the audio element.
       </audio>
       <CoverView2
+      hero={props?.details?.Hero}
       guest={props.guest}
         isVisible={coverVisible}
         onCoverClick={handleCoverClick}

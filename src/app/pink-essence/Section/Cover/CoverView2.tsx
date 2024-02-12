@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
+import { HeroViewInterface } from "../Hero/HeroModel";
+import { TimeConvertionDate, TimeConvertionInterface } from "@/app/utils/TimeConvertion";
 
-
-
-const CoverView2 = (props: CoverModelInterface) => {
+const CoverView2 = (props: CoverModelInterface, ) => {
   const [appear, setAppear] = useState(false);
   const handleCoverClick = () => {
     props.onCoverClick();
@@ -14,6 +14,9 @@ const CoverView2 = (props: CoverModelInterface) => {
       setAppear(true);
     }, 6000);
   };
+
+  console.log(props.hero?.HeroDate);
+  
 
   return !appear ? (
     <motion.div
@@ -44,18 +47,19 @@ const CoverView2 = (props: CoverModelInterface) => {
           // backgroundImage: `url('${props.coverImg}')`,
           backgroundRepeat: "no-repeat",
           // backgroundPosition: "center",
-          display:'flex',
-          justifyContent:'center'
+          display: "flex",
+          justifyContent: "center",
           // objectFit: "fill",
         }}
       >
-        <img className="kenburns-top"
+        <img
+          className="kenburns-top"
           style={{
-          position: "absolute",
-          top:0,
+            position: "absolute",
+            top: 0,
             width: "40%",
-            height:'100%',
-            objectFit:'cover'
+            height: "100%",
+            objectFit: "cover",
           }}
           src={props.detailCover.ImgCover}
           alt="dfasdfsa"
@@ -103,66 +107,79 @@ const CoverView2 = (props: CoverModelInterface) => {
             className="text-center"
             style={{
               position: "absolute",
-              bottom: "5%",
+              bottom: "7%",
               right: "50%",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               transform: "translateX(50%)",
+              fontFamily:'Times New Roman'
             }}
           >
-            <h1
+            <p
               style={{
                 display: "flex",
                 flexDirection: "row",
                 color: "white",
-                marginBottom:'1rem'
+                marginBottom: "1rem",
+                fontFamily: "Times New Roman",
               }}
             >
               Save The Date
-            </h1>
+            </p>
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
               }}
             >
-              <div
-                className="box-time"
-                style={{
-                  color: "black",
-                }}
-              >
-                <h1>05 Day</h1>
+              <div className="box-time" style={{ color: "white" }}>
+                <div className="col">
+                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                    00
+                  </p>
+                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                    Hari
+                  </p>
+                </div>
               </div>
-              <div style={{ marginRight: "1.8rem" }} />
-              <div
-                className="box-time"
-                style={{
-                  color: "black",
-                }}
-              >
-                <h1>05 Hrs</h1>
+              <div style={{ marginRight: "5rem" }} />
+              <div className="box-time" style={{ color: "white" }}>
+                <div className="col">
+                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                    00
+                  </p>
+                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                    Jam
+                  </p>
+                </div>
               </div>
-              <div style={{ marginRight: "1.8rem" }} />
-              <div
-                className="box-time"
-                style={{
-                  color: "black",
-                }}
-              >
-                <h1>05 Mnt</h1>
+              <div style={{ marginRight: "5rem" }} />
+              <div className="box-time" style={{ color: "white" }}>
+                <div className="col">
+                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                    00
+                  </p>
+                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                    Menit
+                  </p>
+                </div>
               </div>
-              <div style={{ marginRight: "1.8rem" }} />
-              <div
-                className="box-time"
-                style={{
-                  color: "black",
-                }}
-              >
-                <h1>05 Sec </h1>
+              <div style={{ marginRight: "5rem" }} />
+              <div className="box-time" style={{ color: "white" }}>
+                <div className="col">
+                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                    00
+                  </p>
+                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                    Detik
+                  </p>
+                </div>
               </div>
+            </div>
+            <div className="row mt-2">
+              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.hero?.HeroDate as TimeConvertionInterface).dateFull}</p>
             </div>
           </div>
         </div>
@@ -187,16 +204,17 @@ const CoverView2 = (props: CoverModelInterface) => {
             position: "absolute",
             top: "200px",
             left: 0,
-            // transform: "translate(-50%, -50%)",
             color: "#fff",
             fontSize: "24px",
             textAlign: "center",
           }}
         >
-          <p style={{ fontSize: "1.5rem" }}>THE WEDDING OF</p>
+          <p style={{ fontSize: "2rem", fontFamily: "Times New Roman" }}>
+            THE WEDDING OF
+          </p>
           <h2
             style={{
-              fontFamily: "sacramento",
+              fontFamily: "brilon",
               fontSize: "5rem",
             }}
           >
@@ -220,7 +238,7 @@ const CoverView2 = (props: CoverModelInterface) => {
             <a
               className="btn btn-lg text-center"
               style={{
-              width:'250px',
+                width: "250px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",

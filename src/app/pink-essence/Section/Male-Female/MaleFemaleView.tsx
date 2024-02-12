@@ -30,10 +30,10 @@ useEffect(() => {
           <div className="col-md-8 col-10 text-center">
             <h2
               style={{
-                fontSize: "5rem",
-                fontFamily: "sacramento",
+                fontSize: "4rem",
+                fontFamily: "brilon",
                 color: "black",
-                fontWeight: 700,
+                fontWeight: 900,
               }}
             >
               Our Wedding
@@ -45,9 +45,9 @@ useEffect(() => {
           <div className="col-md-6 col-3 col-sm-3 text-center justify-content-end d-flex align-items-center ">
             <h3
               style={{
-                fontSize: "5rem",
+                fontSize: "4rem",
                 fontFamily: "Dancing Script",
-                fontWeight: 800,
+                fontWeight: 400,
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 transform: "rotate(180deg)",
@@ -142,9 +142,9 @@ useEffect(() => {
           <div className="col-md-6 col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
             <h3
               style={{
-                fontSize: "5rem",
+                fontSize: "4rem",
                 fontFamily: "Dancing Script",
-                fontWeight: 800,
+                fontWeight: 400,
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
               }}

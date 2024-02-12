@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Poppins&display=swap');
+@font-face {
+  font-family: 'brilon';
+  src: url('../../../Font/brilon/brilon-11-regular.ttf') format('brilon11'),
+}
 :root {
   /* --pink: #f14e95; */
   --pink: hsl(0, 74%, 18%); 
@@ -118,8 +122,10 @@
 @-webkit-keyframes shake-bl{0%,100%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:0 100%;transform-origin:0 100%}10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}}@keyframes shake-bl{0%,100%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:0 100%;transform-origin:0 100%}10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}}
 /* Animation */
 
-
-
+@font-face {
+  font-family: 'brilon';
+  src: url('../../../Font/brilon/brilon-11-regular.ttf') format('truetype'),
+}
 
 body {
   font-size: 1.5rem;
@@ -143,7 +149,7 @@ p {
 }
 
 .cover2 {
-  background-color: #500c0c;
+  background-color: var(--pink);
 }
 
 .our-nav{
@@ -153,7 +159,7 @@ p {
 .cover {
   min-height: 100vh;
   position: relative;
-  background-color: #500c0c;
+  background-color:var(--pink);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,9 +192,6 @@ p {
 
 .box-time {
   border-radius: 1rem;
-  padding: 1rem;
-  width: 60px;
-  background-color: white;
   box-shadow: -24px -18px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -204,7 +207,7 @@ p {
 }
 
 .cover h1 {
-  font-family: "sacramento";
+  font-family: "Sacramento";
   font-size: 7rem;
   color: white;
 }
@@ -329,6 +332,11 @@ p {
   font-family: "Sacramento", cursive;
   font-size: 4rem;
   /* text-shadow: var(--shadow); */
+}
+
+
+.message-box{
+  background-color: var(--pink);
 }
 
 .home h3 {

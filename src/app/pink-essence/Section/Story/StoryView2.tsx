@@ -34,7 +34,7 @@ const StoryView = (props: StoryViewInterface) => {
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
-              style={{ color: "black" }}
+              style={{ color: "black", fontSize:'3.8rem', fontFamily:"brilon"}}
             >
               Cerita <br />
               Kita Berdua
