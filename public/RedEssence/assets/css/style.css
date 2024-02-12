@@ -442,7 +442,7 @@ p {
   padding: 5px;
 }
 
-.info a, .count-down a:hover {
+.info a:hover {
   /* background-color: white; */
   background: var(--bg) !important;
   color: white !important;
