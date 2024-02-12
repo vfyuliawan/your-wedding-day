@@ -483,8 +483,7 @@ p {
 .story {
   padding-bottom: 10rem;
   padding-top: 10rem;
-  background-color: 'white';
-}
+  background-color: var(--sec);}
 
 .story span,
 .galery span {
@@ -515,7 +514,7 @@ p {
   bottom: 0;
   position: absolute;
   width: 5px;
-  background-color: #ccc;
+  background-color: var(--pink);
   left: 50%;
 }
 
@@ -540,7 +539,8 @@ p {
 .timeline li .timeline-image {
   width: 120px;
   height: 120px;
-  background-color: #ccc;
+  background-color: var(--pink);
+
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -553,7 +553,7 @@ p {
 .timeline li .timeline-image2 {
   width: 50px;
   height: 50px;
-  background-color: var(--bg);
+  background-color: var(--pink);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -566,7 +566,7 @@ p {
 .timeline li .timeline-panel {
   width: 40%;
   float: left;
-  border: 1px solid #ccc;
+  border: 1px solid var(--pink);
   padding: 2rem;
   position: relative;
   border-radius: 10px;
@@ -579,8 +579,8 @@ p {
   position: absolute;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-left: 15px solid #ccc;
-  border-right: 0 solid #ccc;
+  border-left: 15px solid var(--pink);
+  border-right: 0 solid var(--pink);
   right: -15px;
   top: 50px;
 }
