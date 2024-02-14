@@ -885,10 +885,9 @@ p {
     var(--pink) 100%
   ); */
   /* background-color: var(--pink); */
-  background: linear-gradient(var(--pink) 0%, white 120%);
+  background: linear-gradient(var(--pink) 0%, var(--pink) 30%, white 170%);
   width: 100%;
 }
-
 .position-relative {
   position: relative;
 }
