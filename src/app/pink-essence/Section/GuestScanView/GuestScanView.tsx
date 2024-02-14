@@ -44,7 +44,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 fontSize: "4rem",
               }}
             >
-              scan <br /> guestbook
+              scan <br /> guest Barcode
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">
@@ -74,7 +74,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-10 justify-content-center d-flex">{body()}</div>
+          <div className="col-6 col-md-4 col-lg-4 col-sm-4 justify-content-center d-flex">{body()}</div>
         </div>
         <div className="row justify-content-center">
           <div className="col-8 text-center">
