@@ -26,12 +26,14 @@ import StoryView2 from "./Section/Story/StoryView2";
 import { DocumentData, Timestamp } from "firebase/firestore";
 import { TimeConvertionDate } from "../utils/TimeConvertion";
 import CoverView2 from "./Section/Cover/CoverView2";
+import GuestScanView from "./Section/GuestScanView/GuestScanView";
 // import AOS from 'aos';
 
 interface RedEssenceInterface {
   details: DocumentData | undefined;
-  getDetails: () => void
-  guest:string;
+  getDetails: () => void;
+  guest: string;
+  idGuest: string;
 }
 
 const RedEssence = (props: RedEssenceInterface) => {
@@ -81,7 +83,7 @@ const RedEssence = (props: RedEssenceInterface) => {
     setCoverVisible(false);
     openInvitation();
     enableScroll();
-  };  
+  };
 
   return (
     <div>
@@ -94,12 +96,15 @@ const RedEssence = (props: RedEssenceInterface) => {
         ref={audioRef}
         controls
       >
-        <source src={`/music/${props?.details?.ThemeSong}.mp3`} type="audio/mp3" />
+        <source
+          src={`/music/${props?.details?.ThemeSong}.mp3`}
+          type="audio/mp3"
+        />
         Your browser does not support the audio element.
       </audio>
       <CoverView2
-      hero={props?.details?.Hero}
-      guest={props.guest}
+        hero={props?.details?.Hero}
+        guest={props.guest}
         isVisible={coverVisible}
         onCoverClick={handleCoverClick}
         detailCover={props?.details?.Cover}
@@ -131,17 +136,34 @@ const RedEssence = (props: RedEssenceInterface) => {
                 props?.details?.CountDown?.Date?.nanoseconds
               )
                 .toDate()
-                .toISOString().split(".")[0]
+                .toISOString()
+                .split(".")[0]
             )
           }
         />
       ) : null}
-      <StoryView2 OurStory={props?.details?.OurStory} />
-      <GaleryView2 />
-      <RsvpView Message={props?.details?.Message} slug={props?.details?.Slug} userId={props?.details?.idDoc} getDetail={function (): void {
-        props.getDetails()
-      } } />
-      <GiftsView />
+      {props?.details?.OurStory.Visible ? (
+        <StoryView2 OurStory={props?.details?.OurStory} />
+      ) : null}
+
+      {props?.details?.Galery.Visible ? (
+        <GaleryView2 image={props?.details?.Galery.image} />
+      ) : null}
+      <RsvpView
+        Message={props?.details?.Message}
+        slug={props?.details?.Slug}
+        userId={props?.details?.idDoc}
+        getDetail={function (): void {
+          props.getDetails();
+        }}
+      />
+      {props?.details?.Gifts.Visible ? (
+        <GiftsView Gifts={props?.details?.Gifts} />
+      ) : null}
+      
+      <GuestScanView idGuest={props.idGuest  ?? 0} guest={props.guest ?? ""}/>
+
+
       <FooterView />
       <EndView />
       {!coverVisible ? (

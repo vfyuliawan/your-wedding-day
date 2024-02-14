@@ -33,8 +33,10 @@ export default function Home() {
   const searchParams = useSearchParams();
   const getParams = searchParams.get("a");
   const getGuest = searchParams.get("to");
+  const getIdGuest = searchParams.get("id");
   const [themeName, setThemeName] = useState("");
   const [guest, setGuest] = useState<string>("")
+  const [idGuest, setidGuest] = useState<string>("")
   const [loading, setLoading] = useState(false);
   const [details, setDetails] = useState<DocumentData | undefined>();
   const [homePage, setHomePage] = useState(false);
@@ -54,6 +56,7 @@ export default function Home() {
       setDetails(res?.[0]);
       setThemeName(res?.[0].ThemeName);
       setGuest(getGuest ?? "");
+      setidGuest(getIdGuest ?? "");
       setLoading(false);
     }
   };
@@ -91,9 +94,9 @@ export default function Home() {
       {loading ? (
         <Loading />
       ) : themeName == "RedEssence" ? (
-        <RedEssence details={details} getDetails={() => { getMessage(); } } guest={guest}/>
+        <RedEssence details={details} getDetails={() => { getMessage(); } } guest={guest} idGuest={idGuest}/>
       ) : themeName == "BluePremium" ? (
-        <RedEssence details={details} getDetails={() => { getMessage(); } } guest={guest}/>
+        <RedEssence details={details} getDetails={() => { getMessage(); } } guest={guest} idGuest={idGuest}/>
       ) : homePage ? (
         <h1>home</h1>
       ) : (

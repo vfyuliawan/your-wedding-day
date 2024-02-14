@@ -650,10 +650,14 @@ p {
 }
 
 .gifts {
-  background-color: #ffffff;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  background-color: var(--pink);
+  /* padding-top: 5rem;
+  padding-bottom: 5rem; */
   position: relative;
+}
+
+.gifts .card-header{
+  background: linear-gradient(to right,var(--pink) 0%,var(--pink) 40%, var(--pink) 10%, white 120%)
 }
 
 .gifts h2 {
@@ -668,9 +672,24 @@ p {
   font-size: 5rem;
 }
 
+.guestContainer{
+  background-color: var(--sec);
+}
+
+.stright-top {
+  clip-path: polygon(0 0,100% 0,100% 100%,0 calc(100% - 77px));
+}
+.stright-bottom {
+  clip-path: polygon(0 0, 100% 30px, 100% 100%, 0 100%);
+  margin-top: -30px;
+  background-color: var(--sec);
+  position: relative; /* Add position relative to make sure the shadow is applied correctly */
+}
+
+
 .vertical-line {
-  width: 120px; /* Adjust the width of the line as needed */
-  height: 3px; /* Adjust the height of the line as needed */
+  width: 120px; 
+  height: 3px; 
   background-color: var(--pink);
   position: absolute;
   right: 50%;
