@@ -114,7 +114,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
           }}
         >
           <QRCode
-            value="https://example.com"
+            value={props.guest +"nviteMe"+props.idGuest}
             size={128}
             bgColor="#ffffff"
             fgColor="#000000"
