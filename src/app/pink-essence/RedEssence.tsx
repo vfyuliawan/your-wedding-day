@@ -14,7 +14,13 @@ import Navbar2View from "./Section/Navbar/Navbar2View";
 import NavbarView from "./Section/Navbar/NavbarView";
 import RsvpView from "./Section/Rsvp/RsvpView";
 import StoryView from "./Section/Story/StoryView";
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import MaleFemaleView from "./Section/Male-Female/MaleFemaleView";
 import NewHomeView from "./Section/NewHome/NewHomeView";
 // import CoverView from "./Section/Cover/CoverView";
@@ -43,6 +49,8 @@ const RedEssence = (props: RedEssenceInterface) => {
   const headerRef = useRef<any>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const containerRef = useRef<any>(null);
+
   const togglePlay = () => {
     if (isPlaying) {
       audioRef?.current?.pause();
@@ -74,6 +82,13 @@ const RedEssence = (props: RedEssenceInterface) => {
     window.onscroll = function () {};
     rootElement.style.scrollBehavior = "smooth";
   }
+
+  const bottomRef = useRef<any>(null);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
+
   useEffect(() => {
     disableScroll();
     return () => {};
@@ -84,6 +99,27 @@ const RedEssence = (props: RedEssenceInterface) => {
     openInvitation();
     enableScroll();
   };
+
+  const scrollToBottom = useCallback(() => {
+    const container = containerRef.current;
+    const scrollHeight = bottomRef.current.offsetTop - container.offsetTop;
+
+    const duration = 1000; // Adjust the duration in milliseconds
+    const startTime = performance.now();
+
+    const animateScroll = (timestamp: any) => {
+      const elapsed = timestamp - startTime;
+      const progress = elapsed / duration;
+
+      container.scrollTop = scrollHeight * progress;
+
+      if (elapsed < duration) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  }, []);
 
   return (
     <div>
@@ -109,90 +145,124 @@ const RedEssence = (props: RedEssenceInterface) => {
         onCoverClick={handleCoverClick}
         detailCover={props?.details?.Cover}
       />
-      {!coverVisible ? <Navbar2View /> : null}
-      <HeaderView themeName={props?.details?.ThemeName} />
-      <div className="hero-home">
-        {props?.details?.Hero?.Visible ? (
-          <HeroView ref={heroRef} HeroDetail={props?.details?.Hero} />
+      <div style={{ overflowY: "scroll" }} ref={containerRef}>
+        {!coverVisible ? <Navbar2View /> : null}
+        <HeaderView themeName={props?.details?.ThemeName} />
+        <div className="hero-home">
+          {props?.details?.Hero?.Visible ? (
+            <HeroView ref={heroRef} HeroDetail={props?.details?.Hero} />
+          ) : null}
+          {props?.details?.Home?.Visible ? (
+            <NewHomeView HomeDetail={props?.details?.Home} />
+          ) : null}
+        </div>
+        {props?.details?.MaleFemale?.Visible ? (
+          <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} />
         ) : null}
-        {props?.details?.Home?.Visible ? (
-          <NewHomeView HomeDetail={props?.details?.Home} />
-        ) : null}
-      </div>
-      {props?.details?.MaleFemale?.Visible ? (
-        <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} />
-      ) : null}
-      {props?.details?.InfoAcara?.Visible ? (
-        <InfoView2 Info={props?.details?.InfoAcara} />
-      ) : (
-        <InfoView2 Info={props?.details?.InfoAcara} />
-      )}
-      {props?.details?.CountDown?.Visible ? (
-        <CountDownView
-          targetDate={
-            new Date(
-              new Timestamp(
-                props?.details?.CountDown?.Date?.seconds,
-                props?.details?.CountDown?.Date?.nanoseconds
+        {props?.details?.InfoAcara?.Visible ? (
+          <InfoView2 Info={props?.details?.InfoAcara} />
+        ) : (
+          <InfoView2 Info={props?.details?.InfoAcara} />
+        )}
+        {props?.details?.CountDown?.Visible ? (
+          <CountDownView
+            targetDate={
+              new Date(
+                new Timestamp(
+                  props?.details?.CountDown?.Date?.seconds,
+                  props?.details?.CountDown?.Date?.nanoseconds
+                )
+                  .toDate()
+                  .toISOString()
+                  .split(".")[0]
               )
-                .toDate()
-                .toISOString()
-                .split(".")[0]
-            )
-          }
-        />
-      ) : null}
-      {props?.details?.OurStory.Visible ? (
-        <StoryView2 OurStory={props?.details?.OurStory} />
-      ) : null}
+            }
+          />
+        ) : null}
+        {props?.details?.OurStory.Visible ? (
+          <StoryView2 OurStory={props?.details?.OurStory} />
+        ) : null}
 
-      {props?.details?.Galery.Visible ? (
-        <GaleryView2 image={props?.details?.Galery.image} />
-      ) : null}
-      <RsvpView
-        Message={props?.details?.Message}
-        slug={props?.details?.Slug}
-        userId={props?.details?.idDoc}
-        getDetail={function (): void {
-          props.getDetails();
-        }}
-      />
-      {props?.details?.Gifts.Visible ? (
-        <GiftsView Gifts={props?.details?.Gifts} />
-      ) : null}
-      
-      <GuestScanView idGuest={props.idGuest  ?? 0} guest={props.guest ?? ""}/>
-
-
-      <FooterView />
-      <EndView />
-      {!coverVisible ? (
-        <button
-          className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
-          style={{
-            position: "fixed",
-            bottom: "150px",
-            right: "20px",
-            padding: "15px",
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-            color: "white",
-            cursor: "pointer",
-            zIndex: "999",
+        {props?.details?.Galery.Visible ? (
+          <GaleryView2 image={props?.details?.Galery.image} />
+        ) : null}
+        <RsvpView
+          Message={props?.details?.Message}
+          slug={props?.details?.Slug}
+          userId={props?.details?.idDoc}
+          getDetail={function (): void {
+            props.getDetails();
           }}
-          onClick={togglePlay}
-        >
-          {isPlaying ? (
-            <i
-              className="bi bi-music-player-fill"
-              style={{ fontSize: "1rem" }}
-            ></i>
-          ) : (
-            <i className="bi bi-pause-fill"></i>
-          )}
-        </button>
-      ) : null}
+        />
+        {props?.details?.Gifts.Visible ? (
+          <GiftsView Gifts={props?.details?.Gifts} />
+        ) : null}
+
+        {props?.details?.GuestBarcode ? (
+          <GuestScanView
+            idGuest={props.idGuest ?? 0}
+            guest={props.guest ?? ""}
+          />
+        ) : null}
+
+        <FooterView Footer={props?.details?.Footer} />
+        <EndView />
+        {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              bottom: "150px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={togglePlay}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-music-player-fill"
+                style={{ fontSize: "1rem" }}
+              ></i>
+            ) : (
+              <i className="bi bi-pause-fill"></i>
+            )}
+          </button>
+        ) : null}
+        {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              bottom: "100px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={scrollToBottom}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-lg bi-arrow-down-circle"
+                style={{ fontSize: "1rem" }}
+              ></i>
+            ) : (
+              <i className="bi bi-lg bi-arrow-down-circle"></i>
+            )}
+          </button>
+        ) : null}
+        <div ref={bottomRef}></div>
+      </div>
     </div>
   );
 };
