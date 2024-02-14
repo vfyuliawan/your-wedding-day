@@ -18,8 +18,8 @@ const FooterView = (props:FooterViewInterface) => {
         }}
         className="footer w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white"
       >
-        <div className="gradient-overlay" />
-        <main className="inside">
+        <div className="gradient-overlay"/>
+        <main className="inside" style={{position:'relative', top:'200px'}}>
           <h2>Terimakasih</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint

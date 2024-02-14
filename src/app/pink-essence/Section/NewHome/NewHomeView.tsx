@@ -19,7 +19,8 @@ const NewHomeView = (props:HomeViewInterface) => {
   }, [isVisible, controls]);
     return ( 
         <section id="new-home" className="new-home" ref={targetRef}>
-        <div className="home-bg">
+        <div className="home-bg" style={{
+        }}>
           <div className="row justify-content-center ">
             <motion.div
             animate={controls}
@@ -58,7 +59,7 @@ const NewHomeView = (props:HomeViewInterface) => {
                       fontSize: "3rem",
                     }}
                   >
-                    {props?.HomeDetail?.HomeTittle}
+                    {props?.HomeDetail?.HomeTittle }
                   </motion.h1>
                   <motion.p
                   animate={controls}

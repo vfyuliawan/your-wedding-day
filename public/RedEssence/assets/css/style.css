@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Poppins&display=swap");
 @font-face {
-  font-family: 'brilon';
-  src: url('../../../Font/brilon/brilon-11-regular.ttf') format('brilon11'),
+  font-family: "brilon";
+  src: url("../../../Font/brilon/brilon-11-regular.ttf") format("brilon11");
 }
 :root {
   /* --pink: #f14e95; */
-  --pink: hsl(0, 74%, 18%); 
-  
+  --pink: hsl(0, 74%, 18%);
+
   /* sama */
   --sec: #dadada;
   --bg: #dadada;
@@ -22,8 +22,9 @@
 /* Animation */
 
 .tracking-in-expand {
-	-webkit-animation: text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /* ----------------------------------------------
@@ -38,42 +39,46 @@
  * animation text-pop-up-top
  * ----------------------------------------
  */
- @-webkit-keyframes text-pop-up-top {
+@-webkit-keyframes text-pop-up-top {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
     text-shadow: none;
   }
   100% {
     -webkit-transform: translateY(-50px);
-            transform: translateY(-50px);
+    transform: translateY(-50px);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+    transform-origin: 50% 50%;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
+      0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
+      0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
   }
 }
 @keyframes text-pop-up-top {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
     text-shadow: none;
   }
   100% {
     -webkit-transform: translateY(-50px);
-            transform: translateY(-50px);
+    transform: translateY(-50px);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+    transform-origin: 50% 50%;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
+      0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
+      0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
   }
 }
 
 .kenburns-top {
-	-webkit-animation: kenburns-top 5s ease-out both;
-	        animation: kenburns-top 5s ease-out both;
+  -webkit-animation: kenburns-top 5s ease-out both;
+  animation: kenburns-top 5s ease-out both;
 }
 
 /* ----------------------------------------------
@@ -88,43 +93,111 @@
  * animation kenburns-top
  * ----------------------------------------
  */
- @-webkit-keyframes kenburns-top {
+@-webkit-keyframes kenburns-top {
   0% {
     -webkit-transform: scale(1) translateY(0);
-            transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
     -webkit-transform-origin: 50% 16%;
-            transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
   }
   100% {
     -webkit-transform: scale(1.25) translateY(-15px);
-            transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
   }
 }
 @keyframes kenburns-top {
   0% {
     -webkit-transform: scale(1) translateY(0);
-            transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
     -webkit-transform-origin: 50% 16%;
-            transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
   }
   100% {
     -webkit-transform: scale(1.25) translateY(-15px);
-            transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
   }
 }
 
-.shake-bl{-webkit-animation:shake-bl .8s cubic-bezier(.455,.03,.515,.955) both;animation:shake-bl .8s cubic-bezier(.455,.03,.515,.955) both}
+.shake-bl {
+  -webkit-animation: shake-bl 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: shake-bl 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
 
-@-webkit-keyframes shake-bl{0%,100%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:0 100%;transform-origin:0 100%}10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}}@keyframes shake-bl{0%,100%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:0 100%;transform-origin:0 100%}10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}}
+@-webkit-keyframes shake-bl {
+  0%,
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+  }
+  10% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: rotate(-4deg);
+    transform: rotate(-4deg);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: rotate(4deg);
+    transform: rotate(4deg);
+  }
+  80% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+  }
+  90% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+}
+@keyframes shake-bl {
+  0%,
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+  }
+  10% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: rotate(-4deg);
+    transform: rotate(-4deg);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: rotate(4deg);
+    transform: rotate(4deg);
+  }
+  80% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+  }
+  90% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+}
 /* Animation */
 
 @font-face {
-  font-family: 'brilon';
-  src: url('../../../Font/brilon/brilon-11-regular.ttf') format('truetype'),
+  font-family: "brilon";
+  src: url("../../../Font/brilon/brilon-11-regular.ttf") format("truetype");
 }
 
 body {
@@ -152,14 +225,14 @@ p {
   background-color: var(--pink);
 }
 
-.our-nav{
+.our-nav {
   background-color: var(--pink);
 }
 
 .cover {
   min-height: 100vh;
   position: relative;
-  background-color:var(--pink);
+  background-color: var(--pink);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -334,8 +407,7 @@ p {
   /* text-shadow: var(--shadow); */
 }
 
-
-.message-box{
+.message-box {
   background-color: var(--pink);
 }
 
@@ -388,8 +460,8 @@ p {
   font-size: 5rem;
 }
 
-.info p{
-  font-family: 'Poppins', sans-serif;
+.info p {
+  font-family: "Poppins", sans-serif;
 }
 
 .info .alamat {
@@ -424,7 +496,8 @@ p {
   font-weight: 800 !important;
 }
 
-.info a, .count-down a,
+.info a,
+.count-down a,
 .cover2 a {
   width: 170px;
   color: white !important;
@@ -478,14 +551,15 @@ p {
   background: linear-gradient(to top, var(--pink), var(--bg2));
 }
 
-.iframeContainer{
+.iframeContainer {
   border: 3px solid var(--pink);
 }
 
 .story {
   padding-bottom: 10rem;
   padding-top: 10rem;
-  background-color: var(--sec);}
+  background-color: var(--sec);
+}
 
 .story span,
 .galery span {
@@ -600,7 +674,8 @@ p {
 }
 
 .galery {
-  background-color: var(--pink);
+  /* background-color: var(--pink); */
+  background: linear-gradient(var(--pink) 0%, white 130%);
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
@@ -656,8 +731,14 @@ p {
   position: relative;
 }
 
-.gifts .card-header{
-  background: linear-gradient(to right,var(--pink) 0%,var(--pink) 40%, var(--pink) 10%, white 120%)
+.gifts .card-header {
+  background: linear-gradient(
+    to right,
+    var(--pink) 0%,
+    var(--pink) 40%,
+    var(--pink) 10%,
+    white 120%
+  );
 }
 
 .gifts h2 {
@@ -672,12 +753,12 @@ p {
   font-size: 5rem;
 }
 
-.guestContainer{
+.guestContainer {
   background-color: var(--sec);
 }
 
 .stright-top {
-  clip-path: polygon(0 0,100% 0,100% 100%,0 calc(100% - 77px));
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 77px));
 }
 .stright-bottom {
   clip-path: polygon(0 0, 100% 30px, 100% 100%, 0 100%);
@@ -686,10 +767,9 @@ p {
   position: relative; /* Add position relative to make sure the shadow is applied correctly */
 }
 
-
 .vertical-line {
-  width: 120px; 
-  height: 3px; 
+  width: 120px;
+  height: 3px;
   background-color: var(--pink);
   position: absolute;
   right: 50%;
@@ -804,7 +884,8 @@ p {
     var(--pink) 50%,
     var(--pink) 100%
   ); */
-  background-color: var(--pink);
+  /* background-color: var(--pink); */
+  background: linear-gradient(var(--pink) 0%, white 120%);
   width: 100%;
 }
 
@@ -839,8 +920,7 @@ p {
   letter-spacing: 1px;
 }
 
-
-.male-female .mid-couple{
+.male-female .mid-couple {
   background-color: var(--pink);
 }
 
@@ -945,7 +1025,7 @@ p {
     writing-mode: horizontal-tb;
   }
 
-  .our-navbbar{
+  .our-navbbar {
     visibility: visible !important;
   }
 }
@@ -1008,7 +1088,7 @@ p {
     opacity: 0 !important;
   }
 
-  .our-navbbar{
+  .our-navbbar {
     visibility: visible !important;
   }
 }
@@ -1087,7 +1167,7 @@ p {
     opacity: 0.3 !important;
   }
 
-  .our-navbbar{
+  .our-navbbar {
     visibility: visible !important;
   }
 
