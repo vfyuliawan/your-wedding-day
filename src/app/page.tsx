@@ -57,7 +57,9 @@ export default function Home() {
       setThemeName(res?.[0].ThemeName);
       setGuest(getGuest ?? "");
       setidGuest(getIdGuest ?? "");
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
@@ -81,6 +83,7 @@ export default function Home() {
 
   useEffect(() => {
     if (getParams !== null) {
+
       getTheme();
     } else {
       setHomePage(true);
