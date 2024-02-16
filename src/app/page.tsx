@@ -35,8 +35,8 @@ export default function Home() {
   const getGuest = searchParams.get("to");
   const getIdGuest = searchParams.get("id");
   const [themeName, setThemeName] = useState("");
-  const [guest, setGuest] = useState<string>("")
-  const [idGuest, setidGuest] = useState<string>("")
+  const [guest, setGuest] = useState<string>("");
+  const [idGuest, setidGuest] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [details, setDetails] = useState<DocumentData | undefined>();
   const [homePage, setHomePage] = useState(false);
@@ -62,9 +62,8 @@ export default function Home() {
   };
 
   const getMessage = async () => {
-
     console.log("run");
-    
+
     const res = await Service.GET({
       collectionName: "UserId",
       queryGet: function (
@@ -94,9 +93,23 @@ export default function Home() {
       {loading ? (
         <Loading />
       ) : themeName == "RedEssence" ? (
-        <RedEssence details={details} getDetails={() => { getMessage(); } } guest={guest} idGuest={idGuest}/>
+        <RedEssence
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
       ) : themeName == "BluePremium" ? (
-        <RedEssence details={details} getDetails={() => { getMessage(); } } guest={guest} idGuest={idGuest}/>
+        <RedEssence
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
       ) : homePage ? (
         <h1>home</h1>
       ) : (
@@ -124,37 +137,36 @@ export default function Home() {
     return (
       <>
         <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
+
         <div
-          className="text-center"
           style={{
-            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
             height: "100vh",
             backgroundColor: "#3A8891",
-            justifyContent: "center",
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
+            alignItems:'center'
           }}
         >
-          <div>
+          <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
             <img
               style={{
-                height: "60%",
-                width: "60%",
+                height:'120px'
               }}
-              className="shake-bl"
+              // className="shake-bl"
               src="/pink-essence/img/LogoNM.png"
               alt=""
             />
+            <ReactLoading
+              type={"spinningBubbles"}
+              color={"#e3b383"}
+              height={160}
+              width={40}
+            />
           </div>
-          <ReactLoading
-            type={"spinningBubbles"}
-            color={"#e3b383"}
-            height={200}
-            width={70}
-          />
-          {/* <h1 className="tracking-in-expand" style={{color:'#F2DEBA'}}> Invite Me </h1> */}
         </div>
+
+        {/* <h1 className="tracking-in-expand" style={{color:'#F2DEBA'}}> Invite Me </h1> */}
       </>
     );
   }
