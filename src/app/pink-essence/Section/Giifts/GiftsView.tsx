@@ -56,7 +56,7 @@ const GiftsView = (props: GiftsViewInterface) => {
           borderRadius: "4% 4% 0 0",
           backgroundColor: "white",
           paddingTop: "5rem",
-          marginTop:'2rem'
+          marginTop:'10rem'
         }}
       >
         <div className="container">

@@ -16,7 +16,7 @@ export interface CoverModelInterface {
 
 
   export interface CoverKeyValue {
-    Date: Date | TimeConvertionInterface
+    Date: Timestamp
     ImgCover:  string
     TitleCover: string
     Visible: boolean

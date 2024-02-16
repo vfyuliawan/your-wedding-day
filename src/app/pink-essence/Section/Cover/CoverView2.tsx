@@ -19,7 +19,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
   const calculateTimeRemaining = () => {
     const now = new Date();
     const targetDate : Date = new Date(
-      props.hero.HeroDate.toDate()
+      props.detailCover.Date.toDate()
       .toISOString().split(".")[0]
     )
 
@@ -205,7 +205,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
               </div>
             </div>
             <div className="row mt-2">
-              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.hero?.HeroDate as any).dateFull}</p>
+              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.detailCover.Date as any).dateFull}</p>
             </div>
           </div>
         </div>
