@@ -131,6 +131,15 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
+      ): themeName == "LuxuryPink" ? (
+        <RedEssence
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
       ): homePage ? (
         <h1>home</h1>
       ) : (
