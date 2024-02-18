@@ -22,9 +22,7 @@ const FooterView = (props:FooterViewInterface) => {
         <main className="inside" style={{position:'relative', top:'200px'}}>
           <h2>Terimakasih</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-            asperiores nisi ipsum odio officiis necessitatibus dolor delectus,
-            debitis, cupiditate aliquam vel quia expedita, maxime ea!
+            ${props.Footer.Quotes}
           </p>
           <h4>Kami Yang Berbahagia</h4>
           <h3>{props.Footer.Name}</h3>
