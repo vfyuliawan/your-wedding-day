@@ -83,7 +83,6 @@ export default function Home() {
 
   useEffect(() => {
     if (getParams !== null) {
-
       getTheme();
     } else {
       setHomePage(true);

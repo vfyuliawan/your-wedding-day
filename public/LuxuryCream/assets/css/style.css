@@ -17,7 +17,6 @@
 }
 
 
-
 /* Animation */
 
 .tracking-in-expand {
@@ -1103,6 +1102,11 @@ p {
 
   .home .heart {
     display: none;
+  }
+
+  .home-quotes{
+    justify-content: center;
+    
   }
 
   .sticky-top {

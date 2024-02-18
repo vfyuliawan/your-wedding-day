@@ -45,7 +45,7 @@ const NewHomeView = (props:HomeViewInterface) => {
                 srcSet=""
               />
             </motion.div>
-            <div className="col-md-6 col-lg-6 col-sm-8 col-8 text-start d-flex align-items-center">
+            <div className="home-quotes col-md-6 col-lg-6 col-sm-8 col-8 text-start d-flex align-items-center">
               <div className="row">
                 <div className="container">
                   <motion.h1

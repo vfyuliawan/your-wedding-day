@@ -131,7 +131,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
             className="text-center"
             style={{
               position: "absolute",
-              bottom: "7%",
+              bottom: "5%",
               right: "50%",
               display: "flex",
               flexDirection: "column",
@@ -250,7 +250,7 @@ const CoverView2 = (props: CoverModelInterface, ) => {
             className="cover2-kepada"
             style={{
               position: "absolute",
-              top: "35%",
+              top: "30%",
               left: "50%",
               transform: "translateX(-50%)",
             }}

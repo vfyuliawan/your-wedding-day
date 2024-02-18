@@ -1105,6 +1105,11 @@ p {
     display: none;
   }
 
+  .home-quotes{
+    justify-content: center;
+    
+  }
+
   .sticky-top {
     overflow: hidden !important;
   }

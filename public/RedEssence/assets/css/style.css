@@ -19,6 +19,7 @@
   --shadow3: 0 2px 2px rgba(0, 0, 0, 0.8);
 }
 
+
 /* Animation */
 
 .tracking-in-expand {
@@ -887,6 +888,7 @@ p {
   background: linear-gradient(var(--pink) 0%, var(--pink) 30%, white 170%);
   width: 100%;
 }
+
 .position-relative {
   position: relative;
 }
@@ -1103,6 +1105,11 @@ p {
 
   .home .heart {
     display: none;
+  }
+
+  .home-quotes{
+    justify-content: center;
+    
   }
 
   .sticky-top {
