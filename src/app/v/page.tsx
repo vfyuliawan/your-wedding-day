@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import PinkEssence from "../pink-essence/LuxuryTheme";
+import PinkEssence from "../LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/navigation";
 
 const MainMenu = () => {

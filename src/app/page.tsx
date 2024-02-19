@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import PinkEssence from "./pink-essence/LuxuryTheme";
+import PinkEssence from "./LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/router";
 import { usePathname, useSearchParams } from "next/navigation";
 import Service from "./services/Service";
@@ -25,8 +25,9 @@ import {
   where,
 } from "firebase/firestore";
 import Swal from "sweetalert2";
-import LuxuryTheme from "./pink-essence/LuxuryTheme";
+import LuxuryTheme from "./LuxuryTheme/LuxuryTheme";
 import ReactLoading from "react-loading";
+import FloralTheme from "./FloralTheme/FloralTheme";
 
 export default function Home() {
   const pathname = usePathname();
@@ -131,7 +132,16 @@ export default function Home() {
           idGuest={idGuest}
         />
       ): themeName == "LuxuryPink" ? (
-        <LuxuryTheme
+        <FloralTheme
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
+      ): themeName == "GreenFloral" ? (
+        <FloralTheme
           details={details}
           getDetails={() => {
             getMessage();
