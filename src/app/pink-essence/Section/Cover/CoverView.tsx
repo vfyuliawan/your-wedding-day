@@ -55,9 +55,6 @@ const CoverView = (props: CoverModelInterface, ) => {
   }, []);
 
 
-  
-  
-
   return !appear ? (
     <motion.div
       className="cover2"
