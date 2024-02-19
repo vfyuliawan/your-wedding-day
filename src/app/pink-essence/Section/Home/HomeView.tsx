@@ -1,72 +1,86 @@
-const HomeView = () => {
-  return (
-    <section id="home" className="home">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-8 text-center">
-            <h2>Acara Pernikahan</h2>
-            <h4>
-              Diselenggarakan pada 20 November 2023 di bandung, Jawa Barat
-            </h4>
-            <p>
-              Oleh karena itu, dengan segala hormat, kami bermaksud untuk
-              mengundang Bapak/Ibu Saudara/i, untuk hadir pada acara pernikaahan
-              kami
-            </p>
-          </div>
-        </div>
-        <div className="row couple mt-5">
-          <div className="col-lg-6">
-            <div className="row">
-              <div className="col-8 text-end">
-                <h3>Fulan</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-                  praesentium dolores eos quo.
-                </p>
-                <p>
-                  Putra dari Bpk. lOrem <br />
-                  dan <br />
-                  Ibu Impus
-                </p>
-              </div>
-              <div className="col-4">
-                <img
-                  src="/pink-essence/img/woman1.jpg"
-                  className="img-responsive rounded-circle"
-                />
-              </div>
-            </div>
-          </div>
-          <span className="heart">
-            <i className="bi bi-balloon-heart-fill" />
-          </span>
-          <div className="col-lg-6">
-            <div className="row">
-              <div className="col-4">
-                <img
-                  src="/pink-essence/img/man.png"
-                  className="img-responsive rounded-circle"
-                />
-              </div>
-              <div className="col-8">
-                <h3>Fulan</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-                  praesentium dolores eos quo.
-                </p>
-                <p>
-                  Putra dari Bpk. lOrem <br />
-                  dan <br />
-                  Ibu Impus
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+'use client'
 
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
+import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
+import AnimationThemeInstance from "@/app/utils/AnimationThemes";
+import { HomeViewInterface } from "./HomeModel";
+
+const HomeView = (props:HomeViewInterface) => {
+
+  const controls = useAnimation();
+  const targetRef = useRef<any>(null);
+  const isVisible = useIntersectionObserver(targetRef);
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start(AnimationThemeInstance.FadeHorizon); 
+    }
+  }, [isVisible, controls]);
+    return ( 
+        <section id="new-home" className="new-home" ref={targetRef}>
+        <div className="home-bg" style={{
+        }}>
+          <div className="row justify-content-center ">
+            <motion.div
+            animate={controls}
+            initial={AnimationThemeInstance.FadeLeft}
+            transition={{duration:1}}
+              className="home-img col-md-6 col-lg-6 col-8 col-sm-8 justify-content-end"
+              style={{
+                paddingTop: "2rem",
+                paddingBottom: "2rem",
+                display: "flex",
+              }}
+            >
+              <img
+                src={props?.HomeDetail?.HomeImg}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderTopLeftRadius: "10%",
+                  borderBottomRightRadius: "10%",
+                }}
+                alt=""
+                srcSet=""
+              />
+            </motion.div>
+            <div className="home-quotes col-md-6 col-lg-6 col-sm-8 col-8 text-start d-flex align-items-center">
+              <div className="row">
+                <div className="container">
+                  <motion.h1
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeRight}
+                  transition={{duration:1, delay:0.5}}
+                    className="home-text"
+                    style={{
+                      color: "white",
+                      fontFamily: "Brilon",
+                      fontSize: "3rem",
+                    }}
+                  >
+                    {props?.HomeDetail?.HomeTittle }
+                  </motion.h1>
+                  <motion.p
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeLeft}
+                  transition={{duration:1, delay:0.8}}
+                    className="home-text"
+                    style={{
+                      color:"#ffff",
+                      fontFamily:'Times-new-roman',
+                      fontSize:'14px'
+                    }}
+                  >
+                    {props?.HomeDetail?.HomeQuotes}
+                  </motion.p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+     );
+}
+ 
 export default HomeView;

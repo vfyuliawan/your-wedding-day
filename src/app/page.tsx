@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import PinkEssence from "./pink-essence/RedEssence";
+import PinkEssence from "./pink-essence/LuxuryTheme";
 import { useRouter } from "next/router";
 import { usePathname, useSearchParams } from "next/navigation";
 import Service from "./services/Service";
@@ -25,7 +25,7 @@ import {
   where,
 } from "firebase/firestore";
 import Swal from "sweetalert2";
-import RedEssence from "./pink-essence/RedEssence";
+import LuxuryTheme from "./pink-essence/LuxuryTheme";
 import ReactLoading from "react-loading";
 
 export default function Home() {
@@ -95,7 +95,7 @@ export default function Home() {
       {loading ? (
         <Loading />
       ) : themeName == "RedEssence" ? (
-        <RedEssence
+        <LuxuryTheme
           details={details}
           getDetails={() => {
             getMessage();
@@ -104,7 +104,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : themeName == "BluePremium" ? (
-        <RedEssence
+        <LuxuryTheme
           details={details}
           getDetails={() => {
             getMessage();
@@ -113,7 +113,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryCream" ? (
-        <RedEssence
+        <LuxuryTheme
           details={details}
           getDetails={() => {
             getMessage();
@@ -122,7 +122,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryGreen" ? (
-        <RedEssence
+        <LuxuryTheme
           details={details}
           getDetails={() => {
             getMessage();
@@ -131,7 +131,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ): themeName == "LuxuryPink" ? (
-        <RedEssence
+        <LuxuryTheme
           details={details}
           getDetails={() => {
             getMessage();

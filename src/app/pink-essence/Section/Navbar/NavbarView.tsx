@@ -1,63 +1,55 @@
 const NavbarView = () => {
-    return ( 
-        <nav className="navbar navbar-expand-md sticky-bottom-navbar my-navbar">
-        <div className="container">
-          <a className="navbar-brand" href="#">
-            Fulan-Fulana
-          </a>
-          <button
-            className="navbar-toggler border-0"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex={-1}
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                Fulan-Fulana
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              />
+  return (
+    <nav
+      className="navbar-expand-md sticky-bottom-navbar our-navbbar"
+      style={{
+        // backgroundColor: "hsl(0, 74%, 18%)",
+        // // opacity: 0.7,
+        backgroundColor:'transparent',
+        height: "5rem",
+        visibility: 'hidden',
+        justifyContent: "center",
+        display: "flex",
+      }}
+    >
+      <div
+        className="row our-nav"
+        style={{
+          position: "absolute",
+          top: -15,
+          width: "90%",
+          borderRadius: "30px",
+          opacity:0.8,
+          justifyContent:'center',
+          boxShadow: "0 -10px 10px rgba(0, 0, 0, 0.7)" // Add this line for shadow
+
+        }}
+      >
+        <div className="col-10">
+          <div className="row" style={{ borderRadius: "20px" }}>
+            <div className="col-3 mt-4 mb-4">
+              <i
+                className="bi bi-house-door-fill"
+                style={{ fontSize: "2rem" }}
+              ></i>
             </div>
-            <div className="offcanvas-body">
-              <div className="navbar-nav ms-auto">
-                <a className="nav-link" href="#home">
-                  Home
-                </a>
-                <a className="nav-link" href="#info">
-                  Info
-                </a>
-                <a className="nav-link" href="#story">
-                  Story
-                </a>
-                <a className="nav-link" href="#galery">
-                  Galery
-                </a>
-                <a className="nav-link" href="#rsvp">
-                  RSVP
-                </a>
-                <a className="nav-link" href="#gifts">
-                  Gifts
-                </a>
-              </div>
+            <div className="col-3 mt-4 mb-4">
+              <i className="bi bi-valentine2" style={{ fontSize: "2rem" }}></i>
+            </div>
+            <div className="col-3 mt-4 mb-4">
+              <i
+                className="bi bi-calendar2-week-fill"
+                style={{ fontSize: "2rem" }}
+              ></i>
+            </div>
+            <div className="col-3 mt-4 mb-4">
+              <i className="bi bi-camera-fill" style={{ fontSize: "2rem" }}></i>{" "}
             </div>
           </div>
         </div>
-      </nav>
-     );
-}
- 
+      </div>
+    </nav>
+  );
+};
+
 export default NavbarView;

@@ -56,7 +56,7 @@ const GiftsView = (props: GiftsViewInterface) => {
           borderRadius: "4% 4% 0 0",
           backgroundColor: "white",
           paddingTop: "5rem",
-          marginTop:'10rem'
+          marginTop: "10rem",
         }}
       >
         <div className="container">
@@ -105,7 +105,12 @@ const GiftsView = (props: GiftsViewInterface) => {
           </div>
           <div className="row justify-content-center">
             {props.Gifts.First.Visible ? (
-              <div className="col-md-4 col-10 col-sm-6 mt-2">
+              <motion.div
+                animate={animate}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 2, delay:1 }}
+                className="col-md-4 col-10 col-sm-6 mt-2"
+              >
                 <div className="card text-center">
                   <div className="card-header">
                     <img
@@ -137,10 +142,15 @@ const GiftsView = (props: GiftsViewInterface) => {
                     A/N {props.Gifts.First.Name}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ) : null}
             {props.Gifts.Second.Visible ? (
-              <div className="col-md-4 col-10 col-sm-6 mt-2">
+              <motion.div
+                animate={animate}
+                initial={AnimationThemeInstance.FadeRight}
+                transition={{ duration: 2.5, delay:1.4 }}
+                className="col-md-4 col-10 col-sm-6 mt-2"
+              >
                 <div className="card text-center">
                   <div className="card-header">
                     <img
@@ -172,10 +182,15 @@ const GiftsView = (props: GiftsViewInterface) => {
                     A/N {props.Gifts.Second.Name}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ) : null}
             {props.Gifts.Third.Visible ? (
-              <div className="col-md-4 col-10 col-sm-6 mt-2">
+              <motion.div
+                animate={animate}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 3 , delay:1.8}}
+                className="col-md-4 col-10 col-sm-6 mt-2"
+              >
                 <div className="card text-center">
                   <div className="card-header">
                     <img
@@ -207,7 +222,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                     A/N {props.Gifts.Third.Name}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ) : null}
           </div>
           <div
@@ -216,7 +231,6 @@ const GiftsView = (props: GiftsViewInterface) => {
           >
             <div className="col-10 justify-content-center d-flex">
               <a
-              
                 className="btn btn-lg text-center"
                 style={{
                   display: "flex",
