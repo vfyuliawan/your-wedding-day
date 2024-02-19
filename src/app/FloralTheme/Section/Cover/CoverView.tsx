@@ -99,25 +99,12 @@ const CoverView = (props: CoverModelInterface) => {
           src="image/background/floralVertical.jpg"
           alt="dfasdfsa"
         />
-        {/* <div
-          className="cover2-overlay-shadow"
-          style={{
-            width: "100%",
-            height: "78%",
-            position: "absolute",
-            bottom: "3%",
-            color: "#fff",
-            fontSize: "24px",
-            textAlign: "center",
-          }}
-        ></div> */}
-
         <div
           className=""
           style={{
             background: ThemeColorClass.ThemeColor.colors.secondary,
             width: "100%",
-            height: "25%",
+            height: "15%",
             position: "absolute",
             flexDirection: "row",
             bottom: 0,
@@ -128,7 +115,7 @@ const CoverView = (props: CoverModelInterface) => {
         >
           <svg  style={{
               position: "relative",
-              bottom: "40%",
+              bottom: "70%",
               opacity:0.5 
             }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
@@ -140,7 +127,7 @@ const CoverView = (props: CoverModelInterface) => {
           <svg
             style={{
               position: "relative",
-              bottom: "70%",
+              bottom: "130%",
             }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
@@ -155,7 +142,7 @@ const CoverView = (props: CoverModelInterface) => {
             className="text-center"
             style={{
               position: "absolute",
-              bottom: "30%",
+              bottom: "10%",
               right: "50%",
               display: "flex",
               flexDirection: "column",
@@ -252,7 +239,7 @@ const CoverView = (props: CoverModelInterface) => {
             width: "100%",
             height: "100%",
             position: "absolute",
-            top: "200px",
+            top: "150px",
             left: 0,
             color: "#fff",
             fontSize: "24px",
@@ -271,7 +258,7 @@ const CoverView = (props: CoverModelInterface) => {
           <h2
             style={{
               fontFamily: "brilon",
-              fontSize: "5rem",
+              fontSize: "4rem",
               color: ThemeColorClass.ThemeColor.colors.textColor,
             }}
           >
@@ -279,8 +266,8 @@ const CoverView = (props: CoverModelInterface) => {
           </h2>
 
           <div style={{
-            height:'180px',
-            width:'180px',
+            height:'140px',
+            width:'140px',
             position:'relative',
             right:'-50%',
             transform: 'translateX(-50%)',
