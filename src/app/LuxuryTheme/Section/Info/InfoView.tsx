@@ -12,6 +12,7 @@ import {
   TimeConvertionDay,
   TimeConvertionInterface,
 } from "@/app/utils/TimeConvertion";
+import { GetEmbededFromGmap } from "@/app/utils/GetEmbeded";
 
 export interface InfoViewInterface {
   Info: InfoViewKeyValue[];
@@ -239,7 +240,7 @@ const InfoView = (props: InfoViewInterface) => {
               style={{ padding: "24px", borderRadius: "10%" }}
             >
               <iframe
-                src={props.Embeded}
+                src={GetEmbededFromGmap(props.Embeded)}
                 width="100%"
                 height="400px"
                 style={{ borderRadius: "10%" }}

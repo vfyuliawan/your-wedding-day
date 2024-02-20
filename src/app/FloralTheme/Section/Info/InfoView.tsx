@@ -13,6 +13,7 @@ import {
   TimeConvertionInterface,
 } from "@/app/utils/TimeConvertion";
 import { ThemeColorClass } from "@/app/Constant/GreenFloral/ThemeColor";
+import { GetEmbededFromGmap } from "@/app/utils/GetEmbeded";
 
 export interface InfoViewInterface {
   Info: InfoViewKeyValue[];
@@ -336,7 +337,7 @@ const InfoView = (props: InfoViewInterface) => {
             >
 
               <iframe
-                src={props.embeded}
+                src={GetEmbededFromGmap(props.embeded)}
                 width="100%"
                 height="400px"
                 style={{ borderRadius: "10%" }}
