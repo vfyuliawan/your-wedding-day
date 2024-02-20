@@ -1,19 +1,47 @@
-export class ThemeColorClass {
+// export class ThemeColorClass {
+//   constructor(String params){
 
-  static ThemeColor = {
-    colors: {
-      primary: '#5F7161',
-      secondary: '#845A27',
-      textColor: '#85865F',
-      textColor2: '#8FA6AC',
-      elevation: {
-        level0: 'transparent',
-        level1: 'rgb(245, 242, 255)',
-        level2: 'rgb(239, 236, 255)',
-        level3: 'rgb(233, 230, 255)',
-        level4: 'rgb(231, 228, 255)',
-        level5: 'rgb(227, 224, 255)',
-      },
-    },
+//     this.ThemeColor = {
+//       colors: {
+//         primary: '#5F7161',
+//         secondary: '#845A27',
+//         textColor: '#85865F',
+//         textColor2: '#8FA6AC',
+//       },
+//     };
+//   }
+
+// }
+
+export class ThemeColorClass {
+  private themeName: string;
+  public color!: {
+    primary: string,
+    secondary: string,
+    textColor: string,
+    textColor2: string,
   };
+
+  constructor(themeName: string) {
+    this.themeName = themeName;
+    this.initializeColor();
+  }
+
+  private initializeColor(): void {
+    if (this.themeName === "GreenFloral") {
+      this.color = {
+        primary: "#5F7161",
+        secondary: "#845A27",
+        textColor: "#85865F",
+        textColor2: "#8FA6AC",
+      };
+    } else {
+      this.color = {
+        primary: "#000000",
+        secondary: "#000000",
+        textColor: "#000000",
+        textColor2: "#000000",
+      };
+    }
+  }
 }

@@ -5,6 +5,7 @@ import { Timestamp } from "firebase/firestore";
 
 export interface CoverModelInterface {
     detailCover : CoverKeyValue
+    themeName : string
     guest: string;
     isVisible: boolean;
     setVisible?: Dispatch<SetStateAction<boolean>>;

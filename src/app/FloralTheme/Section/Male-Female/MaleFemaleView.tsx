@@ -115,7 +115,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
 
         <div
           className="row justify-content-center"
-          style={{ marginBottom: "2rem" }}
+          style={{ marginBottom: "0rem" }}
         >
           <div className="col-md-6 col-9 col-sm-9 d-flex align-items-end justify-content-end position-relative">
             <motion.div

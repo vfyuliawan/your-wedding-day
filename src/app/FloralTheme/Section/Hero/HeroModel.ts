@@ -9,4 +9,5 @@ export interface HeroKeyValue{
   
 export  interface HeroViewInterface {
     HeroDetail: HeroKeyValue;
+    themeName:string;
   }

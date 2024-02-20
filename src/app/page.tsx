@@ -132,7 +132,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ): themeName == "LuxuryPink" ? (
-        <FloralTheme
+        <LuxuryTheme
           details={details}
           getDetails={() => {
             getMessage();

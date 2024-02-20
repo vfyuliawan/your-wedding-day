@@ -138,13 +138,18 @@ const FloralTheme = (props: FloralThemeInterface) => {
         isVisible={coverVisible}
         onCoverClick={handleCoverClick}
         detailCover={props?.details?.Cover}
+        themeName={props.details?.ThemeName}
       />
       <div style={{ overflowY: "scroll" }} ref={containerRef}>
         {!coverVisible ? <NavbarView /> : null}
         <HeaderView themeName={props?.details?.ThemeName} />
         <div className="hero-home">
           {props?.details?.Hero?.Visible ? (
-            <HeroView ref={heroRef} HeroDetail={props?.details?.Hero} />
+            <HeroView
+              ref={heroRef}
+              HeroDetail={props?.details?.Hero}
+              themeName={props?.details?.ThemeName}
+            />
           ) : null}
           {props?.details?.Home?.Visible ? (
             <HomeView HomeDetail={props?.details?.Home} />
@@ -154,9 +159,17 @@ const FloralTheme = (props: FloralThemeInterface) => {
           <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} />
         ) : null}
         {props?.details?.InfoAcara?.Visible ? (
-          <InfoView Info={props?.details?.InfoAcara} />
+          <InfoView
+            Info={props?.details?.InfoAcara}
+            themeName={props?.details?.ThemeName}
+            embeded={props?.details?.Embeded}
+          />
         ) : (
-          <InfoView Info={props?.details?.InfoAcara} />
+          <InfoView
+            Info={props?.details?.InfoAcara}
+            themeName={props?.details?.ThemeName}
+            embeded={props?.details?.Embeded}
+          />
         )}
         {props?.details?.CountDown?.Visible ? (
           <CountDownView

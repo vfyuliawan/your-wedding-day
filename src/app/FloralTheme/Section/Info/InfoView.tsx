@@ -16,6 +16,8 @@ import { ThemeColorClass } from "@/app/Constant/GreenFloral/ThemeColor";
 
 export interface InfoViewInterface {
   Info: InfoViewKeyValue[];
+  themeName: string;
+  embeded:string
 }
 
 export interface InfoViewKeyValue {
@@ -30,6 +32,7 @@ const InfoView = (props: InfoViewInterface) => {
   const controls = useAnimation();
   const targetRef = useRef<any>(null);
   const isVisible = useIntersectionObserver(targetRef);
+  const bgColor = new ThemeColorClass(props.themeName)
 
   useEffect(() => {
     if (isVisible) {
@@ -120,7 +123,7 @@ const InfoView = (props: InfoViewInterface) => {
                   initial={AnimationThemeInstance.FadeLeft}
                   transition={{ duration: 2, delay: 1.3 }}
                   style={{
-                    color: ThemeColorClass.ThemeColor.colors.secondary,
+                    color: bgColor.color.secondary,
                     fontFamily: "brilon",
                     fontSize: "2.5rem",
                   }}
@@ -140,7 +143,7 @@ const InfoView = (props: InfoViewInterface) => {
             transition={{ duration: 2, delay: 1.5 }}
               style={{
                 fontSize: "1.5rem",
-                color: ThemeColorClass.ThemeColor.colors.textColor2,
+                color: bgColor.color.textColor2,
               }}
             >
               <span>
@@ -158,7 +161,7 @@ const InfoView = (props: InfoViewInterface) => {
             transition={{ duration: 2, delay: 1.7 }}
               style={{
                 fontSize: "1.5rem",
-                color: ThemeColorClass.ThemeColor.colors.textColor2,
+                color: bgColor.color.textColor2,
               }}
             >
               <span>
@@ -174,7 +177,7 @@ const InfoView = (props: InfoViewInterface) => {
             transition={{ duration: 2, delay: 1.9 }}
               style={{
                 fontSize: "1.5rem",
-                color: ThemeColorClass.ThemeColor.colors.textColor2,
+                color: bgColor.color.textColor2,
               }}
             >
               <span>
@@ -225,7 +228,7 @@ const InfoView = (props: InfoViewInterface) => {
                 transition={{ duration: 2, delay: 2.4 }}
                   className="mt-4"
                   style={{
-                    color: ThemeColorClass.ThemeColor.colors.secondary,
+                    color: bgColor.color.secondary,
                     fontFamily: "brilon",
                     fontSize: "2.5rem",
                   }}
@@ -244,7 +247,7 @@ const InfoView = (props: InfoViewInterface) => {
               transition={{ duration: 2, delay: 2.5 }}
               style={{
                 fontSize: "1.5rem",
-                color: ThemeColorClass.ThemeColor.colors.textColor2,
+                color: bgColor.color.textColor2,
               }}
             >
               <span>
@@ -262,7 +265,7 @@ const InfoView = (props: InfoViewInterface) => {
             transition={{ duration: 2, delay: 2.6 }}
               style={{
                 fontSize: "1.5rem",
-                color: ThemeColorClass.ThemeColor.colors.textColor2,
+                color: bgColor.color.textColor2,
               }}
             >
               <span>
@@ -278,7 +281,7 @@ const InfoView = (props: InfoViewInterface) => {
             transition={{ duration: 2, delay: 2.8 }}
               style={{
                 fontSize: "1.5rem",
-                color: ThemeColorClass.ThemeColor.colors.textColor2,
+                color: bgColor.color.textColor2,
               }}
             >
               <span>
@@ -331,8 +334,9 @@ const InfoView = (props: InfoViewInterface) => {
               className="iframeContainer"
               style={{ padding: "24px", borderRadius: "10%" }}
             >
+
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.4267616824472!2d106.81876977550014!3d-6.207304660805113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5a1f54c1187%3A0xf8fa357babd8133a!2sMenara%20Astra!5e0!3m2!1sen!2sid!4v1705646637914!5m2!1sen!2sid"
+                src={props.embeded}
                 width="100%"
                 height="400px"
                 style={{ borderRadius: "10%" }}

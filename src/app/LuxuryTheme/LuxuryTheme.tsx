@@ -154,9 +154,9 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
           <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} />
         ) : null}
         {props?.details?.InfoAcara?.Visible ? (
-          <InfoView Info={props?.details?.InfoAcara} />
+          <InfoView Info={props?.details?.InfoAcara} Embeded={props?.details?.Embeded} />
         ) : (
-          <InfoView Info={props?.details?.InfoAcara} />
+          <InfoView Info={props?.details?.InfoAcara} Embeded={props?.details?.Embeded}/>
         )}
         {props?.details?.CountDown?.Visible ? (
           <CountDownView

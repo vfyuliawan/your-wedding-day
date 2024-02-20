@@ -13,6 +13,9 @@ import {
 import { ThemeColorClass } from "@/app/Constant/GreenFloral/ThemeColor";
 
 const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
+  
+
+  const bgColor = new ThemeColorClass(props.themeName);
   return (
     <>
       <section
@@ -46,7 +49,7 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
           <h4
             style={{
               fontFamily: "Times New Roman",
-              color: ThemeColorClass.ThemeColor.colors.secondary,
+              color: bgColor.color.secondary,
               fontSize: "4rem",
               textShadow: "none",
             }}
@@ -57,7 +60,7 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
           <h1
             style={{
               fontFamily: "brilon",
-              color: ThemeColorClass.ThemeColor.colors.textColor2,
+              color: bgColor.color.textColor,
             }}
           >
             {props.HeroDetail.HeroTittle}
@@ -73,7 +76,7 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundImage: `url(${props.HeroDetail.HeroImg})`,
-                backgroundColor: ThemeColorClass.ThemeColor.colors.secondary,
+                backgroundColor: bgColor.color.secondary,
               }}
             ></div>
           </div>
@@ -83,7 +86,7 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
               fontFamily: "Times New Roman",
               fontSize: "2.2rem",
               textShadow: "none",
-              color: ThemeColorClass.ThemeColor.colors.secondary,
+              color: bgColor.color.secondary,
             }}
           >
             {" "}
