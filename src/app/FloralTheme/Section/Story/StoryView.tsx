@@ -94,6 +94,8 @@ const StoryView = (props: StoryViewInterface) => {
                       style={{
                         width: "100%",
                         height: "auto",
+                        borderRadius:'20px'
+
                       }}
                       src={props?.OurStory?.First.Photo}
                       alt=""
@@ -138,6 +140,7 @@ const StoryView = (props: StoryViewInterface) => {
                       style={{
                         width: "100%",
                         height: "auto",
+                        borderRadius:'20px'
                       }}
                       src={props?.OurStory?.Second?.Photo}
                       alt=""
@@ -180,6 +183,8 @@ const StoryView = (props: StoryViewInterface) => {
                       style={{
                         width: "100%",
                         height: "auto",
+                        borderRadius:'20px'
+
                       }}
                       src={props?.OurStory?.Third?.Photo}
                       alt=""

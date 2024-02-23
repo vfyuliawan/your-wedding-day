@@ -248,10 +248,10 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-music-player-fill"
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill"></i>
+              <i className="bi bi-pause-fill" style={{ fontSize: "2rem" }}></i>
             )}
           </button>
         ) : null}
@@ -270,19 +270,20 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={() =>{scrollToBarcode(18000, endRef)}}          
-          >
+            onClick={() =>{scrollToBarcode(18000, endRef)}}          >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-lg bi-arrow-down-circle"></i>
+              <i className="bi bi-lg bi-arrow-down-circle"
+              style={{ fontSize: "2rem" }}
+              ></i>
             )}
           </button>
         ) : null}
-        {!coverVisible ? (
+         {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
@@ -297,12 +298,12 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={() =>{scrollToBarcode(18000, endRef)}}          
+            onClick={() =>{scrollToBarcode(2000, qrCodeRef)}}
           >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "4rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
               <i className="bi bi-lg bi-qr-code" style={{fontSize:"2rem"}}></i>

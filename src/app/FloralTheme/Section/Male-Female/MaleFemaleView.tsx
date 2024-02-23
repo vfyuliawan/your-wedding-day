@@ -74,6 +74,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                borderTopLeftRadius: "9%",
+                borderTopRightRadius: "9%",
               }}
               src={props?.MaleFemaleDetail?.Female?.Photo}
               alt={""}
@@ -139,6 +141,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
+                  borderBottomLeftRadius: "8%",
+                  borderBottomRightRadius: "8%",
                 }}
                 src={props?.MaleFemaleDetail?.Male?.Photo}
                 alt=""

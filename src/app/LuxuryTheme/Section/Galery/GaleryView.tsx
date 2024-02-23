@@ -94,21 +94,22 @@ const GaleryView = (props: GaleryViewInterface) => {
   function firstImage() {
     return (
       <div className="row justify-content-center ">
-      <div className="col-10 mt-3">
-        <a
-          href="/pink-essence/img/prawed/prawed4.jpg"
-          data-toggle="lightbox"
-          data-caption="This describes the image"
-        >
-          <img
-            src={props.image[0] ?? ""}
-            style={{}}
-            className="img-fluid w-100 rounded"
-          />
-        </a>
+        <div className="col-10 mt-3">
+          <a
+            href="/pink-essence/img/prawed/prawed4.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src={props.image[0] ?? ""}
+              style={{
+                borderRadius: "8%",
+              }}
+              className="img-fluid w-100"
+            />
+          </a>
+        </div>
       </div>
-      </div>
-
     );
   }
 
@@ -125,8 +126,12 @@ const GaleryView = (props: GaleryViewInterface) => {
               >
                 <img
                   src={item}
-                  style={{ maxHeight: 376 }}
-                  className="img-fluid w-100 rounded"
+                  style={{
+                    maxHeight: 376,
+                    borderRadius: "8%",
+                  }}
+                  className="img-fluid w-100 "
+                  alt="Image Description"
                 />
               </a>
             </div>
@@ -155,44 +160,14 @@ const GaleryView = (props: GaleryViewInterface) => {
                 {props.image.map((item, key) => {
                   return (
                     <div>
-                      <img src={item} alt="" />
+                      <img style={{
+                        borderRadius:'8px'
+                      }} src={item} alt="" />
                     </div>
                   );
                 })}
               </OwlCarousel>
-              {/* <OwlCarousel
-                className="owl-theme rtl"
-                loop
-                margin={10}
-                autoplay={true}
-                animateIn={true}
-                direction={"ltr"}
-                rtl={false}
-                animateOut={true}
-                autoplaySpeed={4000}
-                >
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed1.jpg" alt="" />
-                </div>
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed2.jpg" alt="" />
-                </div>
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed3.jpg" alt="" />
-                </div>
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed4.jpg" alt="" />
-                </div>
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed5.jpg" alt="" />
-                </div>
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed6.jpg" alt="" />
-                </div>
-                <div>
-                  <img src="/pink-essence/img/prawed/prawed6.jpg" alt="" />
-                </div>
-              </OwlCarousel> */}
+              
             </div>
           </div>
         </div>

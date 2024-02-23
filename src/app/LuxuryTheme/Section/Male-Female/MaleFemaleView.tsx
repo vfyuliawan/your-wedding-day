@@ -64,7 +64,9 @@ useEffect(() => {
               style={{
               width:'100%',
               height:'100%',
-              objectFit:'cover'
+              objectFit:'cover',
+              borderTopRightRadius:'20px',
+              borderTopLeftRadius:'20px',
               }}
                 src={props?.MaleFemaleDetail?.Female?.Photo}
                 alt={""}
@@ -120,7 +122,9 @@ useEffect(() => {
               style={{
                 width:'100%',
                 height:'100%',
-                objectFit:'cover'
+                objectFit:'cover',
+                borderBottomRightRadius:'20px',
+                borderBottomLeftRadius:'20px',
               }}
               src={props?.MaleFemaleDetail?.Male?.Photo}
               alt=""

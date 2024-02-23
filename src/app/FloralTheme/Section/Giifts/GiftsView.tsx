@@ -53,7 +53,7 @@ const GiftsView = (props: GiftsViewInterface) => {
     >
       <div
         style={{
-          borderRadius: "4% 4% 0 0",
+          borderRadius: "20px 20px 0 0",
           backgroundColor: "white",
           paddingTop: "5rem",
           marginTop: "10rem",
