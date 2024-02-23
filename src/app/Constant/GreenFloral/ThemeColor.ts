@@ -35,6 +35,13 @@ export class ThemeColorClass {
         textColor: "#85865F",
         textColor2: "#8FA6AC",
       };
+    }else if (this.themeName === "DarkGreenFloral") {
+      this.color = {
+        primary: "#5F7161",
+        secondary: "#647352",
+        textColor: "#85865F",
+        textColor2: "#8FA6AC",
+      };
     } else {
       this.color = {
         primary: "#000000",

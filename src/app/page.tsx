@@ -66,7 +66,6 @@ export default function Home() {
 
   const getMessage = async () => {
     console.log("run");
-
     const res = await Service.GET({
       collectionName: "UserId",
       queryGet: function (
@@ -140,7 +139,16 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-      ): themeName == "GreenFloral" ? (
+      ):themeName == "GreenFloral" ? (
+        <FloralTheme
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
+      ): themeName == "DarkGreenFloral" ? (
         <FloralTheme
           details={details}
           getDetails={() => {
