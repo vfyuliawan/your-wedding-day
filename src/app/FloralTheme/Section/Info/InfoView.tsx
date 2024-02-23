@@ -234,7 +234,7 @@ const InfoView = (props: InfoViewInterface) => {
                     fontSize: "2.5rem",
                   }}
                 >
-                  {props.Info[0].Judul}
+                  {props.Info[1].Judul}
                 </motion.h1>
               </div>
             </div>
