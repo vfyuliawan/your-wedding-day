@@ -44,7 +44,16 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 fontSize: "4rem",
               }}
             >
-              scan <br /> guest Barcode
+              scan <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "7rem",
+                  color:'black'
+                }}
+              >
+                Barcode
+              </span>
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">

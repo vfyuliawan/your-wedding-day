@@ -62,7 +62,7 @@ const GiftsView = (props: GiftsViewInterface) => {
         <div className="container">
           <div className="row mt-4 justify-content-center">
             <div className="col-6 text-end">
-              <motion.h2
+            <motion.h2
                 animate={animate}
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5 }}
@@ -73,7 +73,16 @@ const GiftsView = (props: GiftsViewInterface) => {
                   fontSize: "4rem",
                 }}
               >
-                Wedding <br /> Gifts
+                Wedding <br />
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "10",
+                  fontSize: "65px",
+                }}
+              >
+                Gifts
+              </span>
               </motion.h2>
             </div>
             <div className="col-5 d-flex align-items-center">

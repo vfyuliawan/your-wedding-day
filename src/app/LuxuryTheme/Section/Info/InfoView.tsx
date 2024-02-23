@@ -44,15 +44,23 @@ const InfoView = (props: InfoViewInterface) => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-6 text-end">
-            <motion.h2
+          <motion.h2
               ref={targetRef}
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5 }}
+              transition={{ duration: 2 }}
               style={{ fontFamily: "brilon", fontSize: "3.4rem" }}
             >
               Informasi <br />
-              Acara
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "65px",
+                }}
+              >
+                Acara
+              </span>
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">

@@ -72,20 +72,20 @@ const RsvpView = (props: RSVPViewInterface) => {
                     transition={{ duration: 1.5 }}
                     style={{
                       color: "white",
-                      fontSize: "2rem",
-                      fontFamily: "brilon",
+                      fontSize: "4rem",
+                      fontFamily: "Brilon",
                       textAlign: "right", // Add this line
                     }}
                   >
-                    Konfrimasi <br />
+                    Ucapan <br />
                     <span
                       style={{
-                        color: "white",
-                        fontSize: "3.3rem",
-                        fontFamily: "brilon",
+                        fontFamily: "Creation",
+                        fontWeight: "normal",
+                        fontSize: "65px",
                       }}
                     >
-                      Kehadiran
+                      Selamat
                     </span>
                   </motion.h2>
                 </div>
@@ -258,7 +258,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <div
                   style={{
                     borderRadius: "50%",
-                    backgroundColor: item.Confirm ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.25)",
+                    backgroundColor: item.Confirm
+                      ? "rgba(0, 0, 0, 0.25)"
+                      : "rgba(0, 0, 0, 0.25)",
                     width: "5rem",
                     height: "5rem",
                     maxHeight: "5rem",

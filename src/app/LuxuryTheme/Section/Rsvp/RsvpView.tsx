@@ -66,26 +66,26 @@ const RsvpView = (props: RSVPViewInterface) => {
             <div className="col-12">
               <div className="row">
                 <div className="col-6">
-                  <motion.h2
+                <motion.h2
                     animate={animate}
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5 }}
                     style={{
                       color: "white",
-                      fontSize: "2rem",
-                      fontFamily: "brilon",
+                      fontSize: "4rem",
+                      fontFamily: "Brilon",
                       textAlign: "right", // Add this line
                     }}
                   >
-                    Konfrimasi <br />
+                    Ucapan <br />
                     <span
                       style={{
-                        color: "white",
-                        fontSize: "3.3rem",
-                        fontFamily: "brilon",
+                        fontFamily: "Creation",
+                        fontWeight: "normal",
+                        fontSize: "65px",
                       }}
                     >
-                      Kehadiran
+                      Selamat
                     </span>
                   </motion.h2>
                 </div>

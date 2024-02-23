@@ -34,10 +34,25 @@ const StoryView = (props: StoryViewInterface) => {
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
-              style={{ color: "black", fontSize:'3.8rem', fontFamily:"brilon"}}
+              style={{
+                color: "black",
+                fontSize: "3.8rem",
+                fontFamily: "brilon",
+              }}
             >
-              Cerita <br />
-              Kita Berdua
+              Our
+              <br />
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "8rem",
+                  color:'black',
+                  textTransform:'capitalize'
+                }}
+              >
+                Story
+              </span>
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">
@@ -94,18 +109,21 @@ const StoryView = (props: StoryViewInterface) => {
                       style={{
                         width: "100%",
                         height: "auto",
-                        borderRadius:'20px'
-
+                        borderRadius: "20px",
                       }}
                       src={props?.OurStory?.First.Photo}
                       alt=""
                     />
                     <span style={{ fontSize: "1.2rem" }}>
                       {" "}
-                      {TimeConvertionDate(
+                      {
+                        TimeConvertionDate(
+                          props?.OurStory?.First.Date as TimeConvertionInterface
+                        ).dateMonth
+                      }
+                      {TimeConversionTime(
                         props?.OurStory?.First.Date as TimeConvertionInterface
-                      ).dateMonth}
-                      {TimeConversionTime(props?.OurStory?.First.Date as TimeConvertionInterface)} 
+                      )}
                     </span>
                   </div>
                   <div className="timeline-body">
@@ -140,16 +158,19 @@ const StoryView = (props: StoryViewInterface) => {
                       style={{
                         width: "100%",
                         height: "auto",
-                        borderRadius:'20px'
+                        borderRadius: "20px",
                       }}
                       src={props?.OurStory?.Second?.Photo}
                       alt=""
                     />
                     <span style={{ fontSize: "1.2rem" }}>
                       {" "}
-                      {TimeConvertionDate(
-                        props?.OurStory?.Second?.Date as TimeConvertionInterface
-                      ).dateMonth}
+                      {
+                        TimeConvertionDate(
+                          props?.OurStory?.Second
+                            ?.Date as TimeConvertionInterface
+                        ).dateMonth
+                      }
                     </span>
                   </div>
                   <div className="timeline-body">
@@ -183,17 +204,19 @@ const StoryView = (props: StoryViewInterface) => {
                       style={{
                         width: "100%",
                         height: "auto",
-                        borderRadius:'20px'
-
+                        borderRadius: "20px",
                       }}
                       src={props?.OurStory?.Third?.Photo}
                       alt=""
                     />
                     <span style={{ fontSize: "1.2rem" }}>
                       {" "}
-                      {TimeConvertionDate(
-                        props?.OurStory?.Third?.Date as TimeConvertionInterface
-                      ).dateMonth}
+                      {
+                        TimeConvertionDate(
+                          props?.OurStory?.Third
+                            ?.Date as TimeConvertionInterface
+                        ).dateMonth
+                      }
                     </span>
                   </div>
                   <div className="timeline-body">

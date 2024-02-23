@@ -18,7 +18,7 @@ import { GetEmbededFromGmap } from "@/app/utils/GetEmbeded";
 export interface InfoViewInterface {
   Info: InfoViewKeyValue[];
   themeName: string;
-  embeded:string
+  embeded: string;
 }
 
 export interface InfoViewKeyValue {
@@ -33,7 +33,7 @@ const InfoView = (props: InfoViewInterface) => {
   const controls = useAnimation();
   const targetRef = useRef<any>(null);
   const isVisible = useIntersectionObserver(targetRef);
-  const bgColor = new ThemeColorClass(props.themeName)
+  const bgColor = new ThemeColorClass(props.themeName);
 
   useEffect(() => {
     if (isVisible) {
@@ -55,7 +55,15 @@ const InfoView = (props: InfoViewInterface) => {
               style={{ fontFamily: "brilon", fontSize: "3.4rem" }}
             >
               Informasi <br />
-              Acara
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "65px",
+                }}
+              >
+                Acara
+              </span>
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">
@@ -139,9 +147,9 @@ const InfoView = (props: InfoViewInterface) => {
             style={{ backgroundColor: "white", padding: "1rem" }}
           >
             <motion.p
-            animate={controls}
-            initial={AnimationThemeInstance.FadeRight}
-            transition={{ duration: 2, delay: 1.5 }}
+              animate={controls}
+              initial={AnimationThemeInstance.FadeRight}
+              transition={{ duration: 2, delay: 1.5 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -157,9 +165,9 @@ const InfoView = (props: InfoViewInterface) => {
               }{" "}
             </motion.p>
             <motion.p
-            animate={controls}
-            initial={AnimationThemeInstance.FadeLeft}
-            transition={{ duration: 2, delay: 1.7 }}
+              animate={controls}
+              initial={AnimationThemeInstance.FadeLeft}
+              transition={{ duration: 2, delay: 1.7 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -173,9 +181,9 @@ const InfoView = (props: InfoViewInterface) => {
               )}
             </motion.p>
             <motion.p
-            animate={controls}
-            initial={AnimationThemeInstance.FadeRight}
-            transition={{ duration: 2, delay: 1.9 }}
+              animate={controls}
+              initial={AnimationThemeInstance.FadeRight}
+              transition={{ duration: 2, delay: 1.9 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -193,9 +201,9 @@ const InfoView = (props: InfoViewInterface) => {
           >
             <div className="col-6 justify-content-center">
               <motion.a
-              animate={controls}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 2, delay: 2 }}
+                animate={controls}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 2, delay: 2 }}
                 className="btn btn-lg text-center"
                 style={{
                   display: "flex",
@@ -216,17 +224,17 @@ const InfoView = (props: InfoViewInterface) => {
             <div className="row">
               <div className="col-12 text-center">
                 <motion.img
-                animate={controls}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 2, delay: 2.2 }}
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeRight}
+                  transition={{ duration: 2, delay: 2.2 }}
                   style={{ width: "50px", height: "50px", marginTop: "2rem" }}
                   src="/image/icons/restaurant.png"
                   alt=""
                 />
                 <motion.h1
-                animate={controls}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 2, delay: 2.4 }}
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeRight}
+                  transition={{ duration: 2, delay: 2.4 }}
                   className="mt-4"
                   style={{
                     color: bgColor.color.secondary,
@@ -243,7 +251,8 @@ const InfoView = (props: InfoViewInterface) => {
             className="col align-items-center"
             style={{ backgroundColor: "white", padding: "1rem" }}
           >
-            <motion.p animate={controls}
+            <motion.p
+              animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 2, delay: 2.5 }}
               style={{
@@ -261,9 +270,9 @@ const InfoView = (props: InfoViewInterface) => {
               }
             </motion.p>
             <motion.p
-            animate={controls}
-            initial={AnimationThemeInstance.FadeRight}
-            transition={{ duration: 2, delay: 2.6 }}
+              animate={controls}
+              initial={AnimationThemeInstance.FadeRight}
+              transition={{ duration: 2, delay: 2.6 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -277,9 +286,9 @@ const InfoView = (props: InfoViewInterface) => {
               )}
             </motion.p>
             <motion.p
-            animate={controls}
-            initial={AnimationThemeInstance.FadeLeft}
-            transition={{ duration: 2, delay: 2.8 }}
+              animate={controls}
+              initial={AnimationThemeInstance.FadeLeft}
+              transition={{ duration: 2, delay: 2.8 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -297,9 +306,9 @@ const InfoView = (props: InfoViewInterface) => {
           >
             <div className="col-6 justify-content-center">
               <motion.a
-              animate={controls}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 2, delay: 2.9 }}
+                animate={controls}
+                initial={AnimationThemeInstance.FadeRight}
+                transition={{ duration: 2, delay: 2.9 }}
                 className="btn btn-lg text-center"
                 style={{
                   display: "flex",
@@ -326,7 +335,7 @@ const InfoView = (props: InfoViewInterface) => {
           />
         </div>
       </div>
-      <div style={{ height: "80rem" }}></div>
+      <div style={{ height: "65rem" }}></div>
 
       <div className="container mt-5  ">
         <div className="row justify-content-center">
@@ -335,7 +344,6 @@ const InfoView = (props: InfoViewInterface) => {
               className="iframeContainer"
               style={{ padding: "24px", borderRadius: "10%" }}
             >
-
               <iframe
                 src={GetEmbededFromGmap(props.embeded)}
                 width="100%"

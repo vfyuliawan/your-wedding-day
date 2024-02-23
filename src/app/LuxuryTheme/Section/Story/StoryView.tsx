@@ -29,15 +29,30 @@ const StoryView = (props: StoryViewInterface) => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-6 text-end">
-            <motion.h2
+          <motion.h2
               ref={targetRef}
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
-              style={{ color: "black", fontSize:'3.8rem', fontFamily:"brilon"}}
+              style={{
+                color: "black",
+                fontSize: "3.8rem",
+                fontFamily: "brilon",
+              }}
             >
-              Cerita <br />
-              Kita Berdua
+              Our
+              <br />
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "8rem",
+                  color:'black',
+                  textTransform:'capitalize'
+                }}
+              >
+                Story
+              </span>
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">

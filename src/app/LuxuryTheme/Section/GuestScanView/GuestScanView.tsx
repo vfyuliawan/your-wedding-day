@@ -33,7 +33,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
       >
         <div className="row mt-4 justify-content-center">
           <div className="col-6 text-end">
-            <motion.h2
+          <motion.h2
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
@@ -44,7 +44,16 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 fontSize: "4rem",
               }}
             >
-              scan <br /> guest Barcode
+              scan <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "7rem",
+                  color:'black'
+                }}
+              >
+                Barcode
+              </span>
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">

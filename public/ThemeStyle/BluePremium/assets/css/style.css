@@ -200,6 +200,11 @@
   src: url("../../../../Font/brilon/brilon-11-regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Creation";
+  src: url("../../../../Font/creattion/CreattionDemo.otf") format("opentype");
+}
+
 body {
   font-size: 1.5rem;
   font-family: "Work Sans", sans-serif;

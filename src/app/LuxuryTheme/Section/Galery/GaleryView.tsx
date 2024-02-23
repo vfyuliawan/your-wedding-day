@@ -42,7 +42,7 @@ const GaleryView = (props: GaleryViewInterface) => {
       <div className="container">
         <div className="row mt-4 justify-content-center">
           <div className="col-6 text-end">
-            <motion.h2
+          <motion.h2
               ref={targetRef}
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
@@ -54,8 +54,18 @@ const GaleryView = (props: GaleryViewInterface) => {
                 fontSize: "4rem",
               }}
             >
-              Our <br /> Galery
+              Our
             </motion.h2>
+            <motion.h4
+              style={{
+                fontFamily: "Creation",
+                fontWeight: "normal",
+                color: "white",
+                fontSize: "65px",
+              }}
+            >
+              Galery
+            </motion.h4>
           </div>
           <div className="col-5 d-flex align-items-center">
             <div

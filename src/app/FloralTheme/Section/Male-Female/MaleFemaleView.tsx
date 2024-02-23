@@ -42,7 +42,16 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontWeight: 900,
               }}
             >
-              Our Wedding
+              Our <br />
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "normal",
+                  fontSize: "65px",
+                }}
+              >
+                Wedding
+              </span>
             </h2>
           </div>
         </div>
@@ -158,7 +167,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               animate={controls}
               transition={{ duration: 1, delay: 2 }}
               className="overlay"
-              style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius:'20px' }}
+              style={{
+                borderBottomRightRadius: "20px",
+                borderBottomLeftRadius: "20px",
+              }}
             >
               <h1 className="">{props?.MaleFemaleDetail?.Male?.Name}</h1>
               <h3 className="">

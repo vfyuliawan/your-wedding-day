@@ -73,7 +73,16 @@ const GiftsView = (props: GiftsViewInterface) => {
                   fontSize: "4rem",
                 }}
               >
-                Wedding <br /> Gifts
+                Wedding <br />
+              <span
+                style={{
+                  fontFamily: "Creation",
+                  fontWeight: "10",
+                  fontSize: "65px",
+                }}
+              >
+                Gifts
+              </span>
               </motion.h2>
             </div>
             <div className="col-5 d-flex align-items-center">

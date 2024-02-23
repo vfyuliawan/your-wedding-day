@@ -198,7 +198,12 @@
 
 @font-face {
   font-family: "brilon";
-  src: url("../../../Font/brilon/brilon-11-regular.ttf") format("truetype");
+  src: url("../../../../Font/brilon/brilon-11-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Creation";
+  src: url("../../../../Font/creattion/CreattionDemo.otf") format("opentype");
 }
 
 body {

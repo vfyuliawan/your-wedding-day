@@ -54,8 +54,18 @@ const GaleryView = (props: GaleryViewInterface) => {
                 fontSize: "4rem",
               }}
             >
-              Our <br /> Galery
+              Our
             </motion.h2>
+            <motion.h4
+              style={{
+                fontFamily: "Creation",
+                fontWeight: "normal",
+                color: "white",
+                fontSize: "65px",
+              }}
+            >
+              Galery
+            </motion.h4>
           </div>
           <div className="col-5 d-flex align-items-center">
             <div
@@ -160,14 +170,17 @@ const GaleryView = (props: GaleryViewInterface) => {
                 {props.image.map((item, key) => {
                   return (
                     <div>
-                      <img style={{
-                        borderRadius:'8px'
-                      }} src={item} alt="" />
+                      <img
+                        style={{
+                          borderRadius: "8px",
+                        }}
+                        src={item}
+                        alt=""
+                      />
                     </div>
                   );
                 })}
               </OwlCarousel>
-              
             </div>
           </div>
         </div>
