@@ -184,7 +184,7 @@ const FloralTheme = (props: FloralThemeInterface) => {
           ) : null}
         </div>
         {props?.details?.MaleFemale?.Visible ? (
-          <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} />
+          <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} themeName={props.details.ThemeName} />
         ) : null}
         {props?.details?.InfoAcara?.Visible ? (
           <InfoView

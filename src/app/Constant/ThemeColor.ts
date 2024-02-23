@@ -30,7 +30,7 @@ export class ThemeColorClass {
       };
     }else if (this.themeName === "BlueFloral") {
       this.color = {
-        primary: "#4392d7",
+        primary: "#AFAFAF",
         secondary: "#4392d7",
         textColor: "#4392d7",
         textColor2: "#4392d7",

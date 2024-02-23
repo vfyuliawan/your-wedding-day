@@ -5,6 +5,7 @@ export class ThemeImageClass {
       cover: string,
       hero: string,
       home: string,
+      maleFemale: string,
     };
   
     constructor(themeName: string) {
@@ -18,24 +19,30 @@ export class ThemeImageClass {
             cover: "image/background/floralVertical.jpg",
             hero: "image/background/floralVertical.jpg",
             home: "string",
+            maleFemale:"/image/background/artPaper.jpg"
         };
       }else if (this.themeName === "DarkGreenFloral") {
         this.image = {
             cover: "image/background/floralVertical.jpg",
             hero: "image/background/floralVertical.jpg",
             home: "string",
+            maleFemale:"/image/background/artPaper.jpg"
+
         };
       }else if (this.themeName === "BlueFloral") {
         this.image = {
             cover: "image/background/BlueFloral.jpg",
             hero: "image/background/BlueFloral.jpg",
             home: "string",
+            maleFemale:"/image/background/artPaper4.jpg"
         };
       } else {
         this.image = {
             cover: "string",
             hero: "string",
             home: "string",
+            maleFemale:"/image/background/artPaper.jpg"
+
         };
       }
     }

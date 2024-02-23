@@ -5,11 +5,16 @@ import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import { setAnimation } from "@/app/utils/AnimationThemes";
 import { MaleFemaleViewInterface } from "./MaleFemaleModel";
+import { ThemeImageClass } from "@/app/Constant/ThemeImage";
+import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
   const targetRef = useRef(null);
   const isVisible = useIntersectionObserver(targetRef);
+
+  const bgTheme = new ThemeImageClass(props.themeName);
+  const bgColor = new ThemeColorClass(props.themeName);
 
   useEffect(() => {
     if (isVisible) {
@@ -19,7 +24,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
 
   return (
     <section
-      style={{ backgroundImage: 'url("/image/background/artPaper.jpg")' }}
+      style={{
+        backgroundImage: `linear-gradient(to bottom, ${bgColor.color.secondary} -65%, rgba(255, 0, 0, 0) 40%), url("${bgTheme.image.maleFemale}")`,
+        backgroundSize: "cover",
+      }}
       id="male-female"
       className="male-female"
     >

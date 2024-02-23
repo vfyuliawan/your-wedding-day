@@ -6,6 +6,7 @@ export interface MaleFemaleProps {
 
   export interface MaleFemaleViewInterface {
     MaleFemaleDetail: MaleFemaleProps
+    themeName: string
   }
   
   export interface MaleFemaleValue{
