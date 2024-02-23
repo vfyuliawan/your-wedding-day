@@ -10,6 +10,7 @@ import FadeDownAnimation from "./Section/MotionText";
 import NavbarView from "./Section/Navbar/NavbarView";
 import RsvpView from "./Section/Rsvp/RsvpView";
 import {
+  MutableRefObject,
   SetStateAction,
   useCallback,
   useEffect,
@@ -77,7 +78,8 @@ const FloralTheme = (props: FloralThemeInterface) => {
     rootElement.style.scrollBehavior = "smooth";
   }
 
-  const bottomRef = useRef<any>(null);
+  const qrCodeRef = useRef<any>(null);
+  const endRef = useRef<any>(null);
 
   useEffect(() => {
     scrollToBottom();
@@ -96,7 +98,7 @@ const FloralTheme = (props: FloralThemeInterface) => {
 
   const scrollToBottom = useCallback(() => {
     const container = containerRef.current;
-    const scrollHeight = bottomRef.current.offsetTop - container.offsetTop;
+    const scrollHeight = qrCodeRef.current.offsetTop - container.offsetTop;
 
     const duration = 1000; // Adjust the duration in milliseconds
     const startTime = performance.now();
@@ -114,6 +116,32 @@ const FloralTheme = (props: FloralThemeInterface) => {
 
     requestAnimationFrame(animateScroll);
   }, []);
+
+  const easeInOutQuad = (t: any) => (t < 0.5 ? 2 * t ** 2 : -1 + (4 - 2 * t) * t);
+
+
+  const scrollToBarcode = (duration: number, ref: MutableRefObject<any>) => {
+    const targetElement = ref.current;
+    const targetPosition = targetElement.offsetTop;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const startTime = performance.now();
+  
+  
+    const scrollStep = (timestamp: any) => {
+      const currentTime = timestamp - startTime;
+      const progress = currentTime / duration;
+  
+      window.scrollTo(0, startPosition + distance * easeInOutQuad(progress));
+  
+      if (currentTime < duration) {
+        requestAnimationFrame(scrollStep);
+      }
+    };
+  
+    requestAnimationFrame(scrollStep);
+  };
+  
 
   return (
     <div>
@@ -204,15 +232,17 @@ const FloralTheme = (props: FloralThemeInterface) => {
         {props?.details?.Gifts.Visible ? (
           <GiftsView Gifts={props?.details?.Gifts} />
         ) : null}
+        <div ref={qrCodeRef}></div>
 
         {props?.details?.GuestBarcode ? (
-          <GuestScanView
+          <GuestScanView 
             idGuest={props.idGuest ?? 0}
             guest={props.guest ?? ""}
           />
         ) : null}
 
         <FooterView Footer={props?.details?.Footer} />
+        <div ref={endRef}></div>
         <EndView />
         {!coverVisible ? (
           <button
@@ -234,10 +264,10 @@ const FloralTheme = (props: FloralThemeInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-music-player-fill"
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill"></i>
+              <i className="bi bi-pause-fill" style={{ fontSize: "2rem" }}></i>
             )}
           </button>
         ) : null}
@@ -256,19 +286,46 @@ const FloralTheme = (props: FloralThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={scrollToBottom}
-          >
+            onClick={() =>{scrollToBarcode(18000, endRef)}}          >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-lg bi-arrow-down-circle"></i>
+              <i className="bi bi-lg bi-arrow-down-circle"
+              style={{ fontSize: "2rem" }}
+              ></i>
             )}
           </button>
         ) : null}
-        <div ref={bottomRef}></div>
+         {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              bottom: "200px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={() =>{scrollToBarcode(2000, qrCodeRef)}}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{ fontSize: "2rem" }}
+              ></i>
+            ) : (
+              <i className="bi bi-lg bi-qr-code" style={{fontSize:"2rem"}}></i>
+            )}
+          </button>
+        ) : null}
       </div>
     </div>
   );

@@ -10,12 +10,14 @@ import {
   TimeConvertionDate,
   TimeConvertionInterface,
 } from "../../../utils/TimeConvertion";
-import { ThemeColorClass } from "@/app/Constant/GreenFloral/ThemeColor";
+import { ThemeColorClass } from "@/app/Constant/ThemeColor";
+import { ThemeImageClass } from "@/app/Constant/ThemeImage";
 
 const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
   
 
   const bgColor = new ThemeColorClass(props.themeName);
+  const bgImage = new ThemeImageClass(props.themeName);
   return (
     <>
       <section
@@ -25,14 +27,14 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
         className="hero w-100 text-center d-flex justify-content-center align-items-center text-white position-relative"
       >
         <div
-          className="background-overlay kenburns-top"
+          className="background-overlay"
           style={{
             position: "absolute",
             top: 0,
             width: "100%",
             height: "100%",
             zIndex: -1,
-            backgroundImage: 'url("/image/background/floralVertical.jpg")',
+            backgroundImage: `url("${bgImage.image.hero}")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -62,6 +64,7 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
           <h1
             style={{
               fontFamily: "brilon",
+              fontSize:'3rem',
               color: bgColor.color.textColor,
             }}
           >

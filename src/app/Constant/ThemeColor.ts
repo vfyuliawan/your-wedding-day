@@ -1,17 +1,3 @@
-// export class ThemeColorClass {
-//   constructor(String params){
-
-//     this.ThemeColor = {
-//       colors: {
-//         primary: '#5F7161',
-//         secondary: '#845A27',
-//         textColor: '#85865F',
-//         textColor2: '#8FA6AC',
-//       },
-//     };
-//   }
-
-// }
 
 export class ThemeColorClass {
   private themeName: string;
@@ -42,7 +28,14 @@ export class ThemeColorClass {
         textColor: "#85865F",
         textColor2: "#8FA6AC",
       };
-    } else {
+    }else if (this.themeName === "BlueFloral") {
+      this.color = {
+        primary: "#4392d7",
+        secondary: "#4392d7",
+        textColor: "#4392d7",
+        textColor2: "#4392d7",
+      };
+    }  else {
       this.color = {
         primary: "#000000",
         secondary: "#000000",

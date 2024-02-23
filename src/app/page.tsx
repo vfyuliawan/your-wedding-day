@@ -157,6 +157,15 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
+      ): themeName == "BlueFloral" ? (
+        <FloralTheme
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
       ): homePage ? (
         <h1>home</h1>
       ) : (
@@ -212,8 +221,6 @@ export default function Home() {
             />
           </div>
         </div>
-
-        {/* <h1 className="tracking-in-expand" style={{color:'#F2DEBA'}}> Invite Me </h1> */}
       </>
     );
   }

@@ -12,7 +12,7 @@ import {
   TimeConvertionDay,
   TimeConvertionInterface,
 } from "@/app/utils/TimeConvertion";
-import { ThemeColorClass } from "@/app/Constant/GreenFloral/ThemeColor";
+import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { GetEmbededFromGmap } from "@/app/utils/GetEmbeded";
 
 export interface InfoViewInterface {

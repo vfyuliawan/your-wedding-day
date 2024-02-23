@@ -9,7 +9,8 @@ import {
   TimeConvertionInterface,
 } from "@/app/utils/TimeConvertion";
 import { Timestamp } from "firebase/firestore";
-import { ThemeColorClass } from "@/app/Constant/GreenFloral/ThemeColor";
+import { ThemeColorClass } from "@/app/Constant/ThemeColor";
+import { ThemeImageClass } from "@/app/Constant/ThemeImage";
 
 const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
@@ -47,7 +48,8 @@ const CoverView = (props: CoverModelInterface) => {
 
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
-  const background = new ThemeColorClass(props.themeName);
+  const bgColor = new ThemeColorClass(props.themeName);
+  const bgImage = new ThemeImageClass(props.themeName);
 
 
   useEffect(() => {
@@ -75,7 +77,7 @@ const CoverView = (props: CoverModelInterface) => {
         justifyContent: "center",
         alignItems: "center",
         zIndex: 999,
-        background:background.color.secondary
+        background:bgColor.color.secondary
       }}
     >
       <div
@@ -99,13 +101,13 @@ const CoverView = (props: CoverModelInterface) => {
             height: "100%",
             objectFit: "cover",
           }}
-          src="image/background/floralVertical.jpg"
+          src={bgImage.image.cover}
           alt="dfasdfsa"
         />
         <div
           className=""
           style={{
-            background: background.color.secondary,
+            background: bgColor.color.secondary,
             width: "100%",
             height: "15%",
             position: "absolute",
@@ -122,7 +124,7 @@ const CoverView = (props: CoverModelInterface) => {
               opacity:0.5 
             }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
-              fill={background.color.secondary}
+              fill={bgColor.color.secondary}
               fill-opacity="1"
               d="M0,128L17.1,133.3C34.3,139,69,149,103,128C137.1,107,171,53,206,42.7C240,32,274,64,309,69.3C342.9,75,377,53,411,74.7C445.7,96,480,160,514,170.7C548.6,181,583,139,617,101.3C651.4,64,686,32,720,37.3C754.3,43,789,85,823,106.7C857.1,128,891,128,926,138.7C960,149,994,171,1029,149.3C1062.9,128,1097,64,1131,53.3C1165.7,43,1200,85,1234,138.7C1268.6,192,1303,256,1337,282.7C1371.4,309,1406,299,1423,293.3L1440,288L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"
             ></path>
@@ -136,7 +138,7 @@ const CoverView = (props: CoverModelInterface) => {
             viewBox="0 0 1440 320"
           >
             <path
-              fill={background.color.secondary}
+              fill={bgColor.color.secondary}
               fill-opacity="1"
               d="M0,160L21.8,138.7C43.6,117,87,75,131,48C174.5,21,218,11,262,21.3C305.5,32,349,64,393,106.7C436.4,149,480,203,524,186.7C567.3,171,611,85,655,53.3C698.2,21,742,43,785,96C829.1,149,873,235,916,240C960,245,1004,171,1047,133.3C1090.9,96,1135,96,1178,96C1221.8,96,1265,96,1309,90.7C1352.7,85,1396,75,1418,69.3L1440,64L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z"
             ></path>
@@ -253,7 +255,7 @@ const CoverView = (props: CoverModelInterface) => {
             style={{
               fontSize: "2rem",
               fontFamily: "Times New Roman",
-              color: background.color.textColor,
+              color: bgColor.color.textColor,
             }}
           >
             THE WEDDING OF
@@ -261,13 +263,13 @@ const CoverView = (props: CoverModelInterface) => {
           <h2
             style={{
               fontFamily: "brilon",
-              fontSize: "4rem",
-              color: background.color.textColor,
+              fontSize: "3rem",
+              color: bgColor.color.textColor,
             }}
           >
             {props.detailCover.TitleCover}
           </h2>
-
+            <div style={{height:'5px'}}></div>
           <div style={{
             height:'140px',
             width:'140px',
@@ -278,7 +280,7 @@ const CoverView = (props: CoverModelInterface) => {
             backgroundPosition:'center',
             backgroundSize: 'cover', 
             backgroundImage:`url(${props.detailCover.ImgCover})`,
-            backgroundColor:background.color.secondary
+            backgroundColor:bgColor.color.secondary
           }}>
           </div>
           <div
@@ -294,7 +296,7 @@ const CoverView = (props: CoverModelInterface) => {
               className=""
               style={{
                 fontSize: "1.4rem",
-                color: background.color.textColor,
+                color: bgColor.color.textColor,
               }}
             >
               Kepada Bpk/Ibu/Saudara/i
@@ -303,7 +305,7 @@ const CoverView = (props: CoverModelInterface) => {
               className=""
               style={{
                 fontSize: "2rem",
-                color: background.color.textColor,
+                color: bgColor.color.textColor,
               }}
             >
               {props.guest.toLocaleUpperCase()}
@@ -315,7 +317,7 @@ const CoverView = (props: CoverModelInterface) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                background: background.color.secondary,
+                background: bgColor.color.secondary,
               }}
               onClick={() => {
                 handleCoverClick();

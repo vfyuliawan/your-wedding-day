@@ -10,6 +10,7 @@ import FadeDownAnimation from "./Section/MotionText";
 import NavbarView from "./Section/Navbar/NavbarView";
 import RsvpView from "./Section/Rsvp/RsvpView";
 import {
+  MutableRefObject,
   SetStateAction,
   useCallback,
   useEffect,
@@ -77,7 +78,32 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     rootElement.style.scrollBehavior = "smooth";
   }
 
-  const bottomRef = useRef<any>(null);
+  const qrCodeRef = useRef<any>(null);
+  const endRef = useRef<any>(null);
+
+  const easeInOutQuad = (t: any) => (t < 0.5 ? 2 * t ** 2 : -1 + (4 - 2 * t) * t);
+
+  const scrollToBarcode = (duration: number, ref: MutableRefObject<any>) => {
+    const targetElement = ref.current;
+    const targetPosition = targetElement.offsetTop;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const startTime = performance.now();
+  
+  
+    const scrollStep = (timestamp: any) => {
+      const currentTime = timestamp - startTime;
+      const progress = currentTime / duration;
+  
+      window.scrollTo(0, startPosition + distance * easeInOutQuad(progress));
+  
+      if (currentTime < duration) {
+        requestAnimationFrame(scrollStep);
+      }
+    };
+  
+    requestAnimationFrame(scrollStep);
+  };
 
   useEffect(() => {
     scrollToBottom();
@@ -96,7 +122,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
 
   const scrollToBottom = useCallback(() => {
     const container = containerRef.current;
-    const scrollHeight = bottomRef.current.offsetTop - container.offsetTop;
+    const scrollHeight = qrCodeRef.current.offsetTop - container.offsetTop;
 
     const duration = 1000; // Adjust the duration in milliseconds
     const startTime = performance.now();
@@ -191,6 +217,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         {props?.details?.Gifts.Visible ? (
           <GiftsView Gifts={props?.details?.Gifts} />
         ) : null}
+        <div ref={qrCodeRef}></div>
 
         {props?.details?.GuestBarcode ? (
           <GuestScanView
@@ -243,7 +270,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={scrollToBottom}
+            onClick={() =>{scrollToBarcode(18000, endRef)}}          
           >
             {isPlaying ? (
               <i
@@ -255,7 +282,34 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             )}
           </button>
         ) : null}
-        <div ref={bottomRef}></div>
+        {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              bottom: "200px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={() =>{scrollToBarcode(18000, endRef)}}          
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{ fontSize: "4rem" }}
+              ></i>
+            ) : (
+              <i className="bi bi-lg bi-qr-code" style={{fontSize:"2rem"}}></i>
+            )}
+          </button>
+        ) : null}
+         
       </div>
     </div>
   );

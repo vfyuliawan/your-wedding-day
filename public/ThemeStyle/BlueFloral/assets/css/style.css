@@ -2,14 +2,14 @@
 
 :root {
   /* --pink: #f14e95; */
-  --pink: #845A27; 
+  --pink: #4392d7; 
   
   /* sama */
-  --sec: #e5d8c7;
-  --bg: #e5d8c7;
+  --sec: #e9f5fb;
+  --bg: #e9f5fb;
   /* sama */
 
-  --bg2: #e5d8c7;
+  --bg2: #b5bcad;
   --shadow2: #363636;
   --shadow4: #000000;
   --shadow: 0 2px 2px rgb(0 0 0 / 0.8);

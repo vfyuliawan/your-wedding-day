@@ -310,11 +310,11 @@ p {
   /* z-index: inherit; */
 }
 
-.hero h1,
+/* .hero h1,
 .hero h4,
 .hero p {
   text-shadow: var(--shadow);
-}
+} */
 
 .hero .inside {
   margin-top: 20rem;
