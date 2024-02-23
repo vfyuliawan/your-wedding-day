@@ -286,7 +286,7 @@ const FloralTheme = (props: FloralThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={() =>{scrollToBarcode(18000, endRef)}}          >
+            onClick={() =>{scrollToBarcode(10000, endRef)}}          >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
