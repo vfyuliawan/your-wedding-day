@@ -46,11 +46,13 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
             top: -180,
           }}
         >
+          <div style={{ height: "8rem" }}></div>
+
           <h4
             style={{
               fontFamily: "Times New Roman",
               color: bgColor.color.secondary,
-              fontSize: "4rem",
+              fontSize: "2.7rem",
               textShadow: "none",
             }}
           >
