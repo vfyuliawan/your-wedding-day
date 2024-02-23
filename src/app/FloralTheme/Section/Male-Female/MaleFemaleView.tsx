@@ -158,6 +158,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               animate={controls}
               transition={{ duration: 1, delay: 2 }}
               className="overlay"
+              style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius:'20px' }}
             >
               <h1 className="">{props?.MaleFemaleDetail?.Male?.Name}</h1>
               <h3 className="">

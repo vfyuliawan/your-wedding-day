@@ -6,25 +6,19 @@ import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionO
 import { setAnimation } from "@/app/utils/AnimationThemes";
 import { MaleFemaleViewInterface } from "./MaleFemaleModel";
 
-
-
-
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
   const targetRef = useRef(null);
   const isVisible = useIntersectionObserver(targetRef);
 
-
-useEffect(() => {
+  useEffect(() => {
     if (isVisible) {
       controls.start({ opacity: 1, y: 0 });
     }
   }, [isVisible, controls]);
 
-
-
   return (
-    <section id="male-female" className="male-female" >
+    <section id="male-female" className="male-female">
       <div className="container" style={{ paddingTop: "2rem" }}>
         <div className="row justify-content-center mb-3">
           <div className="col-md-8 col-10 text-center">
@@ -57,30 +51,41 @@ useEffect(() => {
             </h3>
           </div>
           <div className="col-md-6 col-9 col-sm-9 d-flex align-items-star justify-content-star position-relative">
-              <motion.img ref={targetRef}
-               initial={{ opacity: setAnimation["fade-down"].initialX, y: setAnimation["fade-down"].initialY }}
-               animate={controls}
-               transition={{ duration: 1 }}
-              style={{
-              width:'100%',
-              height:'100%',
-              objectFit:'cover',
-              borderTopRightRadius:'20px',
-              borderTopLeftRadius:'20px',
+            <motion.img
+              ref={targetRef}
+              initial={{
+                opacity: setAnimation["fade-down"].initialX,
+                y: setAnimation["fade-down"].initialY,
               }}
-                src={props?.MaleFemaleDetail?.Female?.Photo}
-                alt={""}
-                srcSet=""
-              />
-            <motion.div
-              initial={{ opacity: setAnimation["fade-Up"].initialX, y: setAnimation["fade-Up"].initialY }}
               animate={controls}
-              transition={{ duration: 1, delay:0.5}}
+              transition={{ duration: 1 }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderTopRightRadius: "20px",
+                borderTopLeftRadius: "20px",
+              }}
+              src={props?.MaleFemaleDetail?.Female?.Photo}
+              alt={""}
+              srcSet=""
+            />
+            <motion.div
+              initial={{
+                opacity: setAnimation["fade-Up"].initialX,
+                y: setAnimation["fade-Up"].initialY,
+              }}
+              animate={controls}
+              transition={{ duration: 1, delay: 0.5 }}
               className="overlay"
             >
               <h1 className="">{props?.MaleFemaleDetail?.Female?.Name}</h1>
-              <h3 className="">Putra Dari Bapaak {props?.MaleFemaleDetail?.Female?.Ayah}</h3>
-              <h3 className="">Putra Dari Bapaak {props?.MaleFemaleDetail?.Female?.Ibu}</h3>
+              <h3 className="">
+                Putra Dari Bapaak {props?.MaleFemaleDetail?.Female?.Ayah}
+              </h3>
+              <h3 className="">
+                Putra Dari Bapaak {props?.MaleFemaleDetail?.Female?.Ibu}
+              </h3>
             </motion.div>
           </div>
         </div>
@@ -101,7 +106,8 @@ useEffect(() => {
                 fontWeight: 800,
               }}
             >
-              {props?.MaleFemaleDetail?.Female?.Name} & {props?.MaleFemaleDetail?.Male?.Name}
+              {props?.MaleFemaleDetail?.Female?.Name} &{" "}
+              {props?.MaleFemaleDetail?.Male?.Name}
             </h2>
           </div>
         </div>
@@ -110,37 +116,46 @@ useEffect(() => {
           className="row justify-content-center"
           style={{ marginBottom: "2rem" }}
         >
-          <div
-            className="col-md-6 col-9 col-sm-9 d-flex align-items-end justify-content-end position-relative"
-          >
+          <div className="col-md-6 col-9 col-sm-9 d-flex align-items-end justify-content-end position-relative">
             <motion.div
-              initial={{ opacity: setAnimation["fade-down"].initialX, y: setAnimation["fade-down"].initialY }}
-              animate={controls}
-              transition={{ duration: 1, delay:1.5 }}
-            >
-            <motion.img
-              style={{
-                width:'100%',
-                height:'100%',
-                objectFit:'cover',
-                borderBottomRightRadius:'20px',
-                borderBottomLeftRadius:'20px',
+              initial={{
+                opacity: setAnimation["fade-down"].initialX,
+                y: setAnimation["fade-down"].initialY,
               }}
-              src={props?.MaleFemaleDetail?.Male?.Photo}
-              alt=""
-              srcSet=""
-              data-aos="fade-down"
-            />
+              animate={controls}
+              transition={{ duration: 1, delay: 1.5 }}
+            >
+              <motion.img
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderBottomRightRadius: "20px",
+                  borderBottomLeftRadius: "20px",
+                }}
+                src={props?.MaleFemaleDetail?.Male?.Photo}
+                alt=""
+                srcSet=""
+                data-aos="fade-down"
+              />
             </motion.div>
             <motion.div
-              initial={{ opacity: setAnimation["fade-Up"].initialX, y: setAnimation["fade-Up"].initialY }}
+              initial={{
+                opacity: setAnimation["fade-Up"].initialX,
+                y: setAnimation["fade-Up"].initialY,
+              }}
               animate={controls}
-              transition={{ duration: 1,delay:2 }}
+              transition={{ duration: 1, delay: 2 }}
               className="overlay"
+              style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius:'20px' }}
             >
-            <h1 className="">{props?.MaleFemaleDetail?.Male?.Name}</h1>
-              <h3 className="">Putra Dari Bapaak {props?.MaleFemaleDetail?.Male?.Ayah}</h3>
-              <h3 className="">Putra Dari Bapaak {props?.MaleFemaleDetail?.Male?.Ibu}</h3>
+              <h1 className="">{props?.MaleFemaleDetail?.Male?.Name}</h1>
+              <h3 className="">
+                Putra Dari Bapaak {props?.MaleFemaleDetail?.Male?.Ayah}
+              </h3>
+              <h3 className="">
+                Putra Dari Bapaak {props?.MaleFemaleDetail?.Male?.Ibu}
+              </h3>
             </motion.div>
           </div>
           <div className="col-md-6 col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
