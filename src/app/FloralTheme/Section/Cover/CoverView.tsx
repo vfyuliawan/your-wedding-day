@@ -242,7 +242,7 @@ const CoverView = (props: CoverModelInterface) => {
             width: "100%",
             height: "100%",
             position: "absolute",
-            top: "150px",
+            top: "180px",
             left: 0,
             color: "#fff",
             fontSize: "24px",
