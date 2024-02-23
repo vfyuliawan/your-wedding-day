@@ -223,7 +223,15 @@ const RsvpView = (props: RSVPViewInterface) => {
             padding: "15px",
           }}
         >
-          <h4 style={{color:'white', fontFamily:'Times-new-roman', fontSize:'16px'}}>Pesan</h4>
+          <h4
+            style={{
+              color: "white",
+              fontFamily: "Times-new-roman",
+              fontSize: "16px",
+            }}
+          >
+            Pesan
+          </h4>
           {loading ? (
             <ReactLoading
               type={"spinningBubbles"}
@@ -250,16 +258,24 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <div
                   style={{
                     borderRadius: "50%",
-                    backgroundColor: item.Confirm ? "green" : 'red',
+                    backgroundColor: item.Confirm ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.25)",
                     width: "5rem",
                     height: "5rem",
-                    maxHeight:'5rem',
-                    maxWidth:'5rem'
+                    maxHeight: "5rem",
+                    maxWidth: "5rem",
                   }}
                   className="text-center justify-content-center d-flex align-items-center"
                 >
-                  <p style={{color:'white', fontSize:'22px', marginTop:'8px'}}>
-                  { item?.Name?.split("")[0] !== undefined ? item?.Name.split("")[0].toLocaleUpperCase() : ""}
+                  <p
+                    style={{
+                      color: "white",
+                      fontSize: "22px",
+                      marginTop: "8px",
+                    }}
+                  >
+                    {item?.Name?.split("")[0] !== undefined
+                      ? item?.Name.split("")[0].toLocaleUpperCase()
+                      : ""}
                   </p>
                 </div>
               </div>
@@ -271,7 +287,36 @@ const RsvpView = (props: RSVPViewInterface) => {
                     fontSize: "18px",
                   }}
                 >
-                  {item?.Name} {item.Confirm ? " ✅" : "❌"}
+                  {item?.Name}{" "}
+                  {item.Confirm ? (
+                    <span
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.25)",
+                        fontSize: "12px",
+                        paddingRight: "5px",
+                        paddingLeft: "5px",
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      <i className="bi bi-check-circle-fill"></i> Hadir
+                    </span>
+                  ) : (
+                    <span
+                      style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.25)",
+                        fontSize: "12px",
+                        paddingRight: "5px",
+                        paddingLeft: "5px",
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      <i className="bi bi-dash-circle-fill"></i> Tidak Hadir
+                    </span>
+                  )}
                 </h3>
                 <p style={{ color: "black", fontSize: "12px" }}>
                   {item.Text}
