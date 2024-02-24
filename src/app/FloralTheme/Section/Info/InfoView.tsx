@@ -14,6 +14,7 @@ import {
 } from "@/app/utils/TimeConvertion";
 import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { GetEmbededFromGmap } from "@/app/utils/GetEmbeded";
+import { useInView } from "react-intersection-observer";
 
 export interface InfoViewInterface {
   Info: InfoViewKeyValue[];
@@ -35,6 +36,13 @@ const InfoView = (props: InfoViewInterface) => {
   const isVisible = useIntersectionObserver(targetRef);
   const bgColor = new ThemeColorClass(props.themeName);
 
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
+  const [ref2, inView2] = useInView({
+    triggerOnce: true,
+  });
+
   useEffect(() => {
     if (isVisible) {
       controls.start(AnimationThemeInstance.FadeHorizon);
@@ -51,7 +59,7 @@ const InfoView = (props: InfoViewInterface) => {
               ref={targetRef}
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 2 }}
+              transition={{ duration: 1.3 }}
               style={{ fontFamily: "brilon", fontSize: "3.4rem" }}
             >
               Informasi <br />
@@ -77,7 +85,7 @@ const InfoView = (props: InfoViewInterface) => {
               }}
             ></div>
           </div>
-          <div className="row justify-content-center">
+          <div ref={ref} className="row justify-content-center">
             <div className="col-8 text-center">
               <motion.p
                 animate={controls}
@@ -101,7 +109,10 @@ const InfoView = (props: InfoViewInterface) => {
           }}
           className="col-10"
         >
-          <img
+          <motion.img
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+            transition={{ duration: 1.5, delay: 1.5 }}
             src={props.Info[0].Photo}
             style={{
               borderTopRightRadius: "20%",
@@ -121,7 +132,7 @@ const InfoView = (props: InfoViewInterface) => {
                 <motion.img
                   animate={controls}
                   initial={AnimationThemeInstance.FadeRight}
-                  transition={{ duration: 2, delay: 1 }}
+                  transition={{ duration: 1.3, delay: 1 }}
                   style={{ width: "50px", height: "50px", marginTop: "2rem" }}
                   src="/image/icons/wedding-rings.png"
                   alt=""
@@ -130,7 +141,7 @@ const InfoView = (props: InfoViewInterface) => {
                   className="mt-4"
                   animate={controls}
                   initial={AnimationThemeInstance.FadeLeft}
-                  transition={{ duration: 2, delay: 1.3 }}
+                  transition={{ duration: 1.3, delay: 1.3 }}
                   style={{
                     color: bgColor.color.secondary,
                     fontFamily: "brilon",
@@ -149,7 +160,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.p
               animate={controls}
               initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 2, delay: 1.5 }}
+              transition={{ duration: 1.3, delay: 1.5 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -167,7 +178,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.p
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 2, delay: 1.7 }}
+              transition={{ duration: 1.3, delay: 1.7 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -183,7 +194,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.p
               animate={controls}
               initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 2, delay: 1.9 }}
+              transition={{ duration: 1.3, delay: 1.9 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -203,7 +214,7 @@ const InfoView = (props: InfoViewInterface) => {
               <motion.a
                 animate={controls}
                 initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 2, delay: 2 }}
+                transition={{ duration: 1.3, delay: 2 }}
                 className="btn btn-lg text-center"
                 style={{
                   display: "flex",
@@ -213,7 +224,10 @@ const InfoView = (props: InfoViewInterface) => {
                 }}
                 href={props.Info[0].Map}
               >
-                <i className="bi bi-geo-alt-fill"> {"    "}Google Map</i>
+                <i ref={ref2} className="bi bi-geo-alt-fill">
+                  {" "}
+                  {"    "}Google Map
+                </i>
               </motion.a>
             </div>
           </div>
@@ -226,7 +240,7 @@ const InfoView = (props: InfoViewInterface) => {
                 <motion.img
                   animate={controls}
                   initial={AnimationThemeInstance.FadeRight}
-                  transition={{ duration: 2, delay: 2.2 }}
+                  transition={{ duration: 1.3, delay: 2.2 }}
                   style={{ width: "50px", height: "50px", marginTop: "2rem" }}
                   src="/image/icons/restaurant.png"
                   alt=""
@@ -234,7 +248,7 @@ const InfoView = (props: InfoViewInterface) => {
                 <motion.h1
                   animate={controls}
                   initial={AnimationThemeInstance.FadeRight}
-                  transition={{ duration: 2, delay: 2.4 }}
+                  transition={{ duration: 1.3, delay: 2.4 }}
                   className="mt-4"
                   style={{
                     color: bgColor.color.secondary,
@@ -254,7 +268,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.p
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 2, delay: 2.5 }}
+              transition={{ duration: 1.3, delay: 2.5 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -272,7 +286,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.p
               animate={controls}
               initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 2, delay: 2.6 }}
+              transition={{ duration: 1.3, delay: 2.6 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -288,7 +302,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.p
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 2, delay: 2.8 }}
+              transition={{ duration: 1.3, delay: 2.8 }}
               style={{
                 fontSize: "1.5rem",
                 color: bgColor.color.textColor2,
@@ -308,7 +322,7 @@ const InfoView = (props: InfoViewInterface) => {
               <motion.a
                 animate={controls}
                 initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 2, delay: 2.9 }}
+                transition={{ duration: 1.3, delay: 2.9 }}
                 className="btn btn-lg text-center"
                 style={{
                   display: "flex",
@@ -322,7 +336,10 @@ const InfoView = (props: InfoViewInterface) => {
               </motion.a>
             </div>
           </div>
-          <img
+          <motion.img
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: inView2 ? 1 : 0, scale: inView2 ? 1 : 0.5 }}
+            transition={{ duration: 1.5, delay: 1.5 }}
             src={props.Info[1].Photo}
             style={{
               borderBottomLeftRadius: "20%",

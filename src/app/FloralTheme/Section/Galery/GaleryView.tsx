@@ -8,6 +8,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import OwlCarousel from "react-owl-carousel3";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
+import { useInView } from "react-intersection-observer";
 
 interface GaleryViewInterface {
   image: Array<any>;
@@ -17,6 +18,9 @@ const GaleryView = (props: GaleryViewInterface) => {
   const targetRef = useRef<any>(null);
   const animate = useAnimation();
   const isVisible = useIntersectionObserver(targetRef);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     if (isVisible) {
@@ -41,7 +45,7 @@ const GaleryView = (props: GaleryViewInterface) => {
     <section className="galery" id="galery">
       <div className="container">
         <div className="row mt-4 justify-content-center">
-          <div className="col-6 text-end">
+          <div  className="col-6 text-end">
             <motion.h2
               ref={targetRef}
               animate={animate}
@@ -57,6 +61,9 @@ const GaleryView = (props: GaleryViewInterface) => {
               Our
             </motion.h2>
             <motion.h4
+              animate={animate}
+              initial={AnimationThemeInstance.FadeLeft}
+              transition={{ duration: 1.5 }}
               style={{
                 fontFamily: "Creation",
                 fontWeight: "normal",
@@ -103,14 +110,18 @@ const GaleryView = (props: GaleryViewInterface) => {
 
   function firstImage() {
     return (
-      <div className="row justify-content-center ">
+      <div ref={ref} className="row justify-content-center ">
         <div className="col-10 mt-3">
           <a
             href="/pink-essence/img/prawed/prawed4.jpg"
             data-toggle="lightbox"
             data-caption="This describes the image"
           >
-            <img
+            <motion.img
+                 
+                 initial={{ opacity: 0, scale: 0.5 }}
+                 animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+                 transition={{ duration: 1.5, delay:0.5 }}
               src={props.image[0] ?? ""}
               style={{
                 borderRadius: "8%",
@@ -134,7 +145,10 @@ const GaleryView = (props: GaleryViewInterface) => {
                 data-toggle="lightbox"
                 data-caption="This describes the image"
               >
-                <img
+                <motion.img
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+                  transition={{ duration: 1.5, delay:1.5 }}
                   src={item}
                   style={{
                     maxHeight: 376,
@@ -170,7 +184,10 @@ const GaleryView = (props: GaleryViewInterface) => {
                 {props.image.map((item, key) => {
                   return (
                     <div>
-                      <img
+                      <motion.img
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+                        transition={{ duration: 1.5, delay:2.0 }}
                         style={{
                           borderRadius: "8px",
                         }}
