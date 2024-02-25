@@ -3,8 +3,6 @@ const NavbarView = () => {
     <nav
       className="navbar-expand-md sticky-bottom-navbar our-navbbar"
       style={{
-        // backgroundColor: "hsl(0, 74%, 18%)",
-        // // opacity: 0.7,
         backgroundColor:'transparent',
         height: "5rem",
         visibility: 'hidden',

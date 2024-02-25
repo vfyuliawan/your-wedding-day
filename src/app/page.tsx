@@ -28,6 +28,7 @@ import Swal from "sweetalert2";
 import LuxuryTheme from "./LuxuryTheme/LuxuryTheme";
 import ReactLoading from "react-loading";
 import FloralTheme from "./FloralTheme/FloralTheme";
+import Fullpage from "./FullAnimatedTheme/FullAnimatedTheme";
 
 export default function Home() {
   const pathname = usePathname();
@@ -130,7 +131,7 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-      ): themeName == "LuxuryPink" ? (
+      ) : themeName == "LuxuryPink" ? (
         <LuxuryTheme
           details={details}
           getDetails={() => {
@@ -139,7 +140,7 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-      ):themeName == "GreenFloral" ? (
+      ) : themeName == "GreenFloral" ? (
         <FloralTheme
           details={details}
           getDetails={() => {
@@ -148,7 +149,7 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-      ): themeName == "DarkGreenFloral" ? (
+      ) : themeName == "DarkGreenFloral" ? (
         <FloralTheme
           details={details}
           getDetails={() => {
@@ -157,7 +158,7 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-      ): themeName == "BlueFloral" ? (
+      ) : themeName == "BlueFloral" ? (
         <FloralTheme
           details={details}
           getDetails={() => {
@@ -166,8 +167,26 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-      ): homePage ? (
-        <h1>home</h1>
+       
+      ): themeName == "BluePastel" ? (
+        <Fullpage
+        details={details}
+        getDetails={() => {
+          getMessage();
+        }}
+        guest={guest}
+        idGuest={idGuest}
+        />
+       
+      ) : homePage ? (
+        <Fullpage
+        details={details}
+        getDetails={() => {
+          getMessage();
+        }}
+        guest={guest}
+        idGuest={idGuest}
+        />
       ) : (
         <Loading />
       )}
@@ -201,13 +220,20 @@ export default function Home() {
             justifyContent: "center",
             height: "100vh",
             backgroundColor: "#3A8891",
-            alignItems:'center'
+            alignItems: "center",
           }}
         >
-          <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <img
               style={{
-                height:'120px'
+                height: "120px",
               }}
               // className="shake-bl"
               src="/pink-essence/img/LogoNM.png"
@@ -225,4 +251,3 @@ export default function Home() {
     );
   }
 }
-
