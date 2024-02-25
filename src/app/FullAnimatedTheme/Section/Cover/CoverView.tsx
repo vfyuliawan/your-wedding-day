@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
 import {
@@ -12,13 +12,34 @@ import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { ThemeImageClass } from "@/app/Constant/ThemeImage";
 
 const CoverView = (props: CoverModelInterface) => {
+
   const [appear, setAppear] = useState(false);
+  const [images, setImages] = useState<string[]>([
+    props.detailCover.ImgCover,
+    props.home!.HomeImg,
+  ]);
+
   const handleCoverClick = () => {
     props.onCoverClick();
     setTimeout(() => {
       setAppear(true);
     }, 2000);
   };
+
+  const [index, setIndex] = useState(0);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      controls.start({ opacity: 0, transition: { duration: 2 } });
+      setIndex((prevIndex) => (prevIndex + 1) % images!.length);
+      controls.start({ opacity: 1, transition: { duration: 2 } });
+    }, 6000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [controls, images!.length]);
 
   const calculateTimeRemaining = () => {
     const now = new Date();
@@ -53,7 +74,7 @@ const CoverView = (props: CoverModelInterface) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeRemaining(calculateTimeRemaining());
-    }, 1000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -78,7 +99,8 @@ const CoverView = (props: CoverModelInterface) => {
         background: bgColor.color.secondary,
       }}
     >
-      <img
+      <motion.img
+        animate={controls}
         className="kenburns-top"
         style={{
           position: "absolute",
@@ -87,7 +109,7 @@ const CoverView = (props: CoverModelInterface) => {
           height: "75%",
           objectFit: "cover",
         }}
-        src={props.detailCover.ImgCover}
+        src={images![index]}
         alt="dfasdfsa"
       />
       <div
@@ -138,20 +160,20 @@ const CoverView = (props: CoverModelInterface) => {
             alignItems: "center",
             position: "absolute",
             flexDirection: "column",
-            bottom: 35,
+            bottom: 25,
             width: "100%",
           }}
         >
           <p
             style={{
               color: bgColor.color.primary,
-              fontSize: "18px",
+              fontSize: "16px",
               fontFamily: "FaunaOne",
             }}
           >
             The Wedding of
           </p>
-          <div style={{ marginTop: 8 }} />
+          <div style={{ marginTop: 2 }} />
           <h2
             style={{
               color: bgColor.color.primary,
@@ -161,7 +183,7 @@ const CoverView = (props: CoverModelInterface) => {
           >
             Romeo And Juliet
           </h2>
-          <div style={{ marginTop: 8 }} />
+          <div style={{ marginTop: 2 }} />
           <p
             style={{
               fontSize: "12px",
@@ -171,7 +193,7 @@ const CoverView = (props: CoverModelInterface) => {
           >
             Turut Mengundang Bapak/Ibu/Sdr/i
           </p>
-          <div style={{ marginTop: 16 }} />
+          <div style={{ marginTop: 2 }} />
           <p
             style={{
               fontSize: 20,
@@ -181,7 +203,7 @@ const CoverView = (props: CoverModelInterface) => {
           >
             Setrytjh
           </p>
-          <div style={{ marginTop: 16 }} />
+          <div style={{ marginTop: 2 }} />
           <div
             style={{
               backgroundColor: bgColor.color.primary,
@@ -190,7 +212,7 @@ const CoverView = (props: CoverModelInterface) => {
               paddingTop: "10px",
               paddingRight: "15px",
               paddingLeft: "15px",
-              fontSize: "15px",
+              fontSize: "13px",
               fontFamily: "faunaone",
               color: bgColor.color.secondary,
             }}

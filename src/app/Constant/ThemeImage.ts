@@ -12,8 +12,10 @@ export class ThemeImageClass {
       this.themeName = themeName;
       this.initializeColor();
     }
+    
   
     private initializeColor(): void {
+      
       if (this.themeName === "GreenFloral") {
         this.image = {
             cover: "image/background/floralVertical.jpg",
@@ -33,6 +35,14 @@ export class ThemeImageClass {
         this.image = {
             cover: "image/background/BlueFloral.jpg",
             hero: "image/background/BlueFloral.jpg",
+            home: "string",
+            maleFemale:"/image/background/artPaper4.jpg"
+        };
+      }else if (this.themeName === "BluePastel") {
+        
+        this.image = {
+            cover: "image/background/artPaper5.jpg",
+            hero: "image/background/artPaper4.jpg",
             home: "string",
             maleFemale:"/image/background/artPaper4.jpg"
         };
