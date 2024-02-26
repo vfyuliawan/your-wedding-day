@@ -92,11 +92,9 @@ const Fullpage = (props: FullPageInterface) => {
         home={props?.details?.Home}
       />
       <ReactFullpage
-        credits={{ enabled: true, label: "", position: "right" }}
+        credits={{ enabled: false, label: "", position: "right" }}
         scrollingSpeed={1000} // Set the scrolling speed
         scrollHorizontally={true} // Enable horizontal scrolling
-        scrollHorizontallyKey={"YOUR KEY HERE"} // Replace with your key for horizontal scrolling
-        verticalCentered={true}
         render={({ state, fullpageApi }) => {
           return (
             <>

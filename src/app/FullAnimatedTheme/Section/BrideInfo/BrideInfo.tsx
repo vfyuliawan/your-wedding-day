@@ -15,7 +15,7 @@ function BrideInformation(props: {
           position: "absolute",
           bottom: 0,
           width: "100%",
-          height: "20%",
+          height: "30%",
           background: `linear-gradient(to top, ${bgColor.color.primary} -20%, rgba(255, 0, 0, 0) 70%)`,
         }}
       ></div>
@@ -30,9 +30,11 @@ function BrideInformation(props: {
       ></div>
       <div
         style={{
+          position:'absolute',
           width: "100%",
           opacity:0.15,
-          height:630,
+          bottom:0,
+          height:'100vh',
           background: `url(${bgTheme.image.cover})`,
           backgroundSize: "cover",
         }}
