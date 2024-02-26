@@ -40,7 +40,7 @@ export class ThemeColorClass {
       this.color = {
         primary: "#CDC2AE",
         secondary: "#116A7B",
-        textColor: "#116A7B",
+        textColor: "#ffff",
         textColor2: "#CDC2AE",
       };
     } else {
