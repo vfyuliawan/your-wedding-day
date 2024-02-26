@@ -32,7 +32,7 @@ function BrideInformation(props: {
         style={{
           width: "100%",
           opacity:0.15,
-          height:800,
+          height:630,
           background: `url(${bgTheme.image.cover})`,
           backgroundSize: "cover",
         }}

@@ -7,6 +7,7 @@ import Galery from "react-image-gallery";
 import Home from "../page";
 import NavbarView from "./Section/Navbar/NavbarView";
 import BrideInformation from "./Section/BrideInfo/BrideInfo";
+import { ThemeColorClass } from "../Constant/ThemeColor";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -22,6 +23,7 @@ const Fullpage = (props: FullPageInterface) => {
   const [visible, setVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const bgColor = new ThemeColorClass(props.details!.ThemeName);
 
   const handleCoverClick = () => {
     setCoverVisible(false);
@@ -103,7 +105,12 @@ const Fullpage = (props: FullPageInterface) => {
                   themeName={props.details?.ThemeName}
                   maleFemale={props?.details?.MaleFemale}
                 />
-                <section className="section">
+                <section
+                  className="section"
+                  style={{
+                    background: `linear-gradient(to bottom, ${bgColor.color.primary} -60%, rgba(255, 0, 0, 0) 200%)`,
+                  }}
+                >
                   <p>Section 2</p>
                 </section>
               </ReactFullpage.Wrapper>
@@ -123,7 +130,7 @@ const Fullpage = (props: FullPageInterface) => {
         <button
           className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
           style={{
-            opacity:0.4,
+            opacity: 0.4,
             position: "fixed",
             bottom: "150px",
             right: "20px",
@@ -151,7 +158,7 @@ const Fullpage = (props: FullPageInterface) => {
         <button
           className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
           style={{
-            opacity:0.4,
+            opacity: 0.4,
             position: "fixed",
             bottom: "100px",
             right: "20px",
@@ -185,7 +192,7 @@ const Fullpage = (props: FullPageInterface) => {
           className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
           style={{
             position: "fixed",
-            opacity:0.4,
+            opacity: 0.4,
             bottom: "200px",
             right: "20px",
             padding: "15px",
