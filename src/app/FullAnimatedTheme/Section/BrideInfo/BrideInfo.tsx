@@ -10,13 +10,13 @@ function BrideInformation(props: {
   const bgColor = new ThemeColorClass(props.themeName);
   return (
     <section className="section" style={{ position: "relative" }}>
-         <div
+        <div
         style={{
           position: "absolute",
           bottom: 0,
           width: "100%",
-          height: "30%",
-          background: `linear-gradient(to top, ${bgColor.color.primary} 0%, rgba(255, 0, 0, 0) 90%)`,
+          height: "20%",
+          background: `linear-gradient(to top, ${bgColor.color.primary} -20%, rgba(255, 0, 0, 0) 70%)`,
         }}
       ></div>
       <div
@@ -32,7 +32,7 @@ function BrideInformation(props: {
         style={{
           width: "100%",
           opacity:0.15,
-          height:600,
+          height:800,
           background: `url(${bgTheme.image.cover})`,
           backgroundSize: "cover",
         }}
