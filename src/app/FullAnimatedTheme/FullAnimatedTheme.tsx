@@ -8,6 +8,7 @@ import Home from "../page";
 import NavbarView from "./Section/Navbar/NavbarView";
 import BrideInformation from "./Section/BrideInfo/BrideInfo";
 import { ThemeColorClass } from "../Constant/ThemeColor";
+import DaysInfo from "./Section/DaysInfo/DaysInfo";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -103,14 +104,11 @@ const Fullpage = (props: FullPageInterface) => {
                   themeName={props.details?.ThemeName}
                   maleFemale={props?.details?.MaleFemale}
                 />
-                <section
-                  className="section"
-                  style={{
-                    background: `linear-gradient(to bottom, ${bgColor.color.primary} -60%, rgba(255, 0, 0, 0) 200%)`,
-                  }}
-                >
-                  <p>Section 2</p>
-                </section>
+                <DaysInfo
+                  themeName={props.details?.ThemeName}
+                  countDown={props?.details?.CountDown.Date}
+                  home={props?.details?.Home}
+                />
               </ReactFullpage.Wrapper>
             </>
           );

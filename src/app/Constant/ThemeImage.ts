@@ -39,12 +39,11 @@ export class ThemeImageClass {
             maleFemale:"/image/background/artPaper4.jpg"
         };
       }else if (this.themeName === "BluePastel") {
-        
         this.image = {
             cover: "image/background/artPaper5.jpg",
             hero: "image/background/artPaper4.jpg",
             home: "string",
-            maleFemale:"/image/background/artPaper4.jpg"
+            maleFemale:"/image/background/flowerIcon.png"
         };
       } else {
         this.image = {
