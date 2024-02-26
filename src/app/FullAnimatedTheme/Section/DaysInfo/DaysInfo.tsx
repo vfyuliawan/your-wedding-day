@@ -67,19 +67,19 @@ const DaysInfo = (props: {
           ref={ref}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-          transition={{ duration: 1.5, delay: 0 }}
-          style={{ width: 280, height: 160 }}
+          transition={{ duration: 2.5, delay: 0 }}
+          style={{ width: 280, height: 150 }}
           src="image/background/frame-tr.jpg"
           alt=""
-        />
+    />
       </div>
       <div style={{ position: "absolute", bottom: 0, left: 0 }}>
         <motion.img
           ref={ref}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-          transition={{ duration: 1.5, delay: 0 }}
-          style={{ width: 240, height: 150 }}
+          transition={{ duration: 2.5, delay: 0 }}
+          style={{ width: 240, height: 130 }}
           src="image/background/frame-bl.jpg"
           alt=""
         />

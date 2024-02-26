@@ -9,7 +9,10 @@ function BrideInformation(props: {
   const bgTheme = new ThemeImageClass(props.themeName);
   const bgColor = new ThemeColorClass(props.themeName);
   return (
-    <section className="section" style={{ position: "relative" }}>
+    <section
+      className="section"
+      style={{ position: "relative", backgroundColor: "white" }}
+    >
       <div
         style={{
           position: "absolute",
@@ -78,13 +81,13 @@ function BrideInformation(props: {
         </div>
         <div className="row">
           <div className="col-5 d-flex justify-content-center">
-          <div
+            <div
               style={{
                 height: "9rem",
                 width: "7rem",
                 borderRadius: "20px",
                 backgroundColor: bgColor.color.secondary,
-                overflow: "hidden", 
+                overflow: "hidden",
               }}
             >
               <img
@@ -93,7 +96,7 @@ function BrideInformation(props: {
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover", 
+                  objectFit: "cover",
                 }}
               />
             </div>
@@ -117,7 +120,7 @@ function BrideInformation(props: {
                 width: "7rem",
                 borderRadius: "20px",
                 backgroundColor: bgColor.color.secondary,
-                overflow: "hidden", 
+                overflow: "hidden",
               }}
             >
               <img
@@ -126,7 +129,7 @@ function BrideInformation(props: {
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover", 
+                  objectFit: "cover",
                 }}
               />
             </div>
@@ -194,12 +197,11 @@ function BrideInformation(props: {
               Bapak {props.maleFemale.Male.Ayah}
             </p>
           </div>
-          <div className="col-6 d-flex align-items-right justify-content-right">
+          <div className="col-6 d-flex align-items-center justify-content-center">
             <p
               style={{
                 fontSize: "1rem",
                 textAlign: "right",
-
                 marginLeft: "2rem",
                 color: bgColor.color.secondary,
               }}
