@@ -6,7 +6,9 @@ import {
 } from "@/app/FloralTheme/Section/Home/HomeModel";
 import { TimeConvertionDate } from "@/app/utils/TimeConvertion";
 import { Timestamp } from "firebase/firestore";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 const DaysInfo = (props: {
   themeName: string;
@@ -50,6 +52,9 @@ const DaysInfo = (props: {
     return () => clearInterval(interval);
   }, []);
   const bgColor = new ThemeColorClass(props.themeName);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
   return (
     <section
       className="section"
@@ -57,6 +62,28 @@ const DaysInfo = (props: {
         background: `${bgColor.color.primary}`,
       }}
     >
+      <div style={{ position: "absolute", top: 0, right: -80 }}>
+        <motion.img
+          ref={ref}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+          transition={{ duration: 1.5, delay: 0 }}
+          style={{ width: 280, height: 160 }}
+          src="image/background/frame-tr.jpg"
+          alt=""
+        />
+      </div>
+      <div style={{ position: "absolute", bottom: 0, left: 0 }}>
+        <motion.img
+          ref={ref}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+          transition={{ duration: 1.5, delay: 0 }}
+          style={{ width: 240, height: 150 }}
+          src="image/background/frame-bl.jpg"
+          alt=""
+        />
+      </div>
       <div style={{ position: "absolute", top: "1%", width: "100%" }}>
         <div className="row justify-content-center">
           <div className="col-10" style={{ textAlign: "center" }}>
@@ -96,9 +123,8 @@ const DaysInfo = (props: {
               }}
             >
               {" "}
-              Semoga selalu merasakan kebahagiaan dan keagungan
-              cinta bersama. Selamat menjalani hidup sebagai sepasang suami
-              istri.
+              Semoga selalu merasakan kebahagiaan dan keagungan cinta bersama.
+              Selamat menjalani hidup sebagai sepasang suami istri.
             </p>
           </div>
         </div>

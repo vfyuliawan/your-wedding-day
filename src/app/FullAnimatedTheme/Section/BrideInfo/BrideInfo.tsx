@@ -61,7 +61,7 @@ function BrideInformation(props: {
               }}
             >
               {" "}
-              Romeo & Juliet
+              {props.maleFemale.Male.Name} & {props.maleFemale.Female.Name}
             </h4>
             <p
               style={{
@@ -71,22 +71,32 @@ function BrideInformation(props: {
               }}
             >
               {" "}
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Assumenda id dolores odit hic obcaecati quo cum dolore repellendus
-              vitae eius?
+              Tanpa mengurangi rasa hormat, kami bermaksud untuk mengundang
+              Bapak/Ibu/Saudara/i pada acara resepsi pernikahan kami
             </p>
           </div>
         </div>
         <div className="row">
           <div className="col-5 d-flex justify-content-center">
-            <div
+          <div
               style={{
                 height: "9rem",
                 width: "7rem",
                 borderRadius: "20px",
                 backgroundColor: bgColor.color.secondary,
+                overflow: "hidden", 
               }}
-            ></div>
+            >
+              <img
+                src={props.maleFemale.Female.Photo}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover", 
+                }}
+              />
+            </div>
           </div>
           <div className="col-2 d-flex align-items-center justify-content-center">
             <h1
@@ -107,8 +117,19 @@ function BrideInformation(props: {
                 width: "7rem",
                 borderRadius: "20px",
                 backgroundColor: bgColor.color.secondary,
+                overflow: "hidden", 
               }}
-            ></div>
+            >
+              <img
+                src={props.maleFemale.Male.Photo}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover", 
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="row mt-4">
@@ -121,7 +142,7 @@ function BrideInformation(props: {
                 fontFamily: "Brilon",
               }}
             >
-              Romeo
+              {props.maleFemale.Male.Name}
             </h1>
           </div>
           <div className="col-2"></div>
@@ -134,7 +155,7 @@ function BrideInformation(props: {
                 fontFamily: "Brilon",
               }}
             >
-              Juliete
+              {props.maleFemale.Female.Name}
             </h1>
           </div>
         </div>
@@ -168,9 +189,9 @@ function BrideInformation(props: {
               }}
             >
               Anak Dari <br />
-              Ibu Nana Sarkina <br />
+              Ibu {props.maleFemale.Male.Ibu} <br />
               <span style={{ fontSize: "2rem" }}>&</span> <br />
-              Bapak Leonardo
+              Bapak {props.maleFemale.Male.Ayah}
             </p>
           </div>
           <div className="col-6 d-flex align-items-right justify-content-right">
@@ -184,9 +205,9 @@ function BrideInformation(props: {
               }}
             >
               Anak Dari <br />
-              Ibu Nana Sarkina <br />
+              Ibu {props.maleFemale.Female.Ibu} <br />
               <span style={{ fontSize: "2rem" }}>&</span> <br />
-              Bapak Leonardo
+              Bapak {props.maleFemale.Female.Ayah}
             </p>
           </div>
         </div>
