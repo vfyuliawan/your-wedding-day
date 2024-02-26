@@ -57,7 +57,7 @@ const DaysInfo = (props: {
         background: `${bgColor.color.primary}`,
       }}
     >
-      <div style={{ position: "absolute", top: "5%", width: "100%" }}>
+      <div style={{ position: "absolute", top: "1%", width: "100%" }}>
         <div className="row justify-content-center">
           <div className="col-10" style={{ textAlign: "center" }}>
             <p
@@ -84,8 +84,8 @@ const DaysInfo = (props: {
             <img
               className="mt-2 mb-2"
               src="/image/background/flowerIcon.png"
-              height={100}
-              width={100}
+              height={130}
+              width={160}
             />
 
             <p
@@ -96,9 +96,9 @@ const DaysInfo = (props: {
               }}
             >
               {" "}
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Assumenda id dolores odit hic obcaecati quo cum dolore repellendus
-              vitae eius?
+              Semoga selalu merasakan kebahagiaan dan keagungan
+              cinta bersama. Selamat menjalani hidup sebagai sepasang suami
+              istri.
             </p>
           </div>
         </div>
@@ -187,7 +187,7 @@ const DaysInfo = (props: {
                     borderTopRightRadius: "80px",
                     borderTopLeftRadius: "80px",
                     backgroundColor: bgColor.color.secondary,
-                    overflow: "hidden", 
+                    overflow: "hidden",
                   }}
                 >
                   <img
@@ -196,7 +196,7 @@ const DaysInfo = (props: {
                     style={{
                       width: "100%",
                       height: "100%",
-                      objectFit: "cover", 
+                      objectFit: "cover",
                     }}
                   />
                 </div>
