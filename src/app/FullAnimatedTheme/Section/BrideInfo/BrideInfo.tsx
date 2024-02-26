@@ -9,23 +9,35 @@ function BrideInformation(props: {
   const bgTheme = new ThemeImageClass(props.themeName);
   const bgColor = new ThemeColorClass(props.themeName);
   return (
-    <section
-      className="section"
-      style={{
-        position: "relative",
-      }}
-    >
+    <section className="section" style={{ position: "relative" }}>
+         <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          width: "100%",
+          height: "30%",
+          background: `linear-gradient(to top, ${bgColor.color.primary} 0%, rgba(255, 0, 0, 0) 90%)`,
+        }}
+      ></div>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          width: "100%",
+          height: "20%",
+          background: `linear-gradient(to bottom, ${bgColor.color.primary} -20%, rgba(255, 0, 0, 0) 70%)`,
+        }}
+      ></div>
       <div
         style={{
           width: "100%",
-          height: "100vh",
-          backgroundImage: `url(${bgTheme.image.cover})`,
-          opacity: 0.2,
+          opacity:0.15,
+          height:600,
+          background: `url(${bgTheme.image.cover})`,
           backgroundSize: "cover",
-          backgroundRepeat: "repeat-y",
         }}
       ></div>
-      <div style={{ position: "absolute", top: "1%", width: "100%" }}>
+      <div style={{ position: "absolute", top: "0%", width: "100%" }}>
         <div className="row justify-content-center">
           <div className="col-10" style={{ textAlign: "center" }}>
             <p
@@ -159,12 +171,13 @@ function BrideInformation(props: {
               Bapak Leonardo
             </p>
           </div>
-          <div className="col-6 d-flex justify-content-right">
+          <div className="col-6 d-flex align-items-right justify-content-right">
             <p
               style={{
                 fontSize: "1rem",
-                textAlign:'right',
-                marginLeft: "1rem",
+                textAlign: "right",
+                
+                marginLeft: "2rem",
                 color: bgColor.color.secondary,
               }}
             >
@@ -176,15 +189,7 @@ function BrideInformation(props: {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          height: "30%",
-          background: `linear-gradient(to top, ${bgColor.color.secondary}, transparent)`,
-        }}
-      ></div>
+     
     </section>
   );
 }
