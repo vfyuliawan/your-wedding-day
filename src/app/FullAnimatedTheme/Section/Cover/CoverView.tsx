@@ -12,7 +12,6 @@ import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { ThemeImageClass } from "@/app/Constant/ThemeImage";
 
 const CoverView = (props: CoverModelInterface) => {
-
   const [appear, setAppear] = useState(false);
   const [images, setImages] = useState<string[]>([
     props.detailCover.ImgCover,
@@ -181,7 +180,7 @@ const CoverView = (props: CoverModelInterface) => {
               fontSize: 24,
             }}
           >
-            Romeo And Juliet
+            {props.detailCover.TitleCover}
           </h2>
           <div style={{ marginTop: 2 }} />
           <p
@@ -201,7 +200,7 @@ const CoverView = (props: CoverModelInterface) => {
               fontFamily: "faunaone",
             }}
           >
-            Setrytjh
+            {props.guest}
           </p>
           <div style={{ marginTop: 2 }} />
           <div
