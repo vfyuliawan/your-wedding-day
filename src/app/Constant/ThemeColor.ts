@@ -38,10 +38,10 @@ export class ThemeColorClass {
       };
     } else if (this.themeName === "BluePastel") {      
       this.color = {
-        primary: "#CDC2AE",
+        primary: "#fcf4e8",
         secondary: "#116A7B",
         textColor: "#ffff",
-        textColor2: "#CDC2AE",
+        textColor2: "#fcf4e8",
       };
     } else {
       this.color = {

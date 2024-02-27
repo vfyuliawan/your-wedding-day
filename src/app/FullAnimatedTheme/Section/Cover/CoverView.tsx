@@ -14,8 +14,8 @@ import { ThemeImageClass } from "@/app/Constant/ThemeImage";
 const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
   const [images, setImages] = useState<string[]>([
-    props.detailCover.ImgCover,
-    props.home!.HomeImg,
+    props?.detailCover?.ImgCover,
+    props.home?.HomeImg,
   ]);
 
   const handleCoverClick = () => {
@@ -43,7 +43,7 @@ const CoverView = (props: CoverModelInterface) => {
   const calculateTimeRemaining = () => {
     const now = new Date();
     const targetDate: Date = new Date(
-      props.detailCover.Date.toDate().toISOString().split(".")[0]
+      props.detailCover?.Date.toDate().toISOString().split(".")[0]
     );
 
     const difference =
@@ -180,7 +180,7 @@ const CoverView = (props: CoverModelInterface) => {
               fontSize: 24,
             }}
           >
-            {props.detailCover.TitleCover}
+            {props.detailCover?.TitleCover}
           </h2>
           <div style={{ marginTop: 2 }} />
           <p

@@ -1,6 +1,10 @@
 import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { ThemeImageClass } from "@/app/Constant/ThemeImage";
 import { MaleFemaleProps } from "@/app/FloralTheme/Section/Male-Female/MaleFemaleModel";
+import useIntersectionObserver from "@/app/LuxuryTheme/Section/UseInterSectionObserver/UseInterSectionObserver";
+import AnimationThemeInstance from "@/app/utils/AnimationThemes";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 function BrideInformation(props: {
   themeName: string;
@@ -8,41 +12,56 @@ function BrideInformation(props: {
 }) {
   const bgTheme = new ThemeImageClass(props.themeName);
   const bgColor = new ThemeColorClass(props.themeName);
+  const controls = useAnimation();
+  const targetRef = useRef(null);
+  const isVisible = useIntersectionObserver(targetRef);
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start(AnimationThemeInstance.FadeHorizon);
+    }
+  }, [isVisible, controls]);
+
+  console.log(props.maleFemale?.Male);
+  
   return (
     <section
       className="section"
-      style={{ position: "relative", backgroundColor: "white" }}
+      style={{
+      }}
     >
       <div
+        className=""
         style={{
           position: "absolute",
           bottom: 0,
+          left: 0,
+          background: `url('${bgTheme.image.cover}')`,
           width: "100%",
-          height: "20%",
-          background: `linear-gradient(to top, ${bgColor.color.primary} 0%, ${bgColor.color.primary} 20%, #ffff 80%`,
-        }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          width: "100%",
-          height: "20%",
-          background: `linear-gradient(to bottom, ${bgColor.color.primary} -20%, rgba(255, 0, 0, 0) 70%)`,
-        }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          opacity: 0.15,
-          bottom: 0,
           height: "100vh",
-          background: `url(${bgTheme.image.cover})`,
-          backgroundSize: "cover",
         }}
       ></div>
-      <div style={{ position: "absolute", top: "5%", width: "100%" }}>
+       <div style={{ position: "absolute", top: 0, right: -30 }}>
+        <motion.img
+          animate={controls}
+          initial={AnimationThemeInstance.FadeLeft}
+          transition={{ duration: 1.7 }}
+          style={{ width: 280, height: 150 }}
+          src={bgTheme.image.top}
+          alt=""
+        />
+      </div>
+      <div style={{ position: "absolute", bottom: 0, left: 0 }}>
+        <motion.img
+          animate={controls}
+          initial={AnimationThemeInstance.FadeRight}
+          transition={{ duration: 1.7 }}
+          style={{ width: 240, height: 130 }}
+          src={bgTheme.image.bottom}
+          alt=""
+        />
+      </div>
+      <div style={{ position: "absolute", top: "5%", width: "100%" }}  ref={targetRef}>
         <div className="row justify-content-center">
           <div className="col-10" style={{ textAlign: "center" }}>
             <p
@@ -64,7 +83,7 @@ function BrideInformation(props: {
               }}
             >
               {" "}
-              {props.maleFemale.Male.Name} & {props.maleFemale.Female.Name}
+              {props.maleFemale?.Male.Name} & {props.maleFemale?.Female.Name}
             </h4>
             <p
               style={{
@@ -91,7 +110,7 @@ function BrideInformation(props: {
               }}
             >
               <img
-                src={props.maleFemale.Female.Photo}
+                src={props.maleFemale?.Female.Photo}
                 alt=""
                 style={{
                   width: "100%",
@@ -124,7 +143,7 @@ function BrideInformation(props: {
               }}
             >
               <img
-                src={props.maleFemale.Male.Photo}
+                src={props.maleFemale?.Male.Photo}
                 alt=""
                 style={{
                   width: "100%",
@@ -145,7 +164,7 @@ function BrideInformation(props: {
                 fontFamily: "Brilon",
               }}
             >
-              {props.maleFemale.Male.Name}
+              {props.maleFemale?.Male.Name}
             </h1>
           </div>
           <div className="col-2"></div>
@@ -158,7 +177,7 @@ function BrideInformation(props: {
                 fontFamily: "Brilon",
               }}
             >
-              {props.maleFemale.Female.Name}
+              {props.maleFemale?.Female.Name}
             </h1>
           </div>
         </div>
@@ -192,9 +211,9 @@ function BrideInformation(props: {
               }}
             >
               Anak Dari <br />
-              Ibu {props.maleFemale.Male.Ibu} <br />
+              Ibu {props.maleFemale?.Male.Ibu} <br />
               <span style={{ fontSize: "2rem" }}>&</span> <br />
-              Bapak {props.maleFemale.Male.Ayah}
+              Bapak {props.maleFemale?.Male.Ayah}
             </p>
           </div>
           <div className="col-6 d-flex align-items-center justify-content-center">
@@ -207,9 +226,9 @@ function BrideInformation(props: {
               }}
             >
               Anak Dari <br />
-              Ibu {props.maleFemale.Female.Ibu} <br />
+              Ibu {props.maleFemale?.Female.Ibu} <br />
               <span style={{ fontSize: "2rem" }}>&</span> <br />
-              Bapak {props.maleFemale.Female.Ayah}
+              Bapak {props.maleFemale?.Female.Ayah}
             </p>
           </div>
         </div>

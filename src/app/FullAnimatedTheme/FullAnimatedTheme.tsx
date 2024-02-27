@@ -9,6 +9,7 @@ import NavbarView from "./Section/Navbar/NavbarView";
 import BrideInformation from "./Section/BrideInfo/BrideInfo";
 import { ThemeColorClass } from "../Constant/ThemeColor";
 import DaysInfo from "./Section/DaysInfo/DaysInfo";
+import InfoView from "./Section/Info/InfoView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -24,7 +25,6 @@ const Fullpage = (props: FullPageInterface) => {
   const [visible, setVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const bgColor = new ThemeColorClass(props.details!.ThemeName);
 
   const handleCoverClick = () => {
     setCoverVisible(false);
@@ -109,6 +109,8 @@ const Fullpage = (props: FullPageInterface) => {
                   countDown={props?.details?.CountDown.Date}
                   home={props?.details?.Home}
                 />
+                <InfoView 
+                  themeName={props.details?.ThemeName} info={props?.details?.InfoAcara}                  />
               </ReactFullpage.Wrapper>
             </>
           );
@@ -138,7 +140,6 @@ const Fullpage = (props: FullPageInterface) => {
             cursor: "pointer",
             zIndex: "999",
           }}
-          //   onClick={togglePlay}
         >
           {isPlaying ? (
             <i
@@ -167,7 +168,6 @@ const Fullpage = (props: FullPageInterface) => {
             zIndex: "999",
           }}
           onClick={() => {
-            // scrollToBarcode(10000, endRef);
           }}
         >
           {isPlaying ? (

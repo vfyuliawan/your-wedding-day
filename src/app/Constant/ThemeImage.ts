@@ -6,6 +6,8 @@ export class ThemeImageClass {
       hero: string,
       home: string,
       maleFemale: string,
+      top?:string,
+      bottom?:string,
     };
   
     constructor(themeName: string) {
@@ -40,10 +42,12 @@ export class ThemeImageClass {
         };
       }else if (this.themeName === "BluePastel") {
         this.image = {
-            cover: "image/background/artPaper5.jpg",
-            hero: "image/background/artPaper4.jpg",
+            cover: "image/background/artPaper6.jpg",
+            hero: "image/background/artPaper5.jpg",
             home: "string",
-            maleFemale:"/image/background/flowerIcon.png"
+            maleFemale:"/image/background/flowerGreenIcon.jpg",
+            top:'/image/background/frame-tr.jpg',
+            bottom:'/image/background/frame-bl.jpg'
         };
       } else {
         this.image = {

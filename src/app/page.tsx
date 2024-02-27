@@ -179,14 +179,7 @@ export default function Home() {
         />
        
       ) : homePage ? (
-        <Fullpage
-        details={details}
-        getDetails={() => {
-          getMessage();
-        }}
-        guest={guest}
-        idGuest={idGuest}
-        />
+        <h1>Home</h1>
       ) : (
         <Loading />
       )}

@@ -59,7 +59,7 @@ const InfoView = (props: InfoViewInterface) => {
               ref={targetRef}
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.3 }}
+              transition={{ duration: 1.7 }}
               style={{ fontFamily: "brilon", fontSize: "3.4rem" }}
             >
               Informasi <br />
@@ -90,7 +90,7 @@ const InfoView = (props: InfoViewInterface) => {
               <motion.p
                 animate={controls}
                 initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 0.5 }}
+                transition={{ duration: 1.7, delay: 0.5 }}
                 style={{ color: "black", fontSize: "1.2rem" }}
                 className="alamat"
               >
