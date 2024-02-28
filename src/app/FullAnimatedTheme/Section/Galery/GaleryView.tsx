@@ -16,12 +16,14 @@ import { Timestamp } from "firebase/firestore";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+// @ts-ignore
+import OwlCarousel from "react-owl-carousel3";
 
-const MapView = (props: {
-  themeName: string;
-  embeded: string;
-  info: InfoViewKeyValue[];
-}) => {
+interface GaleryViewInterface {
+  image: Array<any>;
+}
+
+const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
   const bgImage = new ThemeImageClass(props.themeName);
 
   const bgColor = new ThemeColorClass(props.themeName);
@@ -105,7 +107,7 @@ const MapView = (props: {
                 color: bgColor.color.secondary,
               }}
             >
-              Lokasi <br />
+              Our <br />
               <span
                 style={{
                   fontFamily: "Creation",
@@ -114,7 +116,7 @@ const MapView = (props: {
                   color: bgColor.color.secondary,
                 }}
               >
-                Acara
+                Galery
               </span>
             </motion.h2>
           </div>
@@ -143,98 +145,90 @@ const MapView = (props: {
               }}
             ></motion.div>
           </motion.div>
-          <div style={{ position: "absolute", top: 70 }}>
-            <motion.div
-              ref={ref}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                scale: inView ? 1 : 0.5,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              className="row cols-10 justify-content-center"
-            >
-              <div className="container mt-5  ">
-                <div className="row justify-content-center">
-                  <div className="col-md-10" style={{}}>
-                    <div
-                      className="iframeContainer"
-                      style={{ padding: "24px", borderRadius: "10%" }}
-                    >
-                      <iframe
-                        src={GetEmbededFromGmap(props.embeded)}
-                        width="100%"
-                        height="300px"
-                        style={{ borderRadius: "10%" }}
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-            
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                scale: inView ? 1 : 0.5,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              className="row mt-2"
-            >
-              <p
-                style={{
-                  fontFamily: "faunaone",
-                  textAlign: "center",
-                  color: bgColor.color.secondary,
-                  fontSize: "0.9rem",
-                }}
-              >
-                {props.info[0].Place}
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                scale: inView ? 1 : 0.5,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              className="row mt-2 justify-content-center"
-            >
-              <div className="col-8 align-items-center justify-content-center d-flex">
-                <a
-                  href={props.info[0].Map}
-                  style={{
-                    width: "80%",
-                    textDecoration: "none",
-                    backgroundColor: bgColor.color.secondary,
-                    borderRadius: "20px",
-                    paddingBottom: "10px",
-                    paddingTop: "10px",
-                    justifyContent: "center",
-                    display: "flex",
-                    fontSize: "13px",
-                    fontFamily: "faunaone",
-                    color: bgColor.color.primary,
-                  }}
-                  onClick={() => {}}
-                >
-                  <i className="bi bi-geo-alt-fill" style={{ marginRight: 2 }}>
-                    {" "}
-                  </i>{" "}
-                  {"   "} Google Map
-                </a>
-              </div>
-            </motion.div>
+          <div style={{ position: "absolute", top: 90 }}>
+            {ImageGalleryComponent()}
+            {ImageGaleryComponent2()}
           </div>
         </div>
       </div>
     </section>
   );
+
+  function ImageGalleryComponent() {
+    return (
+      <div>
+        <div className="contaner">
+          <div className="row justify-content-center">
+            <div className="col-md-10 col-10">
+              {/* <Galery autoPlay={true} items={images} disableSwipe /> */}
+              <OwlCarousel
+                className="owl-theme"
+                loop
+                margin={10}
+                autoplay={true}
+                animateIn={"slideInRight"}
+                animateOut={"slideOutRight"}
+                lrt={true}
+              >
+                {props.galery.map((item, key) => {
+                  return (
+                    <div>
+                      <motion.img
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{
+                          opacity: inView ? 1 : 0,
+                          scale: inView ? 1 : 0.5,
+                        }}
+                        transition={{ duration: 1.5, delay: 2.0 }}
+                        style={{
+                          borderRadius: "8px",
+                        }}
+                        src={item}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
+              </OwlCarousel>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function ImageGaleryComponent2() {
+    return (
+      <div
+        className="row row-cols-md-3 row-cols-sm-2 row-cols-3 justify-content-center"
+      >
+        {props.galery.map((item, key) => {
+          return (
+            <div className="col mt-3">
+              <a
+                href={item}
+                data-toggle="lightbox"
+                data-caption="This describes the image"
+              >
+                <motion.img
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+                  transition={{ duration: 1.5, delay: 1.5 }}
+                  src={item}
+                  style={{
+                    maxHeight: 376,
+                    borderRadius: "8%",
+                  }}
+                  className="img-fluid w-100 "
+                  alt="Image Description"
+                />
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 };
 
-export default MapView;
+export default GaleryView;

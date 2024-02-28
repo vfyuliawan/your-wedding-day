@@ -276,6 +276,7 @@ const CoverView = (props: CoverModelInterface) => {
           <div
             style={{
               position: "absolute",
+              zIndex:999,
               transform: "translateX(-50%)",
               top: "82%",
               left: "50%",

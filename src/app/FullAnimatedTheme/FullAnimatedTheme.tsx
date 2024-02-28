@@ -12,6 +12,7 @@ import DaysInfo from "./Section/DaysInfo/DaysInfo";
 import InfoView from "./Section/Info/InfoView";
 import StoryView from "./Section/Story/StoryView";
 import MapView from "./Section/Map/MapView";
+import GaleryView from "./Section/Galery/GaleryView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -127,8 +128,8 @@ const Fullpage = (props: FullPageInterface) => {
                   <StoryView
                     themeName={props.details?.ThemeName}
                     OurStory={props?.details?.OurStory}
-                    
                   />
+                  <GaleryView themeName={props.details?.ThemeName} galery={props?.details?.Galery.image}/>
                  
                 </ReactFullpage.Wrapper>
               </>

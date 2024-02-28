@@ -352,7 +352,7 @@ const InfoView = (props: InfoViewInterface) => {
           />
         </div>
       </div>
-      <div style={{ height: "65rem" }}></div>
+      <div style={{ height: "140rem" }}></div>
 
       <div className="container mt-5  ">
         <div className="row justify-content-center">

@@ -122,10 +122,11 @@ const CoverView = (props: CoverModelInterface) => {
               position: "relative",
               bottom: "83%",
               opacity: 0.5,
+              width:'100%'
             }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
-            height="90"
+            height="110"
           >
             <path
               fill={bgColor.color.secondary}
