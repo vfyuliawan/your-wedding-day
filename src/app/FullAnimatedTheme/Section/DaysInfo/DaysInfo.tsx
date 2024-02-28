@@ -55,7 +55,7 @@ const DaysInfo = (props: {
   }, []);
   const bgColor = new ThemeColorClass(props.themeName);
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    // triggerOnce: true,
   });
 
   const controls = useAnimation();
@@ -83,9 +83,13 @@ const DaysInfo = (props: {
       ></div>
       <div style={{ position: "absolute", top: 0, right: -30 }}>
         <motion.img
-          animate={controls}
-          initial={AnimationThemeInstance.FadeLeft}
-          transition={{ duration: 1.7 }}
+          ref={ref}
+          initial={{ opacity: 0, y: -50 }} 
+          animate={{
+            opacity: inView ? 1 : 0,
+            y: inView ? 0 : -50, 
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 280, height: 150 }}
           src={bgImage.image.top}
           alt=""
@@ -93,9 +97,13 @@ const DaysInfo = (props: {
       </div>
       <div style={{ position: "absolute", bottom: 0, left: 0 }}>
         <motion.img
-          animate={controls}
-          initial={AnimationThemeInstance.FadeRight}
-          transition={{ duration: 1.7 }}
+          ref={ref}
+          initial={{ opacity: 0, y: 100 }} 
+          animate={{
+            opacity: inView ? 1 : 0,
+            y: inView ? 0 : 100, 
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 240, height: 130 }}
           src={bgImage.image.bottom}
           alt=""

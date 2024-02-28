@@ -5,16 +5,21 @@ import useIntersectionObserver from "@/app/LuxuryTheme/Section/UseInterSectionOb
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 
 function BrideInformation(props: {
   themeName: string;
   maleFemale: MaleFemaleProps;
+  coverVisible: boolean;
 }) {
   const bgTheme = new ThemeImageClass(props.themeName);
   const bgColor = new ThemeColorClass(props.themeName);
   const controls = useAnimation();
   const targetRef = useRef(null);
   const isVisible = useIntersectionObserver(targetRef);
+  const [ref, inView] = useInView({
+    // tr: true,
+  });
 
   useEffect(() => {
     if (isVisible) {
@@ -22,14 +27,8 @@ function BrideInformation(props: {
     }
   }, [isVisible, controls]);
 
-  console.log(props.maleFemale?.Male);
-  
   return (
-    <section
-      className="section"
-      style={{
-      }}
-    >
+    <section className="section" style={{}}>
       <div
         className=""
         style={{
@@ -41,11 +40,15 @@ function BrideInformation(props: {
           height: "100vh",
         }}
       ></div>
-       <div style={{ position: "absolute", top: 0, right: -30 }}>
+      <div style={{ position: "absolute", top: 0, right: -30 }}>
         <motion.img
-          animate={controls}
-          initial={AnimationThemeInstance.FadeLeft}
-          transition={{ duration: 1.7 }}
+          ref={ref}
+          initial={{ opacity: 0, y: -50 }} 
+          animate={{
+            opacity: inView ? 1 : 0,
+            y: inView ? 0 : -50, 
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 280, height: 150 }}
           src={bgTheme.image.top}
           alt=""
@@ -53,17 +56,34 @@ function BrideInformation(props: {
       </div>
       <div style={{ position: "absolute", bottom: 0, left: 0 }}>
         <motion.img
-          animate={controls}
-          initial={AnimationThemeInstance.FadeRight}
-          transition={{ duration: 1.7 }}
+          ref={ref}
+          initial={{ opacity: 0, y: 100 }} 
+          animate={{
+            opacity: inView ? 1 : 0,
+            y: inView ? 0 : 100, 
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 240, height: 130 }}
           src={bgTheme.image.bottom}
           alt=""
         />
       </div>
-      <div style={{ position: "absolute", top: "5%", width: "100%" }}  ref={targetRef}>
+      <div
+        style={{ position: "absolute", top: "5%", width: "100%" }}
+        ref={targetRef}
+      >
         <div className="row justify-content-center">
-          <div className="col-10" style={{ textAlign: "center" }}>
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{
+              opacity: inView ? 1 : 0,
+              scale: inView ? 1 : 0.5,
+            }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+            className="col-10"
+            style={{ textAlign: "center" }}
+          >
             <p
               style={{
                 fontSize: "1.5rem",
@@ -96,9 +116,18 @@ function BrideInformation(props: {
               Tanpa mengurangi rasa hormat, kami bermaksud untuk mengundang
               Bapak/Ibu/Saudara/i pada acara resepsi pernikahan kami
             </p>
-          </div>
+          </motion.div>
         </div>
-        <div className="row">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{
+            opacity: inView ? 1 : 0,
+            scale: inView ? 1 : 0.5,
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="row"
+        >
           <div className="col-5 d-flex justify-content-center">
             <div
               style={{
@@ -153,8 +182,17 @@ function BrideInformation(props: {
               />
             </div>
           </div>
-        </div>
-        <div className="row mt-4">
+        </motion.div>
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{
+            opacity: inView ? 1 : 0,
+            scale: inView ? 1 : 0.5,
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="row mt-4"
+        >
           <div className="col-5 d-flex justify-content-center">
             <h1
               style={{
@@ -180,8 +218,16 @@ function BrideInformation(props: {
               {props.maleFemale?.Female.Name}
             </h1>
           </div>
-        </div>
-        <div className="row mt-4">
+        </motion.div>
+        <motion.div
+         ref={ref}
+         initial={{ opacity: 0, scale: 0.5 }}
+         animate={{
+           opacity: inView ? 1 : 0,
+           scale: inView ? 1 : 0.5,
+         }}
+         transition={{ duration: 1.5, delay: 0.5 }}
+         className="row mt-4">
           <div className="col-6 d-flex justify-content-center">
             <div
               style={{
@@ -200,8 +246,15 @@ function BrideInformation(props: {
               }}
             ></div>
           </div>
-        </div>
-        <div className="row mt-4">
+        </motion.div>
+        <motion.div
+         ref={ref}
+         initial={{ opacity: 0, scale: 0.5 }}
+         animate={{
+           opacity: inView ? 1 : 0,
+           scale: inView ? 1 : 0.5,
+         }}
+         transition={{ duration: 1.5, delay: 0.5 }} className="row mt-4">
           <div className="col-6 d-flex justify-content-left">
             <p
               style={{
@@ -231,7 +284,7 @@ function BrideInformation(props: {
               Bapak {props.maleFemale?.Female.Ayah}
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

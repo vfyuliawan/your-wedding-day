@@ -92,35 +92,41 @@ const Fullpage = (props: FullPageInterface) => {
         themeName={props.details?.ThemeName}
         home={props?.details?.Home}
       />
-      <ReactFullpage
-        credits={{ enabled: false, label: "", position: "right" }}
-        scrollingSpeed={1000} // Set the scrolling speed
-        scrollHorizontally={true} // Enable horizontal scrolling
-        render={({ state, fullpageApi }) => {
-          return (
-            <>
-              <ReactFullpage.Wrapper>
-                <BrideInformation
-                  themeName={props.details?.ThemeName}
-                  maleFemale={props?.details?.MaleFemale}
-                />
-                <DaysInfo
-                  themeName={props.details?.ThemeName}
-                  countDown={props?.details?.CountDown.Date}
-                  home={props?.details?.Home}
-                />
-                <InfoView 
-                  themeName={props.details?.ThemeName} info={props?.details?.InfoAcara}                  />
-              </ReactFullpage.Wrapper>
-            </>
-          );
-        }}
-        afterLoad={(origin, destination, direction) => {
-          if (direction === "down") {
-            setEnableVerticalScroll(true);
-          }
-        }}
-      />
+      {!coverVisible ? (
+        <ReactFullpage
+          credits={{ enabled: false, label: "", position: "right" }}
+          scrollingSpeed={1000} // Set the scrolling speed
+          scrollHorizontally={true} // Enable horizontal scrolling
+          render={({ state, fullpageApi }) => {
+            return (
+              <>
+                <ReactFullpage.Wrapper>
+                  <BrideInformation
+                    themeName={props.details?.ThemeName}
+                    maleFemale={props?.details?.MaleFemale}
+                    coverVisible={coverVisible}
+                  />
+                  <DaysInfo
+                    themeName={props.details?.ThemeName}
+                    countDown={props?.details?.CountDown.Date}
+                    home={props?.details?.Home}
+                  />
+                  <InfoView
+                    themeName={props.details?.ThemeName}
+                    info={props?.details?.InfoAcara}
+                  />
+                </ReactFullpage.Wrapper>
+              </>
+            );
+          }}
+          afterLoad={(origin, destination, direction) => {
+            if (direction === "down") {
+              setEnableVerticalScroll(true);
+            }
+          }}
+        />
+      ) : null}
+
       {!coverVisible ? (
         <NavbarView themeName={props.details!.ThemeName} />
       ) : null}
@@ -167,8 +173,7 @@ const Fullpage = (props: FullPageInterface) => {
             cursor: "pointer",
             zIndex: "999",
           }}
-          onClick={() => {
-          }}
+          onClick={() => {}}
         >
           {isPlaying ? (
             <i
