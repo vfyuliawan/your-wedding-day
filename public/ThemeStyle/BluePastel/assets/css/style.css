@@ -214,10 +214,8 @@ body {
 }
 
 .section{
-  height: 100vh;
-  zoom: 1;
-  width: 100vw;
- 
+  /* zoom: 1;
+  width: 100vw; */
 }
 
 .iframeContainer {
