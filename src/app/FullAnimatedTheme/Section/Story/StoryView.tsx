@@ -140,13 +140,16 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
           </motion.div>
         </div>
         <motion.div
-            ref={ref}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{
-              opacity: inView ? 1 : 0,
-              scale: inView ? 1 : 0.5,
-            }}
-            transition={{ duration: 1.5, delay: 0.5 }} className="row" style={{ position: "absolute", top: 80 }}>
+          ref={ref}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{
+            opacity: inView ? 1 : 0,
+            scale: inView ? 1 : 0.5,
+          }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="row"
+          style={{ position: "absolute", top: 80 }}
+        >
           <div className="col">
             <ul className="timeline">
               <li>
@@ -160,26 +163,39 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     }}
                   ></i>
                 </div>
-                <motion.div className="timeline-panel" style={{width:300, height:260, left:100, top:-10}}>
+                <motion.div
+                  className="timeline-panel"
+                  style={{ width: 300, height: 260, left: 100, top: -10 }}
+                >
                   <div className="timeline-heading">
                     <h4
                       style={{ fontSize: 20, color: bgColor.color.secondary }}
                     >
                       {props?.OurStory?.First.Tittle}
                     </h4>
-                    <img
+                    <div
                       style={{
                         width: "100%",
-                        height: "auto",
-                        borderRadius: "20px",
+                        height: "140px",
+                        overflow: "hidden", 
+                        borderRadius:'20px'
                       }}
-                      src={props?.OurStory?.First.Photo}
-                      alt=""
-                    />
+                    >
+                      <img
+                        style={{
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        src={props?.OurStory?.First.Photo}
+                        alt=""
+                      />
+                    </div>
+
                     <span
                       style={{
                         fontSize: "0.5rem",
-                        fontFamily:'faunaOne',
+                        fontFamily: "faunaOne",
                         color: bgColor.color.secondary,
                       }}
                     >
@@ -197,9 +213,9 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                   <div className="timeline-body">
                     <p
                       style={{
-                        fontSize: "0.8rem",
+                        fontSize: "0.7rem",
                         color: bgColor.color.secondary,
-                        fontFamily:'faunaOne',
+                        fontFamily: "faunaOne",
                       }}
                     >
                       {props?.OurStory?.First.Story}
@@ -218,33 +234,46 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     }}
                   ></i>
                 </div>
-                <motion.div className="timeline-panel" style={{width:300, height:260, left:100, top:-15}}>
+                <motion.div
+                  className="timeline-panel"
+                  style={{ width: 300, height: 260, left: 100, top: -15 }}
+                >
                   <div className="timeline-heading">
                     <h4
                       style={{ fontSize: 20, color: bgColor.color.secondary }}
                     >
                       {props?.OurStory?.Second.Tittle}
                     </h4>
-                    <img
+                    <div
                       style={{
                         width: "100%",
-                        height: "auto",
-                        borderRadius: "20px",
+                        height: "140px",
+                        overflow: "hidden", 
+                        borderRadius:'20px'
                       }}
-                      src={props?.OurStory?.Second.Photo}
-                      alt=""
-                    />
+                    >
+                      <img
+                        style={{
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        src={props?.OurStory?.Second.Photo}
+                        alt=""
+                      />
+                    </div>
                     <span
                       style={{
                         fontSize: "0.5rem",
-                        fontFamily:'faunaOne',
+                        fontFamily: "faunaOne",
                         color: bgColor.color.secondary,
                       }}
                     >
                       {" "}
                       {
                         TimeConvertionDate(
-                          props?.OurStory?.Second.Date as TimeConvertionInterface
+                          props?.OurStory?.Second
+                            .Date as TimeConvertionInterface
                         ).dateMonth
                       }
                       {TimeConversionTime(
@@ -255,9 +284,9 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                   <div className="timeline-body">
                     <p
                       style={{
-                        fontSize: "0.8rem",
+                        fontSize: "0.7rem",
                         color: bgColor.color.secondary,
-                        fontFamily:'faunaOne',
+                        fontFamily: "faunaOne",
                       }}
                     >
                       {props?.OurStory?.Second.Story}
