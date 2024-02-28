@@ -10,6 +10,7 @@ import BrideInformation from "./Section/BrideInfo/BrideInfo";
 import { ThemeColorClass } from "../Constant/ThemeColor";
 import DaysInfo from "./Section/DaysInfo/DaysInfo";
 import InfoView from "./Section/Info/InfoView";
+import StoryView from "./Section/Story/StoryView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -114,6 +115,10 @@ const Fullpage = (props: FullPageInterface) => {
                   <InfoView
                     themeName={props.details?.ThemeName}
                     info={props?.details?.InfoAcara}
+                  />
+                  <StoryView
+                    themeName={props.details?.ThemeName}
+                    OurStory={props?.details?.OurStory}
                   />
                 </ReactFullpage.Wrapper>
               </>
