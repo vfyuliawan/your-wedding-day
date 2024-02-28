@@ -146,7 +146,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
               opacity: inView ? 1 : 0,
               scale: inView ? 1 : 0.5,
             }}
-            transition={{ duration: 1.5, delay: 0.5 }} className="row" style={{ position: "absolute", top: 60 }}>
+            transition={{ duration: 1.5, delay: 0.5 }} className="row" style={{ position: "absolute", top: 80 }}>
           <div className="col">
             <ul className="timeline">
               <li>
