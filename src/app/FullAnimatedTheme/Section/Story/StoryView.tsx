@@ -223,7 +223,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     <h4
                       style={{ fontSize: 20, color: bgColor.color.secondary }}
                     >
-                      {props?.OurStory?.First.Tittle}
+                      {props?.OurStory?.Second.Tittle}
                     </h4>
                     <img
                       style={{
@@ -231,7 +231,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                         height: "auto",
                         borderRadius: "20px",
                       }}
-                      src={props?.OurStory?.First.Photo}
+                      src={props?.OurStory?.Second.Photo}
                       alt=""
                     />
                     <span
@@ -244,11 +244,11 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                       {" "}
                       {
                         TimeConvertionDate(
-                          props?.OurStory?.First.Date as TimeConvertionInterface
+                          props?.OurStory?.Second.Date as TimeConvertionInterface
                         ).dateMonth
                       }
                       {TimeConversionTime(
-                        props?.OurStory?.First.Date as TimeConvertionInterface
+                        props?.OurStory?.Second.Date as TimeConvertionInterface
                       )}
                     </span>
                   </div>
@@ -260,7 +260,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                         fontFamily:'faunaOne',
                       }}
                     >
-                      {props?.OurStory?.First.Story}
+                      {props?.OurStory?.Second.Story}
                     </p>
                   </div>
                 </motion.div>
