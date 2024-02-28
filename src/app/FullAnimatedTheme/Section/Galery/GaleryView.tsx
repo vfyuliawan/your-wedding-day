@@ -85,7 +85,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
       <div
         style={{
           position: "absolute",
-          top: "2%",
+          top: "6%",
           right: "50%",
           width: "100%",
           transform: "translateX(50%)",

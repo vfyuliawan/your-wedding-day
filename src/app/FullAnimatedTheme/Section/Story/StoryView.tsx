@@ -83,7 +83,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
       <div
         style={{
           position: "absolute",
-          top: "3%",
+          top: "5%",
           right: "50%",
           width: "100%",
           transform: "translateX(50%)",

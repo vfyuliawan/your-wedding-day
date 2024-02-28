@@ -74,7 +74,10 @@ const Fullpage = (props: FullPageInterface) => {
         rel="stylesheet"
         href={`/ThemeStyle/${props?.details?.ThemeName}/assets/css/style.css`}
       />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      />
 
       {/* <audio
         style={{ position: "fixed", visibility: "hidden" }}
@@ -88,158 +91,171 @@ const Fullpage = (props: FullPageInterface) => {
         Your browser does not support the audio element.
       </audio> */}
       <body>
-      <CoverView
-        hero={props?.details?.Hero}
-        guest={props.guest}
-        isVisible={coverVisible}
-        onCoverClick={handleCoverClick}
-        detailCover={props?.details?.Cover}
-        themeName={props.details?.ThemeName}
-        home={props?.details?.Home}
-      />
-      {!coverVisible ? (
-        <ReactFullpage
-          credits={{ enabled: false, label: "", position: "right" }}
-          scrollingSpeed={1000} // Set the scrolling speed
-          scrollHorizontally={true} // Enable horizontal scrolling
-          render={({ state, fullpageApi }) => {
-            return (
-              <>
-                <ReactFullpage.Wrapper>
-                  <BrideInformation
-                    themeName={props.details?.ThemeName}
-                    maleFemale={props?.details?.MaleFemale}
-                    coverVisible={coverVisible}
-                  />
-                  <DaysInfo
-                    themeName={props.details?.ThemeName}
-                    countDown={props?.details?.CountDown.Date}
-                    home={props?.details?.Home}
-                  />
-                  <InfoView
-                    themeName={props.details?.ThemeName}
-                    info={props?.details?.InfoAcara}
-                  />
-                   <MapView
-                    themeName={props.details?.ThemeName}
-                    embeded={props?.details?.Embeded}
-                    info={props?.details?.InfoAcara}
-                  />
-                  <StoryView
-                    themeName={props.details?.ThemeName}
-                    OurStory={props?.details?.OurStory}
-                  />
-                  <GaleryView themeName={props.details?.ThemeName} galery={props?.details?.Galery.image}/>
-                 
-                </ReactFullpage.Wrapper>
-              </>
-            );
-          }}
-          afterLoad={(origin, destination, direction) => {
-            if (direction === "down") {
-              setEnableVerticalScroll(true);
-            }
-          }}
+        <CoverView
+          hero={props?.details?.Hero}
+          guest={props.guest}
+          isVisible={coverVisible}
+          onCoverClick={handleCoverClick}
+          detailCover={props?.details?.Cover}
+          themeName={props.details?.ThemeName}
+          home={props?.details?.Home}
         />
-      ) : null}
+        {!coverVisible ? (
+          <ReactFullpage
+            credits={{ enabled: false, label: "", position: "right" }}
+            scrollingSpeed={1000} 
+            fadingEffect={"slides"}
+            continuousVertical={true}
+            navigationPosition="left"
+            responsiveSlides={true}
+            responsive={{
+              768: {
+                responsiveHeight: 400, // Set the height for screens with a width of 768 pixels or more (e.g., tablets)
+              },
+              375: {
+                responsiveHeight: 200, // Set the height for screens with a width of 375 pixels or more (e.g., iPhones)
+                scrollHorizontally: false, // Disable horizontal scrolling for smaller screens if needed
+              },
+            }}
+            scrollHorizontally={true} // Enable horizontal scrolling
+            render={({ state, fullpageApi }) => {
+              return (
+                <>
+                  <ReactFullpage.Wrapper>
+                    <BrideInformation
+                      themeName={props.details?.ThemeName}
+                      maleFemale={props?.details?.MaleFemale}
+                      coverVisible={coverVisible}
+                    />
+                    <DaysInfo
+                      themeName={props.details?.ThemeName}
+                      countDown={props?.details?.CountDown.Date}
+                      home={props?.details?.Home}
+                    />
+                    <InfoView
+                      themeName={props.details?.ThemeName}
+                      info={props?.details?.InfoAcara}
+                    />
+                    <MapView
+                      themeName={props.details?.ThemeName}
+                      embeded={props?.details?.Embeded}
+                      info={props?.details?.InfoAcara}
+                    />
+                    <StoryView
+                      themeName={props.details?.ThemeName}
+                      OurStory={props?.details?.OurStory}
+                    />
+                    <GaleryView
+                      themeName={props.details?.ThemeName}
+                      galery={props?.details?.Galery.image}
+                    />
+                  </ReactFullpage.Wrapper>
+                </>
+              );
+            }}
+            afterLoad={(origin, destination, direction) => {
+              if (direction === "down") {
+                setEnableVerticalScroll(true);
+              }
+            }}
+          />
+        ) : null}
 
-      {!coverVisible ? (
-        <NavbarView themeName={props.details!.ThemeName} />
-      ) : null}
-      {!coverVisible ? (
-        <button
-          className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
-          style={{
-            opacity: 0.4,
-            position: "fixed",
-            bottom: "150px",
-            right: "20px",
-            padding: "15px",
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-            color: "white",
-            cursor: "pointer",
-            zIndex: "999",
-          }}
-        >
-          {isPlaying ? (
-            <i
-              className="bi bi-music-player-fill"
-              style={{ fontSize: "1.5" }}
-            ></i>
-          ) : (
-            <i className="bi bi-pause-fill" style={{ fontSize: "1.5" }}></i>
-          )}
-        </button>
-      ) : null}
-      {!coverVisible ? (
-        <button
-          className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
-          style={{
-            opacity: 0.4,
-            position: "fixed",
-            bottom: "100px",
-            right: "20px",
-            padding: "15px",
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-            color: "white",
-            cursor: "pointer",
-            zIndex: "999",
-          }}
-          onClick={() => {}}
-        >
-          {isPlaying ? (
-            <i
-              className="bi bi-lg bi-arrow-down-circle"
-              style={{ fontSize: "1.5rem" }}
-            ></i>
-          ) : (
-            <i
-              className="bi bi-lg bi-arrow-down-circle"
-              style={{ fontSize: "1.5rem" }}
-            ></i>
-          )}
-        </button>
-      ) : null}
-      {!coverVisible ? (
-        <button
-          className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
-          style={{
-            position: "fixed",
-            opacity: 0.4,
-            bottom: "200px",
-            right: "20px",
-            padding: "15px",
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-            color: "white",
-            cursor: "pointer",
-            zIndex: "999",
-          }}
-          onClick={() => {
-            // scrollToBarcode(2000, qrCodeRef);
-          }}
-        >
-          {isPlaying ? (
-            <i
-              className="bi bi-lg bi-qr-code"
-              style={{ fontSize: "1.2rem" }}
-            ></i>
-          ) : (
-            <i
-              className="bi bi-lg bi-qr-code"
-              style={{ fontSize: "1.2rem" }}
-            ></i>
-          )}
-        </button>
-      ) : null}
+        {!coverVisible ? (
+          <NavbarView themeName={props.details!.ThemeName} />
+        ) : null}
+        {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              opacity: 0.4,
+              position: "fixed",
+              bottom: "150px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-music-player-fill"
+                style={{ fontSize: "1.5" }}
+              ></i>
+            ) : (
+              <i className="bi bi-pause-fill" style={{ fontSize: "1.5" }}></i>
+            )}
+          </button>
+        ) : null}
+        {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              opacity: 0.4,
+              position: "fixed",
+              bottom: "100px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={() => {}}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-lg bi-arrow-down-circle"
+                style={{ fontSize: "1.5rem" }}
+              ></i>
+            ) : (
+              <i
+                className="bi bi-lg bi-arrow-down-circle"
+                style={{ fontSize: "1.5rem" }}
+              ></i>
+            )}
+          </button>
+        ) : null}
+        {!coverVisible ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              opacity: 0.4,
+              bottom: "200px",
+              right: "20px",
+              padding: "15px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={() => {
+              // scrollToBarcode(2000, qrCodeRef);
+            }}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{ fontSize: "1.2rem" }}
+              ></i>
+            ) : (
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{ fontSize: "1.2rem" }}
+              ></i>
+            )}
+          </button>
+        ) : null}
       </body>
-
-      
     </>
   );
 };

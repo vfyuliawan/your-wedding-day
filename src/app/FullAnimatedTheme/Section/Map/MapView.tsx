@@ -83,7 +83,7 @@ const MapView = (props: {
       <div
         style={{
           position: "absolute",
-          top: "2%",
+          top: "5%",
           right: "50%",
           width: "100%",
           transform: "translateX(50%)",

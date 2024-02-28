@@ -109,7 +109,7 @@ const DaysInfo = (props: {
           alt=""
         />
       </div>
-      <div style={{ position: "absolute", top: "1%", width: "100%" }}>
+      <div style={{ position: "absolute", top: "8%", width: "100%" }}>
         <div className="row justify-content-center">
           <motion.div
             ref={ref}
