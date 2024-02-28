@@ -72,6 +72,8 @@ const Fullpage = (props: FullPageInterface) => {
         rel="stylesheet"
         href={`/ThemeStyle/${props?.details?.ThemeName}/assets/css/style.css`}
       />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
       {/* <audio
         style={{ position: "fixed", visibility: "hidden" }}
         ref={audioRef}

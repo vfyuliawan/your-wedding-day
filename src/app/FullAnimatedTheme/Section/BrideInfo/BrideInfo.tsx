@@ -69,7 +69,7 @@ function BrideInformation(props: {
         />
       </div>
       <div
-        style={{ position: "absolute", top: "5%", width: "100%" }}
+        style={{ position: "absolute", top: "9%", width: "100%" }}
         ref={targetRef}
       >
         <div className="row justify-content-center">
@@ -139,7 +139,7 @@ function BrideInformation(props: {
               }}
             >
               <img
-                src={props.maleFemale?.Female.Photo}
+                src={props.maleFemale?.Male.Photo}
                 alt=""
                 style={{
                   width: "100%",
@@ -172,7 +172,7 @@ function BrideInformation(props: {
               }}
             >
               <img
-                src={props.maleFemale?.Male.Photo}
+                src={props.maleFemale?.Female.Photo}
                 alt=""
                 style={{
                   width: "100%",

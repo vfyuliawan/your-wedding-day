@@ -169,7 +169,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     </h4>
                     <img
                       style={{
-                        width: "100%",
+                        width: "90%",
                         height: "auto",
                         borderRadius: "20px",
                       }}
@@ -178,7 +178,8 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     />
                     <span
                       style={{
-                        fontSize: "1rem",
+                        fontSize: "0.8rem",
+                        fontFamily:'faunaOne',
                         color: bgColor.color.secondary,
                       }}
                     >
@@ -196,8 +197,9 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                   <div className="timeline-body">
                     <p
                       style={{
-                        fontSize: "1rem",
+                        fontSize: "0.8rem",
                         color: bgColor.color.secondary,
+                        fontFamily:'faunaOne',
                       }}
                     >
                       {props?.OurStory?.First.Story}
@@ -225,7 +227,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     </h4>
                     <img
                       style={{
-                        width: "100%",
+                        width: "90%",
                         height: "auto",
                         borderRadius: "20px",
                       }}
@@ -234,8 +236,9 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                     />
                     <span
                       style={{
-                        fontSize: "1rem",
+                        fontSize: "0.8rem",
                         color: bgColor.color.secondary,
+                        fontFamily:'faunaOne',
                       }}
                     >
                       {" "}
@@ -252,8 +255,9 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
                   <div className="timeline-body">
                     <p
                       style={{
-                        fontSize: "1rem",
+                        fontSize: "0.8rem",
                         color: bgColor.color.secondary,
+                        fontFamily:'faunaOne',
                       }}
                     >
                       {props?.OurStory?.Second.Story}
