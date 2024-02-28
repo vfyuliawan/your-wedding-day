@@ -146,13 +146,13 @@ const DaysInfo = (props: {
             <img
               className="mt-2 mb-2"
               src={bgImage.image.maleFemale}
-              height={170}
-              width={190}
+              height={130}
+              width={150}
             />
 
             <p
               style={{
-                fontSize: "0.8rem",
+                fontSize: "0.6rem",
                 fontFamily: "FaunaOne",
                 color: bgColor.color.secondary,
               }}
@@ -197,10 +197,10 @@ const DaysInfo = (props: {
                 style={{ color: bgColor.color.secondary }}
               >
                 <div className="col">
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "23px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "20px" }}>
                     {timeRemaining.days}
                   </p>
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "15px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "13px" }}>
                     Hari
                   </p>
                 </div>
@@ -211,10 +211,10 @@ const DaysInfo = (props: {
                 style={{ color: bgColor.color.secondary }}
               >
                 <div className="col">
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "23px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "20px" }}>
                     {timeRemaining.hours}
                   </p>
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "15px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "13px" }}>
                     Jam
                   </p>
                 </div>
@@ -225,10 +225,10 @@ const DaysInfo = (props: {
                 style={{ color: bgColor.color.secondary }}
               >
                 <div className="col">
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "23px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "20px" }}>
                     {timeRemaining.minutes}
                   </p>
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "15px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "13px" }}>
                     Menit
                   </p>
                 </div>
@@ -239,10 +239,10 @@ const DaysInfo = (props: {
                 style={{ color: bgColor.color.secondary }}
               >
                 <div className="col">
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "23px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "20px" }}>
                     {timeRemaining.seconds}
                   </p>
-                  <p style={{ fontFamily: "FaunaOne", fontSize: "15px" }}>
+                  <p style={{ fontFamily: "FaunaOne", fontSize: "13px" }}>
                     Detik
                   </p>
                 </div>
@@ -261,7 +261,7 @@ const DaysInfo = (props: {
               <p
                 style={{
                   color: bgColor.color.secondary,
-                  fontSize: "18px",
+                  fontSize: "13px",
                   fontFamily: "faunaone",
                 }}
               >

@@ -78,7 +78,7 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
       <div
         style={{
           position: "absolute",
-          top: "3%",
+          top: "2%",
           right: "50%",
           width: "100%",
           transform: "translateX(50%)",
@@ -96,7 +96,7 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
               transition={{ duration: 1.5, delay: 0.5 }}
               style={{
                 fontFamily: "brilon",
-                fontSize: "1.8rem",
+                fontSize: "1.5rem",
                 color: bgColor.color.secondary,
               }}
             >
@@ -143,8 +143,8 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
               }}
               transition={{ duration: 1.5, delay: 0.5 }}
               style={{
-                width: "140px",
-                height: "200px",
+                width: "100px",
+                height: "160px",
                 borderTopRightRadius: "150px",
                 borderBottomLeftRadius: "150px",
                 marginRight: 3,
@@ -161,8 +161,8 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
               }}
               transition={{ duration: 1.5, delay: 0.5 }}
               style={{
-                width: "140px",
-                height: "200px",
+                width: "100px",
+                height: "160px",
                 borderTopLeftRadius: "150px",
                 borderBottomRightRadius: "150px",
                 background: `url('${props.info?.[1].Photo}')`,
@@ -186,7 +186,7 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                 }}
                 className="alamat"
               >
-                Pernikahan kami yang akan dilaksanakan pada:
+                Pernikahan kami dilaksanakan pada:
               </motion.p>
             </div>
           </div>
@@ -199,6 +199,8 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
             }}
             transition={{ duration: 1.5, delay: 0.5 }}
             className="row justify-content-center mt-2"
+            style={{position:'absolute', top:'93%'}}
+
           >
             <div
               className="col-10"
@@ -217,16 +219,16 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                     <h3
                       style={{
                         fontFamily: "Brilon",
-                        fontSize: 24,
+                        fontSize: 18,
                         color: bgColor.color.secondary,
                       }}
                     >
                       {item.Judul}
                     </h3>
-                    <p style={{ fontSize: 14, fontFamily: "FaunaOne" }}>
+                    <p style={{ fontSize: 10, fontFamily: "FaunaOne" }}>
                       {TimeConvertionDate(item.Date).dateFull}
                     </p>
-                    <p style={{ fontSize: 14, fontFamily: "FaunaOne" }}>
+                    <p style={{ fontSize: 11, fontFamily: "FaunaOne" }}>
                       {item.Place}
                     </p>
                     <a
@@ -238,8 +240,8 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                         borderRadius: "20px",
                         paddingBottom: "10px",
                         paddingTop: "10px",
-                        paddingRight: "35px",
-                        paddingLeft: "35px",
+                        paddingRight: "20px",
+                        paddingLeft: "20px",
                         fontSize: "13px",
                         fontFamily: "faunaone",
                         color: bgColor.color.primary,

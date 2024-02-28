@@ -210,6 +210,7 @@
 body {
   font-size: 1.5rem;
   font-family: "Work Sans", sans-serif;
+  
 }
 
 .section{
@@ -217,6 +218,10 @@ body {
   zoom: 1;
   width: 100vw;
  
+}
+
+.iframeContainer {
+  border: 3px solid var(--pink);
 }
 
 .my-navbar {

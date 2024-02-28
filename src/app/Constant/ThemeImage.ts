@@ -45,7 +45,7 @@ export class ThemeImageClass {
             cover: "image/background/artPaper6.jpg",
             hero: "image/background/artPaper5.jpg",
             home: "string",
-            maleFemale:"/image/background/flowerGreenIcon.jpg",
+            maleFemale:"/image/background/flowerGreenIcon2.jpg",
             top:'/image/background/frame-tr.jpg',
             bottom:'/image/background/frame-bl.jpg'
         };

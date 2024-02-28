@@ -11,6 +11,7 @@ import { ThemeColorClass } from "../Constant/ThemeColor";
 import DaysInfo from "./Section/DaysInfo/DaysInfo";
 import InfoView from "./Section/Info/InfoView";
 import StoryView from "./Section/Story/StoryView";
+import MapView from "./Section/Map/MapView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -85,7 +86,7 @@ const Fullpage = (props: FullPageInterface) => {
         />
         Your browser does not support the audio element.
       </audio> */}
-
+      <body>
       <CoverView
         hero={props?.details?.Hero}
         guest={props.guest}
@@ -118,10 +119,17 @@ const Fullpage = (props: FullPageInterface) => {
                     themeName={props.details?.ThemeName}
                     info={props?.details?.InfoAcara}
                   />
+                   <MapView
+                    themeName={props.details?.ThemeName}
+                    embeded={props?.details?.Embeded}
+                    info={props?.details?.InfoAcara}
+                  />
                   <StoryView
                     themeName={props.details?.ThemeName}
                     OurStory={props?.details?.OurStory}
+                    
                   />
+                 
                 </ReactFullpage.Wrapper>
               </>
             );
@@ -228,6 +236,9 @@ const Fullpage = (props: FullPageInterface) => {
           )}
         </button>
       ) : null}
+      </body>
+
+      
     </>
   );
 };
