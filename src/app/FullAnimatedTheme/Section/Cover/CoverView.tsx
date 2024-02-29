@@ -260,7 +260,7 @@ const CoverView = (props: CoverModelInterface) => {
                 fontFamily: "faunaone",
               }}
             >
-              {props.guest}fasdfsa
+              {props.guest}
             </p>
             <p
               style={{
