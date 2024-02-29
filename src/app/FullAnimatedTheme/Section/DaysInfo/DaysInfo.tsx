@@ -1,5 +1,6 @@
 import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { ThemeImageClass } from "@/app/Constant/ThemeImage";
+import { HeroKeyValue } from "@/app/FloralTheme/Section/Hero/HeroModel";
 import {
   HomeKeyValue,
   HomeViewInterface,
@@ -15,7 +16,7 @@ import { useInView } from "react-intersection-observer";
 const DaysInfo = (props: {
   themeName: string;
   countDown: Timestamp;
-  home: HomeKeyValue;
+  hero: HeroKeyValue;
 }) => {
   const calculateTimeRemaining = () => {
     const now = new Date();
@@ -84,10 +85,10 @@ const DaysInfo = (props: {
       <div style={{ position: "absolute", top: 0, right: -30 }}>
         <motion.img
           ref={ref}
-          initial={{ opacity: 0, y: -50 }} 
+          initial={{ opacity: 0, y: -50 }}
           animate={{
             opacity: inView ? 1 : 0,
-            y: inView ? 0 : -50, 
+            y: inView ? 0 : -50,
           }}
           transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 280, height: 150 }}
@@ -98,10 +99,10 @@ const DaysInfo = (props: {
       <div style={{ position: "absolute", bottom: 0, left: 0 }}>
         <motion.img
           ref={ref}
-          initial={{ opacity: 0, y: 100 }} 
+          initial={{ opacity: 0, y: 100 }}
           animate={{
             opacity: inView ? 1 : 0,
-            y: inView ? 0 : 100, 
+            y: inView ? 0 : 100,
           }}
           transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 240, height: 130 }}
@@ -109,7 +110,7 @@ const DaysInfo = (props: {
           alt=""
         />
       </div>
-      <div style={{ position: "absolute", top: "8%", width: "100%" }}>
+      <div style={{ position: "absolute", top: "2%", width: "100%" }}>
         <div className="row justify-content-center">
           <motion.div
             ref={ref}
@@ -269,44 +270,38 @@ const DaysInfo = (props: {
               </p>
             </motion.div>
             <div className="row mt-2">
-              <div className="col-8">
-                <motion.div
-                  ref={ref}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{
-                    opacity: inView ? 1 : 0,
-                    scale: inView ? 1 : 0.5,
-                  }}
-                  transition={{ duration: 1.5, delay: 0.5 }}
+              <motion.div ref={ref}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                scale: inView ? 1 : 0.5,
+              }}
+              transition={{ duration: 1.5, delay: 0.5 }} className="col-8">
+                <div
                   style={{
-                    height: "18rem",
-                    width: "15rem",
-                    borderTopRightRadius: "80px",
-                    borderTopLeftRadius: "80px",
-                    backgroundColor: bgColor.color.secondary,
+                    height: 320,
+                    width: 250,
+                    borderTopLeftRadius: 180,
+                    borderTopRightRadius: 180,
+                    border: `5px solid ${bgColor.color.secondary}`,
+                    borderColor: bgColor.color.secondary,
+                    padding: 8,
                     overflow: "hidden",
                   }}
                 >
-                  <motion.img
-                    ref={ref}
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{
-                      opacity: inView ? 1 : 0,
-                      scale: inView ? 1 : 0.5,
-                    }}
-                    transition={{ duration: 1.5, delay: 0.5 }}
-                    src={props.home?.HomeImg}
+                  <img
+                    src={props.hero.HeroImg}
                     alt=""
                     style={{
-                      borderTopRightRadius: "80px",
-                      borderTopLeftRadius: "80px",
-                      width: "100%",
-                      height: "100%",
                       objectFit: "cover",
+                      width: "100%",
+                      borderTopLeftRadius: 180,
+                      borderTopRightRadius: 180,
+                      height: "100%",
                     }}
                   />
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>

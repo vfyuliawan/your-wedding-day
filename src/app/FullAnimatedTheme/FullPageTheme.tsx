@@ -13,6 +13,12 @@ import InfoView from "./Section/Info/InfoView";
 import StoryView from "./Section/Story/StoryView";
 import MapView from "./Section/Map/MapView";
 import GaleryView from "./Section/Galery/GaleryView";
+import {
+  FullpageContainer,
+  FullpageSection,
+} from "@shinyongjun/react-fullpage";
+import "@shinyongjun/react-fullpage/css";
+import HomeView from "./Section/Home/HomeView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -21,7 +27,7 @@ interface FullPageInterface {
   idGuest: string;
 }
 
-const Fullpage = (props: FullPageInterface) => {
+const FullPageTheme = (props: FullPageInterface) => {
   const [enableVerticalScroll, setEnableVerticalScroll] = useState(true);
 
   const [coverVisible, setCoverVisible] = useState(true);
@@ -57,6 +63,9 @@ const Fullpage = (props: FullPageInterface) => {
       setEnableVerticalScroll(false);
     }
   };
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  console.log("set", activeIndex);
 
   return (
     <>
@@ -101,68 +110,67 @@ const Fullpage = (props: FullPageInterface) => {
           home={props?.details?.Home}
         />
         {!coverVisible ? (
-          <ReactFullpage
-            credits={{ enabled: false, label: "", position: "right" }}
-            scrollingSpeed={1000} 
-            fadingEffect={"slides"}
-            continuousVertical={true}
-            navigationPosition="left"
-            responsiveSlides={true}
-            responsive={{
-              768: {
-                responsiveHeight: 400, // Set the height for screens with a width of 768 pixels or more (e.g., tablets)
-              },
-              375: {
-                responsiveHeight: 200, // Set the height for screens with a width of 375 pixels or more (e.g., iPhones)
-                scrollHorizontally: false, // Disable horizontal scrolling for smaller screens if needed
-              },
-            }}
-            scrollHorizontally={true} // Enable horizontal scrolling
-            render={({ state, fullpageApi }) => {
-              return (
-                <>
-                  <ReactFullpage.Wrapper>
-                    <BrideInformation
-                      themeName={props.details?.ThemeName}
-                      maleFemale={props?.details?.MaleFemale}
-                      coverVisible={coverVisible}
-                    />
-                    <DaysInfo
-                      themeName={props.details?.ThemeName}
-                      countDown={props?.details?.CountDown.Date}
-                      home={props?.details?.Home}
-                    />
-                    <InfoView
-                      themeName={props.details?.ThemeName}
-                      info={props?.details?.InfoAcara}
-                    />
-                    <MapView
-                      themeName={props.details?.ThemeName}
-                      embeded={props?.details?.Embeded}
-                      info={props?.details?.InfoAcara}
-                    />
-                    <StoryView
-                      themeName={props.details?.ThemeName}
-                      OurStory={props?.details?.OurStory}
-                    />
-                    <GaleryView
-                      themeName={props.details?.ThemeName}
-                      galery={props?.details?.Galery.image}
-                    />
-                  </ReactFullpage.Wrapper>
-                </>
-              );
-            }}
-            afterLoad={(origin, destination, direction) => {
-              if (direction === "down") {
-                setEnableVerticalScroll(true);
-              }
-            }}
-          />
+          <>
+            <FullpageContainer
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            >
+              <FullpageSection>
+                <BrideInformation
+                  themeName={props.details?.ThemeName}
+                  maleFemale={props?.details?.MaleFemale}
+                  coverVisible={coverVisible}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <HomeView
+                  themeName={props.details?.ThemeName} home={props?.details?.Home}                  
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <DaysInfo
+                  themeName={props.details?.ThemeName}
+                  countDown={props?.details?.CountDown.Date}
+                  hero={props?.details?.Hero}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <InfoView
+                  themeName={props.details?.ThemeName}
+                  info={props?.details?.InfoAcara}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <MapView
+                  themeName={props.details?.ThemeName}
+                  embeded={props?.details?.Embeded}
+                  info={props?.details?.InfoAcara}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <StoryView
+                  themeName={props.details?.ThemeName}
+                  OurStory={props?.details?.OurStory}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <GaleryView
+                  themeName={props.details?.ThemeName}
+                  galery={props?.details?.Galery.image}
+                />
+              </FullpageSection>
+            </FullpageContainer>
+          </>
         ) : null}
 
         {!coverVisible ? (
-          <NavbarView themeName={props.details!.ThemeName} />
+          <NavbarView
+            themeName={props.details!.ThemeName}
+            activeIndex={activeIndex}
+            setActiveIndex={(value)=>{
+              setActiveIndex(value);
+            }}
+          />
         ) : null}
         {!coverVisible ? (
           <button
@@ -260,4 +268,4 @@ const Fullpage = (props: FullPageInterface) => {
   );
 };
 
-export default Fullpage;
+export default FullPageTheme;

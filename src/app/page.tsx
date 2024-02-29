@@ -29,6 +29,7 @@ import LuxuryTheme from "./LuxuryTheme/LuxuryTheme";
 import ReactLoading from "react-loading";
 import FloralTheme from "./FloralTheme/FloralTheme";
 import Fullpage from "./FullAnimatedTheme/FullAnimatedTheme";
+import FullPageTheme from "./FullAnimatedTheme/FullPageTheme";
 
 export default function Home() {
   const pathname = usePathname();
@@ -169,7 +170,7 @@ export default function Home() {
         />
        
       ): themeName == "BluePastel" ? (
-        <Fullpage
+        <FullPageTheme
         details={details}
         getDetails={() => {
           getMessage();
