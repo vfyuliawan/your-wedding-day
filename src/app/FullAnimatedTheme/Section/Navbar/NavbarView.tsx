@@ -11,7 +11,7 @@ const NavbarView = (props: {
   const activeElementRef = useRef<any>(null);
 
   const imgPage: string[] = [
-    "bi bi-house-door-fill",
+    "bi bi-person-hearts",
     "bi bi-blockquote-left",
     "bi bi-valentine2",
     "bi bi-calendar2-week-fill",
@@ -19,7 +19,8 @@ const NavbarView = (props: {
     "bi bi-camera-fill",
     "bi bi-card-image",
     "bi bi-gift-fill",
-    "bi bi-envelope-arrow-up"
+    "bi bi-envelope-arrow-up",
+    "bi bi-bookmark-heart-fill"
   ];
 
   useEffect(() => {

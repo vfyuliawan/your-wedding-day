@@ -440,6 +440,7 @@ const MessageView = (props: {
           <div className="row mt-2">
             <div
               style={{
+                opacity:0.5,
                 borderTop: `2px dotted ${bgColor.color.secondary}`,
                 width: "100%",
               }}

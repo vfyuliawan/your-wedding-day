@@ -21,6 +21,7 @@ import "@shinyongjun/react-fullpage/css";
 import HomeView from "./Section/Home/HomeView";
 import GiftsView from "./Section/Gifts/GiftView";
 import MessageView from "./Section/Message/MessageView";
+import FooterView from "./Section/Footer/FooterView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -36,6 +37,15 @@ const FullPageTheme = (props: FullPageInterface) => {
   const [visible, setVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const togglePlay = () => {
+    if (isPlaying) {
+      audioRef?.current?.pause();
+    } else {
+      audioRef?.current?.play();
+    }
+
+    setIsPlaying(!isPlaying);
+  };
 
   const handleCoverClick = () => {
     setCoverVisible(false);
@@ -66,6 +76,7 @@ const FullPageTheme = (props: FullPageInterface) => {
     }
   };
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const bgColor = new ThemeColorClass(props.details?.ThemeName);
 
   console.log("set", activeIndex);
 
@@ -91,7 +102,7 @@ const FullPageTheme = (props: FullPageInterface) => {
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
       />
 
-      {/* <audio
+      <audio
         style={{ position: "fixed", visibility: "hidden" }}
         ref={audioRef}
         controls
@@ -101,7 +112,7 @@ const FullPageTheme = (props: FullPageInterface) => {
           type="audio/mp3"
         />
         Your browser does not support the audio element.
-      </audio> */}
+      </audio>
       <body>
         <CoverView
           hero={props?.details?.Hero}
@@ -165,6 +176,7 @@ const FullPageTheme = (props: FullPageInterface) => {
               </FullpageSection>
               <FullpageSection>
                 <GiftsView
+                  alamat={props.details?.Alamat ?? ""}
                   themeName={props.details?.ThemeName}
                   gifts={props?.details?.Gifts}
                 />
@@ -182,6 +194,14 @@ const FullPageTheme = (props: FullPageInterface) => {
                   themeName={props.details?.ThemeName}
                   gifts={props?.details?.Gifts}
                   countDown={props?.details?.CountDown.Date}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <FooterView
+                  alamat={props.details?.Alamat ?? ""}
+                  themeName={props.details?.ThemeName}
+                  gifts={props?.details?.Gifts}
+                  footer={props.details?.Footer}
                 />
               </FullpageSection>
             </FullpageContainer>
@@ -202,25 +222,27 @@ const FullPageTheme = (props: FullPageInterface) => {
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               opacity: 0.4,
+              backgroundColor: bgColor.color.secondary,
               position: "fixed",
-              bottom: "150px",
+              bottom: "170px",
               right: "20px",
               padding: "15px",
-              height: "40px",
-              width: "40px",
+              height: "55px",
+              width: "55px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
               zIndex: "999",
             }}
+            onClick={togglePlay}
           >
             {isPlaying ? (
               <i
                 className="bi bi-music-player-fill"
-                style={{ fontSize: "1.5" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill" style={{ fontSize: "1.5" }}></i>
+              <i className="bi bi-pause-fill" style={{ fontSize: "2rem" }}></i>
             )}
           </button>
         ) : null}
@@ -229,12 +251,13 @@ const FullPageTheme = (props: FullPageInterface) => {
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               opacity: 0.4,
+              backgroundColor: bgColor.color.secondary,
               position: "fixed",
               bottom: "100px",
               right: "20px",
               padding: "15px",
-              height: "40px",
-              width: "40px",
+              height: "55px",
+              width: "55px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -245,12 +268,12 @@ const FullPageTheme = (props: FullPageInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "1.5rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "1.5rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             )}
           </button>
@@ -261,29 +284,28 @@ const FullPageTheme = (props: FullPageInterface) => {
             style={{
               position: "fixed",
               opacity: 0.4,
-              bottom: "200px",
+              backgroundColor: bgColor.color.secondary,
+              bottom: "240px",
               right: "20px",
               padding: "15px",
-              height: "40px",
-              width: "40px",
+              height: "55px",
+              width: "55px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={() => {
-              // scrollToBarcode(2000, qrCodeRef);
-            }}
+            onClick={() => {}}
           >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "1.2rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             ) : (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "1.2rem" }}
+                style={{ fontSize: "2rem" }}
               ></i>
             )}
           </button>

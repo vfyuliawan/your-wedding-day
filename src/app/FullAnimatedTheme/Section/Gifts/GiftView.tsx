@@ -34,7 +34,11 @@ interface GiftsKeyValue {
   Visible: boolean;
 }
 
-const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
+const GiftsView = (props: {
+  themeName: string;
+  gifts: GiftsOption;
+  alamat: string;
+}) => {
   const bgImage = new ThemeImageClass(props.themeName);
 
   const bgColor = new ThemeColorClass(props.themeName);
@@ -249,8 +253,7 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                     }}
                   >
                     Anda Dapat Mengirim Kado ke: <br />
-                    Lorem ipsum dolor sit amet consectetur, adipisi cing elit.
-                    Reprehenderit adipisci amet ullam?
+                    {props.alamat}
                   </p>
                 </div>
               </>
@@ -284,8 +287,8 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                           <div
                             style={{
                               width: "100%",
-                              marginTop:5,
-                              marginBottom:5,
+                              marginTop: 5,
+                              marginBottom: 5,
                               height: 30,
                               textDecoration: "none",
                               backgroundColor: bgColor.color.secondary,
@@ -298,7 +301,7 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                               color: bgColor.color.primary,
                             }}
                             onClick={() => {
-                              copyToClipboard(props.gifts.First.NoRek)
+                              copyToClipboard(props.gifts.First.NoRek);
                             }}
                           >
                             <i
@@ -334,8 +337,8 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                           <div
                             style={{
                               width: "100%",
-                              marginTop:5,
-                              marginBottom:5,
+                              marginTop: 5,
+                              marginBottom: 5,
                               height: 30,
                               textDecoration: "none",
                               backgroundColor: bgColor.color.secondary,
@@ -348,7 +351,7 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                               color: bgColor.color.primary,
                             }}
                             onClick={() => {
-                              copyToClipboard(props.gifts.Second.NoRek)
+                              copyToClipboard(props.gifts.Second.NoRek);
                             }}
                           >
                             <i
@@ -369,7 +372,7 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                       </div>
                     </div>
                   ) : null}
-                   {props.gifts.Third.Visible ? (
+                  {props.gifts.Third.Visible ? (
                     <div className="col-6 mt-3">
                       <div className="card">
                         <div className="justify-content-center">
@@ -384,8 +387,8 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                           <div
                             style={{
                               width: "100%",
-                              marginTop:5,
-                              marginBottom:5,
+                              marginTop: 5,
+                              marginBottom: 5,
                               height: 30,
                               textDecoration: "none",
                               backgroundColor: bgColor.color.secondary,
@@ -398,7 +401,7 @@ const GiftsView = (props: { themeName: string; gifts: GiftsOption }) => {
                               color: bgColor.color.primary,
                             }}
                             onClick={() => {
-                              copyToClipboard(props.gifts.Third.NoRek)
+                              copyToClipboard(props.gifts.Third.NoRek);
                             }}
                           >
                             <i
