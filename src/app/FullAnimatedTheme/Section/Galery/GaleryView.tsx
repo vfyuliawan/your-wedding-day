@@ -62,7 +62,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
             opacity: inView ? 1 : 0,
             y: inView ? 0 : -50,
           }}
-          transition={{ duration: 1.5, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.5 }}
           style={{ width: 280, height: 150 }}
           src={bgImage.image.top}
           alt=""
@@ -76,7 +76,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
             opacity: inView ? 1 : 0,
             y: inView ? 0 : 100,
           }}
-          transition={{ duration: 1.5, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.5 }}
           style={{ width: 240, height: 130 }}
           src={bgImage.image.bottom}
           alt=""
@@ -100,7 +100,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
                 opacity: inView ? 1 : 0,
                 scale: inView ? 1 : 0.5,
               }}
-              transition={{ duration: 1.5, delay: 0.5 }}
+              transition={{ duration: 1, delay: 0.5 }}
               style={{
                 fontFamily: "brilon",
                 fontSize: "1.5rem",
@@ -127,7 +127,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
               opacity: inView ? 1 : 0,
               scale: inView ? 1 : 0.5,
             }}
-            transition={{ duration: 1.5, delay: 0.5 }}
+            transition={{ duration: 1, delay: 0.5 }}
             className="col-5 d-flex align-items-center"
           >
             <motion.div
@@ -179,7 +179,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
                           opacity: inView ? 1 : 0,
                           scale: inView ? 1 : 0.5,
                         }}
-                        transition={{ duration: 1.5, delay: 2.0 }}
+                        transition={{ duration: 1, delay: 0.5 }}
                         style={{
                           borderRadius: "8px",
                         }}
@@ -213,7 +213,7 @@ const GaleryView = (props: { themeName: string; galery: Array<any> }) => {
                 <motion.img
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-                  transition={{ duration: 1.5, delay: 1.5 }}
+                  transition={{ duration: 1.2, delay: 0.5 }}
                   src={item}
                   style={{
                     maxHeight: 376,

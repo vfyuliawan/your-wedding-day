@@ -26,6 +26,7 @@ import { motion, useAnimation } from "framer-motion";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import ReactLoading from "react-loading";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 
@@ -451,89 +452,113 @@ const MessageView = (props: {
   );
 
   function MessageView() {
-    return props?.rsvp?.Message?.slice()
-      .reverse()
-      .map((item, index) => {
-        return (
-          <div style={{ borderRadius: "10px" }} className="bg-white mt-3 ">
-            <div className="row justify-content-center align-items-center d-flex">
-              <div className="col-2 justify-content-center d-flex items-content-center">
-                <div
-                  style={{
-                    borderRadius: "50%",
-                    backgroundColor: item.Confirm
-                      ? "rgba(0, 0, 0, 0.25)"
-                      : "rgba(0, 0, 0, 0.25)",
-                    width: 90,
-                    height: 45,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center", // Center both horizontally and vertically
-                  }}
-                >
-                  <p
+    if (loading) {
+      return (
+        <div style={{height:400}} className="row d-flex justify-content-center align-items-center">
+          <ReactLoading
+            type={"spinningBubbles"}
+            color={"#e3b383"}
+            height={200}
+            width={70}
+          />
+        </div>
+      );
+    } else {
+      return props?.rsvp?.Message?.slice()
+        .reverse()
+        .map((item, index) => {
+          return (
+            <div style={{ borderRadius: "10px" }} className="bg-white mt-3 ">
+              <div className="row justify-content-center align-items-center d-flex">
+                <div className="col-3 justify-content-center d-flex items-content-center">
+                  <div
                     style={{
-                      color: "white",
-                      margin: 0, // Remove default margin to ensure text is centered
+                      borderRadius: "50%",
+                      backgroundColor: item.Confirm
+                        ? "rgba(0, 0, 0, 0.25)"
+                        : "rgba(0, 0, 0, 0.25)",
+                      width: 50,
+                      height: 50,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center", // Center both horizontally and vertically
                     }}
                   >
-                    {item?.Name?.split("")[0] !== undefined
-                      ? item?.Name.split("")[0].toLocaleUpperCase()
-                      : ""}
+                    <p
+                      style={{
+                        color: "white",
+                        margin: 0, // Remove default margin to ensure text is centered
+                      }}
+                    >
+                      {item?.Name?.split("")[0] !== undefined
+                        ? item?.Name.split("")[0].toLocaleUpperCase()
+                        : ""}
+                    </p>
+                  </div>
+                </div>
+                <div key={index} className="col-9 ">
+                  <h3
+                    style={{
+                      color: "black",
+                      marginTop: "10px",
+                      fontSize: "18px",
+                    }}
+                  >
+                    {item?.Name}{" "}
+                    {item.Confirm ? (
+                      <span
+                        style={{
+                          backgroundColor: "rgba(0, 0, 0, 0.25)",
+                          fontSize: "12px",
+                          paddingRight: "5px",
+                          paddingLeft: "5px",
+                          paddingTop: "2px",
+                          paddingBottom: "2px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        <i className="bi bi-check-circle-fill"></i> Hadir
+                      </span>
+                    ) : (
+                      <span
+                        style={{
+                          backgroundColor: "rgba(0, 0, 0, 0.25)",
+                          fontSize: "12px",
+                          paddingRight: "5px",
+                          paddingLeft: "5px",
+                          paddingTop: "2px",
+                          paddingBottom: "2px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        <i className="bi bi-dash-circle-fill"></i> Tidak Hadir
+                      </span>
+                    )}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "faunaone",
+                      color: "black",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {item.Text}
+                    <br />
+                    <span
+                      style={{
+                        fontFamily: "times-new-roman",
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      {TimeConvertionDate(item.Date).dateFull}
+                    </span>
                   </p>
                 </div>
               </div>
-              <div key={index} className="col-10 ">
-                <h3
-                  style={{
-                    color: "black",
-                    marginTop: "10px",
-                    fontSize: "18px",
-                  }}
-                >
-                  {item?.Name}{" "}
-                  {item.Confirm ? (
-                    <span
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.25)",
-                        fontSize: "12px",
-                        paddingRight: "5px",
-                        paddingLeft: "5px",
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <i className="bi bi-check-circle-fill"></i> Hadir
-                    </span>
-                  ) : (
-                    <span
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.25)",
-                        fontSize: "12px",
-                        paddingRight: "5px",
-                        paddingLeft: "5px",
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <i className="bi bi-dash-circle-fill"></i> Tidak Hadir
-                    </span>
-                  )}
-                </h3>
-                <p style={{ color: "black", fontSize: "12px" }}>
-                  {item.Text}
-                  <br />
-                  <span style={{ fontSize: "0.9rem" }}>
-                    {TimeConvertionDate(item.Date).dateFull}
-                  </span>
-                </p>
-              </div>
             </div>
-          </div>
-        );
-      });
+          );
+        });
+    }
   }
 };
 
