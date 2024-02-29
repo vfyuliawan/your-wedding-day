@@ -19,6 +19,7 @@ const NavbarView = (props: {
     "bi bi-camera-fill",
     "bi bi-card-image",
     "bi bi-gift-fill",
+    "bi bi-envelope-arrow-up"
   ];
 
   useEffect(() => {

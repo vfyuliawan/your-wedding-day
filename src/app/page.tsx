@@ -28,7 +28,6 @@ import Swal from "sweetalert2";
 import LuxuryTheme from "./LuxuryTheme/LuxuryTheme";
 import ReactLoading from "react-loading";
 import FloralTheme from "./FloralTheme/FloralTheme";
-import Fullpage from "./FullAnimatedTheme/FullAnimatedTheme";
 import FullPageTheme from "./FullAnimatedTheme/FullPageTheme";
 
 export default function Home() {

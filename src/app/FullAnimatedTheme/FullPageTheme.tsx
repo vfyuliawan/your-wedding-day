@@ -19,6 +19,8 @@ import {
 } from "@shinyongjun/react-fullpage";
 import "@shinyongjun/react-fullpage/css";
 import HomeView from "./Section/Home/HomeView";
+import GiftsView from "./Section/Gifts/GiftView";
+import MessageView from "./Section/Message/MessageView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -79,6 +81,7 @@ const FullPageTheme = (props: FullPageInterface) => {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossOrigin="anonymous"
       />
+
       <link
         rel="stylesheet"
         href={`/ThemeStyle/${props?.details?.ThemeName}/assets/css/style.css`}
@@ -124,7 +127,8 @@ const FullPageTheme = (props: FullPageInterface) => {
               </FullpageSection>
               <FullpageSection>
                 <HomeView
-                  themeName={props.details?.ThemeName} home={props?.details?.Home}                  
+                  themeName={props.details?.ThemeName}
+                  home={props?.details?.Home}
                 />
               </FullpageSection>
               <FullpageSection>
@@ -159,6 +163,27 @@ const FullPageTheme = (props: FullPageInterface) => {
                   galery={props?.details?.Galery.image}
                 />
               </FullpageSection>
+              <FullpageSection>
+                <GiftsView
+                  themeName={props.details?.ThemeName}
+                  gifts={props?.details?.Gifts}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <MessageView
+                  rsvp={{
+                    Message: props?.details?.Message,
+                    getDetail: function (): void {
+                      props.getDetails();
+                    },
+                    slug: props?.details?.Slug,
+                    userId: props?.details?.idDoc,
+                  }}
+                  themeName={props.details?.ThemeName}
+                  gifts={props?.details?.Gifts}
+                  countDown={props?.details?.CountDown.Date}
+                />
+              </FullpageSection>
             </FullpageContainer>
           </>
         ) : null}
@@ -167,7 +192,7 @@ const FullPageTheme = (props: FullPageInterface) => {
           <NavbarView
             themeName={props.details!.ThemeName}
             activeIndex={activeIndex}
-            setActiveIndex={(value)=>{
+            setActiveIndex={(value) => {
               setActiveIndex(value);
             }}
           />

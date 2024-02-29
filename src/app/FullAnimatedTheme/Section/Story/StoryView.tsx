@@ -90,7 +90,7 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
         }}
       >
         <div className="row justify-content-center">
-          <div className="col-6 text-end">
+        <div className="col-10 text-center">
             <motion.h2
               ref={ref}
               initial={{ opacity: 0, scale: 0.5 }}
@@ -100,44 +100,24 @@ const StoryView = (props: { themeName: string; OurStory: StoryViewMap }) => {
               }}
               transition={{ duration: 1.5, delay: 0.5 }}
               style={{
-                fontFamily: "brilon",
-                fontSize: "1.8rem",
+                fontFamily: "faunaOne",
+                fontSize: "1.2rem",
                 color: bgColor.color.secondary,
               }}
             >
-              Our <br />
+              Our <br /> 
               <span
                 style={{
-                  fontFamily: "Creation",
+                  fontFamily: "Brilon",
                   fontWeight: "normal",
-                  fontSize: "2.8rem",
+                  fontSize: "2rem",
                   color: bgColor.color.secondary,
                 }}
               >
-                Story
+                Story<br />
               </span>
             </motion.h2>
           </div>
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{
-              opacity: inView ? 1 : 0,
-              scale: inView ? 1 : 0.5,
-            }}
-            transition={{ duration: 1.5, delay: 0.5 }}
-            className="col-5 d-flex align-items-center"
-          >
-            <div
-              style={{
-                width: "100%",
-                height: "2px",
-                backgroundColor: bgColor.color.secondary,
-                marginBottom: "1rem",
-                marginTop: "1rem",
-              }}
-            ></div>
-          </motion.div>
         </div>
         <motion.div
           ref={ref}

@@ -90,7 +90,7 @@ const MapView = (props: {
         }}
       >
         <div className="row justify-content-center">
-          <div className="col-6 text-end">
+        <div className="col-10 text-center">
             <motion.h2
               ref={ref}
               initial={{ opacity: 0, scale: 0.5 }}
@@ -100,17 +100,17 @@ const MapView = (props: {
               }}
               transition={{ duration: 1.5, delay: 0.5 }}
               style={{
-                fontFamily: "brilon",
-                fontSize: "1.5rem",
+                fontFamily: "faunaOne",
+                fontSize: "1.2rem",
                 color: bgColor.color.secondary,
               }}
             >
-              Lokasi <br />
+              Lokasi <br /> <br />
               <span
                 style={{
-                  fontFamily: "Creation",
+                  fontFamily: "Brilon",
                   fontWeight: "normal",
-                  fontSize: "2.8rem",
+                  fontSize: "2rem",
                   color: bgColor.color.secondary,
                 }}
               >
@@ -118,31 +118,7 @@ const MapView = (props: {
               </span>
             </motion.h2>
           </div>
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{
-              opacity: inView ? 1 : 0,
-              scale: inView ? 1 : 0.5,
-            }}
-            transition={{ duration: 1.5, delay: 0.5 }}
-            className="col-5 d-flex align-items-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                scale: inView ? 1 : 0.5,
-              }}
-              style={{
-                width: "100%",
-                height: "2px",
-                backgroundColor: bgColor.color.secondary,
-                marginBottom: "1rem",
-                marginTop: "1rem",
-              }}
-            ></motion.div>
-          </motion.div>
+          
           <div style={{ position: "absolute", top: 70 }}>
             <motion.div
               ref={ref}
