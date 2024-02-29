@@ -10,17 +10,17 @@ const NavbarView = (props: {
 
   const activeElementRef = useRef<any>(null);
 
-  const imgPage: string[] = [
-    "bi bi-person-hearts",
-    "bi bi-blockquote-left",
-    "bi bi-valentine2",
-    "bi bi-calendar2-week-fill",
-    "bi bi-geo-alt",
-    "bi bi-camera-fill",
-    "bi bi-card-image",
-    "bi bi-gift-fill",
-    "bi bi-envelope-arrow-up",
-    "bi bi-bookmark-heart-fill"
+  const imgPage = [
+    {title: "Bride", icon:"bi bi-person-hearts"},
+    {title: "Quotes", icon:"bi bi-blockquote-left"},
+    {title: "Love", icon:"bi bi-valentine2"},
+    {title: "Info", icon:"bi bi-calendar2-week-fill"},
+    {title: "Lokasi", icon:"bi bi-geo-alt"},
+    {title: "Story", icon:"bi bi-camera-fill"},
+    {title: "Galery", icon:"bi bi-card-image"},
+    {title: "Gifts", icon:"bi bi-gift-fill"},
+    {title: "RSVP", icon:"bi bi-envelope-arrow-up"},
+    {title: "Thanks", icon:"bi bi-bookmark-heart-fill"},
   ];
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const NavbarView = (props: {
       className="navbar-expand-md sticky-bottom-navbar our-navbbar"
       style={{
         backgroundColor: "transparent",
-        height: "5rem",
+        height: "6rem",
         justifyContent: "center",
         display: "flex",
       }}
@@ -48,7 +48,8 @@ const NavbarView = (props: {
         style={{
           backgroundColor: bgColor.color.secondary,
           position: "absolute",
-          top: 20,
+          bottom: 0,
+          height:'80%',
           width: 400,
           borderRadius: "30px",
           paddingTop: 10,
@@ -61,7 +62,8 @@ const NavbarView = (props: {
         <div
           style={{
             borderRadius: "0px",
-            overflowY: "auto",
+            overflowY: "hidden", 
+            overflowX: "auto", 
             display: "flex",
             flexDirection: "row",
             width: 350,
@@ -74,16 +76,18 @@ const NavbarView = (props: {
                 onClick={() => {
                   props.setActiveIndex(index);
                 }}
-                style={{ minWidth: 70 }}
+                style={{ minWidth: 70, height:50, display:'flex', flexDirection:'column', }}
               >
                 <i
-                  className={item}
+                  className={item.icon}
                   style={{
                     fontSize: props.activeIndex === index ? "2.2rem" : "1.3rem",
                     marginTop: 4,
                     marginBottom: 4,
+                    color: props.activeIndex === index ? 'black': 'white'
                   }}
                 ></i>
+                <p style={{fontSize:11}}>{item.title}</p>
               </div>
             );
           })}
