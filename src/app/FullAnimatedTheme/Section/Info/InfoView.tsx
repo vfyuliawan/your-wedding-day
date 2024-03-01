@@ -47,13 +47,13 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
           height: "100vh",
         }}
       ></div>
-     <div style={{ position: "absolute", top: 0, right: -30 }}>
+      <div style={{ position: "absolute", top: 0, right: -30 }}>
         <motion.img
           ref={ref}
-          initial={{ opacity: 0, y: -50 }} 
+          initial={{ opacity: 0, y: -50 }}
           animate={{
             opacity: inView ? 1 : 0,
-            y: inView ? 0 : -50, 
+            y: inView ? 0 : -50,
           }}
           transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 280, height: 150 }}
@@ -64,10 +64,10 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
       <div style={{ position: "absolute", bottom: 0, left: 0 }}>
         <motion.img
           ref={ref}
-          initial={{ opacity: 0, y: 100 }} 
+          initial={{ opacity: 0, y: 100 }}
           animate={{
             opacity: inView ? 1 : 0,
-            y: inView ? 0 : 100, 
+            y: inView ? 0 : 100,
           }}
           transition={{ duration: 1.5, delay: 0.5 }}
           style={{ width: 240, height: 130 }}
@@ -100,7 +100,7 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                 color: bgColor.color.secondary,
               }}
             >
-              Informasi <br />  <br />
+              Informasi <br /> <br />
               <span
                 style={{
                   fontFamily: "Brilon",
@@ -179,43 +179,40 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
             }}
             transition={{ duration: 1.5, delay: 0.5 }}
             className="row justify-content-center mt-2"
-            style={{position:'absolute', top:'93%'}}
-
+            style={{ position: "absolute", top: "93%" }}
           >
-            <div
-              className="col-10"
-              style={{
-                backgroundColor: "white",
-                height: "25rem",
-                borderRadius: "20px",
-              }}
-            >
-              {props.info.map((item) => {
-                return (
-                  <div
-                    className="row"
-                    style={{ marginTop: 15, paddingLeft: "1rem" }}
+            {props.info.map((item) => {
+              return (
+                <div
+                  className="card"
+                  style={{
+                    marginTop: 15,
+                    padding: "1rem",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontFamily: "Brilon",
+                      fontSize: 18,
+                      color: bgColor.color.secondary,
+                    }}
                   >
-                    <h3
-                      style={{
-                        fontFamily: "Brilon",
-                        fontSize: 18,
-                        color: bgColor.color.secondary,
-                      }}
-                    >
-                      {item.Judul}
-                    </h3>
-                    <p style={{ fontSize: 10, fontFamily: "FaunaOne" }}>
-                      {TimeConvertionDate(item.Date).dateFull}
-                    </p>
-                    <p style={{ fontSize: 11, fontFamily: "FaunaOne" }}>
-                      {item.Place}
-                    </p>
+                    {item.Judul}
+                  </h3>
+                  <p style={{ fontSize: 10, fontFamily: "FaunaOne" }}>
+                    {TimeConvertionDate(item.Date).dateFull}
+                  </p>
+                  <p style={{ fontSize: 11, fontFamily: "FaunaOne" }}>
+                    {item.Place}
+                  </p>
+                  <div className="col-12 justify-content-center d-flex">
                     <a
                       href={item.Map}
                       style={{
-                        width: "50%",
+                        width: "80%",
                         textDecoration: "none",
+                        textAlign: "center",
                         backgroundColor: bgColor.color.secondary,
                         borderRadius: "20px",
                         paddingBottom: "10px",
@@ -231,9 +228,9 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                       <i className="bi bi-geo-alt-fill"> </i> Google Map
                     </a>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
