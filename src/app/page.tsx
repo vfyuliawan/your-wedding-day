@@ -178,6 +178,16 @@ export default function Home() {
         idGuest={idGuest}
         />
        
+      ): themeName == "BlueAnimatedFloral" ? (
+        <FullPageTheme
+        details={details}
+        getDetails={() => {
+          getMessage();
+        }}
+        guest={guest}
+        idGuest={idGuest}
+        />
+       
       ) : homePage ? (
         <h1>Home</h1>
       ) : (

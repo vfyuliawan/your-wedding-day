@@ -383,8 +383,8 @@ const FullPageTheme = (props: FullPageInterface) => {
               bottom: "170px",
               right: "20px",
               padding: "15px",
-              height: "55px",
-              width: "55px",
+              height: "48px",
+              width: "48px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -395,10 +395,10 @@ const FullPageTheme = (props: FullPageInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-music-player-fill"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: "1.8rem" }}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill" style={{ fontSize: "2rem" }}></i>
+              <i className="bi bi-pause-fill" style={{ fontSize: "1.8rem" }}></i>
             )}
           </button>
         ) : null}
@@ -412,8 +412,8 @@ const FullPageTheme = (props: FullPageInterface) => {
               bottom: "100px",
               right: "20px",
               padding: "15px",
-              height: "55px",
-              width: "55px",
+              height: "48px",
+              width: "48px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -424,12 +424,12 @@ const FullPageTheme = (props: FullPageInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: "1.8rem" }}
               ></i>
             ) : (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: "1.8rem" }}
               ></i>
             )}
           </button>
@@ -444,8 +444,8 @@ const FullPageTheme = (props: FullPageInterface) => {
               bottom: "240px",
               right: "20px",
               padding: "15px",
-              height: "55px",
-              width: "55px",
+              height: "48px",
+              width: "48px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -458,12 +458,12 @@ const FullPageTheme = (props: FullPageInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: "1.8rem" }}
               ></i>
             ) : (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: "1.8rem" }}
               ></i>
             )}
           </button>

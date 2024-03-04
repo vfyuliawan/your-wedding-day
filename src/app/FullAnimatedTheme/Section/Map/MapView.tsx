@@ -52,34 +52,76 @@ const MapView = (props: {
           height: "100vh",
         }}
       ></div>
-      <div style={{ position: "absolute", top: 0, right: -30 }}>
-        <motion.img
-          ref={ref}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{
-            opacity: inView ? 1 : 0,
-            y: inView ? 0 : -50,
-          }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-          style={{ width: 280, height: 150 }}
-          src={bgImage.image.top}
-          alt=""
-        />
-      </div>
-      <div style={{ position: "absolute", bottom: 0, left: 0 }}>
-        <motion.img
-          ref={ref}
-          initial={{ opacity: 0, y: 100 }}
-          animate={{
-            opacity: inView ? 1 : 0,
-            y: inView ? 0 : 100,
-          }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-          style={{ width: 240, height: 130 }}
-          src={bgImage.image.bottom}
-          alt=""
-        />
-      </div>
+      {/* Corner Image */}
+      {bgImage.image.topRight !== "" ? (
+          <div style={{ position: "absolute", top: 0, right: 0, opacity:0.6}}>
+            <motion.img
+              ref={ref}
+              initial={{ opacity: 0, y: -50 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : -50,
+              }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              style={{ width: 280, height: '100%' }}
+              src={bgImage.image.topRight}
+              alt=""
+            />
+          </div>
+        ) : null}
+        {bgImage.image.topLeft !== "" ? (
+          <div style={{ position: "absolute", top: 0, left: 0, opacity:0.6 }}>
+            <motion.img
+              ref={ref}
+              initial={{ opacity: 0, y: -50 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : -50,
+              }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              style={{ width: 280, height: '100%' }}
+              src={bgImage.image.topLeft}
+              alt=""
+            />
+          </div>
+        ) : null}
+        {bgImage.image.bottomLeft !== "" ? (
+          <div
+            style={{ position: "absolute", bottom: 0, left: 0, opacity:0.6}}
+          >
+            <motion.img
+              ref={ref}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : 100,
+              }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              style={{ width: 280, height: '100%' }}
+              src={bgImage.image.bottomLeft}
+              alt=""
+            />
+          </div>
+        ) : null}
+        {bgImage.image.bottomRight !== "" ? (
+          <div
+            style={{ position: "absolute", bottom: 0, right: 0, opacity:0.6 }}
+          >
+            <motion.img
+              ref={ref}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : 100,
+              }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              style={{ width: 280, height: '100%' }}
+              src={bgImage.image.bottomRight}
+              alt=""
+            />
+          </div>
+        ) : null}
+        {/* Corner Image */}
       <div
         style={{
           position: "absolute",
@@ -90,7 +132,7 @@ const MapView = (props: {
         }}
       >
         <div className="row justify-content-center">
-        <div className="col-10 text-center">
+          <div className="col-10 text-center">
             <motion.h2
               ref={ref}
               initial={{ opacity: 0, scale: 0.5 }}
@@ -118,7 +160,7 @@ const MapView = (props: {
               </span>
             </motion.h2>
           </div>
-          
+
           <div style={{ position: "absolute", top: 70 }}>
             <motion.div
               ref={ref}
@@ -152,7 +194,6 @@ const MapView = (props: {
               </div>
             </motion.div>
             <motion.div
-            
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{
                 opacity: inView ? 1 : 0,

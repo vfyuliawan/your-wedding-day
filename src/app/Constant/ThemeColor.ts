@@ -43,6 +43,13 @@ export class ThemeColorClass {
         textColor: "#ffff",
         textColor2: "#fcf4e8",
       };
+    }else if (this.themeName === "BlueAnimatedFloral") {      
+      this.color = {
+        primary: "#fcf4e8",
+        secondary: "#2b3c5a",
+        textColor: "#ffff",
+        textColor2: "#fcf4e8",
+      };
     } else {
       this.color = {
         primary: "#000000",
