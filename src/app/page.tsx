@@ -167,27 +167,33 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
-       
-      ): themeName == "BluePastel" ? (
+      ) : themeName == "BluePastel" ? (
         <FullPageTheme
-        details={details}
-        getDetails={() => {
-          getMessage();
-        }}
-        guest={guest}
-        idGuest={idGuest}
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
         />
-       
-      ): themeName == "BlueAnimatedFloral" ? (
+      ) : themeName == "BlueAnimatedFloral" ? (
         <FullPageTheme
-        details={details}
-        getDetails={() => {
-          getMessage();
-        }}
-        guest={guest}
-        idGuest={idGuest}
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
         />
-       
+      ) : themeName == "CoklatAnimatedFloral" ? (
+        <FullPageTheme
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
       ) : homePage ? (
         <h1>Home</h1>
       ) : (

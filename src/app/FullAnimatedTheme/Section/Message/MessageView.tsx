@@ -29,6 +29,7 @@ import { useInView } from "react-intersection-observer";
 import ReactLoading from "react-loading";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
+import AnimatedImageComponent from "../../component/AnimatedImage";
 
 interface GiftsOption {
   First: GiftsKeyValue;
@@ -138,75 +139,14 @@ const MessageView = (props: {
         }}
       ></div>
      {/* Corner Image */}
-     {bgImage.image.topRight !== "" ? (
-          <div style={{ position: "absolute", top: 0, right: 0, opacity:0.6}}>
-            <motion.img
-              ref={ref}
-              initial={{ opacity: 0, y: -50 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                y: inView ? 0 : -50,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              style={{ width: 280, height: '100%' }}
-              src={bgImage.image.topRight}
-              alt=""
-            />
-          </div>
-        ) : null}
-        {bgImage.image.topLeft !== "" ? (
-          <div style={{ position: "absolute", top: 0, left: 0, opacity:0.6 }}>
-            <motion.img
-              ref={ref}
-              initial={{ opacity: 0, y: -50 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                y: inView ? 0 : -50,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              style={{ width: 280, height: '100%' }}
-              src={bgImage.image.topLeft}
-              alt=""
-            />
-          </div>
-        ) : null}
-        {bgImage.image.bottomLeft !== "" ? (
-          <div
-            style={{ position: "absolute", bottom: 0, left: 0, opacity:0.6}}
-          >
-            <motion.img
-              ref={ref}
-              initial={{ opacity: 0, y: 100 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                y: inView ? 0 : 100,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              style={{ width: 280, height: '100%' }}
-              src={bgImage.image.bottomLeft}
-              alt=""
-            />
-          </div>
-        ) : null}
-        {bgImage.image.bottomRight !== "" ? (
-          <div
-            style={{ position: "absolute", bottom: 0, right: 0, opacity:0.6 }}
-          >
-            <motion.img
-              ref={ref}
-              initial={{ opacity: 0, y: 100 }}
-              animate={{
-                opacity: inView ? 1 : 0,
-                y: inView ? 0 : 100,
-              }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              style={{ width: 280, height: '100%' }}
-              src={bgImage.image.bottomRight}
-              alt=""
-            />
-          </div>
-        ) : null}
-        {/* Corner Image */}
+     <AnimatedImageComponent
+        bgImage={bgImage}
+        ref={function (node?: Element | null | undefined): void {
+          ref;
+        }}
+        inView={inView}
+      />
+      {/* Corner Image */}
       <div
         style={{
           position: "absolute",

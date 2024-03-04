@@ -60,7 +60,18 @@ export class ThemeImageClass {
         bottomRight: "/image/background/blueAnimatedFrame-br.png",
         bottomLeft: "",
       };
-    } else {
+    } else if (this.themeName === "CoklatAnimatedFloral") {
+      this.image = {
+        cover: "image/background/artPaper8.jpg",
+        hero: "image/background/artPaper5.jpg",
+        home: "string",
+        maleFemale: "/image/background/CoklatAnimatedInfo.png",
+        topRight: "",
+        topLeft: "/image/background/CoklatAnimateFrame-tl.png",
+        bottomRight: "/image/background/CoklatAnimateFrame-br.png",
+        bottomLeft: "",
+      };
+    }else {
       this.image = {
         cover: "string",
         hero: "string",

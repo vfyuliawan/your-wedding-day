@@ -50,7 +50,14 @@ export class ThemeColorClass {
         textColor: "#ffff",
         textColor2: "#fcf4e8",
       };
-    } else {
+    } else if (this.themeName === "CoklatAnimatedFloral") {      
+      this.color = {
+        primary: "#fcf4e8",
+        secondary: "#6c240f",
+        textColor: "#ffff",
+        textColor2: "#fcf4e8",
+      };
+    }  else {
       this.color = {
         primary: "#000000",
         secondary: "#000000",
