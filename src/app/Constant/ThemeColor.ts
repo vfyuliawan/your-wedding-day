@@ -57,6 +57,13 @@ export class ThemeColorClass {
         textColor: "#ffff",
         textColor2: "#fcf4e8",
       };
+    }else if (this.themeName === "JavaStyle1") {      
+      this.color = {
+        primary: "#fcf4e8",
+        secondary: "#c5a250",
+        textColor: "#ffff",
+        textColor2: "#fcf4e8",
+      };
     }  else {
       this.color = {
         primary: "#000000",

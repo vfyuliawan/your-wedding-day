@@ -194,6 +194,15 @@ export default function Home() {
           guest={guest}
           idGuest={idGuest}
         />
+      ): themeName == "JavaStyle1" ? (
+        <FullPageTheme
+          details={details}
+          getDetails={() => {
+            getMessage();
+          }}
+          guest={guest}
+          idGuest={idGuest}
+        />
       ) : homePage ? (
         <h1>Home</h1>
       ) : (

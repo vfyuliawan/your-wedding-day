@@ -71,6 +71,17 @@ export class ThemeImageClass {
         bottomRight: "/image/background/CoklatAnimateFrame-br.png",
         bottomLeft: "",
       };
+    }else if (this.themeName === "JavaStyle1") {
+      this.image = {
+        cover: "image/background/artPaper10.jpg",
+        hero: "image/background/artPaper5.jpg",
+        home: "string",
+        maleFemale: "/image/background/JavaStyle1-info.png",
+        topLeft: "/image/background/JavaStyle1-tl1.png",
+        topRight: "/image/background/JavaStyle1-tr1.png",
+        bottomRight: "/image/background/JavaStyle1-br1.png",
+        bottomLeft: "/image/background/JavaStyle1-bl1.png",
+      };
     }else {
       this.image = {
         cover: "string",

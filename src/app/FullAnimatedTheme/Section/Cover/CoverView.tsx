@@ -272,6 +272,7 @@ const CoverView = (props: CoverModelInterface) => {
               flexDirection: "column",
               top: "60%",
               left: "50%",
+              zIndex:99,
               transform: "translateX(-50%)",
               width: "65%",
               height: 150,
@@ -281,7 +282,6 @@ const CoverView = (props: CoverModelInterface) => {
             }}
           >
             <div style={{ marginTop: 10 }} />
-
             <p
               style={{
                 fontSize: "16px",
