@@ -135,7 +135,7 @@ const DaysInfo = (props: {
 
             <p
               style={{
-                fontSize: "0.6rem",
+                fontSize: "0.8rem",
                 fontFamily: "FaunaOne",
                 color: bgColor.color.secondary,
               }}
@@ -251,7 +251,7 @@ const DaysInfo = (props: {
                 {TimeConvertionDate(props.countDown! as any).dateFull}
               </p>
             </motion.div>
-            <div className="row mt-2">
+            <div className="row">
               <motion.div
                 ref={ref}
                 initial={{ opacity: 0, scale: 0.5 }}

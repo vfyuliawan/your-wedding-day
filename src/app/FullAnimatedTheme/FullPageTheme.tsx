@@ -25,6 +25,7 @@ import FooterView from "./Section/Footer/FooterView";
 import Modal from "react-modal";
 import React from "react";
 import QRCode from "react-qr-code";
+import FallingLeaves from "./FallingLeaves";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -162,6 +163,7 @@ const FullPageTheme = (props: FullPageInterface) => {
         />
         {!coverVisible ? (
           <>
+            <FallingLeaves />
             <FullpageContainer
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
@@ -289,7 +291,7 @@ const FullPageTheme = (props: FullPageInterface) => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderRadius:20,
+                  borderRadius: 20,
                   marginTop: 30,
                   padding: 100,
                   border: `3px solid ${bgColor.color.secondary}`,
@@ -326,7 +328,7 @@ const FullPageTheme = (props: FullPageInterface) => {
                       <div
                         style={{
                           opacity: 0.5,
-                          marginTop:20,
+                          marginTop: 20,
                           borderTop: `2px dotted ${bgColor.color.secondary}`,
                           width: "100%",
                         }}
@@ -337,21 +339,25 @@ const FullPageTheme = (props: FullPageInterface) => {
                         marginTop: "10px",
                         color: "grey",
                         fontSize: "1rem",
-                        fontFamily:'faunaOne',
-                        textAlign:'center',
-                        fontWeight:'bold'
+                        fontFamily: "faunaOne",
+                        textAlign: "center",
+                        fontWeight: "bold",
                       }}
                     >
-                      Nama Tamu<br/> <span style={{color:'black'}}>{props.guest.charAt(0).toUpperCase() +
-                        props.guest.slice(1)}
-                        </span><br/>
-                        Guest ID :  {props.idGuest}
+                      Nama Tamu
+                      <br />{" "}
+                      <span style={{ color: "black" }}>
+                        {props.guest.charAt(0).toUpperCase() +
+                          props.guest.slice(1)}
+                      </span>
+                      <br />
+                      Guest ID : {props.idGuest}
                     </p>
                     <div className="col-12">
                       <div
                         style={{
                           opacity: 0.5,
-                          marginTop:5,
+                          marginTop: 5,
                           borderTop: `2px dotted ${bgColor.color.secondary}`,
                           width: "100%",
                         }}
@@ -398,7 +404,10 @@ const FullPageTheme = (props: FullPageInterface) => {
                 style={{ fontSize: "1.8rem" }}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill" style={{ fontSize: "1.8rem" }}></i>
+              <i
+                className="bi bi-pause-fill"
+                style={{ fontSize: "1.8rem" }}
+              ></i>
             )}
           </button>
         ) : null}
