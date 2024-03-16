@@ -13,6 +13,8 @@ const NavbarView = (props: {
   const imgPage = [
     {title: "Bride", icon:"bi bi-person-hearts"},
     {title: "Quotes", icon:"bi bi-blockquote-left"},
+    {title: "Broom", icon:"bi bi-gender-male"},
+    {title: "Ride", icon:"bi bi-gender-female"},
     {title: "Love", icon:"bi bi-valentine2"},
     {title: "Info", icon:"bi bi-calendar2-week-fill"},
     {title: "Lokasi", icon:"bi bi-geo-alt"},

@@ -26,6 +26,8 @@ import Modal from "react-modal";
 import React from "react";
 import QRCode from "react-qr-code";
 import FallingLeaves from "./FallingLeaves";
+import TheBroomView from "./Section/TheBroom/TheBroomView";
+import TheRideView from "./Section/TheRide/TheRideView";
 
 interface FullPageInterface {
   details: DocumentData | undefined;
@@ -173,6 +175,18 @@ const FullPageTheme = (props: FullPageInterface) => {
                   themeName={props.details?.ThemeName}
                   maleFemale={props?.details?.MaleFemale}
                   coverVisible={coverVisible}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <TheBroomView
+                  themeName={props.details?.ThemeName}
+                  maleFemale={props?.details?.MaleFemale}
+                />
+              </FullpageSection>
+              <FullpageSection>
+                <TheRideView
+                  themeName={props.details?.ThemeName}
+                  maleFemale={props?.details?.MaleFemale}
                 />
               </FullpageSection>
               <FullpageSection>
