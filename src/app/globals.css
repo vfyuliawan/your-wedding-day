@@ -333,6 +333,7 @@ b, strong {
 }
 .custom-btn.login-btn.custom-btn-bg:hover, .custom-btn.custom-btn-bg:hover{
   background: var(--main2);
+  border: 2px solid var(--main2);
   color: #ffffff !important;
 } 
 
@@ -409,17 +410,17 @@ b, strong {
   transition: transform 200ms linear;
 } 
 
-.nav-link {
+.navbar-nav .nav-item .nav-link {
   font-weight: bold;
   font-size: 14px;
   overflow: hidden;
 }
-.nav-link span {
+.navbar-nav .nav-item .nav-link span {
   position: relative;
   display: inline-block;
   transition: transform 0.3s;
 }
-.nav-link span:before {
+.navbar-nav .nav-item .nav-link span:before {
   position: absolute;
   top: 115%;
   content: attr(data-hover);
@@ -749,6 +750,7 @@ height: 150px;
 .design { 
   padding-top: 5rem;
   padding-bottom: 8rem;
+  margin-bottom: 3rem;
   height: 100vh;
   display: block;
 }
@@ -805,7 +807,7 @@ footer li{
     display: inline;
 }
 
-.scrolling-wrapper {
+.design .scrolling-wrapper {
   overflow-x: auto;
   white-space: nowrap;
   padding: 5px;
@@ -814,7 +816,7 @@ footer li{
     border: 2px solid var(--main);
 }
 
-.card-block {
+.design .card-block {
   display: inline-block;
   vertical-align: top; 
 
