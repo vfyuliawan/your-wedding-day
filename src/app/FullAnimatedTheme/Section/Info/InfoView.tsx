@@ -188,7 +188,8 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                   <p style={{ fontSize: 11, fontFamily: "FaunaOne" }}>
                     {item.Place}
                   </p>
-                  <div className="col-12 justify-content-center d-flex">
+                  <div className="row justify-content-center ">
+                  <div className="col-8 justify-content-center d-flex">
                     <a
                       href={item.Map}
                       style={{
@@ -209,6 +210,7 @@ const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
                     >
                       <i className="bi bi-geo-alt-fill"> </i> Google Map
                     </a>
+                  </div>
                   </div>
                 </div>
               );

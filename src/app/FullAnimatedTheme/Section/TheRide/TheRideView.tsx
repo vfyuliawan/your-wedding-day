@@ -76,7 +76,7 @@ const TheRideView = (props: {
                   textAlign: "center",
                 }}
               >
-                The Broom
+                The Ride
               </span>
             </motion.h2>
           </div>
