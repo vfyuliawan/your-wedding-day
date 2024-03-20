@@ -3,7 +3,7 @@ const DashboardPage = () => {
         <> 
             <section className="cover full-screen d-lg-flex justify-content-center align-items-center mt-3" id="home">
                 <div className="container">
-                <div className="row dflex">
+                <div className="row dflex ">
                     <div className="col-lg-7 col-md-12 col-12 d-flex align-items-center">
                     <div className="cover-text">
                         <small className="small-text">Welcome to <span className="mobile-block">Wedding Invitation website!</span></small>
