@@ -97,7 +97,7 @@ const NavbarDashboard = () => {
                                 <div className="custom-btn-group"> 
                                     <Link href="/Section/Login">
                                         <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
-                                            <i className="bi bi-box-arrow-in-right" /> Login
+                                            <i className="bi bi-box-arrow-in-right " /> Login
                                         </span>
                                     </Link>
                                 </div>
