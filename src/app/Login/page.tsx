@@ -1,7 +1,20 @@
+"use client";
+
+import { useState } from "react";
+import PinkEssence from "../LuxuryTheme/LuxuryTheme";
+import { useRouter } from "next/navigation";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 const LoginDashboard = () => {
+    const [first, setFirst] = useState("Pink-Esssence");
+
+  const router = useRouter();
+
+  if (first === "Pink-Essence") {
+    // return <RedEssence />;
+  } else {
     return (
         <section className="vh-100">
             <div className="container-fluid h-custom">
@@ -49,6 +62,7 @@ const LoginDashboard = () => {
 
 
     );
+  }
   };
   
   export default LoginDashboard;

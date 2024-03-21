@@ -24,6 +24,6 @@
   },
   "types": ["react-image-gallery", /* other types */],
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/services/AuthContext.js"],
   "exclude": ["node_modules"]
 }

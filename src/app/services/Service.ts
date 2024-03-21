@@ -149,6 +149,8 @@ class Service {
         return false
     }
   }
+
+  
 }
 
 export default new Service();
