@@ -8,32 +8,32 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css';
  
 
 const NavbarDashboard = () => {
-    const { user, googleSignIn, logOut } = UserAuth();
+    // const { user, googleSignIn, logOut } = UserAuth();
     const [loading, setLoading] = useState(true);
 
-  const handleSignIn = async () => {
-    try {
-      await googleSignIn();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const handleSignIn = async () => {
+//     try {
+//       await googleSignIn();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
-  const handleSignOut = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const handleSignOut = async () => {
+//     try {
+//       await logOut();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 50));
-      setLoading(false);
-    };
-    checkAuthentication();
-  }, [user]);
+//   useEffect(() => {
+//     const checkAuthentication = async () => {
+//       await new Promise((resolve) => setTimeout(resolve, 50));
+//       setLoading(false);
+//     };
+//     checkAuthentication();
+//   }, [user]);
 
     return (
         <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
@@ -76,24 +76,14 @@ const NavbarDashboard = () => {
                         <ul className="navbar-nav ml-lg-auto">
                             <li className="nav-item ml-lg-4">
                                 <div className="custom-btn-group"> 
-                                    {loading ? null : !user ? (
+                                    {/* {loading ? null : !user ? ( */}
                                         <ul className="flex">
                                             <Link href="/Login">
                                                 <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
                                                     <i className="bi bi-box-arrow-in-right " /> Login
                                                 </span>
                                             </Link> 
-                                        </ul>
-                                    ) : (
-                                        <div>
-                                            <p>Welcome, {user.displayName}</p>
-                                            <Link href="/">
-                                                <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link" onClick={handleSignOut}>
-                                                    <i className="bi bi-box-arrow-left " /> Logout
-                                                </span>
-                                            </Link>  
-                                        </div>
-                                    )}
+                                        </ul> 
                                    
                                 </div>
                             </li>

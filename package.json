@@ -21,6 +21,7 @@
     "firebase": "^10.7.2",
     "framer-motion": "^10.18.0",
     "next": "14.0.4",
+    "next-auth": "^4.24.7",
     "react": "^18",
     "react-aos": "^1.0.1",
     "react-barcode": "^1.4.6",
