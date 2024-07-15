@@ -14,6 +14,9 @@ import {
 import { app, getDb } from "../api/firebase";
 import Swal from "sweetalert2";
 import { GetInterface } from "../repository/GetInterface";
+import { ModelLoginRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
+import { ConvertModelLoginResponseInterface, ModelLoginResponseInterface } from "../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
+import { post } from "../Dashboard/Core/Api";
 
 class Service {
   constructor() {}
@@ -150,7 +153,26 @@ class Service {
     }
   }
 
-  
+
+  async login  (
+    props: ModelLoginRequestInterface
+  ): Promise<ModelLoginResponseInterface | null>  {
+    const res = await post({
+      path: "/auth/authenticate",
+      reqBody: {
+        username: props.username,
+        password: props.password,
+      },
+    });
+    if (res != null) {
+      const result =
+        ConvertModelLoginResponseInterface.toModelLoginResponseInterface(res);
+    }
+    return null;
+  };
 }
+
+  
+
 
 export default new Service();
