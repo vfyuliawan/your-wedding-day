@@ -1,9 +1,10 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+// import { useState } from "react";
 import PinkEssence from "../LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -19,9 +20,16 @@ const LoginDashboard = () => {
   const [first, setFirst] = useState("Pink-Esssence");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
+  const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null); 
-
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken); // Set token state if found in localStorage
+      router.replace("/"); // Redirect to dashboard if token exists
+    }
+  }, []);
   const [loginDetail, setloginDetail] = useState<ResultModelLoginResponseInterface>();
   const getMessage = async () => {
     console.log("run");
@@ -48,6 +56,7 @@ const LoginDashboard = () => {
         
             if (serviceLogin && serviceLogin.result?.token) {
               // Login successful
+              localStorage.setItem("token", serviceLogin.result.token);
               setToken(serviceLogin.result.token);
               // Navigate to dashboard or any other route
               router.push("/"); // Example route to dashboard
@@ -66,7 +75,7 @@ const LoginDashboard = () => {
           }
       };
 
-
+     
 
   const router = useRouter();
 
