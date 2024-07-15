@@ -20,6 +20,7 @@ const LoginDashboard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
+  const [error, setError] = useState<string | null>(null); 
 
   const [loginDetail, setloginDetail] = useState<ResultModelLoginResponseInterface>();
   const getMessage = async () => {
@@ -42,18 +43,26 @@ const LoginDashboard = () => {
             username: username,
             password: password,
           };
-          const serviceLogin = await LoginService.loginService(requestBody)
-
-          if (serviceLogin != null) {
-            console.log(serviceLogin, "serviceLogin");
-
-            //lu simpen di i storage 
-            
-            //atau lu simpen di cookies tokennya 
-
-            //lempar ke halaamn home dashboard project
-
-            setToken(serviceLogin?.result?.token)
+          try {
+            const serviceLogin = await LoginService.loginService(requestBody);
+        
+            if (serviceLogin && serviceLogin.result?.token) {
+              // Login successful
+              setToken(serviceLogin.result.token);
+              // Navigate to dashboard or any other route
+              router.push("/"); // Example route to dashboard
+            } else {
+              // Login failed, handle error state
+              // console.error("Login failed");
+              setError("Invalid credentials. Please try again.");
+              // Optionally, set an error state or show an error message
+              // For example:
+              // setError("Invalid credentials. Please try again.");
+            }
+          } catch (error) {
+            console.error("Login error:", error);
+            setError("An error occurred. Please try again later.");
+            // Handle error state if necessary
           }
       };
 
@@ -76,7 +85,8 @@ const LoginDashboard = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mt-2">
-              <h2 className=" text-center text-bold">Sign In {token}</h2>
+              <h2 className=" text-center text-bold">Sign In</h2>
+              {/* <h2 className=" text-center text-bold">Sign In {token}</h2> */}
               <div className="social-login mt-4">
                 <a href="#">
                   <i className="fa fa-google" /> Sign in with Google
@@ -130,37 +140,37 @@ const LoginDashboard = () => {
                       Remember me
                     </label>
                   </div>
-                  <a
+                  <button
+                    type="button"
                     onClick={() => router.push("/forgot-password")}
-                    className="text-body text-bold "
+                    className="text-body text-bold text-yellow btn font-weight-bold"
+                    style={{ textDecoration: "none" }}
                   >
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
                   type="button"
-                    onClick={() =>{
-                        doLogin(email, password);
-                        
-                    }
-                     
-                    }
+                    onClick={() => doLogin(email, password)}
                     disabled={!email || !password}
                     className="disabled:opacity-40 btn btn-warning btn-lg login-btn"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                   >
                     Sign In
                   </button>
+                  {error && <p className="text-danger mt-2">{error}</p>}
                   {/* <a type="button" className="btn btn-warning btn-lg login-btn" style={{paddingLeft: '2.5rem', paddingRight: '2.5rem'}} href="setting-content.html">Login</a> */}
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
-                    <a
-                      onClick={() => router.push("signup")}
-                      className="text-body text-bold text-yellow"
+                    <button
+                      type="button"
+                      onClick={() => router.push("/signup")}
+                      className="text-body text-bold text-yellow btn font-weight-bold"
+                      style={{ textDecoration: "none" }}
                     >
                       Sign Up
-                    </a>
+                    </button>
                   </p>
                 </div>
               </form>

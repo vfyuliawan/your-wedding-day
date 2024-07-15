@@ -12,7 +12,8 @@ class LoginRepository {
     props: ModelLoginRequestInterface
   ): Promise<ModelLoginResponseInterface | null>  {
     const res = await post({
-      path: "/auth/authenticate",
+      // path: "/auth/authenticate",
+      path: "/api/v1/auth/authenticate",
       reqBody: {
         username: props.username,
         password: props.password,

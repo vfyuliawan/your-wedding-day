@@ -114,6 +114,12 @@ a {
   --main2: #ffc200; 
 }
 
+.font-weight-bold{
+  font-weight: bold !important;
+  margin-bottom: 4px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
 #page {
   position: relative;
   overflow-x: hidden;
@@ -422,7 +428,7 @@ b, strong {
 }
 .navbar-nav .nav-item .nav-link span:before {
   position: absolute;
-  top: 115%;
+  top: 125%;
   content: attr(data-hover);
   transform: translate3d(0, 0, 0);
 }
