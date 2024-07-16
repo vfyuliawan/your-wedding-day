@@ -14,13 +14,13 @@ export enum CallBackError {
   NetworkError = "Network Error",
 }
 
-export const header = async () => {
-  const token = "token";
+export const header = async (isNeedToken:boolean) => { 
+  const token = "Bearer" + " " + localStorage.getItem("token");
 
   return {
     "Content-Type": "application/json",
     language: "IDN",
-    Authorization: token ?? "",
+    Authorization: isNeedToken ? token : "" ,
   };
 };
 
@@ -160,6 +160,7 @@ interface FetchInterface {
   path: string;
   isErrorCreate?: boolean;
   dismissable?: boolean;
+  isNeedToken: boolean;
   reqBody: {};
   errorMessage?: ErrorMessageType;
 }
@@ -169,7 +170,7 @@ export async function post(props: FetchInterface) {
     {
       method: "POST",
       url: baseUrl() + props.path,
-      headers: await header(),
+      headers: await header(props.isNeedToken),
       data: props.reqBody,
       timeout: timeOut,
       timeoutErrorMessage: "Request Timeout",
@@ -183,6 +184,7 @@ export async function post(props: FetchInterface) {
 interface FetchInterfaceGet {
   path: string;
   params?: object;
+  isNeedToken: boolean;
   isError?: boolean;
 }
 
@@ -191,7 +193,7 @@ export async function getImage(props: FetchInterfaceGet) {
     {
       method: "GET",
       url: props.path,
-      headers: await header(),
+      headers: await header(props.isNeedToken),
       timeout: timeOut,
       timeoutErrorMessage: "Request Timeout",
       params: props.params,
@@ -205,7 +207,7 @@ export async function get(props: FetchInterfaceGet) {
     {
       method: "GET",
       url: baseUrl() + props.path,
-      headers: await header(),
+      headers: await header(props.isNeedToken),
       timeout: timeOut,
       timeoutErrorMessage: "Request Timeout",
       params: props.params,
@@ -219,7 +221,7 @@ export async function put(props: FetchInterface) {
     {
       method: "PUT",
       url: baseUrl() + props.path,
-      headers: await header(),
+      headers: await header(props.isNeedToken),
       data: props.reqBody,
       timeout: timeOut,
       timeoutErrorMessage: "Request Timeout",
@@ -233,7 +235,7 @@ export async function patch(props: FetchInterface) {
     {
       method: "PATCH",
       url: baseUrl() + props.path,
-      headers: await header(),
+      headers: await header(props.isNeedToken),
       data: props.reqBody,
       timeout: timeOut,
       timeoutErrorMessage: "Request Timeout",
@@ -247,7 +249,7 @@ export async function deleted(props: FetchInterface) {
     {
       method: "DELETE",
       url: baseUrl() + props.path,
-      headers: await header(),
+      headers: await header(props.isNeedToken),
       data: props.reqBody,
       timeout: timeOut,
       timeoutErrorMessage: "Request Timeout",

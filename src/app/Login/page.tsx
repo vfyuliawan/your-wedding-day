@@ -30,21 +30,22 @@ const LoginDashboard = () => {
       router.replace("/"); // Redirect to dashboard if token exists
     }
   }, []);
-  const [loginDetail, setloginDetail] = useState<ResultModelLoginResponseInterface>();
-  const getMessage = async () => {
-    console.log("run");
-    const res = await Service.GET({
-      collectionName: "UserId",
-      queryGet: function (
-        queryGet: CollectionReference<DocumentData, DocumentData>
-      ): Query<DocumentData, DocumentData> {
-        const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
-        return nameQuery;
-      },
-    });
-    if (res?.length ?? 0 > 0) {
-    }
-  };
+
+    const [loginDetail, setloginDetail] = useState<ResultModelLoginResponseInterface>();
+    const getMessage = async () => {
+      console.log("run");
+      const res = await Service.GET({
+        collectionName: "UserId",
+        queryGet: function (
+          queryGet: CollectionReference<DocumentData, DocumentData>
+        ): Query<DocumentData, DocumentData> {
+          const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
+          return nameQuery;
+        },
+      });
+      if (res?.length ?? 0 > 0) {
+      }
+    };
 
     const doLogin = async (username: string, password: string) => {
         const requestBody: ModelLoginRequestInterface = {
@@ -94,8 +95,7 @@ const LoginDashboard = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mt-2">
-              <h2 className=" text-center text-bold">Sign In</h2>
-              {/* <h2 className=" text-center text-bold">Sign In {token}</h2> */}
+              <h2 className=" text-center text-bold">Sign In</h2> 
               <div className="social-login mt-4">
                 <a href="#">
                   <i className="fa fa-google" /> Sign in with Google
@@ -104,8 +104,7 @@ const LoginDashboard = () => {
               <form>
                 <div className="divider d-flex align-items-center my-4">
                   <p className="text-center fw-bold mx-3 mb-0">Or</p>
-                </div>
-                {/* Email input */}
+                </div> 
                 <div className="form-outline mb-4">
                   <input
                     type="email"
@@ -169,7 +168,6 @@ const LoginDashboard = () => {
                     Sign In
                   </button>
                   {error && <p className="text-danger mt-2">{error}</p>}
-                  {/* <a type="button" className="btn btn-warning btn-lg login-btn" style={{paddingLeft: '2.5rem', paddingRight: '2.5rem'}} href="setting-content.html">Login</a> */}
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
                     <button

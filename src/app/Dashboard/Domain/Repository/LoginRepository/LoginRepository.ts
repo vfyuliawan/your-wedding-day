@@ -6,7 +6,7 @@ import {
 } from "../../Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
 
 class LoginRepository {
-    constructor() {}
+  constructor() {}
 
   async login  (
     props: ModelLoginRequestInterface
@@ -18,6 +18,7 @@ class LoginRepository {
         username: props.username,
         password: props.password,
       },
+      isNeedToken: false
     });
     if (res != null) {
       const result =

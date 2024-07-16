@@ -116,10 +116,11 @@ a {
 
 .font-weight-bold{
   font-weight: bold !important;
-  margin-bottom: 4px;
-  margin-left: 0px;
-  padding-left: 0px;
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-bottom: 4px !important;
 }
+
 #page {
   position: relative;
   overflow-x: hidden;
@@ -165,7 +166,7 @@ a {
   
   .mac-frame .iphone-image {
     position: absolute;
-    bottom: -10px;
+    bottom: -9px;
     right: -5px;
     /* width: 20px;   */
   } 

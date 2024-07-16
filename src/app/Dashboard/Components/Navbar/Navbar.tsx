@@ -5,35 +5,43 @@ import { UserAuth } from "../../../services/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.min.css'; 
+import LogoutService from "../../Domain/Service/LogoutService/LogoutService";
+// import { useRouter } from "next/router";
  
 
 const NavbarDashboard = () => {
     // const { user, googleSignIn, logOut } = UserAuth();
     const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    // const router = useRouter();
+    useEffect(() => {
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          setToken(storedToken);
+        } else {
+          // Token not found in localStorage, handle accordingly (e.g., redirect to login)
+        }
+      }, []);
+     
+      const handleLogout = async() => {
+        // Clear token from localStorage
+        
+        const logoutService = await LogoutService.logoutService();
 
-//   const handleSignIn = async () => {
-//     try {
-//       await googleSignIn();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   const handleSignOut = async () => {
-//     try {
-//       await logOut();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     const checkAuthentication = async () => {
-//       await new Promise((resolve) => setTimeout(resolve, 50));
-//       setLoading(false);
-//     };
-//     checkAuthentication();
-//   }, [user]);
+        try {
+            if (logoutService?.result == true) {
+                await localStorage.removeItem("token");
+            }else{
+                setError("Invalid credentials. Please try again.");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setError("An error occurred. Please try again later.");
+        }
+        // Redirect to login page or any other desired page
+        // router.push("/");
+      };
 
     return (
         <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
@@ -76,15 +84,35 @@ const NavbarDashboard = () => {
                         <ul className="navbar-nav ml-lg-auto">
                             <li className="nav-item ml-lg-4">
                                 <div className="custom-btn-group"> 
-                                    {/* {loading ? null : !user ? ( */}
+                                    {token ? (<ul className="flex">
+                                            {/* <Link href="/">
+                                                <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
+                                                    <i className="bi bi-box-arrow-in-right " /> Logout
+                                                </span>
+                                            </Link>  */}
+                                            <button 
+                                                className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
+                                                style={{ marginLeft: "10px" }}
+                                            >
+                                               <i className="bi bi-box-arrow-in-right " /> My Projects
+                                            </button>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
+                                                style={{ marginLeft: "10px" }}
+                                            >
+                                               <i className="bi bi-box-arrow-in-right " /> Logout
+                                            </button>
+                                        </ul> 
+                                    ) : (
                                         <ul className="flex">
-                                            <Link href="/Login">
+                                            <Link href="/login">
                                                 <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
                                                     <i className="bi bi-box-arrow-in-right " /> Login
                                                 </span>
                                             </Link> 
                                         </ul> 
-                                   
+                                    )}
                                 </div>
                             </li>
                         </ul>

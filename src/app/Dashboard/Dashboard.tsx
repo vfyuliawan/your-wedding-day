@@ -10,16 +10,7 @@ import NavbarDashboard from "./Components/Navbar/Navbar";
 import DashboardPage from "./Section/Page/Page"; 
 import { AuthContextProvider } from '../services/AuthContext';
 
-const Dashboard = () => {
-    // useEffect(() => {
-    //   import('bootstrap/dist/js/bootstrap.min.js')
-    //     .then(() => { 
-    //       console.error('Bootstrap JS has been successfully loaded');
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error loading Bootstrap JS:', error);
-    //     });
-    // }, []);
+const Dashboard = () => { 
 
     return (
       < >  
