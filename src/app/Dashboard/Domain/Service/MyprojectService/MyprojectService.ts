@@ -2,18 +2,21 @@
 // import { ModelLoginResponseInterface } from "../../Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
 // import LoginRepository from "../../Repository/LoginRepository/LoginRepository";
 
-import { ModelLogoutResponseInterface } from "../../Models/ModelResponse/LogoutRepository/ModelLogoutResponseInterface";
-import LogoutRepository from "../../Repository/LogoutRepository/Logoutrepository";
+import { ModelMyprojectResponseInterface } from "../../Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
+import MyprojectRepository from "../../Repository/MyprojectRepository/MyprojectRepository";
+
+// import { ModelLogoutResponseInterface } from "../../Models/ModelResponse/LogoutRepository/ModelLogoutResponseInterface";
+// import Logoutrepository from "../../Repository/LogoutRepository/Logoutrepository";
 
 // import { ModelSignupRequestInterface } from "../../Models/ModelRequest/SignupRequest/ModelSignupRequestInterface";
 // import { ModelSignupResponseInterface } from "../../Models/ModelResponse/SignupResponse/ModelSignupResponseInterface";
 // import SignupRepository from "../../Repository/SignupRepository/SignupRepository";
 
-class LogoutService {
+class MyprojectService {
     constructor() {}
 
-  async logoutService (): Promise<ModelLogoutResponseInterface | null> {
-    const result = await LogoutRepository.logout();
+  async myprojectService (): Promise<ModelMyprojectResponseInterface | null> {
+    const result = await MyprojectRepository.myproject();
     if (result != null) {
       return result;
     }
@@ -21,4 +24,4 @@ class LogoutService {
   };
 }
 
-export default new LogoutService();
+export default new MyprojectService();

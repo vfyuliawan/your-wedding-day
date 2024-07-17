@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MyprojectService from "../../Domain/Service/MyprojectService/MyprojectService";
 const data = [
     {
       id: 1,
@@ -23,21 +24,40 @@ const data = [
       coupleName: 'David & Sophia',
       theme: 'Anniversary',
       date: '2024-07-17T07:51:51.264Z',
-    },
-    // Add more data here...
+    }, 
   ];
 
   
 const DashboardPage = () => {
     const [token, setToken] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
+        handleGetMyProjects();
         if (storedToken) {
           setToken(storedToken);        
         } else {
           // Token not found in localStorage, handle accordingly (e.g., redirect to login)
         }
-      }, []);
+    }, []);
+
+    const handleGetMyProjects = async() => {  
+        const myprojectServices = await MyprojectService.myprojectService(); 
+        try {
+            if (myprojectServices && myprojectServices.result?.projects) { 
+                // await localStorage.removeItem("token");
+                console.log(myprojectServices);
+                
+            }else{
+                setError("Invalid credentials. Please try again.");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setError("An error occurred. Please try again later.");
+        } 
+    };
+
     return (
         <> 
             {token ? (

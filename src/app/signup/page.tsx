@@ -26,7 +26,7 @@ export default function Signup() {
   const [error, setError] = useState<string | null>(null); 
   const router = useRouter();
 
-  const [signupDetail, setsignupDetail] = useState<ResultModelSignupResponseInterface>();
+    const [signupDetail, setsignupDetail] = useState<ResultModelSignupResponseInterface>();
     const getMessage = async () => {
       console.log("run");
       const res = await Service.GET({
