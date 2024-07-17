@@ -94,7 +94,7 @@ const NavbarDashboard = () => {
                                                 className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
                                                 style={{ marginLeft: "10px" }}
                                             >
-                                               <i className="bi bi-box-arrow-in-right " /> My Projects
+                                               <i className="bi bi-pencil " /> Create
                                             </button>
                                             <button
                                                 onClick={handleLogout}

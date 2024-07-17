@@ -1,12 +1,3 @@
-// import { post } from "@/app/Dashboard/Core/Api";
-// import { ModelSignupRequestInterface } from "../../Models/ModelRequest/SignupRequest/ModelSignupRequestInterface";
-// import { ConvertModelSignupResponseInterface, ModelSignupResponseInterface } from "../../Models/ModelResponse/SignupResponse/ModelSignupResponseInterface";
-// import { ModelSignupRequestInterface } from "../../Models/ModelRequest/SignupRequest/ModelSignupRequestInterface";
-// import {
-//   ConvertModelSignupResponseInterface,
-//   ModelSignupResponseInterface,
-// } from "../../Models/ModelResponse/SignupResponse/ModelSignupResponseInterface";
-
 import { post } from "@/app/Dashboard/Core/Api";
 import { ModelSignupRequestInterface } from "../../Models/ModelRequest/SignupRequest/ModelSignupRequestInterface";
 import { ConvertModelSignupResponseInterface, ModelSignupResponseInterface } from "../../Models/ModelResponse/SignupResponse/ModelSignupResponseInterface";

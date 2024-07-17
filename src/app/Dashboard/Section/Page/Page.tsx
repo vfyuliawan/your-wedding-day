@@ -1,6 +1,118 @@
+import React, { useState, useEffect } from "react";
+const data = [
+    {
+      id: 1,
+      number: 1,
+      nameProject: 'Project 1',
+      coupleName: 'John & Jane',
+      theme: 'Wedding',
+      date: '2024-07-17T07:51:51.264Z',
+    },
+    {
+      id: 2,
+      number: 2,
+      nameProject: 'Project 2',
+      coupleName: 'Mike & Emma',
+      theme: 'Birthday',
+      date: '2024-07-17T07:51:51.264Z',
+    },
+    {
+      id: 3,
+      number: 3,
+      nameProject: 'Project 3',
+      coupleName: 'David & Sophia',
+      theme: 'Anniversary',
+      date: '2024-07-17T07:51:51.264Z',
+    },
+    // Add more data here...
+  ];
+
+  
 const DashboardPage = () => {
+    const [token, setToken] = useState<string | null>(null);
+    useEffect(() => {
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          setToken(storedToken);        
+        } else {
+          // Token not found in localStorage, handle accordingly (e.g., redirect to login)
+        }
+      }, []);
     return (
         <> 
+            {token ? (
+            <section className="home" id="home">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-md-7 col-10 text-center"> 
+                            <h2>My Invitation</h2>
+                        </div>
+                    </div>
+                    <div className="card" style={{
+                        // height: "80vh",
+                        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)", 
+                        border: "none"}}
+                    >
+                        <div
+                            style={{
+                                // height: '90vh',
+                                paddingBottom: '30px',
+                                boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+                                border: 'none',
+                                padding: "10px"
+                            }}
+                        >
+                            <table className="align-items-center">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Title</th>
+                                    <th>Couple Name</th>
+                                    <th>Theme</th>
+                                    <th>Create Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {data ? (
+                                        data.map((item) => (
+                                            <tr key={item.id}>
+                                            <td>{item.number}</td>
+                                            <td>{item.nameProject}</td>
+                                            <td>{item.coupleName}</td>
+                                            <td>{item.theme}</td>
+                                            <td>{new Date(item.date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: 'short',
+                                                    year: 'numeric',
+                                                })}
+                                                {' '}
+                                                {new Date(item.date).toLocaleTimeString('en-GB', {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                })}
+                                            </td>
+                                            <td>
+                                                <button name="Preview" className="btn btn btn-outline-info btn-sm"
+                                                        style={{ margin: "3px" }}><i className="bi bi-eye " /></button>
+                                                <button className="btn btn btn-outline-success btn-sm"
+                                                        style={{ margin: "3px" }}><i className="bi bi-pencil-square " /></button>
+                                                {/* <button className="btn btn btn-outline-danger btn-sm"
+                                                        style={{ margin: "3px" }}><i className="bi bi-trash " /></button> */}
+                                            </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                        <td colSpan={6} style={{ textAlign: 'center' }}>Not Found</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>):(
             <section className="cover full-screen d-lg-flex justify-content-center align-items-center mt-3" id="home">
                 <div className="container">
                 <div className="row dflex ">
@@ -34,40 +146,41 @@ const DashboardPage = () => {
                     </div>
                 </div>
                 </div>
-            </section>
+            </section>)}
+
             <section className="project" id="project">
                 <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-7 col-10 text-center">
-                    {/* <span>Memori kisah kami</span> */}
-                    <h2>Our Projects</h2>
-                    <p>The Nvite Me Digital Invitation website has a lot of projects and invitation templates</p>
+                    <div className="row justify-content-center">
+                        <div className="col-md-7 col-10 text-center">
+                        {/* <span>Memori kisah kami</span> */}
+                        <h2>Our Projects</h2>
+                        <p>The Nvite Me Digital Invitation website has a lot of projects and invitation templates</p>
+                        </div>
                     </div>
-                </div>
-                <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="true">
-                    <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img src="image/project/project-image01.png" className="d-block w-100" alt="..." />
-                    </div> 
-                    <div className="carousel-item active">
-                        <img src="image/project/project-image02.png" className="d-block w-100" alt="..." />
-                    </div> 
-                    <div className="carousel-item active">
-                        <img src="image/project/project-image03.png" className="d-block w-100" alt="..." />
-                    </div> 
-                    <div className="carousel-item active">
-                        <img src="image/project/project-image04.png" className="d-block w-100" alt="..." />
-                    </div> 
+                    <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="true">
+                        <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src="image/project/project-image01.png" className="d-block w-100" alt="..." />
+                        </div> 
+                        <div className="carousel-item active">
+                            <img src="image/project/project-image02.png" className="d-block w-100" alt="..." />
+                        </div> 
+                        <div className="carousel-item active">
+                            <img src="image/project/project-image03.png" className="d-block w-100" alt="..." />
+                        </div> 
+                        <div className="carousel-item active">
+                            <img src="image/project/project-image04.png" className="d-block w-100" alt="..." />
+                        </div> 
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true" />
+                        <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true" />
+                        <span className="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true" />
-                    <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true" />
-                    <span className="visually-hidden">Next</span>
-                    </button>
-                </div>
                 </div>
             </section>
             <section id="fiture" className="fiture">

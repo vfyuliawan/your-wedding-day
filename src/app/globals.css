@@ -41,6 +41,7 @@
   --card-border-rgb: 131, 134, 135;
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -112,6 +113,36 @@ a {
 :root {
   --main: #116A7B; 
   --main2: #ffc200; 
+}
+
+
+table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  text-align: center;
+}
+
+thead{
+  background-color: var(--main);
+  color: #fff;
+  font-weight: bold;
+}
+
+th{
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #333;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
 .font-weight-bold{
@@ -664,9 +695,19 @@ b, strong {
 
 .project .container{ 
   padding:5rem;
+  
+}
+.home .container{ 
+  padding:4rem;
+  margin-bottom: 3rem;
 }
 
-
+.home h2{
+  color: var(--main);
+  font-family: "Maven Pro", sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+}
 
 .fiture { 
   padding-top: 7rem;
@@ -1069,6 +1110,7 @@ margin-bottom: 16px;
 font-size: 16px;
 color: #333;
 }
+
 
 @media (max-width: 992px) {
   .list-design .card .custom-btn span{ 
