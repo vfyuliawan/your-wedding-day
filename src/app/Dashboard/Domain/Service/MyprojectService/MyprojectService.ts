@@ -2,6 +2,7 @@
 // import { ModelLoginResponseInterface } from "../../Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
 // import LoginRepository from "../../Repository/LoginRepository/LoginRepository";
 
+import { ModelMyprojectRequestInterface } from "../../Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
 import { ModelMyprojectResponseInterface } from "../../Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
 import MyprojectRepository from "../../Repository/MyprojectRepository/MyprojectRepository";
 
@@ -15,8 +16,8 @@ import MyprojectRepository from "../../Repository/MyprojectRepository/MyprojectR
 class MyprojectService {
     constructor() {}
 
-  async myprojectService (): Promise<ModelMyprojectResponseInterface | null> {
-    const result = await MyprojectRepository.myproject();
+  async myprojectService (props: ModelMyprojectRequestInterface): Promise<ModelMyprojectResponseInterface | null> {
+    const result = await MyprojectRepository.myproject(props);
     if (result != null) {
       return result;
     }

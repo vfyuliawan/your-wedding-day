@@ -1,54 +1,51 @@
 import React, { useState, useEffect } from "react";
 import MyprojectService from "../../Domain/Service/MyprojectService/MyprojectService";
-const data = [
-    {
-      id: 1,
-      number: 1,
-      nameProject: 'Project 1',
-      coupleName: 'John & Jane',
-      theme: 'Wedding',
-      date: '2024-07-17T07:51:51.264Z',
-    },
-    {
-      id: 2,
-      number: 2,
-      nameProject: 'Project 2',
-      coupleName: 'Mike & Emma',
-      theme: 'Birthday',
-      date: '2024-07-17T07:51:51.264Z',
-    },
-    {
-      id: 3,
-      number: 3,
-      nameProject: 'Project 3',
-      coupleName: 'David & Sophia',
-      theme: 'Anniversary',
-      date: '2024-07-17T07:51:51.264Z',
-    }, 
-  ];
+import { ModelMyprojectRequestInterface } from "../../Domain/Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
+import { ProjectModelMyprojectResponseInterface } from "../../Domain/Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
 
   
 const DashboardPage = () => {
     const [token, setToken] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [page, setPage] = useState(0);
+    const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>([]);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
-        handleGetMyProjects();
         if (storedToken) {
-          setToken(storedToken);        
+            setToken(storedToken);        
+            handleGetMyProjects(page, 10, ''); 
+            // console.log(storedToken);
+            
         } else {
           // Token not found in localStorage, handle accordingly (e.g., redirect to login)
         }
     }, []);
+    const handleNextPage = async() => {
+        // setPage(page + 1);
+        let nextPage = page + 1;
+        handleGetMyProjects(nextPage, 10, '');
+    }
 
-    const handleGetMyProjects = async() => {  
-        const myprojectServices = await MyprojectService.myprojectService(); 
+    const getIdForEdit = async (projectId: string) => {
+        // You can add any additional logic here to handle the edit request
+        console.log(`Edit button clicked for project ${projectId}`);
+      
+        // Navigate to the /contentSetting page
+        // window.location.href = `/contentSetting?projectId=${projectId}`;
+      };
+    const handleGetMyProjects = async(currentPage: number, size: number, title: string) => {  
+        const requestParams: ModelMyprojectRequestInterface = {
+            currentPage: currentPage,
+            size: size,
+            title: title,
+          };
         try {
-            if (myprojectServices && myprojectServices.result?.projects) { 
-                // await localStorage.removeItem("token");
-                console.log(myprojectServices);
-                
+            const myprojectServices = await MyprojectService.myprojectService(requestParams); 
+            if (myprojectServices && myprojectServices.result?.projects) {  
+                setData(myprojectServices.result.projects);
+                // setTotalPages(Math.ceil(myprojectServices.result.totalCount / size));
             }else{
                 setError("Invalid credentials. Please try again.");
             }
@@ -87,20 +84,23 @@ const DashboardPage = () => {
                                 <tr>
                                     <th>No.</th>
                                     <th>Title</th>
-                                    <th>Couple Name</th>
+                                    <th>id</th>
                                     <th>Theme</th>
+                                    <th>Music</th>
                                     <th>Create Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody> 
                                     {data ? (
-                                        data.map((item) => (
+                                        data.map((item, index) => (
                                             <tr key={item.id}>
-                                            <td>{item.number}</td>
-                                            <td>{item.nameProject}</td>
-                                            <td>{item.coupleName}</td>
-                                            <td>{item.theme}</td>
+                                            <td>{index+1}</td>
+                                            {/* <td>{item.nameProject}</td> */}
+                                            <td>{item.title}</td>
+                                            <td>{item.id}</td>
+                                            <td>{item.theme.theme}</td>
+                                            <td>{item.theme.music}</td>
                                             <td>{new Date(item.date).toLocaleDateString('en-GB', {
                                                     day: '2-digit',
                                                     month: 'short',
@@ -116,7 +116,9 @@ const DashboardPage = () => {
                                                 <button name="Preview" className="btn btn btn-outline-info btn-sm"
                                                         style={{ margin: "3px" }}><i className="bi bi-eye " /></button>
                                                 <button className="btn btn btn-outline-success btn-sm"
-                                                        style={{ margin: "3px" }}><i className="bi bi-pencil-square " /></button>
+                                                        style={{ margin: "3px" }}
+                                                        onClick={() => getIdForEdit(item.id)}
+                                                ><i className="bi bi-pencil-square " /></button> 
                                                 {/* <button className="btn btn btn-outline-danger btn-sm"
                                                         style={{ margin: "3px" }}><i className="bi bi-trash " /></button> */}
                                             </td>
@@ -128,6 +130,17 @@ const DashboardPage = () => {
                                         </tr>
                                     )}
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                    <td colSpan={7}>
+                                        {page < totalPages && (
+                                        <button className="btn btn-primary" onClick={handleNextPage}>
+                                            Next Page
+                                        </button>
+                                        )}
+                                    </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
