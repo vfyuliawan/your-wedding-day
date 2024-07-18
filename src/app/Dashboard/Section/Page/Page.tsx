@@ -84,7 +84,6 @@ const DashboardPage = () => {
                                 <tr>
                                     <th>No.</th>
                                     <th>Title</th>
-                                    <th>id</th>
                                     <th>Theme</th>
                                     <th>Music</th>
                                     <th>Create Date</th>
@@ -98,7 +97,6 @@ const DashboardPage = () => {
                                             <td>{index+1}</td>
                                             {/* <td>{item.nameProject}</td> */}
                                             <td>{item.title}</td>
-                                            <td>{item.id}</td>
                                             <td>{item.theme.theme}</td>
                                             <td>{item.theme.music}</td>
                                             <td>{new Date(item.date).toLocaleDateString('en-GB', {
