@@ -15,7 +15,7 @@ const NavbarDashboard = () => {
     const [token, setToken] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     // const router = useRouter();
-    useEffect(() => {
+      useEffect(() => {
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
           setToken(storedToken);
@@ -90,12 +90,12 @@ const NavbarDashboard = () => {
                                                     <i className="bi bi-box-arrow-in-right " /> Logout
                                                 </span>
                                             </Link>  */}
-                                            <button 
+                                            <Link href="/content-setting" 
                                                 className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
                                                 style={{ marginLeft: "10px" }}
                                             >
                                                <i className="bi bi-pencil " /> Create
-                                            </button>
+                                            </Link>
                                             <button
                                                 onClick={handleLogout}
                                                 className="btn custom-btn login-btn custom-btn-bg custom-btn-link"

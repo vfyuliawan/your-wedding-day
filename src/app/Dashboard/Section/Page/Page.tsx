@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MyprojectService from "../../Domain/Service/MyprojectService/MyprojectService";
 import { ModelMyprojectRequestInterface } from "../../Domain/Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
 import { ProjectModelMyprojectResponseInterface } from "../../Domain/Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
-
+import Cryptr from 'cryptr';
   
 const DashboardPage = () => {
     const [token, setToken] = useState<string | null>(null);
@@ -11,13 +11,13 @@ const DashboardPage = () => {
     const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>([]);
     const [totalPages, setTotalPages] = useState(0);
 
-    useEffect(() => {
+    useEffect(() => { 
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
             setToken(storedToken);        
             handleGetMyProjects(page, 10, ''); 
             // console.log(storedToken);
-            
+           
         } else {
           // Token not found in localStorage, handle accordingly (e.g., redirect to login)
         }
@@ -31,9 +31,17 @@ const DashboardPage = () => {
     const getIdForEdit = async (projectId: string) => {
         // You can add any additional logic here to handle the edit request
         console.log(`Edit button clicked for project ${projectId}`);
-      
+        
+        //boy encrypt gimana boy
+        let projectParam = `projectId=${projectId}`;
+        let keyEncrypt = new Cryptr('nViteMeKey');
+        let encryptedProjectParam = keyEncrypt.encrypt(projectParam)
+        // console.log(encryptedProjectParam);
+        // let decryptedProjectParam = keyEncrypt.decrypt(encryptedProjectParam)
+        // console.log(decryptedProjectParam); 
+
         // Navigate to the /contentSetting page
-        // window.location.href = `/contentSetting?projectId=${projectId}`;
+        window.location.href = `/content-setting?`+encryptedProjectParam;
       };
     const handleGetMyProjects = async(currentPage: number, size: number, title: string) => {  
         const requestParams: ModelMyprojectRequestInterface = {
