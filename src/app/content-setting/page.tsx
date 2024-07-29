@@ -18,20 +18,93 @@ import {
 } from "firebase/firestore";
 import LogoutService from "../Dashboard/Domain/Service/LogoutService/LogoutService";
 import FooterDashboard from "../Dashboard/Components/Footer/Footer";
+import Cryptr from 'cryptr'; 
+import { ModelGetProjectDetailRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/GetProjectDetailRequest/GetProjectDetailRequest";
+import { ResultModelGetProjectDetailResponseInterface } from "../Dashboard/Domain/Models/ModelResponse/GetProjectDetailResponse/GetProjectDetailResponse";
+import GetProjectDetailService from "../Dashboard/Domain/Service/GetProjectDetailService/GetProjectDetailService";
+
+interface ProjectData {
+    title: string;
+    imageCover: File | null; // For handling file inputs
+    eventDate: string;
+    showCover: boolean;
+}
+
 const ContentSettingPage = () => {
     const [first, setFirst] = useState("Pink-Esssence");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [token, setToken] = useState < string | null > (null);
     const [error, setError] = useState < string | null > (null);
+    const [projectId, setProjectId] = useState<string | null>(null);
+    const [data, setData] = useState<ResultModelGetProjectDetailResponseInterface | undefined>(undefined);
+
+    const [isProjectIdReady, setIsProjectIdReady] = useState(false); // add a state variable to track when the project ID is ready
     const router = useRouter();
+    
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
-        // console.log(storedToken);
-        if (! storedToken) {
-            router.replace("/"); // Redirect to dashboard if token is not found
+        const keyEncrypt = new Cryptr('nViteMeKey');
+        let queryString = window.location.search; 
+        if (queryString.startsWith('?')) {
+          queryString = queryString.substring(1);
+        } 
+        queryString = keyEncrypt.decrypt(queryString);
+        let urlParam = new URLSearchParams(queryString);   
+        
+        if (urlParam) {
+          let decryptedProjectParam = urlParam.get('projectId');
+          // update the state variable
+          try {  // extract the project ID from the decrypted string
+            setProjectId(decryptedProjectParam); 
+            setIsProjectIdReady(true); // set the flag to true
+          } catch (error) {
+            console.error("Error decrypting project ID:", error);
+          }
+        };  
+        if (!storedToken) {
+          router.replace("/"); // Redirect to dashboard if token is not found
         }
-    }, []);
+      }, []);
+    
+      useEffect(() => {
+        if (isProjectIdReady && projectId !== null) {
+          handleGetProjectDetails(projectId);
+        }
+      }, [isProjectIdReady, projectId]);
+    
+      const handleGetProjectDetails = async(id: string | null) => {
+        if (id === null) {
+          // handle the case where id is null
+          return;
+        } 
+        const requestParams: ModelGetProjectDetailRequestInterface = {
+          id: id,
+        };
+        try {
+          // GetProjectDetailService; 
+          const GetProjectDetailServices = await GetProjectDetailService.getProjectDetailService(requestParams); 
+          if (GetProjectDetailServices && GetProjectDetailServices?.result) {  
+            setData(GetProjectDetailServices.result); 
+          }else{
+            setError("Invalid credentials. Please try again.");
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          setError("An error occurred. Please try again later.");
+        } 
+      };
+
+      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked, files } = event.target;
+    
+        // setData(prevData => ({
+        //     ...prevData,
+        //     [name]: type === 'checkbox' ? checked : (type === 'file' ? (files ? files[0] : null) : value)
+        // }));
+    };
+    
+
     const getMessage = async () => {
         console.log("run");
         const res = await Service.GET({
@@ -44,6 +117,8 @@ const ContentSettingPage = () => {
         });
         if (res ?. length ?? 0 > 0) {}
     };
+
+    
     const handleLogout = async () => { // Clear token from localStorage
         const logoutService = await LogoutService.logoutService();
         try {
@@ -60,9 +135,39 @@ const ContentSettingPage = () => {
         // Redirect to login page or any other desired page
         // router.push("/");
     };
+    
+    const handleSubmit = async () => {
+        if (data?.hero.img instanceof File) {
+            const formData = new FormData();
+            formData.append('imageCover', data.hero.img);
+            // Handle file upload
+        }
+    
+        try {
+            const response = await fetch('/api/submit', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: data?.title,
+                    eventDate: data?.hero.date,
+                    showCover: data?.hero.isShow
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error('Form submission error:', error);
+        }
+    };
+
+    
     if (first === "Pink-Essence") { // return <RedEssence />;
     } else {
-        return (<>
+        // console.log("Rendering data:", data);
+        return (
+        <>
             <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
                 <div className="container">
                     <a href="/" className="navbar-brand"><i className="bi bi-envelope-paper-heart"/>
@@ -130,27 +235,59 @@ const ContentSettingPage = () => {
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
-                                <div className="accordion-body">
-                                    <div className="mb-3">
-                                        <label htmlFor="titleCover" className="form-label">Title Cover</label>
-                                        <input type="text" className="form-control" id="titleCover" placeholder="name@example.com"/>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="titleCover" className="form-label">Image Cover</label>
-                                        <input type="file" className="form-control" id="titleCover" placeholder="name@example.com"/>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="titleCover" className="form-label">Event Date</label>
-                                        <input type="date" className="form-control" id="titleCover" placeholder="name@example.com"/>
-                                    </div>
-                                    <div className="mb-3 form-check form-switch">
-                                        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-                                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Show Cover</label>
-                                    </div>
-                                    <div className="mb-3">
-                                        <button className="btn btn-warning">Apply</button>
-                                    </div>
-                                </div>
+                            <div className="accordion-body">
+    <div className="mb-3">
+        <label htmlFor="titleCover" className="form-label">Title Cover</label>
+        <input
+            type="text"
+            className="form-control"
+            id="titleCover"
+            name="title"
+            placeholder="Title Cover"
+            value={data?.title || ''}
+            onChange={handleChange}
+        />
+    </div>
+    <div className="mb-3">
+        <label htmlFor="imageCover" className="form-label">Image Cover</label>
+        <input
+            type="file"
+            className="form-control"
+            id="imageCover"
+            name="imageCover"
+            value={data?.hero.img || ''}
+            onChange={handleChange}
+        />
+    </div>
+    <div className="mb-3">
+        <label htmlFor="eventDate" className="form-label">Event Date</label>
+        <input
+            type="text"
+            className="form-control"
+            id="eventDate"
+            name="eventDate"
+            placeholder="Event Date"
+            value={data?.hero.date || ''}
+            onChange={handleChange}
+        />
+    </div>
+    <div className="mb-3 form-check form-switch">
+        <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="showCoverDepanSwitch"
+            name="showCover"
+            checked={data?.hero.isShow || false}
+            onChange={handleChange}
+        />
+        <label className="form-check-label" htmlFor="showCoverDepanSwitch">Show Cover</label>
+    </div>
+    <div className="mb-3">
+        <button className="btn btn-warning" onClick={handleSubmit}>Apply</button>
+    </div>
+</div>
+
                             </div>
                         </div>
                         <div className="accordion-item">
@@ -379,7 +516,10 @@ const ContentSettingPage = () => {
                 </div>
             </div>
             <FooterDashboard/>
-        </>);
+        </>
+        );
     }
 };
 export default ContentSettingPage;
+
+ 

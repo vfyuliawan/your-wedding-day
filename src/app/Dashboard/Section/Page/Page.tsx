@@ -28,21 +28,12 @@ const DashboardPage = () => {
         handleGetMyProjects(nextPage, 10, '');
     }
 
-    const getIdForEdit = async (projectId: string) => {
-        // You can add any additional logic here to handle the edit request
-        console.log(`Edit button clicked for project ${projectId}`);
-        
-        //boy encrypt gimana boy
+    const getIdForEdit = async (projectId: string) => { 
         let projectParam = `projectId=${projectId}`;
         let keyEncrypt = new Cryptr('nViteMeKey');
-        let encryptedProjectParam = keyEncrypt.encrypt(projectParam)
-        // console.log(encryptedProjectParam);
-        // let decryptedProjectParam = keyEncrypt.decrypt(encryptedProjectParam)
-        // console.log(decryptedProjectParam); 
-
-        // Navigate to the /contentSetting page
+        let encryptedProjectParam = keyEncrypt.encrypt(projectParam) 
         window.location.href = `/content-setting?`+encryptedProjectParam;
-      };
+    };
     const handleGetMyProjects = async(currentPage: number, size: number, title: string) => {  
         const requestParams: ModelMyprojectRequestInterface = {
             currentPage: currentPage,
