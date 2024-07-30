@@ -245,6 +245,19 @@ td {
   align-items: center;
 }   
 
+.item-right{
+  color: var(--main);
+  align-items: end !important;
+  align-items: right !important;
+  align-content: end !important;
+  align-content: right !important;
+  text-align: right !important;
+}
+
+.color-main{
+  color: var(--main);
+}
+
 
 
 

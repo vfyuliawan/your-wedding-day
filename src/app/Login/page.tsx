@@ -15,6 +15,7 @@ import LoginService from "../Dashboard/Domain/Service/LoginService/LoginService"
 import Service from "../services/Service";
 import { CollectionReference, DocumentData, query, Query, where } from "firebase/firestore";
 import LoginRepository from "../Dashboard/Domain/Repository/LoginRepository/LoginRepository";
+import CekUserLoginService from "../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService";
 
 const LoginDashboard = () => {
   const [first, setFirst] = useState("Pink-Esssence");
@@ -22,61 +23,81 @@ const LoginDashboard = () => {
   const [password, setPassword] = useState("");
   // const [token, setToken] = useState("");
   const [token, setToken] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null); 
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loginDetail, setloginDetail] = useState<ResultModelLoginResponseInterface>();
+  
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+     
     if (storedToken) {
       setToken(storedToken); // Set token state if found in localStorage
-      router.replace("/"); // Redirect to dashboard if token exists
+      checkUserLogin(); 
     }
   }, []);
 
-    const [loginDetail, setloginDetail] = useState<ResultModelLoginResponseInterface>();
-    const getMessage = async () => {
-      console.log("run");
-      const res = await Service.GET({
-        collectionName: "UserId",
-        queryGet: function (
-          queryGet: CollectionReference<DocumentData, DocumentData>
-        ): Query<DocumentData, DocumentData> {
-          const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
-          return nameQuery;
-        },
-      });
-      if (res?.length ?? 0 > 0) {
+  const checkUserLogin = async () => {
+    try {
+      const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
+      if (serviceCheckUserLogin?.result == true) {
+        setIsUserLoggedIn(true);
       }
-    };
-
-    const doLogin = async (username: string, password: string) => {
-        const requestBody: ModelLoginRequestInterface = {
-            username: username,
-            password: password,
-          };
-          try {
-            const serviceLogin = await LoginService.loginService(requestBody);
-        
-            if (serviceLogin && serviceLogin.result?.token) {
-              // Login successful
-              localStorage.setItem("token", serviceLogin.result.token);
-              setToken(serviceLogin.result.token);
-              // Navigate to dashboard or any other route
-              router.push("/"); // Example route to dashboard
-            } else {
-              // Login failed, handle error state
-              // console.error("Login failed");
-              setError("Invalid credentials. Please try again.");
-              // Optionally, set an error state or show an error message
-              // For example:
-              // setError("Invalid credentials. Please try again.");
-            }
-          } catch (error) {
-            console.error("Login error:", error);
-            setError("An error occurred. Please try again later.");
-            // Handle error state if necessary
+    } catch (error) {
+      console.error("check User Login error:", error);
+      setError("An error occurred. Please try again later.");
+      
+    }
+  };
+    
+  const getMessage = async () => {
+    console.log("run");
+    const res = await Service.GET({
+      collectionName: "UserId",
+      queryGet: function (
+        queryGet: CollectionReference<DocumentData, DocumentData>
+      ): Query<DocumentData, DocumentData> {
+        const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
+        return nameQuery;
+      },
+    });
+    if (res?.length ?? 0 > 0) {
+    }
+  };
+  
+  const doLogin = async (username: string, password: string) => {
+      const requestBody: ModelLoginRequestInterface = {
+          username: username,
+          password: password,
+        };
+        try {
+          const serviceLogin = await LoginService.loginService(requestBody);
+      
+          if (serviceLogin && serviceLogin.result?.token) {
+            // Login successful
+            localStorage.setItem("token", serviceLogin.result.token);
+            setToken(serviceLogin.result.token);
+            // Navigate to dashboard or any other route
+            router.push("/"); // Example route to dashboard
+          } else {
+            // Login failed, handle error state
+            // console.error("Login failed");
+            setError("Invalid credentials. Please try again.");
+            // Optionally, set an error state or show an error message
+            // For example:
+            // setError("Invalid credentials. Please try again.");
           }
-      };
+        } catch (error) {
+          console.error("Login error:", error);
+          setError("An error occurred. Please try again later.");
+          // Handle error state if necessary
+        }
+  };
 
-     
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      router.replace("/"); // Redirect to dashboard if user is logged in
+    }
+  }, [isUserLoggedIn]);   
 
   const router = useRouter();
 

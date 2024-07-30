@@ -3,18 +3,23 @@ import MyprojectService from "../../Domain/Service/MyprojectService/MyprojectSer
 import { ModelMyprojectRequestInterface } from "../../Domain/Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
 import { ProjectModelMyprojectResponseInterface } from "../../Domain/Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
 import Cryptr from 'cryptr';
+import CekUserLoginService from "../../Domain/Service/CekUserLoginService/CekUserLoginService";
+import Link from "next/link";
+import LogoutService from "../../Domain/Service/LogoutService/LogoutService";
   
 const DashboardPage = () => {
     const [token, setToken] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(0);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>([]);
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => { 
         const storedToken = localStorage.getItem("token");
         if (storedToken) {
-            setToken(storedToken);        
+            setToken(storedToken); 
+            checkUserLogin();        
             handleGetMyProjects(page, 10, ''); 
             // console.log(storedToken);
            
@@ -22,6 +27,20 @@ const DashboardPage = () => {
           // Token not found in localStorage, handle accordingly (e.g., redirect to login)
         }
     }, []);
+
+    const checkUserLogin = async () => {
+        try {
+          const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
+          if (serviceCheckUserLogin?.result == true) {
+            setIsUserLoggedIn(true);
+          }
+        } catch (error) {
+          console.error("check User Login error:", error);
+          setError("An error occurred. Please try again later.");
+          
+        }
+    };
+
     const handleNextPage = async() => {
         // setPage(page + 1);
         let nextPage = page + 1;
@@ -44,7 +63,7 @@ const DashboardPage = () => {
             const myprojectServices = await MyprojectService.myprojectService(requestParams); 
             if (myprojectServices && myprojectServices.result?.projects) {  
                 setData(myprojectServices.result.projects);
-                // setTotalPages(Math.ceil(myprojectServices.result.totalCount / size));
+                setTotalPages(myprojectServices.result.paging?.totalPage);
             }else{
                 setError("Invalid credentials. Please try again.");
             }
@@ -54,9 +73,104 @@ const DashboardPage = () => {
         } 
     };
 
+    const handleLogout = async() => {
+        // Clear token from localStorage
+        
+        const logoutService = await LogoutService.logoutService();
+
+        try {
+            if (logoutService?.result == true) {
+                await localStorage.removeItem("token");
+            }else{
+                setError("Invalid credentials. Please try again.");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setError("An error occurred. Please try again later.");
+        }
+        // Redirect to login page or any other desired page
+        // router.push("/");
+      };
+
     return (
-        <> 
-            {token ? (
+        <>  
+            <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
+                <div className="container">
+                    {/* <Link href="/"> */}
+                        <a href="/" className="navbar-brand"><i className="bi bi-envelope-paper-heart" /> Nvite Me</a>
+                    {/* </Link> */}
+                    <button className="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon" />
+                    </button>
+                    <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div className="offcanvas-header">
+                            <h5 className="offcanvas-title" id="offcanvasNavbarLabel"><i className="bi bi-envelope-paper-heart" /> Nvite Me</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
+                        </div>
+                        <div className="offcanvas-body">
+                            <ul className="navbar-nav mx-auto">
+                                <li className="nav-item">
+                                    <Link href="/#home" className="nav-link"><span data-hover="Home">Home</span> 
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link href="/#project" className="nav-link"><span data-hover="Project">Project</span> 
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link href="/#fiture" className="nav-link"><span data-hover="Fiture">Fiture</span> 
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link href="/#tutorial" className="nav-link"><span data-hover="Tutorial">Tutorial</span> 
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link href="/#design" className="nav-link"><span data-hover="Design">Design</span> 
+                                    </Link>
+                                </li>
+                                {/* Add other list items */}
+                            </ul>
+                            <ul className="navbar-nav ml-lg-auto">
+                                <li className="nav-item ml-lg-4">
+                                    <div className="custom-btn-group"> 
+                                        {(token && isUserLoggedIn) ? (<ul className="flex">
+                                                {/* <Link href="/">
+                                                    <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
+                                                        <i className="bi bi-box-arrow-in-right " /> Logout
+                                                    </span>
+                                                </Link>  */}
+                                                <Link href="/content-setting" 
+                                                    className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
+                                                    style={{ marginLeft: "10px" }}
+                                                >
+                                                <i className="bi bi-pencil " /> Create
+                                                </Link>
+                                                <button
+                                                    onClick={handleLogout}
+                                                    className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
+                                                    style={{ marginLeft: "10px" }}
+                                                >
+                                                <i className="bi bi-box-arrow-in-right " /> Logout
+                                                </button>
+                                            </ul> 
+                                        ) : (
+                                            <ul className="flex">
+                                                <Link href="/login">
+                                                    <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
+                                                        <i className="bi bi-box-arrow-in-right " /> Login
+                                                    </span>
+                                                </Link> 
+                                            </ul> 
+                                        )}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            {(token && isUserLoggedIn) ? (
             <section className="home" id="home">
                 <div className="container">
                     <div className="row justify-content-center">
@@ -127,15 +241,15 @@ const DashboardPage = () => {
                                         </tr>
                                     )}
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                    <td colSpan={7}>
-                                        {page < totalPages && (
-                                        <button className="btn btn-primary" onClick={handleNextPage}>
-                                            Next Page
-                                        </button>
-                                        )}
-                                    </td>
+                                <tfoot >
+                                    <tr >
+                                        <td className="item-right" colSpan={7}>
+                                            {page < totalPages && (
+                                                <button className="color-main btn btn-sm" onClick={handleNextPage}>
+                                                    {'Next Page >>'}
+                                                </button>
+                                            )}
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>

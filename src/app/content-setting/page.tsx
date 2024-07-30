@@ -22,13 +22,8 @@ import Cryptr from 'cryptr';
 import { ModelGetProjectDetailRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/GetProjectDetailRequest/GetProjectDetailRequest";
 import { ResultModelGetProjectDetailResponseInterface } from "../Dashboard/Domain/Models/ModelResponse/GetProjectDetailResponse/GetProjectDetailResponse";
 import GetProjectDetailService from "../Dashboard/Domain/Service/GetProjectDetailService/GetProjectDetailService";
-
-interface ProjectData {
-    title: string;
-    imageCover: File | null; // For handling file inputs
-    eventDate: string;
-    showCover: boolean;
-}
+import CekUserLoginService from "../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService";
+ 
 
 const ContentSettingPage = () => {
     const [first, setFirst] = useState("Pink-Esssence");
@@ -41,35 +36,40 @@ const ContentSettingPage = () => {
 
     const [isProjectIdReady, setIsProjectIdReady] = useState(false); // add a state variable to track when the project ID is ready
     const router = useRouter();
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
-        const keyEncrypt = new Cryptr('nViteMeKey');
-        let queryString = window.location.search; 
-        if (queryString.startsWith('?')) {
-          queryString = queryString.substring(1);
-        } 
-        queryString = keyEncrypt.decrypt(queryString);
-        let urlParam = new URLSearchParams(queryString);   
-        
-        if (urlParam) {
-          let decryptedProjectParam = urlParam.get('projectId');
-          // update the state variable
-          try {  // extract the project ID from the decrypted string
-            setProjectId(decryptedProjectParam); 
-            setIsProjectIdReady(true); // set the flag to true
-          } catch (error) {
-            console.error("Error decrypting project ID:", error);
-          }
-        };  
-        if (!storedToken) {
-          router.replace("/"); // Redirect to dashboard if token is not found
+        checkUserLogin();
+        if (storedToken) {
+            const keyEncrypt = new Cryptr('nViteMeKey');
+            let queryString = window.location.search; 
+            if (queryString.startsWith('?')) {
+            queryString = queryString.substring(1);
+            } 
+            queryString = keyEncrypt.decrypt(queryString);
+            let urlParam = new URLSearchParams(queryString);   
+            
+            if (urlParam) {
+            let decryptedProjectParam = urlParam.get('projectId');
+            // update the state variable
+            try {  // extract the project ID from the decrypted string
+                setProjectId(decryptedProjectParam); 
+                setIsProjectIdReady(true); // set the flag to true
+            } catch (error) {
+                console.error("Error decrypting project ID:", error);
+            }
+            }; 
+        }else{
+            router.replace("/"); 
         }
       }, []);
     
       useEffect(() => {
         if (isProjectIdReady && projectId !== null) {
           handleGetProjectDetails(projectId);
+         
+          
         }
       }, [isProjectIdReady, projectId]);
     
@@ -95,16 +95,39 @@ const ContentSettingPage = () => {
         } 
       };
 
-      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type, checked, files } = event.target;
-    
-        // setData(prevData => ({
-        //     ...prevData,
-        //     [name]: type === 'checkbox' ? checked : (type === 'file' ? (files ? files[0] : null) : value)
-        // }));
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(data);
+        
+        if (data) {
+            setData({
+                ...data,
+                title: event.target.value,
+                hero: {
+                    ...data.hero,
+                    date: new Date(event.target.value)
+                  }
+
+            });
+        }
     };
     
-
+    const checkUserLogin = async () => {
+        try {
+          const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
+          if (serviceCheckUserLogin?.result) { // check if result is truthy
+            setIsUserLoggedIn(false); // or leave it unchanged
+          } else {
+            setIsUserLoggedIn(true);
+          }
+        } catch (error: any) {
+            if (error.response  ) {
+                setIsUserLoggedIn(true);
+            }
+          console.error("check User Login error:", error);
+          setError("An error occurred. Please try again later.");
+        }
+      };
+    
     const getMessage = async () => {
         console.log("run");
         const res = await Service.GET({
@@ -120,8 +143,8 @@ const ContentSettingPage = () => {
 
     
     const handleLogout = async () => { // Clear token from localStorage
-        const logoutService = await LogoutService.logoutService();
         try {
+            const logoutService = await LogoutService.logoutService();
             if (logoutService ?. result == true) {
                 await localStorage.removeItem("token");
                 router.replace("/");
@@ -136,33 +159,37 @@ const ContentSettingPage = () => {
         // router.push("/");
     };
     
-    const handleSubmit = async () => {
-        if (data?.hero.img instanceof File) {
-            const formData = new FormData();
-            formData.append('imageCover', data.hero.img);
-            // Handle file upload
-        }
+    // const handleSubmit = async () => {
+    //     if (data.hero.img instanceof File) {
+    //         const formData = new FormData();
+    //         formData.append('imageCover', data.hero.img);
+    //         // Handle file upload
+    //     }
     
-        try {
-            const response = await fetch('/api/submit', {
-                method: 'POST',
-                body: JSON.stringify({
-                    title: data?.title,
-                    eventDate: data?.hero.date,
-                    showCover: data?.hero.isShow
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error('Form submission error:', error);
-        }
-    };
+    //     try {
+    //         const response = await fetch('/api/submit', {
+    //             method: 'POST',
+    //             body: JSON.stringify({
+    //                 title: data?.title,
+    //                 eventDate: data?.hero.date,
+    //                 showCover: data?.hero.isShow
+    //             }),
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         });
+    //         const result = await response.json();
+    //         console.log(result);
+    //     } catch (error) {
+    //         console.error('Form submission error:', error);
+    //     }
+    //
 
-    
+    useEffect(() => {  
+        if (isUserLoggedIn) {           
+            router.replace("/"); 
+        }
+    }, [isUserLoggedIn]); 
     if (first === "Pink-Essence") { // return <RedEssence />;
     } else {
         // console.log("Rendering data:", data);
@@ -236,57 +263,65 @@ const ContentSettingPage = () => {
                             </h2>
                             <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
                             <div className="accordion-body">
-    <div className="mb-3">
-        <label htmlFor="titleCover" className="form-label">Title Cover</label>
-        <input
-            type="text"
-            className="form-control"
-            id="titleCover"
-            name="title"
-            placeholder="Title Cover"
-            value={data?.title || ''}
-            onChange={handleChange}
-        />
-    </div>
-    <div className="mb-3">
-        <label htmlFor="imageCover" className="form-label">Image Cover</label>
-        <input
-            type="file"
-            className="form-control"
-            id="imageCover"
-            name="imageCover"
-            value={data?.hero.img || ''}
-            onChange={handleChange}
-        />
-    </div>
-    <div className="mb-3">
-        <label htmlFor="eventDate" className="form-label">Event Date</label>
-        <input
-            type="text"
-            className="form-control"
-            id="eventDate"
-            name="eventDate"
-            placeholder="Event Date"
-            value={data?.hero.date || ''}
-            onChange={handleChange}
-        />
-    </div>
-    <div className="mb-3 form-check form-switch">
-        <input
-            className="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="showCoverDepanSwitch"
-            name="showCover"
-            checked={data?.hero.isShow || false}
-            onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="showCoverDepanSwitch">Show Cover</label>
-    </div>
-    <div className="mb-3">
-        <button className="btn btn-warning" onClick={handleSubmit}>Apply</button>
-    </div>
-</div>
+                                <div className="mb-3">
+                                    <label htmlFor="titleCover" className="form-label">Title Cover</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="titleCover"
+                                        name="title"
+                                        placeholder="Title Cover"
+                                        value={data?.title || ''}
+                                        onChange={handleChange}
+                                    /> 
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="imageCover" className="form-label">Image Cover</label>
+                                    <input
+                                        type="file"
+                                        className="form-control"
+                                        id="imageCover"
+                                        name="imageCover"
+                                        // value={data?.hero.img || ''}
+                                        // onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="eventDate" className="form-label">Event Date</label>
+                                    <input
+                                        type="date"
+                                        className="form-control"
+                                        id="eventDate"
+                                        name="eventDate"
+                                        placeholder="Event Date"
+                                        value={data?.hero.date ? new Date(data.hero.date).toISOString().split('T')[0] : ''}
+                                        onChange={(event) => {
+                                            // You might want to add a separate handleChange function for this field
+                                            handleChange(event);
+                                        }}
+                                    /> 
+                                </div>
+                                <div className="mb-3 form-check form-switch">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="showCoverDepanSwitch"
+                                        name="showCover"
+                                        // checked={data?.hero.isShow || false}
+                                        // onChange={handleChange}
+                                    />
+                                    <label className="form-check-label" htmlFor="showCoverDepanSwitch">Show Cover</label>
+                                </div>
+                                <div className="mb-3">
+                                    <button 
+                                        className="btn btn-warning" 
+                                        // onClick={handleSubmit}
+                                    >
+                                        Apply
+                                    </button>
+                                </div>
+                            </div>
 
                             </div>
                         </div>
