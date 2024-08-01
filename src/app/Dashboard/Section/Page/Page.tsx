@@ -45,8 +45,9 @@ const DashboardPage = () => {
         // setPage(page + 1);
         let nextPage = page + 1;
         handleGetMyProjects(nextPage, 10, '');
-    }
-
+        
+    }  
+    
     const getIdForEdit = async (projectId: string) => { 
         let projectParam = `projectId=${projectId}`;
         let keyEncrypt = new Cryptr('nViteMeKey');
@@ -244,7 +245,8 @@ const DashboardPage = () => {
                                 <tfoot >
                                     <tr >
                                         <td className="item-right" colSpan={7}>
-                                            {page < totalPages && (
+                                            {page+1 < totalPages && (
+                                                
                                                 <button className="color-main btn btn-sm" onClick={handleNextPage}>
                                                     {'Next Page >>'}
                                                 </button>
