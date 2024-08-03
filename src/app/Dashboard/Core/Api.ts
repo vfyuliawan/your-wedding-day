@@ -7,7 +7,8 @@ const timeOut = 60000;
 // const errorHandler = useErrorHandler();
 
 export const baseUrl = (): string => {
-  return "https://innovative-emotion-production.up.railway.app";
+  // return "https://innovative-emotion-production.up.railway.app";
+  return "http://localhost:8080";
 };
 
 export enum CallBackError {

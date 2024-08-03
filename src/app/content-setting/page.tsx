@@ -1010,6 +1010,153 @@ const ContentSettingPage = () => {
                         </div>
                         <div className="accordion-item">
                             <h2 className="accordion-header">
+                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                                    Gift
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseSix" className="accordion-collapse collapse">
+                                <div className="accordion-body">
+                                    {data?.gift.gifts.map((gift, index) => (
+                                        <div key={index} className="accordion" id="accordionPanelsStayOpenExample">
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header">
+                                                <button
+                                                    className="accordion-button"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target={`#panelsStayOpen-collapseSix-${index + 1}`}
+                                                    aria-expanded="true"
+                                                    aria-controls={`panelsStayOpen-collapseSix-${index + 1}`}
+                                                >
+                                                    Gift {index + 1}
+                                                </button>
+                                                </h2>
+                                                <div id={`panelsStayOpen-collapseSix-${index + 1}`} className="accordion-collapse collapse show">
+                                                    <div className="accordion-body">
+                                                        <div className="mb-3">
+                                                        <label htmlFor={`bank${index + 1}`} className="form-label">
+                                                            Bank
+                                                        </label> 
+                                                            <select 
+                                                                value={gift.name}
+                                                                id={`bank${index + 1}`}
+                                                                className="form-select" 
+                                                                aria-label="Default select example"
+                                                                onChange={(val) => {
+                                                                    setData(prevState => {
+                                                                        return {
+                                                                            ...prevState,
+                                                                            gift: {
+                                                                              ...prevState?.gift,
+                                                                              gifts: prevState?.gift.gifts.map((gift, i) => {
+                                                                                if (i === index) {
+                                                                                  return { ...gift, bank: val.target.value };
+                                                                                }
+                                                                                return gift;
+                                                                              }),
+                                                                            },
+                                                                          } as ResultModelGetProjectDetailResponseInterface
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <option selected>--- Select Bank ---</option>
+                                                                <option value="BCA">Bank BCA</option>
+                                                                <option value="Mandiri">Bank Mandiri</option>
+                                                                <option value="BNI">Bank BNI</option>
+                                                                <option value="BRI">Bank BRI</option>
+                                                                <option value="BSI">Bank BSI</option>
+                                                                <option value="UOB">Bank UOB</option>
+                                                                <option value="BTPN">Bank BTPN</option>
+                                                                <option value="CIMB">Bank CIMB</option>
+                                                                <option value="OCBC">Bank OCBC</option>
+                                                                <option value="BJB">Bank BJB</option>
+                                                                <option value="MEGA">Bank MEGA</option>
+                                                                <option value="BTN">Bank BTN</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="mb-3">
+                                                        <label
+                                                            htmlFor={`bankAccountNumber${index + 1}`}
+                                                            className="form-label"
+                                                        >Bank Account Number</label>
+                                                            <input
+                                                                type="text"
+                                                                className="form-control"
+                                                                id={`bankAccountNumber${index + 1}`}
+                                                                name={`bankAccountNumber${index + 1}`}
+                                                                placeholder="0123456789"
+                                                                value={gift.noRek}
+                                                                onChange={(val) => {
+                                                                    console.log(index);
+                                                                    setData(prevState => {
+                                                                        return {
+                                                                            ...prevState,
+                                                                            gift: {
+                                                                              ...prevState?.gift,
+                                                                              gifts: prevState?.gift.gifts.map((gift, i) => {
+                                                                                if (i === index) {
+                                                                                  return { ...gift, accountNumber: val.target.value };
+                                                                                }
+                                                                                return gift;
+                                                                              }),
+                                                                            },
+                                                                        } as ResultModelGetProjectDetailResponseInterface
+                                                                    });
+                                                                }}
+                                                            /> 
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    ))}
+                                    <button className="btn btn-primary mt-3" onClick={(val) => {
+                                        setData(prevState => {
+                                            
+                                             
+                                          return {
+                                            ...prevState,
+                                            gift: {
+                                              ...prevState?.gift,
+                                              gifts: [
+                                                    // ...prevState?.gift?.gifts, 
+                                                    { name: '', noRek: '' }
+                                                ],
+                                            },
+                                          } as ResultModelGetProjectDetailResponseInterface;
+                                        });
+                                        setGiftCount(giftCount + 1);
+                                    }}
+                                    >
+                                        Add Gift 
+                                    </button>
+                                    <div className="mb-3 mt-3 form-check form-switch">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            role="switch"
+                                            id="showgiftSwitch"
+                                            name="showgift"
+                                            checked={data?.gift.isShow || false}
+                                            onChange={(val) => {
+                                                setData(prevState => {
+                                                    return { 
+                                                        ...prevState,
+                                                        gift: {
+                                                            ...prevState?.gift,
+                                                            isShow: val.target.checked
+                                                        }
+                                                    } as ResultModelGetProjectDetailResponseInterface
+                                                })
+                                            }}
+                                        />
+                                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Show Gift</label>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div className="accordion-item">
+                            <h2 className="accordion-header">
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
                                     Couple's
                                 </button>
@@ -1292,155 +1439,13 @@ const ContentSettingPage = () => {
                                         />
                                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Show Hero</label>
                                     </div>
-                                    <div className="mb-3">
-                                        <button className="btn btn-warning">Apply</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
-                        <div className="accordion-item">
-                            <h2 className="accordion-header">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-                                    Gift
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseFive" className="accordion-collapse collapse">
-                                <div className="accordion-body">
-                                    {data?.gift.gifts.map((gift, index) => (
-                                        <div key={index} className="accordion" id="accordionPanelsStayOpenExample">
-                                            <div className="accordion-item">
-                                                <h2 className="accordion-header">
-                                                <button
-                                                    className="accordion-button"
-                                                    type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target={`#panelsStayOpen-collapseFive-${index + 1}`}
-                                                    aria-expanded="true"
-                                                    aria-controls={`panelsStayOpen-collapseFive-${index + 1}`}
-                                                >
-                                                    Gift {index + 1}
-                                                </button>
-                                                </h2>
-                                                <div id={`panelsStayOpen-collapseFive-${index + 1}`} className="accordion-collapse collapse show">
-                                                    <div className="accordion-body">
-                                                        <div className="mb-3">
-                                                        <label htmlFor={`bank${index + 1}`} className="form-label">
-                                                            Bank
-                                                        </label> 
-                                                            <select 
-                                                                value={gift.name}
-                                                                id={`bank${index + 1}`}
-                                                                className="form-select" 
-                                                                aria-label="Default select example"
-                                                                onChange={(val) => {
-                                                                    setData(prevState => {
-                                                                        return {
-                                                                            ...prevState,
-                                                                            gift: {
-                                                                              ...prevState?.gift,
-                                                                              gifts: prevState?.gift.gifts.map((gift, i) => {
-                                                                                if (i === index) {
-                                                                                  return { ...gift, bank: val.target.value };
-                                                                                }
-                                                                                return gift;
-                                                                              }),
-                                                                            },
-                                                                          } as ResultModelGetProjectDetailResponseInterface
-                                                                    });
-                                                                }}
-                                                            >
-                                                                <option selected>--- Select Bank ---</option>
-                                                                <option value="BCA">Bank BCA</option>
-                                                                <option value="Mandiri">Bank Mandiri</option>
-                                                                <option value="BNI">Bank BNI</option>
-                                                                <option value="BRI">Bank BRI</option>
-                                                                <option value="BSI">Bank BSI</option>
-                                                                <option value="UOB">Bank UOB</option>
-                                                                <option value="BTPN">Bank BTPN</option>
-                                                                <option value="CIMB">Bank CIMB</option>
-                                                                <option value="OCBC">Bank OCBC</option>
-                                                                <option value="BJB">Bank BJB</option>
-                                                                <option value="MEGA">Bank MEGA</option>
-                                                                <option value="BTN">Bank BTN</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="mb-3">
-                                                        <label
-                                                            htmlFor={`bankAccountNumber${index + 1}`}
-                                                            className="form-label"
-                                                        >Bank Account Number</label>
-                                                            <input
-                                                                type="text"
-                                                                className="form-control"
-                                                                id={`bankAccountNumber${index + 1}`}
-                                                                name={`bankAccountNumber${index + 1}`}
-                                                                placeholder="0123456789"
-                                                                value={gift.noRek}
-                                                                onChange={(val) => {
-                                                                    setData(prevState => {
-                                                                        return {
-                                                                            ...prevState,
-                                                                            gift: {
-                                                                              ...prevState?.gift,
-                                                                              gifts: prevState?.gift.gifts.map((gift, i) => {
-                                                                                if (i === index) {
-                                                                                  return { ...gift, accountNumber: val.target.value };
-                                                                                }
-                                                                                return gift;
-                                                                              }),
-                                                                            },
-                                                                        } as ResultModelGetProjectDetailResponseInterface
-                                                                    });
-                                                                }}
-                                                            /> 
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    ))}
-                                    <button className="btn btn-primary" onClick={(val) => {
-                                        setData(prevState => {
-                                          return {
-                                            ...prevState,
-                                            gift: {
-                                              ...prevState?.gift,
-                                              gifts: [
-                                                    // ...prevState?.gift?.gifts, 
-                                                    { name: '', noRek: '' }
-                                                ],
-                                            },
-                                          } as ResultModelGetProjectDetailResponseInterface;
-                                        });
-                                        setGiftCount(giftCount + 1);
-                                    }}
-                                    >
-                                        Add Gift
-                                    </button>
-                                    <div className="mb-3 mt-3 form-check form-switch">
-                                        <input
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            role="switch"
-                                            id="showgiftSwitch"
-                                            name="showgift"
-                                            checked={data?.gift.isShow || false}
-                                            onChange={(val) => {
-                                                setData(prevState => {
-                                                    return { 
-                                                        ...prevState,
-                                                        gift: {
-                                                            ...prevState?.gift,
-                                                            isShow: val.target.checked
-                                                        }
-                                                    } as ResultModelGetProjectDetailResponseInterface
-                                                })
-                                            }}
-                                        />
-                                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Show Gift</label>
-                                    </div> 
-                                </div>
-                            </div>
+                        
+                        <div className="mb-3">
+                            <button className="btn btn-warning mt-3">Apply</button>
                         </div>
                     </div>
                 </div>
