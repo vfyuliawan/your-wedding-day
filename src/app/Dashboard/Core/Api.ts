@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import ErrorHandler from "./ErrorHandler";
 import useErrorHandler from "./ErrorHandler";
 
-const timeOut = 60000;
+const timeOut = 60000*5; //max request timeout menjadi 3 menit 
 
 // const errorHandler = useErrorHandler();
 

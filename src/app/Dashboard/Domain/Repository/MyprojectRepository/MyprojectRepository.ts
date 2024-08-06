@@ -11,13 +11,13 @@ class MyprojectRepository {
   
     async myproject  (props: ModelMyprojectRequestInterface): Promise<ModelMyprojectResponseInterface | null>  {
       const res = await get({ 
-        path: "/api/v1/project/myProjects",
+        path: `/api/v1/project/myProjects?currentPage=${props.currentPage}&size=${props.size}`,
         // reqBody: {},
-        params: {
-          currentPage: props.currentPage,
-          size: props.size,
-          title: props.title ?? '',
-        }, 
+        // params: {
+        //   currentPage: props.currentPage,
+        //   size: props.size,
+        //   title: props.title ?? '',
+        // }, 
         isNeedToken: true 
       });
       if (res != null) {
