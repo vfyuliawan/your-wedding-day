@@ -3,6 +3,10 @@
 //   import { Convert, ModelRequestUpdateProjectInterface } from "./file";
 //
 //   const modelRequestUpdateProjectInterface = Convert.toModelRequestUpdateProjectInterface(json);
+export interface ModelRequestUpdateProjectPatch{
+    body:ModelRequestUpdateProjectInterface,
+    param: string
+}
 
 export interface ModelRequestUpdateProjectInterface {
     title:     string;

@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import ErrorHandler from "./ErrorHandler";
 import useErrorHandler from "./ErrorHandler";
+import Swal from "sweetalert2";
 
 const timeOut = 60000*5; //max request timeout menjadi 3 menit 
 
@@ -91,9 +92,11 @@ async function RequestData(
     } else if (resp.status === 201) {
       return JSON.stringify(resp.data);
     } else if (resp.status === 303) {
-      console.log({
-        message: resp.data.message,
-        status: resp.data.status,
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
       });
     } else if (resp.status === 400) {
       const e = resp.data.message;
@@ -101,54 +104,70 @@ async function RequestData(
       if (isErrorCreate) {
         return CallBackError.NetworkError;
       } else {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
       }
     } else if (resp.status === 401) {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     } else if (resp.status === 403) {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     } else if (
       resp.status === 404 ||
       resp.status === 413 ||
       resp.status === 422 ||
       resp.status === 409
     ) {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     } else if (resp.status === 500) {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     } else if (resp.status === 503 || resp.status === 525) {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     } else if (resp.status === 504) {
-        console.log({
-            message: resp.data.message,
-            status: resp.data.status,
-          });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     }
     return null;
   } catch (e) {
     console.log("error request", e);
-    console.log({
-        message: e,
-        status: "Bad Request",
-      });
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: e as string,
+      footer: '<a href="#">Why do I have this issue?</a>'
+    });
     return null;
   } finally {
     console.debug("::FINISH::");

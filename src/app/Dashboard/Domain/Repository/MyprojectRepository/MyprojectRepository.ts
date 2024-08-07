@@ -8,7 +8,7 @@ import {
 } from "../../Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
 import { ModelMyprojectRequestInterface } from "../../Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
 import { title } from "process";
-import { ConvertModelRequestUpdateProjectInterface, ModelRequestUpdateProjectInterface } from "../../Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
+import { ConvertModelRequestUpdateProjectInterface, ModelRequestUpdateProjectInterface, ModelRequestUpdateProjectPatch } from "../../Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
 
 class MyprojectRepository {
   constructor() {}
@@ -31,11 +31,11 @@ class MyprojectRepository {
   }
 
   async updateProject(
-    props: ModelRequestUpdateProjectInterface
+    props: ModelRequestUpdateProjectPatch
   ): Promise<ModelMyprojectResponseInterface | null> {
     const res = await patch({
-      path: `/api/v1/project/update`,
-      reqBody: ConvertModelRequestUpdateProjectInterface.modelRequestUpdateProjectInterfaceToJson(props),
+      path: `/api/v1/project/update?idProject=`,
+      reqBody: ConvertModelRequestUpdateProjectInterface.modelRequestUpdateProjectInterfaceToJson(props.body),
       isNeedToken: true,
     });
     if (res != null) {
