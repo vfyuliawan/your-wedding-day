@@ -36,6 +36,7 @@ import {
 } from "../Dashboard/Domain/Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
+import Constant from "../Constant/Constant";
 
 const ContentSettingPage = () => {
   const [first, setFirst] = useState("Pink-Esssence");
@@ -69,26 +70,6 @@ const ContentSettingPage = () => {
     const storedToken = localStorage.getItem("token");
     checkUserLogin();
     if (storedToken) {
-      // const keyEncrypt = new Cryptr("nViteMeKey");
-      // let queryString = window.location.search;
-      // if (queryString.startsWith("?")) {
-      //   queryString = queryString.substring(1);
-      // }
-      // queryString = keyEncrypt.decrypt(queryString);
-      // let urlParam = new URLSearchParams(queryString);
-
-      // if (urlParam) {
-      //   let decryptedProjectParam = urlParam.get("projectId");
-      //   // update the state variable
-      //   try {
-      //     // extract the project ID from the decrypted string
-      //     setProjectId(decryptedProjectParam);
-      //     setIsProjectIdReady(true); // set the flag to true
-      //   } catch (error) {
-      //     console.error("Error decrypting project ID:", error);
-      //   }
-      // }
-
       const projectId = searchParams?.get("projectId");
       setProjectId(projectId);
       setIsProjectIdReady(true);
@@ -352,8 +333,20 @@ const ContentSettingPage = () => {
           <div className="container">
             <div className="row justify-content-center ">
               <div className="col-md-12 col-sm-12 col-12">
-                <div className="card ">
+                <div className="card " style={{
+                  // display:'flex',
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                }}>
                   <img src="image/background/prewed-bg.jpg" />
+                  {/* <img
+                    src={`image/themeList/${data?.theme.theme}.png`}
+                    style={{
+                      alignItems: "center",
+                      width: "70%",
+                      height: "70%",
+                    }}
+                  /> */}
                   <div className="card-buttons">
                     <button className="view-btn">
                       <i className="bi bi-eye" />
@@ -367,19 +360,17 @@ const ContentSettingPage = () => {
           <div className="container mt-2 mb-5 ">
             <div className="accordion" id="accordionPanelsStayOpenExample">
               {loading ? (
-                <div
-                  className="accordion-item"
-                >
+                <div className="accordion-item">
                   <div
                     style={{
                       width: "100%",
-                      height:200,
+                      height: 200,
                       alignItems: "center",
                       justifyContent: "center",
                       alignSelf: "center",
-                      display:'flex',
-                      paddingTop:'1rem',
-                      paddingBottom:'1rem'
+                      display: "flex",
+                      paddingTop: "1rem",
+                      paddingBottom: "1rem",
                     }}
                   >
                     <ReactLoading
@@ -393,6 +384,7 @@ const ContentSettingPage = () => {
               ) : (
                 <>
                   <CoverDepan data={data} setData={setData} />
+                  <ThemeView data={data} setData={setData} />
                   <HomeView data={data} setData={setData} />
                   <HeroView data={data} setData={setData} />
                   <EventInfo data={data} setData={setData} />
@@ -420,6 +412,164 @@ const ContentSettingPage = () => {
     );
   }
 };
+
+function ThemeView(params: {
+  data?: ResultModelGetProjectDetailResponseInterface;
+  setData: Dispatch<
+    SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
+  >;
+}) {
+  return (
+    <div className="accordion-item">
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseNine"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseNine"
+        >
+          Theme
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseNine"
+        className="accordion-collapse collapse"
+      >
+        <div className="accordion-body">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <img
+              src={`image/themelist/${params.data?.theme.theme}.png`}
+              style={{
+                width: "50%",
+                alignItems: "center",
+                height: "50%",
+                borderTopLeftRadius: "10%",
+                borderBottomRightRadius: "10%",
+              }}
+              alt=""
+              srcSet=""
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor={`themeName`} className="form-label">
+              Theme
+            </label>
+            <select
+              defaultValue={params.data?.theme.theme}
+              value={params.data?.theme.theme}
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(val) => {
+                const newValue = val.target.value;
+                console.log(newValue);
+
+                params.setData((prevState) => {
+                  return {
+                    ...prevState,
+                    theme: {
+                      ...prevState?.theme,
+                      theme: newValue,
+                    },
+                  } as ResultModelGetProjectDetailResponseInterface;
+                });
+              }}
+            >
+              <option selected>-- {params.data?.theme.theme} --</option>
+              {Constant.listTheme.map((item) => {
+                return <option value={item.key}>{item.val}</option>;
+              })}
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="slugTheme" className="form-label">
+              Slug
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="alamatTheme"
+              name="slug"
+              placeholder="slug"
+              defaultValue={params.data?.theme.slug || ""}
+              onChange={(val) => {
+                params.setData((prevState) => {
+                  return {
+                    ...prevState,
+                    theme: {
+                      ...prevState?.theme,
+                      slug: val.target.value,
+                    },
+                  } as ResultModelGetProjectDetailResponseInterface;
+                });
+              }}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="titleHome" className="form-label">
+              Alamat
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="alamatTheme"
+              name="title"
+              placeholder="Alamat"
+              defaultValue={params.data?.theme.alamat || ""}
+              onChange={(val) => {
+                params.setData((prevState) => {
+                  return {
+                    ...prevState,
+                    theme: {
+                      ...prevState?.theme,
+                      alamat: val.target.value,
+                    },
+                  } as ResultModelGetProjectDetailResponseInterface;
+                });
+              }}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="titleHome" className="form-label">
+              Embeded Map
+            </label>
+            <textarea
+              className="form-control"
+              id="embeded"
+              style={{
+                height: 200,
+              }}
+              name="embeded"
+              placeholder="Embeded"
+              defaultValue={params.data?.theme.embeded || ""}
+              onChange={(val) => {
+                params.setData((prevState) => {
+                  return {
+                    ...prevState,
+                    theme: {
+                      ...prevState?.theme,
+                      embeded: val.target.value,
+                    },
+                  } as ResultModelGetProjectDetailResponseInterface;
+                });
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function GaleryView(params: {
   data?: ResultModelGetProjectDetailResponseInterface;
