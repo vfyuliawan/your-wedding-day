@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 // import { useState } from "react";
 import PinkEssence from "../LuxuryTheme/LuxuryTheme";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,7 +34,7 @@ const ContentSettingPage = () => {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [projectId, setProjectId] = useState<string | null>(null);
+  const [projectId, setProjectId] = useState<string | null | undefined>(null);
   const [data, setData] = useState<
     ResultModelGetProjectDetailResponseInterface | undefined
   >(undefined);
@@ -49,6 +49,8 @@ const ContentSettingPage = () => {
       } as GiftElementModelGetProjectDetailResponseInterface;
     })
   );
+  const searchParams = useSearchParams();
+
 
   const [isProjectIdReady, setIsProjectIdReady] = useState(false); // add a state variable to track when the project ID is ready
   const router = useRouter();
@@ -58,25 +60,30 @@ const ContentSettingPage = () => {
     const storedToken = localStorage.getItem("token");
     checkUserLogin();
     if (storedToken) {
-      const keyEncrypt = new Cryptr("nViteMeKey");
-      let queryString = window.location.search;
-      if (queryString.startsWith("?")) {
-        queryString = queryString.substring(1);
-      }
-      queryString = keyEncrypt.decrypt(queryString);
-      let urlParam = new URLSearchParams(queryString);
+      // const keyEncrypt = new Cryptr("nViteMeKey");
+      // let queryString = window.location.search;
+      // if (queryString.startsWith("?")) {
+      //   queryString = queryString.substring(1);
+      // }
+      // queryString = keyEncrypt.decrypt(queryString);
+      // let urlParam = new URLSearchParams(queryString);
 
-      if (urlParam) {
-        let decryptedProjectParam = urlParam.get("projectId");
-        // update the state variable
-        try {
-          // extract the project ID from the decrypted string
-          setProjectId(decryptedProjectParam);
-          setIsProjectIdReady(true); // set the flag to true
-        } catch (error) {
-          console.error("Error decrypting project ID:", error);
-        }
-      }
+      // if (urlParam) {
+      //   let decryptedProjectParam = urlParam.get("projectId");
+      //   // update the state variable
+      //   try {
+      //     // extract the project ID from the decrypted string
+      //     setProjectId(decryptedProjectParam);
+      //     setIsProjectIdReady(true); // set the flag to true
+      //   } catch (error) {
+      //     console.error("Error decrypting project ID:", error);
+      //   }
+      // }
+
+      const projectId = searchParams?.get("projectId");
+          setProjectId(projectId);
+          setIsProjectIdReady(true);
+
     } else {
       router.replace("/");
     }
@@ -88,7 +95,7 @@ const ContentSettingPage = () => {
     }
   }, [isProjectIdReady, projectId]);
 
-  const handleGetProjectDetails = async (id: string | null) => {
+  const handleGetProjectDetails = async (id?: string | null) => {
     if (id === null) {
       // handle the case where id is null
       return;

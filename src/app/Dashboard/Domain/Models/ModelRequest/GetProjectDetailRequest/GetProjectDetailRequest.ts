@@ -1,5 +1,5 @@
 export interface ModelGetProjectDetailRequestInterface {
-    id: string; 
+    id?: string; 
 }
 
 // Converts JSON strings to/from your types

@@ -7,6 +7,8 @@ import CekUserLoginService from "../../Domain/Service/CekUserLoginService/CekUse
 import Link from "next/link";
 import LogoutService from "../../Domain/Service/LogoutService/LogoutService";
 import ReactLoading from "react-loading";
+import { useRouter } from 'next/navigation'
+
 
 const DashboardPage = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -16,8 +18,11 @@ const DashboardPage = () => {
   const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>(
     []
   );
+  const router = useRouter();
+
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setisLoading] = useState(false);
+
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -51,10 +56,14 @@ const DashboardPage = () => {
   };
 
   const getIdForEdit = async (projectId: string) => {
-    let projectParam = `projectId=${projectId}`;
-    let keyEncrypt = new Cryptr("nViteMeKey");
-    let encryptedProjectParam = keyEncrypt.encrypt(projectParam);
-    window.location.href = `/content-setting?` + encryptedProjectParam;
+    // let projectParam = `projectId=${projectId}`;
+    // let keyEncrypt = new Cryptr("nViteMeKey");
+    // let encryptedProjectParam = keyEncrypt.encrypt(projectParam);
+    // window.location.href = `/content-setting?` + encryptedProjectParam;
+    // window.location.href = `/content-setting?projectId=${projectId}`;
+    // router.push(`/content-setting?projectId=${projectId}`)
+    router.push(`/content-setting?projectId=${projectId}`)
+
   };
   const handleGetMyProjects = async (
     currentPage: number,

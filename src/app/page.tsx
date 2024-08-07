@@ -34,9 +34,9 @@ import Dashboard from "./Dashboard/Dashboard";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const getParams = searchParams.get("a");
-  const getGuest = searchParams.get("to");
-  const getIdGuest = searchParams.get("id");
+  const getParams = searchParams?.get("a");
+  const getGuest = searchParams?.get("to");
+  const getIdGuest = searchParams?.get("id");
   const [themeName, setThemeName] = useState("");
   const [guest, setGuest] = useState<string>("");
   const [idGuest, setidGuest] = useState<string>("");
