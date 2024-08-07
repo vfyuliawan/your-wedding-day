@@ -383,8 +383,8 @@ const ContentSettingPage = () => {
                 </div>
               ) : (
                 <>
-                  <CoverDepan data={data} setData={setData} />
                   <ThemeView data={data} setData={setData} />
+                  <CoverDepan data={data} setData={setData} />
                   <HomeView data={data} setData={setData} />
                   <HeroView data={data} setData={setData} />
                   <EventInfo data={data} setData={setData} />
@@ -423,11 +423,11 @@ function ThemeView(params: {
     <div className="accordion-item">
       <h2 className="accordion-header">
         <button
-          className="accordion-button collapsed"
+          className="accordion-button"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#panelsStayOpen-collapseNine"
-          aria-expanded="false"
+          aria-expanded="true"
           aria-controls="panelsStayOpen-collapseNine"
         >
           Theme
@@ -435,7 +435,7 @@ function ThemeView(params: {
       </h2>
       <div
         id="panelsStayOpen-collapseNine"
-        className="accordion-collapse collapse"
+        className="accordion-collapse collapse show"
       >
         <div className="accordion-body">
           <div
@@ -2385,15 +2385,17 @@ function CoverDepan(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) {
+
+
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
         <button
-          className="accordion-button"
+          className="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#panelsStayOpen-collapseOne"
-          aria-expanded="true"
+          aria-expanded="false"
           aria-controls="panelsStayOpen-collapseOne"
         >
           Cover Depan
@@ -2401,7 +2403,7 @@ function CoverDepan(params: {
       </h2>
       <div
         id="panelsStayOpen-collapseOne"
-        className="accordion-collapse collapse show"
+        className="accordion-collapse collapse"
       >
         <div className="accordion-body">
           <div className="mb-3">
