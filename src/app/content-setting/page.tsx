@@ -254,12 +254,12 @@ const ContentSettingPage = () => {
         },
       },
     } as ModelRequestUpdateProjectInterface;
-
+    
     const props : ModelRequestUpdateProjectPatch = {
       body: body,
       param:projectId
     } as ModelRequestUpdateProjectPatch
-    
+
     const result = await MyprojectService.updateProjectService(props);
     if (result !== null) {
       Swal.fire({
