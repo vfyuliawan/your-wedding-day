@@ -3,6 +3,7 @@
 // import LoginRepository from "../../Repository/LoginRepository/LoginRepository";
 
 import { ModelMyprojectRequestInterface } from "../../Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
+import { ModelRequestUpdateProjectInterface } from "../../Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
 import { ModelMyprojectResponseInterface } from "../../Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
 import MyprojectRepository from "../../Repository/MyprojectRepository/MyprojectRepository";
 
@@ -18,6 +19,14 @@ class MyprojectService {
 
   async myprojectService (props: ModelMyprojectRequestInterface): Promise<ModelMyprojectResponseInterface | null> {
     const result = await MyprojectRepository.myproject(props);
+    if (result != null) {
+      return result;
+    }
+    return null;
+  };
+
+  async updateProjectService (props: ModelRequestUpdateProjectInterface): Promise<ModelMyprojectResponseInterface | null> {
+    const result = await MyprojectRepository.updateProject(props);
     if (result != null) {
       return result;
     }

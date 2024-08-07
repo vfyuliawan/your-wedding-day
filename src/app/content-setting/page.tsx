@@ -28,6 +28,11 @@ import {
 } from "../Dashboard/Domain/Models/ModelResponse/GetProjectDetailResponse/GetProjectDetailResponse";
 import GetProjectDetailService from "../Dashboard/Domain/Service/GetProjectDetailService/GetProjectDetailService";
 import CekUserLoginService from "../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService";
+import Galery from "react-image-gallery";
+import MyprojectService from "../Dashboard/Domain/Service/MyprojectService/MyprojectService";
+import { ModelRequestUpdateProjectInterface } from "../Dashboard/Domain/Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
+import Swal from "sweetalert2";
+import ReactLoading from "react-loading";
 
 const ContentSettingPage = () => {
   const [first, setFirst] = useState("Pink-Esssence");
@@ -55,6 +60,7 @@ const ContentSettingPage = () => {
   const [isProjectIdReady, setIsProjectIdReady] = useState(false); // add a state variable to track when the project ID is ready
   const router = useRouter();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -95,6 +101,8 @@ const ContentSettingPage = () => {
   }, [isProjectIdReady, projectId]);
 
   const handleGetProjectDetails = async (id?: string | null) => {
+    setloading(true);
+
     if (id === null) {
       // handle the case where id is null
       return;
@@ -108,10 +116,15 @@ const ContentSettingPage = () => {
         await GetProjectDetailService.getProjectDetailService(requestParams);
       if (GetProjectDetailServices && GetProjectDetailServices?.result) {
         setData(GetProjectDetailServices.result);
+        setloading(false);
       } else {
+        setloading(false);
+
         setError("Invalid credentials. Please try again.");
       }
     } catch (error) {
+      setloading(false);
+
       console.error("Login error:", error);
       setError("An error occurred. Please try again later.");
     }
@@ -185,31 +198,72 @@ const ContentSettingPage = () => {
     // router.push("/");
   };
 
-  // const handleSubmit = async () => {
-  //     if (data.hero.img instanceof File) {
-  //         const formData = new FormData();
-  //         formData.append('imageCover', data.hero.img);
-  //         // Handle file upload
-  //     }
-
-  //     try {
-  //         const response = await fetch('/api/submit', {
-  //             method: 'POST',
-  //             body: JSON.stringify({
-  //                 title: data?.title,
-  //                 eventDate: data?.hero.date,
-  //                 showCover: data?.hero.isShow
-  //             }),
-  //             headers: {
-  //                 'Content-Type': 'application/json'
-  //             }
-  //         });
-  //         const result = await response.json();
-  //         console.log(result);
-  //     } catch (error) {
-  //         console.error('Form submission error:', error);
-  //     }
-  //
+  const submitApply = async (
+    dataSubmit?: ResultModelGetProjectDetailResponseInterface
+  ) => {
+    setloading(true);
+    const props: ModelRequestUpdateProjectInterface = {
+      title: dataSubmit?.title,
+      theme: dataSubmit?.theme,
+      story: dataSubmit?.story,
+      countdown: dataSubmit?.countdown,
+      cover: {
+        img: dataSubmit?.cover.img,
+        isShow: dataSubmit?.cover.isShow,
+      },
+      braidInfo: {
+        female: {
+          dad: dataSubmit?.braidInfo.female.dad,
+          mom: dataSubmit?.braidInfo.female.mom,
+          name: dataSubmit?.braidInfo.female.name,
+          photo: dataSubmit?.braidInfo.female.image,
+        },
+        male: {
+          dad: dataSubmit?.braidInfo.male.dad,
+          mom: dataSubmit?.braidInfo.male.mom,
+          name: dataSubmit?.braidInfo.male.name,
+          photo: dataSubmit?.braidInfo.male.image,
+        },
+        isShow: dataSubmit?.braidInfo.isShow,
+      },
+      home: {
+        img: dataSubmit?.home.img,
+        isShow: dataSubmit?.home.isShow,
+        quotes: dataSubmit?.home.quotes,
+      },
+      hero: {
+        img: dataSubmit?.hero.img,
+        isShow: dataSubmit?.hero.isShow,
+      },
+      gift: dataSubmit?.gift,
+      galery: dataSubmit?.galery,
+      infoAcara: {
+        akad: {
+          dateAkad: dataSubmit?.infoAcara.akad.dateAkad,
+          imgAkad: dataSubmit?.infoAcara.akad.imageAkad,
+          lokasiAkad: dataSubmit?.infoAcara.akad.lokasiAkad,
+          mapAkad: dataSubmit?.infoAcara.akad.mapAkad,
+          titleAkad: dataSubmit?.infoAcara.akad.titleAkad,
+        },
+        resepsi: {
+          dateResepsi: dataSubmit?.infoAcara.resepsi.dateResepsi,
+          imgResepsi: dataSubmit?.infoAcara.resepsi.imageResepsi,
+          lokasiResepsi: dataSubmit?.infoAcara.resepsi.lokasiResepsi,
+          mapResepsi: dataSubmit?.infoAcara.resepsi.mapResepsi,
+          titleResepsi: dataSubmit?.infoAcara.resepsi.titleResepsi,
+        },
+      },
+    } as ModelRequestUpdateProjectInterface;
+    const result = await MyprojectService.updateProjectService(props);
+    if (result !== null) {
+      Swal.fire({
+        title: "Good job!",
+        text: "Edited Project Success",
+        icon: "success",
+      });
+      setloading(false);
+    }
+  };
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -301,16 +355,37 @@ const ContentSettingPage = () => {
           </div>
           <div className="container mt-2 mb-5 ">
             <div className="accordion" id="accordionPanelsStayOpenExample">
-              <CoverDepan data={data} setData={setData} />
-              <HomeView data={data} setData={setData} />
-              <HeroView data={data} setData={setData} />
-              <EventInfo data={data} setData={setData} />
-              <GiftsView data={data} setData={setData} />
-              <StoryView data={data} setData={setData} />
-              <CouplesView data={data} setData={setData} />
-              <div className="mb-3">
-                <button className="btn btn-warning mt-3">Apply</button>
-              </div>
+              {loading ? (
+                <div className="accordion-item">
+                  <ReactLoading
+                    type={"spin"}
+                    color={"black"}
+                    height={"30%"}
+                    width={"30%"}
+                  />
+                </div>
+              ) : (
+                <>
+                  <CoverDepan data={data} setData={setData} />
+                  <HomeView data={data} setData={setData} />
+                  <HeroView data={data} setData={setData} />
+                  <EventInfo data={data} setData={setData} />
+                  <GiftsView data={data} setData={setData} />
+                  <StoryView data={data} setData={setData} />
+                  <GaleryView data={data} setData={setData} />
+                  <CouplesView data={data} setData={setData} />
+                  <div className="mb-3">
+                    <button
+                      className="btn btn-warning mt-3"
+                      onClick={() => {
+                        submitApply(data);
+                      }}
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -319,6 +394,124 @@ const ContentSettingPage = () => {
     );
   }
 };
+
+function GaleryView(params: {
+  data?: ResultModelGetProjectDetailResponseInterface;
+  setData: Dispatch<
+    SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
+  >;
+}) {
+  return (
+    <div className="accordion-item">
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseEight"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseEight"
+        >
+          Galery {params.data?.story.stories.length}
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseEight"
+        className="accordion-collapse collapse"
+      >
+        <div className="accordion-body">
+          <section
+            style={{ padding: 20, paddingBottom: 15 }}
+            className="design"
+            id="design"
+          >
+            <div className="row justify-content-center">
+              <div className="col-md-8 col-10 text-center">
+                {/* <span>Memori kisah kami</span> */}
+                <h5>Add Your Galery</h5>
+              </div>
+            </div>
+            <div className="scrolling-wrapper">
+              {params.data?.galery.galeries.map((item) => {
+                return (
+                  <div className="card card-block  ">
+                    <img
+                      src={params.data ? "data:image/jpeg;base64," + item : ""}
+                      alt={"imageCover"}
+                    />
+                    {/* <img src="image/background/prewed1.jpeg" alt="Card Image" /> */}
+                  </div>
+                );
+              })}
+            </div>
+            <input
+              type="file"
+              className="form-control"
+              id="imageCover"
+              name="imageCover"
+              onChange={(val) => {
+                const fileImageCover = val?.target?.files?.[0];
+                if (fileImageCover) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(fileImageCover);
+                  reader.onloadend = () => {
+                    const imageDataUrl = reader.result as string;
+                    const base64Data = imageDataUrl.replace(
+                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                      ""
+                    );
+                    params.setData((prev) => {
+                      return {
+                        ...prev,
+                        galery: {
+                          ...prev?.galery,
+                          galeries: [
+                            ...(prev?.galery?.galeries ?? []),
+                            base64Data,
+                          ],
+                        },
+                      } as ResultModelGetProjectDetailResponseInterface;
+                    });
+                  };
+                }
+              }}
+            />
+            <div
+              style={{ marginTop: 25 }}
+              className="mb-3 mt-3 form-check form-switch"
+            >
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="showgiftSwitch"
+                name="showgift"
+                checked={params.data?.story.isShow || false}
+                onChange={(val) => {
+                  params.setData((prevState) => {
+                    return {
+                      ...prevState,
+                      story: {
+                        ...prevState?.story,
+                        isShow: val.target.checked,
+                      },
+                    } as ResultModelGetProjectDetailResponseInterface;
+                  });
+                }}
+              />
+              <label
+                className="form-check-label"
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Show Galery
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function StoryView(params: {
   data?: ResultModelGetProjectDetailResponseInterface;
@@ -357,7 +550,9 @@ function StoryView(params: {
                     className="accordion-button"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target={`#panelsStayOpen-collapseSeven-${index + 1}`}
+                    data-bs-target={`#panelsStayOpen-collapseSeven-${
+                      index + 1
+                    }`}
                     aria-expanded="true"
                     aria-controls={`panelsStayOpen-collapseSeven-${index + 1}`}
                   >
