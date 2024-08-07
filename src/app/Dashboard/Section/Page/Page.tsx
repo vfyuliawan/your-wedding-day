@@ -260,14 +260,26 @@ const DashboardPage = () => {
                     </tr>
                   </thead>
                   {isLoading ? (
-                    <tbody>
+                      <tbody>
                       <tr>
-                        <ReactLoading
-                          type={"spin"}
-                          color={"green"}
-                          height={"70%"}
-                          width={"70%"}
-                        />
+                        <td colSpan={6} style={{ textAlign: 'center', padding: '20px' }}>
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: '100%',
+                              height: '100%',
+                            }}
+                          >
+                            <ReactLoading
+                              type={"spinningBubbles"}
+                              color={"#116A7B"}
+                              height={"7%"}
+                              width={"7%"}
+                            />
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   ) : null}
