@@ -498,6 +498,7 @@ function ThemeView(params: {
             <input
               type="text"
               className="form-control"
+              disabled
               id="alamatTheme"
               name="slug"
               placeholder="slug"
@@ -514,6 +515,10 @@ function ThemeView(params: {
                 });
               }}
             />
+            <div style={{display:'flex', flexDirection:'row'}}>
+            <p style={{color:"red", fontSize:12, marginTop:4}}>Tidak dapat merubah slug</p>
+
+            </div>
           </div>
           <div className="mb-3">
             <label htmlFor="titleHome" className="form-label">
