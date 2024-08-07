@@ -2245,13 +2245,15 @@ const ContentSettingPage = () => {
                   <div>
                     <img
                       id="imageCoverPreview"
+                    
                       src={
                         params.data
                           ? "data:image/jpeg;base64," + params.data.cover.img
                           : ""
                       }
                       alt={"imageCover"}
-                      style={{ maxWidth: "50px", margin: "5px" }}
+                      
+                      style={{ maxWidth: "180px", margin: "5px", borderRadius:'5%' }}
                     />
                     <input
                       type="file"

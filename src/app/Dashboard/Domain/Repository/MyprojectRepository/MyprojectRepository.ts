@@ -34,7 +34,7 @@ class MyprojectRepository {
     props: ModelRequestUpdateProjectPatch
   ): Promise<ModelMyprojectResponseInterface | null> {
     const res = await patch({
-      path: `/api/v1/project/update?idProject=`,
+      path: `/api/v1/project/update?idProject=${props.param}`,
       reqBody: ConvertModelRequestUpdateProjectInterface.modelRequestUpdateProjectInterfaceToJson(props.body),
       isNeedToken: true,
     });
