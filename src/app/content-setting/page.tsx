@@ -516,7 +516,8 @@ function ThemeView(params: {
               }}
             />
             <div style={{display:'flex', flexDirection:'row'}}>
-            <p style={{color:"red", fontSize:12, marginTop:4}}>Tidak dapat merubah slug</p>
+            <i style={{color:'red'}} className="bi bi-info-circle-fill"></i>
+            <p style={{color:"red", fontSize:12, marginTop:4, marginLeft:8}}>Tidak dapat merubah slug</p>
 
             </div>
           </div>
