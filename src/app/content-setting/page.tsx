@@ -24,6 +24,7 @@ import {
   GiftElementModelGetProjectDetailResponseInterface,
   ModelGetProjectDetailResponseInterface,
   ResultModelGetProjectDetailResponseInterface,
+  StoryElementModelGetProjectDetailResponseInterface,
 } from "../Dashboard/Domain/Models/ModelResponse/GetProjectDetailResponse/GetProjectDetailResponse";
 import GetProjectDetailService from "../Dashboard/Domain/Service/GetProjectDetailService/GetProjectDetailService";
 import CekUserLoginService from "../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService";
@@ -50,7 +51,6 @@ const ContentSettingPage = () => {
     })
   );
   const searchParams = useSearchParams();
-
 
   const [isProjectIdReady, setIsProjectIdReady] = useState(false); // add a state variable to track when the project ID is ready
   const router = useRouter();
@@ -81,9 +81,8 @@ const ContentSettingPage = () => {
       // }
 
       const projectId = searchParams?.get("projectId");
-          setProjectId(projectId);
-          setIsProjectIdReady(true);
-
+      setProjectId(projectId);
+      setIsProjectIdReady(true);
     } else {
       router.replace("/");
     }
@@ -307,6 +306,7 @@ const ContentSettingPage = () => {
               <HeroView data={data} setData={setData} />
               <EventInfo data={data} setData={setData} />
               <GiftsView data={data} setData={setData} />
+              <StoryView data={data} setData={setData} />
               <CouplesView data={data} setData={setData} />
               <div className="mb-3">
                 <button className="btn btn-warning mt-3">Apply</button>
@@ -319,6 +319,287 @@ const ContentSettingPage = () => {
     );
   }
 };
+
+function StoryView(params: {
+  data?: ResultModelGetProjectDetailResponseInterface;
+  setData: Dispatch<
+    SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
+  >;
+}) {
+  return (
+    <div className="accordion-item">
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseSeven"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseSeven"
+        >
+          Story {params.data?.story.stories.length}
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseSeven"
+        className="accordion-collapse collapse"
+      >
+        <div className="accordion-body">
+          {params.data?.story.stories.map((item, index) => (
+            <div
+              key={index}
+              className="accordion"
+              id="accordionPanelsStayOpenExample"
+            >
+              <div className="accordion-item">
+                <h2 className="accordion-header">
+                  <button
+                    className="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#panelsStayOpen-collapseSeven-${index + 1}`}
+                    aria-expanded="true"
+                    aria-controls={`panelsStayOpen-collapseSeven-${index + 1}`}
+                  >
+                    Story {index + 1}
+                  </button>
+                </h2>
+                <div
+                  id={`panelsStayOpen-collapseSeven-${index + 1}`}
+                  className="accordion-collapse collapse show"
+                >
+                  <div className="accordion-body">
+                    <div className="mb-3">
+                      <label
+                        htmlFor={`bankAccountNumber${index + 1}`}
+                        className="form-label"
+                      >
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id={`bankAccountNumber${index + 1}`}
+                        name={`bankAccountNumber${index + 1}`}
+                        defaultValue={item.title}
+                        onChange={(val) => {
+                          params.setData((prevState) => {
+                            return {
+                              ...prevState,
+                              story: {
+                                ...prevState?.story,
+                                stories: prevState?.story.stories.map(
+                                  (item, i) => {
+                                    if (i === index) {
+                                      return {
+                                        ...item,
+                                        title: val.target.value,
+                                      };
+                                    }
+                                    return item;
+                                  }
+                                ),
+                              },
+                            } as ResultModelGetProjectDetailResponseInterface;
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label
+                        htmlFor={`bankAccountNumber${index + 1}`}
+                        className="form-label"
+                      >
+                        Text
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id={`bankAccountNumber${index + 1}`}
+                        name={`bankAccountNumber${index + 1}`}
+                        defaultValue={item.text}
+                        onChange={(val) => {
+                          params.setData((prevState) => {
+                            return {
+                              ...prevState,
+                              story: {
+                                ...prevState?.story,
+                                stories: prevState?.story.stories.map(
+                                  (item, i) => {
+                                    if (i === index) {
+                                      return {
+                                        ...item,
+                                        text: val.target.value,
+                                      };
+                                    }
+                                    return item;
+                                  }
+                                ),
+                              },
+                            } as ResultModelGetProjectDetailResponseInterface;
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="imageStory" className="form-label">
+                        Image Story
+                      </label>
+                      <div>
+                        <img
+                          id="imageHeroPreview"
+                          src={
+                            params.data
+                              ? "data:image/jpeg;base64," +
+                                params.data.story.stories[index].image
+                              : ""
+                          }
+                          alt={"imageHero"}
+                          style={{ maxWidth: "50px", margin: "5px" }}
+                        />
+                        <input
+                          type="file"
+                          className="form-control"
+                          id="imageSotry"
+                          name="imageSotry"
+                          onChange={(val) => {
+                            const fileImageHero = val?.target?.files?.[0];
+                            if (fileImageHero) {
+                              const reader = new FileReader();
+                              reader.readAsDataURL(fileImageHero);
+                              reader.onloadend = () => {
+                                const imageHeroDataUrl =
+                                  reader.result as string;
+                                const base64HeroData = imageHeroDataUrl.replace(
+                                  /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                  ""
+                                );
+                                params.setData((prevState) => {
+                                  return {
+                                    ...prevState,
+                                    story: {
+                                      ...prevState?.story,
+                                      stories: prevState?.story.stories.map(
+                                        (item, i) => {
+                                          if (i === index) {
+                                            return {
+                                              ...item,
+                                              img: base64HeroData,
+                                            };
+                                          }
+                                          return item;
+                                        }
+                                      ),
+                                    },
+                                  } as ResultModelGetProjectDetailResponseInterface;
+                                });
+                              };
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="eventDate" className="form-label">
+                        Story Date
+                      </label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="eventDate"
+                        name="eventDate"
+                        placeholder="Event Date"
+                        value={
+                          params.data?.cover.date
+                            ? new Date(params.data.cover.date)
+                                .toISOString()
+                                .split("T")[0]
+                            : ""
+                        }
+                        onChange={(val) => {
+                          params.setData((prevState) => {
+                            return {
+                              ...prevState,
+                              story: {
+                                ...prevState?.story,
+                                stories: prevState?.story.stories.map(
+                                  (item, i) => {
+                                    if (i === index) {
+                                      return {
+                                        ...item,
+                                        date: new Date(val.target.value),
+                                      };
+                                    }
+                                    return item;
+                                  }
+                                ),
+                              },
+                            } as ResultModelGetProjectDetailResponseInterface;
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <button
+            className="btn btn-primary mt-3"
+            onClick={() => {
+              console.log("adsadfasd");
+
+              const newForm = {
+                title: "",
+                text: "",
+                image: "",
+                date: new Date(),
+              } as StoryElementModelGetProjectDetailResponseInterface;
+              params.setData((prev) => {
+                return {
+                  ...prev,
+                  story: {
+                    ...prev?.story,
+                    stories: [...(prev?.story?.stories ?? []), newForm],
+                  },
+                } as ResultModelGetProjectDetailResponseInterface;
+              });
+            }}
+          >
+            Add Story
+          </button>
+          <div className="mb-3 mt-3 form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="showgiftSwitch"
+              name="showgift"
+              checked={params.data?.story.isShow || false}
+              onChange={(val) => {
+                params.setData((prevState) => {
+                  return {
+                    ...prevState,
+                    story: {
+                      ...prevState?.story,
+                      isShow: val.target.checked,
+                    },
+                  } as ResultModelGetProjectDetailResponseInterface;
+                });
+              }}
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Show Story
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function CouplesView(params: {
   data?: ResultModelGetProjectDetailResponseInterface;
