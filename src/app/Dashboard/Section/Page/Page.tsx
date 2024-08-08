@@ -7,34 +7,35 @@ import CekUserLoginService from "../../Domain/Service/CekUserLoginService/CekUse
 import Link from "next/link";
 import LogoutService from "../../Domain/Service/LogoutService/LogoutService";
 import ReactLoading from "react-loading";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
 
 const DashboardPage = () => {
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(0);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [searchQueary, setSearchQueary] = useState("");
   const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>(
     []
   );
-  const router = useRouter();
-
   const [totalPages, setTotalPages] = useState(0);
+  const router = useRouter();
   const [isLoading, setisLoading] = useState(false);
-
+  const [isLoadingMain, setisLoadingMain] = useState(false);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-      checkUserLogin();
-      handleGetMyProjects(page, 5, "");
-      // console.log(storedToken);
-    } else {
-      // Token not found in localStorage, handle accordingly (e.g., redirect to login)
+    if (searchQueary.length > 0) {
+      handleGetMyProjects(page, 5, searchQueary);
+    }else{
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        setisLoadingMain(true);
+        setToken(storedToken);
+        checkUserLogin();
+        handleGetMyProjects(page, 5, "");
+      }
     }
-  }, []);
+  }, [searchQueary]);
 
   const checkUserLogin = async () => {
     try {
@@ -42,6 +43,10 @@ const DashboardPage = () => {
         await CekUserLoginService.cekUserLoginService();
       if (serviceCheckUserLogin?.result == true) {
         setIsUserLoggedIn(true);
+        setisLoadingMain(false);
+      } else {
+        await localStorage.removeItem("token");
+        router.push("/");
       }
     } catch (error) {
       console.error("check User Login error:", error);
@@ -52,18 +57,24 @@ const DashboardPage = () => {
   const handleNextPage = async () => {
     // setPage(page + 1);
     let nextPage = page + 1;
+    setPage(nextPage);
     handleGetMyProjects(nextPage, 5, "");
   };
+  const handlePreviousPage = async () => {
+    let previousPage = page - 1;
+    setPage(previousPage);
+    handleGetMyProjects(previousPage, 5, "");
+  };
+
+  // const getIdForEdit = async (projectId: string) => {
+  //   let projectParam = `projectId=${projectId}`;
+  //   let keyEncrypt = new Cryptr("nViteMeKey");
+  //   let encryptedProjectParam = keyEncrypt.encrypt(projectParam);
+  //   window.location.href = `/content-setting?` + encryptedProjectParam;
+  // };
 
   const getIdForEdit = async (projectId: string) => {
-    // let projectParam = `projectId=${projectId}`;
-    // let keyEncrypt = new Cryptr("nViteMeKey");
-    // let encryptedProjectParam = keyEncrypt.encrypt(projectParam);
-    // window.location.href = `/content-setting?` + encryptedProjectParam;
-    // window.location.href = `/content-setting?projectId=${projectId}`;
-    // router.push(`/content-setting?projectId=${projectId}`)
-    router.push(`/content-setting?projectId=${projectId}`)
-
+    router.push(`/content-setting?projectId=${projectId}`);
   };
   const handleGetMyProjects = async (
     currentPage: number,
@@ -86,8 +97,7 @@ const DashboardPage = () => {
         setData(myprojectServices.result.projects);
         setTotalPages(myprojectServices.result.paging?.totalPage);
         setisLoading(false);
-        console.log("cekData", myprojectServices);
-        
+        // console.log("cekData", myprojectServices);
       } else {
         setError("Invalid credentials. Please try again.");
         setisLoading(false);
@@ -185,36 +195,43 @@ const DashboardPage = () => {
               <ul className="navbar-nav ml-lg-auto">
                 <li className="nav-item ml-lg-4">
                   <div className="custom-btn-group">
-                    {token && isUserLoggedIn ? (
-                      <ul className="flex">
-                        {/* <Link href="/">
-                                                    <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
-                                                        <i className="bi bi-box-arrow-in-right " /> Logout
-                                                    </span>
-                                                </Link>  */}
-                        <Link
-                          href="/content-setting"
-                          className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
-                          style={{ marginLeft: "10px" }}
-                        >
-                          <i className="bi bi-pencil " /> Create
-                        </Link>
-                        <button
-                          onClick={handleLogout}
-                          className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
-                          style={{ marginLeft: "10px" }}
-                        >
-                          <i className="bi bi-box-arrow-in-right " /> Logout
-                        </button>
-                      </ul>
+                    {isLoadingMain ? (
+                      <div
+                        style={{
+                          display: "grid",
+                          placeItems: "center",
+                        }}
+                      >
+                        <ReactLoading
+                          type={"spinningBubbles"}
+                          color={"#116A7B"}
+                          height={30} // Specify a fixed size
+                          width={30} // Specify a fixed size
+                        />
+                      </div>
                     ) : (
-                      <ul className="flex">
-                        <Link href="/login">
-                          <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
-                            <i className="bi bi-box-arrow-in-right " /> Login
-                          </span>
-                        </Link>
-                      </ul>
+                      <>
+                        {token && isUserLoggedIn ? (
+                          <ul className="flex">
+                            <button
+                              onClick={handleLogout}
+                              className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
+                              style={{ marginLeft: "10px" }}
+                            >
+                              <i className="bi bi-box-arrow-in-right " /> Logout
+                            </button>
+                          </ul>
+                        ) : (
+                          <ul className="flex">
+                            <Link href="/login">
+                              <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
+                                <i className="bi bi-box-arrow-in-right " />{" "}
+                                Login
+                              </span>
+                            </Link>
+                          </ul>
+                        )}
+                      </>
                     )}
                   </div>
                 </li>
@@ -223,22 +240,47 @@ const DashboardPage = () => {
           </div>
         </div>
       </nav>
+
       {token && isUserLoggedIn ? (
         <section className="home" id="home">
           <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-md-7 col-10 text-center">
-                <h2>My Invitation</h2>
-              </div>
+            <div className="col mb-3 d-flex justify-content-between">
+              {/* <div className="col-md-7 col-10 text-left">  */}
+              {/* <h2>My Invitation</h2> */}
+              <Link
+                href="/content-setting"
+                className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
+                style={{
+                  marginLeft: "15px",
+                  width: "135px",
+                  marginBottom: "8px",
+                }}
+              >
+                <i className="bi bi-pencil " /> Create
+              </Link>
+              <input
+              style={{borderColor:'#116A7B', borderRadius:15, paddingLeft:5}}
+                placeholder="  Search Your Project"
+                onChange={(val) => {
+                  setSearchQueary(val.target.value);
+                  setPage(0);
+                }}
+              />
+              {/* </div> */}
             </div>
+
             <div
-              className="card"
+              className="card justify-content-center"
               style={{
                 // height: "80vh",
                 boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
                 border: "none",
+                borderRadius: "12px",
+                padding: "10px",
               }}
             >
+              {" "}
+              <h2 style={{ textAlign: "center" }}>My Invitations List</h2>
               <div
                 style={{
                   // height: '90vh',
@@ -248,7 +290,7 @@ const DashboardPage = () => {
                   padding: "10px",
                 }}
               >
-                <table className="align-items-center">
+                <table className="align-items-center ">
                   <thead>
                     <tr>
                       <th>No.</th>
@@ -259,92 +301,120 @@ const DashboardPage = () => {
                       <th>Action</th>
                     </tr>
                   </thead>
+
                   {isLoading ? (
-                      <tbody>
+                    <tbody>
                       <tr>
-                        <td colSpan={6} style={{ textAlign: 'center', padding: '20px' }}>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
                           <div
                             style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              width: '100%',
-                              height: '100%',
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "50px", // Height can be adjusted as needed
                             }}
                           >
                             <ReactLoading
                               type={"spinningBubbles"}
                               color={"#116A7B"}
-                              height={"7%"}
-                              width={"7%"}
+                              height={50}
+                              width={50}
                             />
                           </div>
                         </td>
                       </tr>
                     </tbody>
-                  ) : null}
-                  <tbody>
-                    {data ? (
-                      data.map((item, index) => (
-                        <tr key={item.id}>
-                          <td>{index + 1}</td>
-                          {/* <td>{item.nameProject}</td> */}
-                          <td>{item.title}</td>
-                          <td>{item.theme.theme}</td>
-                          <td>{item.theme.music}</td>
-                          <td>
-                            {new Date(item.date).toLocaleDateString("en-GB", {
-                              day: "2-digit",
-                              month: "short",
-                              year: "numeric",
-                            })}{" "}
-                            {new Date(item.date).toLocaleTimeString("en-GB", {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
-                          </td>
-                          <td>
-                            <button
-                              name="Preview"
-                              className="btn btn btn-outline-info btn-sm"
-                              style={{ margin: "3px" }}
-                            >
-                              <i className="bi bi-eye " />
-                            </button>
-                            <button
-                              className="btn btn btn-outline-success btn-sm"
-                              style={{ margin: "3px" }}
-                              onClick={() => getIdForEdit(item.id)}
-                            >
-                              <i className="bi bi-pencil-square " />
-                            </button>
-                            {/* <button className="btn btn btn-outline-danger btn-sm"
+                  ) : (
+                    <>
+                      <tbody>
+                        {data ? (
+                          data.map((item, index) => (
+                            <tr key={item.id}>
+                              <td>{index + 1}</td>
+                              {/* <td>{item.nameProject}</td> */}
+                              <td>{item.title}</td>
+                              <td>{item.theme.theme}</td>
+                              <td>{item.theme.music}</td>
+                              <td>
+                                {new Date(item.date).toLocaleDateString(
+                                  "en-GB",
+                                  {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                  }
+                                )}{" "}
+                                {new Date(item.date).toLocaleTimeString(
+                                  "en-GB",
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  }
+                                )}
+                              </td>
+                              <td>
+                                <button
+                                  name="Preview"
+                                  className="btn btn btn-outline-info btn-sm"
+                                  style={{ margin: "3px" }}
+                                >
+                                  <i className="bi bi-eye " />
+                                </button>
+                                <button
+                                  className="btn btn btn-outline-success btn-sm"
+                                  style={{ margin: "3px" }}
+                                  onClick={() => getIdForEdit(item.id)}
+                                >
+                                  <i className="bi bi-pencil-square " />
+                                </button>
+                                {/* <button className="btn btn btn-outline-danger btn-sm"
                                                         style={{ margin: "3px" }}><i className="bi bi-trash " /></button> */}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={6} style={{ textAlign: "center" }}>
+                              Not Found
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan={7}>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              {page + 1 > 1 ? (
+                                <button
+                                  className="color-main btn btn-sm"
+                                  onClick={handlePreviousPage}
+                                >
+                                  {"<< Previous Page"}
+                                </button>
+                              ) : (
+                                <>.</>
+                              )}
+                              {page + 1 < totalPages ? (
+                                <button
+                                  className="color-main btn btn-sm"
+                                  onClick={handleNextPage}
+                                >
+                                  {"Next Page >>"}
+                                </button>
+                              ) : (
+                                <>.</>
+                              )}
+                            </div>
                           </td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={6} style={{ textAlign: "center" }}>
-                          Not Found
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td className="item-right" colSpan={7}>
-                        {page + 1 < totalPages && (
-                          <button
-                            className="color-main btn btn-sm"
-                            onClick={handleNextPage}
-                          >
-                            {"Next Page >>"}
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  </tfoot>
+                      </tfoot>
+                    </>
+                  )}
                 </table>
               </div>
             </div>
@@ -356,63 +426,81 @@ const DashboardPage = () => {
           id="home"
         >
           <div className="container">
-            <div className="row dflex ">
-              <div className="col-lg-7 col-md-12 col-12 d-flex align-items-center">
-                <div className="cover-text">
-                  <small className="small-text">
-                    Welcome to{" "}
-                    <span className="mobile-block">
-                      Wedding Invitation website!
-                    </span>
-                  </small>
-                  <h2 className="animated animated-text">
-                    <span className="mr-2 first-animated-word">We are</span>
-                    <div className="animated-info">
-                      <span className="animated-item">Nvite Me</span>
-                      <span className="animated-item">Wedding Invitation</span>
-                    </div>
-                  </h2>
-                  <p>
-                    Create invitations for free in minutes, download or share
-                    your invitations with RSVP online. We are good in organize
-                    your wedding guest at your special day.
-                  </p>
-                  <div className="custom-btn-group mt-4">
-                    <a
-                      href="design/list-design.html"
-                      className="btn mr-lg-2 custom-btn"
-                    >
-                      <i className="bi bi-card-list" /> Design
-                    </a>
-                    {/* <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a> */}
-                  </div>
-                </div>
+            {isLoadingMain ? (
+              <div
+                style={{
+                  display: "grid",
+                  placeItems: "center",
+                }}
+              >
+                <ReactLoading
+                  type={"spinningBubbles"}
+                  color={"#116A7B"}
+                  height={100} // Specify a fixed size
+                  width={100} // Specify a fixed size
+                />
               </div>
-              <div className="row justify-content-center col-lg-5 col-md-12 col-12">
-                <div className="cover-image">
-                  <div className="mac-frame">
-                    <img
-                      src="image/background/prewed-bg.jpg"
-                      className="mac-image"
-                      alt="Mac Frame"
-                    />
-                    <div className="iphone-frame">
-                      <img
-                        src="image/background/prewed2.jpeg"
-                        className="iphone-img-frame"
-                        id="iphone-img-frame"
-                        alt="iPhone Frame"
-                      />
-                      <img
-                        className="iphone-image iphone-img-image"
-                        src="image/background/iphone.png"
-                        alt="iPhone Image"
-                      />
+            ) : (
+              <div className="row dflex ">
+                <div className="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+                  <div className="cover-text">
+                    <small className="small-text">
+                      Welcome to{" "}
+                      <span className="mobile-block">
+                        Wedding Invitation website!
+                      </span>
+                    </small>
+                    <h2 className="animated animated-text">
+                      <span className="mr-2 first-animated-word">We are</span>
+                      <div className="animated-info">
+                        <span className="animated-item">Nvite Me</span>
+                        <span className="animated-item">
+                          Wedding Invitation
+                        </span>
+                      </div>
+                    </h2>
+                    <p>
+                      Create invitations for free in minutes, download or share
+                      your invitations with RSVP online. We are good in organize
+                      your wedding guest at your special day.
+                    </p>
+                    <div className="custom-btn-group mt-4">
+                      <a
+                        href="design/list-design.html"
+                        className="btn mr-lg-2 custom-btn"
+                      >
+                        <i className="bi bi-card-list" /> Design
+                      </a>
+                      {/* <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a> */}
                     </div>
                   </div>
                 </div>
+                <div className="row justify-content-center col-lg-5 col-md-12 col-12">
+                  <div className="cover-image">
+                    <div className="mac-frame">
+                      <img
+                        src="image/background/prewed-bg.jpg"
+                        className="mac-image"
+                        alt="Mac Frame"
+                      />
+                      <div className="iphone-frame">
+                        <img
+                          src="image/background/prewed2.jpeg"
+                          className="iphone-img-frame"
+                          id="iphone-img-frame"
+                          alt="iPhone Frame"
+                        />
+                        <img
+                          className="iphone-image iphone-img-image"
+                          src="image/background/iphone.png"
+                          alt="iPhone Image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
       )}

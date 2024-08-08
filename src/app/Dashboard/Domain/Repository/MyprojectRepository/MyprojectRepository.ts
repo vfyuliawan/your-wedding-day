@@ -17,7 +17,7 @@ class MyprojectRepository {
     props: ModelMyprojectRequestInterface
   ): Promise<ModelMyprojectResponseInterface | null> {
     const res = await get({
-      path: `/api/v1/project/myProjects?currentPage=${props.currentPage}&size=${props.size}`,
+      path: `/api/v1/project/myProjects?currentPage=${props.currentPage}&size=${props.size}&title=${props.title?? ""}`,
       isNeedToken: true,
     });
     if (res != null) {
