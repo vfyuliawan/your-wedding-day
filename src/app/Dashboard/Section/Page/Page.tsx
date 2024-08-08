@@ -18,20 +18,19 @@ const DashboardPage = () => {
   const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>(
     []
   );
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const router = useRouter();
   const [isLoading, setisLoading] = useState(false);
   const [isLoadingMain, setisLoadingMain] = useState(false);
 
   useEffect(() => {
-      const storedToken = localStorage.getItem("token");
-      if (storedToken) {
-        setisLoadingMain(true);
-        setToken(storedToken);
-        checkUserLogin();
-        handleGetMyProjects(page, 5, "");
-      }
-    
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setisLoadingMain(true);
+      setToken(storedToken);
+      checkUserLogin();
+      handleGetMyProjects(page, 5, "");
+    }
   }, []);
 
   const checkUserLogin = async () => {
@@ -255,28 +254,32 @@ const DashboardPage = () => {
               >
                 <i className="bi bi-pencil " /> Create
               </Link>
-              <div style={{display: 'flex', flexDirection:'row'}}>
-              <input
-                style={{
-                  borderColor: "#116A7B",
-                  borderRadius: 15,
-                  paddingLeft: 5,
-                }}
-                placeholder="  Search Your Project"
-                onChange={(val) => {
-                  setSearchQueary(val.target.value);
-                  setPage(0);
-                }}
-              />
-              <div style={{width:5}}></div>
-              <button onClick={() =>{
-                handleGetMyProjects(page, 4, searchQueary)
-              }} className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left">
-                {" "}
-                <i className="bi bi-search " /> 
-              </button>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <input
+                  style={{
+                    borderColor: "#116A7B",
+                    borderRadius: 15,
+                    paddingLeft: 5,
+                  }}
+                  placeholder="  Search Your Project"
+                  onChange={(val) => {
+                    setSearchQueary(val.target.value);
+                    setPage(0);
+                  }}
+                />
+                <div style={{ width: 5 }}></div>
+                <button
+                  onClick={() => {
+                    handleGetMyProjects(page, 4, searchQueary);
+                    console.log(totalPages);
+                  }}
+                  className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
+                >
+                  {" "}
+                  <i className="bi bi-search " />
+                </button>
               </div>
-             
+
               {/* </div> */}
             </div>
 
@@ -338,7 +341,7 @@ const DashboardPage = () => {
                   ) : (
                     <>
                       <tbody>
-                        {data ? (
+                        {data.length > 0 ? (
                           data.map((item, index) => (
                             <tr key={item.id}>
                               <td>{index + 1}</td>
@@ -383,13 +386,22 @@ const DashboardPage = () => {
                               </td>
                             </tr>
                           ))
-                        ) : (
+                        ) : data.length == 0 ? (
                           <tr>
                             <td colSpan={6} style={{ textAlign: "center" }}>
-                              Not Found
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  height: "50px", // Height can be adjusted as needed
+                                }}
+                              >
+                                <h4 style={{color:"#116A7B"}}>Project Not Found</h4>
+                              </div>
                             </td>
                           </tr>
-                        )}
+                        ) : null}
                       </tbody>
                       <tfoot>
                         <tr>
