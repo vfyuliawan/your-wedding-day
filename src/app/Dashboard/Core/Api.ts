@@ -3,7 +3,7 @@ import ErrorHandler from "./ErrorHandler";
 import useErrorHandler from "./ErrorHandler";
 import Swal from "sweetalert2";
 
-const timeOut = 60000*5; //max request timeout menjadi 3 menit 
+const timeOut = 60000*10; //max request timeout menjadi 3 menit 
 
 // const errorHandler = useErrorHandler();
 
