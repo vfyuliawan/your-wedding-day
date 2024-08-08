@@ -24,9 +24,6 @@ const DashboardPage = () => {
   const [isLoadingMain, setisLoadingMain] = useState(false);
 
   useEffect(() => {
-    if (searchQueary.length > 0) {
-      handleGetMyProjects(page, 5, searchQueary);
-    }else{
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setisLoadingMain(true);
@@ -34,8 +31,8 @@ const DashboardPage = () => {
         checkUserLogin();
         handleGetMyProjects(page, 5, "");
       }
-    }
-  }, [searchQueary]);
+    
+  }, []);
 
   const checkUserLogin = async () => {
     try {
@@ -258,14 +255,28 @@ const DashboardPage = () => {
               >
                 <i className="bi bi-pencil " /> Create
               </Link>
+              <div style={{display: 'flex', flexDirection:'row'}}>
               <input
-              style={{borderColor:'#116A7B', borderRadius:15, paddingLeft:5}}
+                style={{
+                  borderColor: "#116A7B",
+                  borderRadius: 15,
+                  paddingLeft: 5,
+                }}
                 placeholder="  Search Your Project"
                 onChange={(val) => {
                   setSearchQueary(val.target.value);
                   setPage(0);
                 }}
               />
+              <div style={{width:5}}></div>
+              <button onClick={() =>{
+                handleGetMyProjects(page, 4, searchQueary)
+              }} className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left">
+                {" "}
+                <i className="bi bi-search " /> 
+              </button>
+              </div>
+             
               {/* </div> */}
             </div>
 
