@@ -112,4 +112,5 @@ export class ConvertModelRequestUpdateProjectInterface {
     public static modelRequestUpdateProjectInterfaceToJson(value: ModelRequestUpdateProjectInterface): string {
         return JSON.stringify(value);
     }
+ 
 }

@@ -29,7 +29,7 @@ import {
 import GetProjectDetailService from "../Dashboard/Domain/Service/GetProjectDetailService/GetProjectDetailService";
 import CekUserLoginService from "../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService";
 import Galery from "react-image-gallery";
-import MyprojectService from "../Dashboard/Domain/Service/MyprojectService/MyprojectService";
+// import MyprojectService from "../Dashboard/Domain/Service/MyprojectService/MyprojectService";
 import {
   ModelRequestUpdateProjectInterface,
   ModelRequestUpdateProjectPatch,
@@ -38,30 +38,17 @@ import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
 import Constant from "../Constant/Constant";
 
-const ContentSettingPage = () => {
-  const [first, setFirst] = useState("Pink-Esssence");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const CreatePage = () => {
+  const [first, setFirst] = useState("Pink-Esssence"); 
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [projectId, setProjectId] = useState<string | null | undefined>(null);
-  const [data, setData] = useState<
-    ResultModelGetProjectDetailResponseInterface | undefined
-  >(undefined);
-  const [giftForm, setgiftForm] = useState<
-    GiftElementModelGetProjectDetailResponseInterface[] | undefined
-  >(
-    data?.gift.gifts.map((item, index) => {
-      return {
-        image: item.image,
-        name: item.name,
-        noRek: item.noRek,
-      } as GiftElementModelGetProjectDetailResponseInterface;
-    })
-  );
-  const searchParams = useSearchParams();
-//   const [isGambarStory, setisGambarStory] = useState(false);
-  const [isProjectIdReady, setIsProjectIdReady] = useState(false); // add a state variable to track when the project ID is ready
+  const [data, setData] = useState<ResultModelGetProjectDetailResponseInterface | undefined>(undefined);
+  const [giftForm, setgiftForm] = useState<GiftElementModelGetProjectDetailResponseInterface>({
+    image: '',
+    name: '',
+    noRek: ''
+  });
   const router = useRouter();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [loading, setloading] = useState(false);
@@ -69,66 +56,12 @@ const ContentSettingPage = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     checkUserLogin();
-    if (storedToken) {
-      const projectId = searchParams?.get("pi");
-      setProjectId(projectId);
-      setIsProjectIdReady(true);
+    if (storedToken) { 
     } else {
       router.replace("/");
     }
   }, []);
-
-  useEffect(() => {
-    if (isProjectIdReady && projectId !== null) {
-      handleGetProjectDetails(projectId);
-    }
-  }, [isProjectIdReady, projectId]);
-
-  const handleGetProjectDetails = async (id?: string | null) => {
-    setloading(true);
-
-    if (id === null) {
-      // handle the case where id is null
-      return;
-    }
-    const requestParams: ModelGetProjectDetailRequestInterface = {
-      id: id,
-    };
-    try {
-      // GetProjectDetailService;
-      const GetProjectDetailServices =
-        await GetProjectDetailService.getProjectDetailService(requestParams);
-      if (GetProjectDetailServices && GetProjectDetailServices?.result) {
-        setData(GetProjectDetailServices.result);
-        setloading(false);
-      } else {
-        setloading(false);
-
-        setError("Invalid credentials. Please try again.");
-      }
-    } catch (error) {
-      setloading(false);
-
-      console.error("Login error:", error);
-      setError("An error occurred. Please try again later.");
-    }
-  };
-
-//   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     // console.log(data);
-
-//     if (data) {
-//       setData({
-//         ...data,
-//         title: event.target.value,
-//         hero: {
-//           ...data.hero,
-//           date: new Date(event.target.value),
-//           isShow: event.target.checked,
-//         },
-//       });
-//     }
-//   };
+ 
 
   const checkUserLogin = async () => {
     try {
@@ -241,14 +174,14 @@ const ContentSettingPage = () => {
 
     const props: ModelRequestUpdateProjectPatch = {
       body: body,
-      param: projectId,
+      param: '',
     } as ModelRequestUpdateProjectPatch;
 
-    const result = await MyprojectService.updateProjectService(props);
+    const result = await GetProjectDetailService.createProjectService(props);
     if (result !== null) {
       Swal.fire({
         title: "Good job!",
-        text: "Edited Project Success",
+        text: "New Project Created Successfully",
         icon: "success",
       });
       setloading(false);
@@ -333,10 +266,7 @@ const ContentSettingPage = () => {
           <div className="container">
             <div className="row justify-content-center ">
               <div className="col-md-12 col-sm-12 col-12">
-                <div className="card " style={{
-                  // display:'flex',
-                  // justifyContent: "center",
-                  // alignItems: "center",
+                <div className="card " style={{ 
                 }}>
                   <img src="image/background/prewed-bg.jpg" />
                   {/* <img
@@ -388,7 +318,7 @@ const ContentSettingPage = () => {
                   <HomeView data={data} setData={setData} />
                   <HeroView data={data} setData={setData} />
                   <EventInfo data={data} setData={setData} />
-                  <GiftsView data={data} setData={setData} />
+                  <GiftsView />
                   <StoryView data={data} setData={setData} />
                   <CouplesView data={data} setData={setData} />
                   <GaleryView data={data} setData={setData} />
@@ -1357,12 +1287,16 @@ function CouplesView(params: {
   );
 }
 
-function GiftsView(params: {
-  data?: ResultModelGetProjectDetailResponseInterface;
-  setData: Dispatch<
-    SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
-  >;
-}) {
+function GiftsView() {
+
+  const [giftForm, setGiftForm] = useState<GiftElementModelGetProjectDetailResponseInterface[]>([
+    {
+      image: '',
+      name: '',
+      noRek: '',
+    },
+  ]);
+
     const banks = [
         { value: "BCA", label: "Bank BCA" },
         { value: "MANDIRI", label: "Bank Mandiri" },
@@ -1397,7 +1331,7 @@ function GiftsView(params: {
         className="accordion-collapse collapse"
       >
         <div className="accordion-body">
-          {params.data?.gift.gifts.map((gift, index) => (
+          {giftForm.map((gift, index) => (
             <div
               key={index}
               className="accordion mb-3"
@@ -1429,32 +1363,23 @@ function GiftsView(params: {
                             Bank
                         </label>
                         <select
-                            value={gift.image} // Use 'value' instead of 'defaultValue'
+                            value=''
                             id={`bank${index + 1}`}
                             className="form-select"
                             aria-label="Default select example"
                             onChange={(val) => {
-                                const newValue = val.target.value; 
-                                params.setData((prevState) => {
-                                return {
-                                    ...prevState,
-                                    gift: {
-                                    ...prevState?.gift,
-                                    gifts: prevState?.gift.gifts.map((giftItem, i) => {
-                                        if (i === index) {
-                                        return {
-                                            ...giftItem,
-                                            image: newValue,
-                                        };
-                                        }
-                                        return giftItem;
-                                    }),
-                                    },
-                                } as ResultModelGetProjectDetailResponseInterface;
-                                });
+                              const newValue = val.target.value;
+                              setGiftForm((prevGiftForm) =>
+                                prevGiftForm.map((giftItem, i) => {
+                                  if (i === index) {
+                                    return { ...giftItem, image: newValue };
+                                  }
+                                  return giftItem;
+                                })
+                              );
                             }}
                         >   
-                            <option value="">--- Select Bank ---</option>
+                          <option value="">--- Select Bank ---</option>
                             {banks.map((bank) => (
                                 <option key={bank.value} value={bank.value}>
                                 {bank.label}
@@ -1475,25 +1400,17 @@ function GiftsView(params: {
                         id={`bankAccountNumber${index + 1}`}
                         name={`bankAccountNumber${index + 1}`}
                         placeholder="68123456789"
-                        defaultValue={gift.noRek}
+                        defaultValue=''
                         onChange={(val) => {
-                          params.setData((prevState) => {
-                            return {
-                              ...prevState,
-                              gift: {
-                                ...prevState?.gift,
-                                gifts: prevState?.gift.gifts.map((gift, i) => {
-                                  if (i === index) {
-                                    return {
-                                      ...gift,
-                                      noRek: val.target.value,
-                                    };
-                                  }
-                                  return gift;
-                                }),
-                              },
-                            } as ResultModelGetProjectDetailResponseInterface;
-                          });
+                          const newValue = val.target.value;
+                          setGiftForm((prevGiftForm) =>
+                            prevGiftForm.map((giftItem, i) => {
+                              if (i === index) {
+                                return { ...giftItem, noRek: newValue };
+                              }
+                              return giftItem;
+                            })
+                          );
                         }}
                       />
                     </div>
@@ -1510,25 +1427,17 @@ function GiftsView(params: {
                         id={`bankAccountName${index + 1}`}
                         name={`bankAccountName${index + 1}`}
                         placeholder="John Doe"
-                        value={gift.name || ""}
+                        value=''
                         onChange={(val) => {
-                          params.setData((prevState) => {
-                            return {
-                              ...prevState,
-                              gift: {
-                                ...prevState?.gift,
-                                gifts: prevState?.gift.gifts.map((gift, i) => {
-                                  if (i === index) {
-                                    return {
-                                      ...gift,
-                                      name: val.target.value,
-                                    };
-                                  }
-                                  return gift;
-                                }),
-                              },
-                            } as ResultModelGetProjectDetailResponseInterface;
-                          });
+                          const newValue = val.target.value;
+                          setGiftForm((prevGiftForm) =>
+                            prevGiftForm.map((giftItem, i) => {
+                              if (i === index) {
+                                return { ...giftItem, name: newValue };
+                              }
+                              return giftItem;
+                            })
+                          );
                         }}
                       />
                     </div>
@@ -1540,22 +1449,12 @@ function GiftsView(params: {
           <button
             className="btn btn-primary mt-3"
             onClick={() => {
-              console.log("adsadfasd");
-
               const newForm = {
                 image: "",
                 name: "",
                 noRek: "",
               } as GiftElementModelGetProjectDetailResponseInterface;
-              params.setData((prev) => {
-                return {
-                  ...prev,
-                  gift: {
-                    ...prev?.gift,
-                    gifts: [...(prev?.gift?.gifts ?? []), newForm],
-                  },
-                } as ResultModelGetProjectDetailResponseInterface;
-              });
+              setGiftForm((prevGiftForm) => [...prevGiftForm, newForm]);
             }}
           >
             Add Gift
@@ -1567,18 +1466,7 @@ function GiftsView(params: {
               role="switch"
               id="showgiftSwitch"
               name="showgift"
-              checked={params.data?.gift.isShow || false}
-              onChange={(val) => {
-                params.setData((prevState) => {
-                  return {
-                    ...prevState,
-                    gift: {
-                      ...prevState?.gift,
-                      isShow: val.target.checked,
-                    },
-                  } as ResultModelGetProjectDetailResponseInterface;
-                });
-              }}
+              checked={false} 
             />
             <label
               className="form-check-label"
@@ -2119,32 +2007,7 @@ function EventInfo(params: {
                 </div>
               </div>
             </div>
-          </div>
-          {/* <div className="mb-3 form-check form-switch">
-                                              <input
-                                                  className="form-check-input"
-                                                  type="checkbox"
-                                                  role="switch"
-                                                  id="showBraidInfoSwitch"
-                                                  name="showBraidInfo"
-                                                  checked={data?.braidInfo.isShow || false}
-                                                  onChange={(val) => {
-                                                      setData(prevState => {
-                                                          return { 
-                                                              ...prevState,
-                                                              braidInfo: {
-                                                                  ...prevState?.braidInfo,
-                                                                  isShow: val.target.checked
-                                                              }
-                                                          } as ResultModelGetProjectDetailResponseInterface
-                                                      })
-                                                  }}
-                                              />
-                                              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Show Hero</label>
-                                          </div> */}
-          {/* <div className="mb-3">
-                                              <button className="btn btn-warning">Apply</button>
-                                          </div> */}
+          </div> 
         </div>
       </div>
     </div>
@@ -2576,18 +2439,10 @@ function CoverDepan(params: {
             <label className="form-check-label" htmlFor="showCoverDepanSwitch">
               Show Cover
             </label>
-          </div>
-          {/* <div className="mb-3">
-                                          <button 
-                                              className="btn btn-warning" 
-                                              // onClick={handleSubmit}
-                                          >
-                                              Apply
-                                          </button>
-                                      </div> */}
+          </div> 
         </div>
       </div>
     </div>
   );
 }
-export default ContentSettingPage;
+export default CreatePage;

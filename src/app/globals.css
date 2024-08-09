@@ -374,7 +374,7 @@ b, strong {
 }
 .custom-btn-group .custom-btn:hover {
   color: var(--main);
-  border: 2px solid var(--main);
+  border: 1px solid var(--main);
 } 
 
 .custom-btn.custom-btn-bg {
@@ -384,7 +384,7 @@ b, strong {
 }
 .custom-btn.login-btn.custom-btn-bg:hover, .custom-btn.custom-btn-bg:hover{
   background: var(--main2);
-  border: 2px solid var(--main2);
+  border: 1px solid var(--main2);
   color: #ffffff !important;
 } 
 
@@ -901,7 +901,7 @@ footer li{
   background-size: cover;
   transition: all 0.2s ease-in-out;
   border-radius: 24px;
-  margin: 0 1% 1% 0;
+  margin: 0 1% 0 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   /* border: 2px solid var(--main); */
 }
@@ -911,6 +911,10 @@ footer li{
   height: 100%;
   object-fit: cover; 
   border-radius: 20px; 
+}
+
+.accordion-button-color {
+  background-color: #cfe2ff !important ; 
 }
 
 .card-block .card-buttons {

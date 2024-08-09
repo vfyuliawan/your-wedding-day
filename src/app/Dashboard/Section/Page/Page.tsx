@@ -70,7 +70,7 @@ const DashboardPage = () => {
   // };
 
   const getIdForEdit = async (projectId: string) => {
-    router.push(`/content-setting?projectId=${projectId}`);
+    router.push(`/content-setting?pi=${projectId}`);
   };
   const handleGetMyProjects = async (
     currentPage: number,
@@ -208,24 +208,23 @@ const DashboardPage = () => {
                     ) : (
                       <>
                         {token && isUserLoggedIn ? (
-                          <ul className="flex">
+                          <div className="flex">
                             <button
                               onClick={handleLogout}
-                              className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
-                              style={{ marginLeft: "10px" }}
+                              className="btn custom-btn login-btn custom-btn-bg custom-btn-link" 
                             >
                               <i className="bi bi-box-arrow-in-right " /> Logout
                             </button>
-                          </ul>
+                          </div>
                         ) : (
-                          <ul className="flex">
+                          <div className="flex">
                             <Link href="/login">
                               <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
                                 <i className="bi bi-box-arrow-in-right " />{" "}
                                 Login
                               </span>
                             </Link>
-                          </ul>
+                          </div>
                         )}
                       </>
                     )}
@@ -240,28 +239,43 @@ const DashboardPage = () => {
       {token && isUserLoggedIn ? (
         <section className="home" id="home">
           <div className="container">
-            <div className="col mb-3 d-flex justify-content-between">
-              {/* <div className="col-md-7 col-10 text-left">  */}
-              {/* <h2>My Invitation</h2> */}
+            <div className="col mb-3 d-flex justify-content-center"> 
+              <h2>My Invitation</h2>  
+            </div>
+
+            <div
+              className="card justify-content-center"
+              style={{
+                // height: "80vh",
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+                border: "none",
+                borderRadius: "12px",
+                padding: "10px",
+              }}
+            >
+              {/* {" "} */}
+              {/* <h2 style={{ textAlign: "center" }}>My Invitations List</h2> */}
+              <div className="col d-flex justify-content-between">  
               <Link
                 href="/content-setting"
                 className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
                 style={{
                   marginLeft: "15px",
                   width: "135px",
-                  marginBottom: "8px",
+                //   marginBottom: "0px",
                 }}
               >
                 <i className="bi bi-pencil " /> Create
               </Link>
-              <div style={{ display: "flex", flexDirection: "row" }}>
+              <div style={{ display: "flex", flexDirection: "row", marginRight:"15px" }}>
                 <input
                   style={{
-                    borderColor: "#116A7B",
+                    borderColor: "black",
                     borderRadius: 15,
                     paddingLeft: 5,
+                    backgroundColor:"white"
                   }}
-                  placeholder="  Search Your Project"
+                  placeholder="      Search Your Project"
                   onChange={(val) => {
                     setSearchQueary(val.target.value);
                     setPage(0);
@@ -279,22 +293,7 @@ const DashboardPage = () => {
                   <i className="bi bi-search " />
                 </button>
               </div>
-
-              {/* </div> */}
             </div>
-
-            <div
-              className="card justify-content-center"
-              style={{
-                // height: "80vh",
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
-                border: "none",
-                borderRadius: "12px",
-                padding: "10px",
-              }}
-            >
-              {" "}
-              <h2 style={{ textAlign: "center" }}>My Invitations List</h2>
               <div
                 style={{
                   // height: '90vh',

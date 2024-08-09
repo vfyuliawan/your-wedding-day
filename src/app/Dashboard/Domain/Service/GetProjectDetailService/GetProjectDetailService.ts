@@ -3,6 +3,7 @@
 // import LoginRepository from "../../Repository/LoginRepository/LoginRepository";
 
 import { ModelGetProjectDetailRequestInterface } from "../../Models/ModelRequest/GetProjectDetailRequest/GetProjectDetailRequest";
+import { ModelRequestUpdateProjectPatch } from "../../Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
 import { ModelGetProjectDetailResponseInterface } from "../../Models/ModelResponse/GetProjectDetailResponse/GetProjectDetailResponse";
 import GetProjectDetailRepository from "../../Repository/GetProjectDetailRepository/GetProjectDetailRepository";
 
@@ -22,6 +23,14 @@ class GetProjectDetailService {
 
   async getProjectDetailService (props: ModelGetProjectDetailRequestInterface): Promise<ModelGetProjectDetailResponseInterface | null> {
     const result = await GetProjectDetailRepository.getProjectDetail(props);
+    if (result != null) {
+      return result;
+    }
+    return null;
+  };
+
+  async createProjectService (props: ModelRequestUpdateProjectPatch): Promise<ModelGetProjectDetailResponseInterface | null> {
+    const result = await GetProjectDetailRepository.createProject(props);
     if (result != null) {
       return result;
     }
