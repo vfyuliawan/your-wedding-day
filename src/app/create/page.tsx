@@ -21,6 +21,7 @@ import FooterDashboard from "../Dashboard/Components/Footer/Footer";
 import Cryptr from "cryptr";
 import { ModelGetProjectDetailRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/GetProjectDetailRequest/GetProjectDetailRequest";
 import {
+  GaleryModelGetProjectDetailResponseInterface,
   GiftElementModelGetProjectDetailResponseInterface,
   ModelGetProjectDetailResponseInterface,
   ResultModelGetProjectDetailResponseInterface,
@@ -318,7 +319,7 @@ const CreatePage = () => {
                   <HomeView data={data} setData={setData} />
                   <HeroView data={data} setData={setData} />
                   <EventInfo data={data} setData={setData} />
-                  <GiftsView />
+                  <GiftsView data={data} setData={setData}/>
                   <StoryView data={data} setData={setData} />
                   <CouplesView data={data} setData={setData} />
                   <GaleryView data={data} setData={setData} />
@@ -349,6 +350,7 @@ function ThemeView(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) {
+  const [isSlugFromTitle, setisSlugFromTitle] = useState('');
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -378,7 +380,7 @@ function ThemeView(params: {
             }}
           >
             <img
-              src={`image/themelist/${params.data?.theme.theme}.png`}
+              src={`image/themelist/JavaStyle1.png`}
               style={{
                 width: "50%",
                 alignItems: "center",
@@ -396,7 +398,7 @@ function ThemeView(params: {
               Theme
             </label>
             <select
-              defaultValue={params.data?.theme.theme}
+              defaultValue=''
             //   value={params.data?.theme.theme}
               className="form-select"
               aria-label="Default select example"
@@ -415,12 +417,42 @@ function ThemeView(params: {
                 });
               }}
             >
-              <option>-- {params.data?.theme.theme} --</option>
+              <option>--- Select Theme ---</option>
               {/* <option selected>-- {params.data?.theme.theme} --</option> */}
               {Constant.listTheme.map((item) => {
                 return <option key={item.key} value={item.key}>{item.val}</option>;
               })}
             </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="titleHome" className="form-label">
+              Project Title
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="titleTheme"
+              name="title"
+              placeholder="John-Rebecca"
+              defaultValue=''
+              onChange={(val) => {
+                const title = val.target.value;
+                const timestamp = new Date().getTime();
+                const random8Digit = Math.floor(10000000 + Math.random() * 90000000);
+                const slug = `${title.toLowerCase().replace(/\s+/g, '-')}-${random8Digit}`;
+                setisSlugFromTitle(slug);
+                params.setData((prevState) => {
+                  return {
+                    ...prevState,
+                    title,
+                    theme: {
+                      ...prevState?.theme,
+                      slug,
+                    },
+                  } as ResultModelGetProjectDetailResponseInterface;
+                });
+              }}
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="slugTheme" className="form-label">
@@ -433,7 +465,7 @@ function ThemeView(params: {
               id="alamatTheme"
               name="slug"
               placeholder="slug"
-              defaultValue={params.data?.theme.slug || ""}
+              value={isSlugFromTitle}
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -462,7 +494,7 @@ function ThemeView(params: {
               id="alamatTheme"
               name="title"
               placeholder="Alamat"
-              defaultValue={params.data?.theme.alamat || ""}
+              defaultValue=''
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -488,7 +520,7 @@ function ThemeView(params: {
               }}
               name="embeded"
               placeholder="Embeded"
-              defaultValue={params.data?.theme.embeded || ""}
+              defaultValue=''
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -514,6 +546,7 @@ function GaleryView(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) {
+  const [galleryImageForm, setgalleryImageForm] = useState<GaleryModelGetProjectDetailResponseInterface[]>([]);
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -542,15 +575,15 @@ function GaleryView(params: {
             <div className="row justify-content-center">
               <div className="col-md-8 col-10 text-center">
                 {/* <span>Memori kisah kami</span> */}
-                <h5>Add Your Galery</h5>
+                <h5>Add Your Gallery</h5>
               </div>
             </div>
             <div className="scrolling-wrapper">
-              {params.data?.galery.galeries.map((item, index) => {
+              {galleryImageForm.map((item, index) => {
                 return (
                   <div key={index} className="card card-block  " style={{borderRadius:"12px"}}>
                     <img
-                      src={params.data ? "data:image/jpeg;base64," + item : ""}
+                      src=''
                       alt={"imageCover"}
                       style={{borderRadius:"12px"}}
                     />
@@ -601,7 +634,7 @@ function GaleryView(params: {
                 role="switch"
                 id="showgalerySwitch"
                 name="showgalery"
-                checked={params.data?.galery.isShow || false}
+                checked={false}
                 onChange={(val) => {
                   params.setData((prevState) => {
                     return {
@@ -634,6 +667,14 @@ function StoryView(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) { 
+  const [storyForm, setstoryForm] = useState<StoryElementModelGetProjectDetailResponseInterface[]>([
+    {
+      title: "",
+      text: "",
+      image: "",
+      date: new Date(),
+    },
+  ]);
     const [isGambarStory, setisGambarStory] = useState(false);
   return (
     <div className="accordion-item">
@@ -655,7 +696,7 @@ function StoryView(params: {
         className="accordion-collapse collapse"
       >
         <div className="accordion-body">
-          {params.data?.story.stories.map((item, index) => (
+          {storyForm.map((item, index) => (
             <div
               key={index}
               className="accordion mb-2"
@@ -691,11 +732,7 @@ function StoryView(params: {
                                 id={`titleStoryPreview${index+1}`}
                                 name={`titleStoryPreview${index+1}`}
                                 placeholder="Event Date"
-                                value={
-                                    params.data?.story.stories[index].title
-                                    ? params.data.story.stories[index].title
-                                    : ""
-                                }
+                                value=''
                                 onChange={(val) => {
                                     
                                     params.setData((prevState) => {
@@ -724,15 +761,10 @@ function StoryView(params: {
                                 Image Story
                             </label>
                             <div>
-                                {(params?.data?.story.stories[index].image || isGambarStory) ? (
+                                {(isGambarStory) ? (
                                     <img
                                     id={`imageStoryPreview${index+1}`}
-                                    src={
-                                        params.data
-                                        ? "data:image/jpeg;base64," +
-                                            params.data.story.stories[index].image
-                                        : ""
-                                    }
+                                    src=''
                                     alt={`imageStoryPreview${index+1}`}
                                     style={{
                                         maxWidth: "180px",
@@ -746,42 +778,43 @@ function StoryView(params: {
                                     id="imageSotry"
                                     name="imageSotry"
                                     onChange={(val) => {
-                                        setisGambarStory(true);
+                                        
                                         const fileImageStory = val?.target?.files?.[0];
                                         if (fileImageStory) {
                                             
-                                        const reader = new FileReader();
-                                        reader.readAsDataURL(fileImageStory);
-                                        reader.onloadend = () => {
-                                            const imageStoryDataUrl =
-                                            reader.result as string;
-                                            const base64StoryData = imageStoryDataUrl.replace(
-                                            /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                                            ""
-                                            );
-                                            
-                                            params.setData((prevState) => {
-                                            return {
-                                                ...prevState,
-                                                story: {
-                                                ...prevState?.story,
-                                                    stories: prevState?.story.stories.map(
-                                                        (item, i) => {
-                                                        if (i === index) {
-                                                            
-                                                            return {
-                                                            ...item,
-                                                            image: base64StoryData,
-                                                            
-                                                            };
-                                                        }
-                                                        return item;
-                                                        }
-                                                    ),
-                                                },
-                                            } as ResultModelGetProjectDetailResponseInterface;
-                                            });
-                                        };
+                                          const reader = new FileReader();
+                                          reader.readAsDataURL(fileImageStory);
+                                          reader.onloadend = () => {
+                                              const imageStoryDataUrl =
+                                              reader.result as string;
+                                              const base64StoryData = imageStoryDataUrl.replace(
+                                              /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                              ""
+                                              );
+                                              
+                                              params.setData((prevState) => {
+                                              return {
+                                                  ...prevState,
+                                                  story: {
+                                                  ...prevState?.story,
+                                                      stories: prevState?.story.stories.map(
+                                                          (item, i) => {
+                                                          if (i === index) {
+                                                              
+                                                              return {
+                                                              ...item,
+                                                              image: base64StoryData,
+                                                              
+                                                              };
+                                                          }
+                                                          return item;
+                                                          }
+                                                      ),
+                                                  },
+                                              } as ResultModelGetProjectDetailResponseInterface;
+                                              });
+                                          };
+                                          setisGambarStory(true);
                                         }
                                     }}
                                 />
@@ -797,11 +830,7 @@ function StoryView(params: {
                                 id={`dateStoryPreview${index+1}`}
                                 name={`dateStoryPreview${index+1}`}
                                 placeholder="Event Date"
-                                value={
-                                    params.data?.story.stories[index].date
-                                    ? new Date(params.data.story.stories[index].date).toISOString().split("T")[0]
-                                    : ""
-                                }
+                                value=''
                                 onChange={(val) => {
                                     params.setData((prevState) => {
                                     return {
@@ -835,11 +864,7 @@ function StoryView(params: {
                                 }}
                                 name={`textStoryPreview${index+1}`}
                                 placeholder="My story begin when ..."
-                                defaultValue={
-                                    params.data?.story.stories[index].text
-                                    ? params.data.story.stories[index].text
-                                    : ""
-                                }
+                                defaultValue=''
                                 onChange={(val) => {
                                     params.setData((prevState) => {
                                     return {
@@ -868,9 +893,7 @@ function StoryView(params: {
           ))}
           <button
             className="btn btn-primary mt-3"
-            onClick={() => {
-            //   console.log("adsadfasd");
-
+            onClick={() => { 
               const newForm = {
                 title: "",
                 text: "",
@@ -897,7 +920,7 @@ function StoryView(params: {
               role="switch"
               id="showstorySwitch"
               name="showstory"
-              checked={params.data?.story.isShow || false}
+              checked={false}
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -977,7 +1000,7 @@ function CouplesView(params: {
                       id="maleFatherName"
                       name="maleFatherName"
                       placeholder="Pak John Doe"
-                      value={params.data?.braidInfo.male.dad || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1004,7 +1027,7 @@ function CouplesView(params: {
                       id="maleMotherName"
                       name="maleMotherName"
                       placeholder="Mrs. Barbie"
-                      value={params.data?.braidInfo.male.mom || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1031,7 +1054,7 @@ function CouplesView(params: {
                       id="maleName"
                       name="maleName"
                       placeholder="Mr. John Doe"
-                      value={params.data?.braidInfo.male.name || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1055,7 +1078,7 @@ function CouplesView(params: {
                     <div>
                       <img
                         id="imageMalePreview"
-                        src={`data:image/jpeg;base64,${params.data?.braidInfo.male.image}`}
+                        src=''
                         alt={"imageMale"}
                         style={{
                           maxWidth: "180px",
@@ -1128,7 +1151,7 @@ function CouplesView(params: {
                       id="femaleFatherName"
                       name="femaleFatherName"
                       placeholder="Pak John Doe"
-                      value={params.data?.braidInfo.female.dad || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1155,7 +1178,7 @@ function CouplesView(params: {
                       id="femaleMotherName"
                       name="femaleMotherName"
                       placeholder="Mrs. Barbie"
-                      value={params.data?.braidInfo.female.mom || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1182,7 +1205,7 @@ function CouplesView(params: {
                       id="femaleName"
                       name="femaleName"
                       placeholder="Mr. John Doe"
-                      value={params.data?.braidInfo.female.name || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1206,7 +1229,7 @@ function CouplesView(params: {
                     <div>
                       <img
                         id="imagefemalePreview"
-                        src={`data:image/jpeg;base64,${params.data?.braidInfo.female.image}`}
+                        src=''
                         alt={"imagefemale"}
                         style={{
                           maxWidth: "180px",
@@ -1261,7 +1284,7 @@ function CouplesView(params: {
               role="switch"
               id="showBraidInfoSwitch"
               name="showBraidInfo"
-              checked={params.data?.braidInfo.isShow || false}
+              checked={false}
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -1287,7 +1310,12 @@ function CouplesView(params: {
   );
 }
 
-function GiftsView() {
+function GiftsView(params: {
+  data?: ResultModelGetProjectDetailResponseInterface;
+  setData: Dispatch<
+    SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
+  >;
+}) {
 
   const [giftForm, setGiftForm] = useState<GiftElementModelGetProjectDetailResponseInterface[]>([
     {
@@ -1454,7 +1482,15 @@ function GiftsView() {
                 name: "",
                 noRek: "",
               } as GiftElementModelGetProjectDetailResponseInterface;
-              setGiftForm((prevGiftForm) => [...prevGiftForm, newForm]);
+              params.setData((prev) => {
+                return {
+                  ...prev,
+                  gift: {
+                    ...prev?.gift,
+                    gifts: [...(prev?.gift?.gifts ?? []), newForm],
+                  },
+                } as ResultModelGetProjectDetailResponseInterface;
+              });
             }}
           >
             Add Gift
@@ -1487,6 +1523,9 @@ function EventInfo(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) {
+  const [isImageEvent1View, setisImageEvent1View] = useState(false);
+  const [isImageEvent2View, setisImageEvent2View] = useState(false);
+
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -1535,7 +1574,7 @@ function EventInfo(params: {
                       id="titleEvent1"
                       name="title"
                       placeholder="Title Event 1: e.g. Akad, Resepsi, Pemberkatan"
-                      value={params.data?.infoAcara.akad.titleAkad || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1562,7 +1601,7 @@ function EventInfo(params: {
                       id="placeEvent1"
                       name="place"
                       placeholder="place Event 1: e.g. Hotel..., Taman..."
-                      value={params.data?.infoAcara.akad.lokasiAkad || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1589,7 +1628,7 @@ function EventInfo(params: {
                       id="locationEvent1"
                       name="location"
                       placeholder={"https://maps.app.goo.gl/LeMeridien"}
-                      value={params.data?.infoAcara.akad.mapAkad || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1611,9 +1650,10 @@ function EventInfo(params: {
                       Image Event 1
                     </label>
                     <div>
+                      {isImageEvent1View ? 
                       <img
                         id="imageEvent1Preview"
-                        src={`data:image/jpeg;base64,${params.data?.infoAcara.akad.imageAkad}`}
+                        src=''
                         alt={"imageEvent1"}
                         style={{
                           maxWidth: "180px",
@@ -1621,6 +1661,7 @@ function EventInfo(params: {
                           borderRadius: "5%",
                         }}
                       />
+                      : <></>}
                       <input
                         type="file"
                         className="form-control"
@@ -1652,6 +1693,7 @@ function EventInfo(params: {
                                 } as ResultModelGetProjectDetailResponseInterface;
                               });
                             };
+                            setisImageEvent1View(true);
                           }
                         }}
                       />
@@ -1668,13 +1710,7 @@ function EventInfo(params: {
                         id="eventDate"
                         name="eventDate"
                         placeholder="Event Date"
-                        value={
-                          params.data?.infoAcara.akad.dateAkad
-                            ? new Date(params.data.infoAcara.akad.dateAkad)
-                                .toISOString()
-                                .split("T")[0]
-                            : ""
-                        }
+                        value=''
                         onChange={(val) => {
                           const newDate = new Date(val.target.value);
                           const timePart = params.data?.infoAcara.akad.dateAkad
@@ -1712,14 +1748,7 @@ function EventInfo(params: {
                         id="eventTime1"
                         name="eventTime1"
                         placeholder="Event Time 1"
-                        value={
-                          params.data?.infoAcara.akad.dateAkad
-                            ? new Date(params.data.infoAcara.akad.dateAkad)
-                                .toISOString()
-                                .split("T")[1]
-                                .slice(0, 5)
-                            : ""
-                        }
+                        value=''
                         onChange={(val) => {
                           const newTime = val.target.value;
                           const datePart = params.data?.infoAcara.akad.dateAkad
@@ -1746,9 +1775,9 @@ function EventInfo(params: {
                       />
                     </div>
                   </div>
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <button className="btn btn-warning">Apply</button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -1780,7 +1809,7 @@ function EventInfo(params: {
                       id="titleEvent2"
                       name="title"
                       placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan"
-                      value={params.data?.infoAcara.resepsi.titleResepsi || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1807,7 +1836,7 @@ function EventInfo(params: {
                       id="placeEvent2"
                       name="place"
                       placeholder="place Event 1: e.g. Hotel..., Taman..."
-                      value={params.data?.infoAcara.resepsi.lokasiResepsi || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1834,7 +1863,7 @@ function EventInfo(params: {
                       id="locationEvent2"
                       name="location"
                       placeholder={"https://maps.app.goo.gl/LeMeridien"}
-                      value={params.data?.infoAcara.resepsi.mapResepsi || ""}
+                      value=''
                       onChange={(val) => {
                         params.setData((prevState) => {
                           return {
@@ -1856,16 +1885,18 @@ function EventInfo(params: {
                       Image Event 2
                     </label>
                     <div>
-                      <img
-                        id="imageEvent2Preview"
-                        src={`data:image/jpeg;base64,${params.data?.infoAcara.resepsi.imageResepsi}`}
-                        alt={"imageEvent2"}
-                        style={{
-                          maxWidth: "180px",
-                          margin: "5px",
-                          borderRadius: "5%",
-                        }}
-                      />
+                      {isImageEvent2View ? 
+                        <img
+                          id="imageEvent2Preview"
+                          src=''
+                          alt={"imageEvent2"}
+                          style={{
+                            maxWidth: "180px",
+                            margin: "5px",
+                            borderRadius: "5%",
+                          }}
+                        />
+                      : <></>}
                       <input
                         type="file"
                         className="form-control"
@@ -1897,6 +1928,7 @@ function EventInfo(params: {
                                 } as ResultModelGetProjectDetailResponseInterface;
                               });
                             };
+                            setisImageEvent2View(true);
                           }
                         }}
                       />
@@ -1913,15 +1945,7 @@ function EventInfo(params: {
                         id="eventDate2"
                         name="eventDate2"
                         placeholder="Event Date 2"
-                        value={
-                          params.data?.infoAcara.resepsi.dateResepsi
-                            ? new Date(
-                                params.data.infoAcara.resepsi.dateResepsi
-                              )
-                                .toISOString()
-                                .split("T")[0]
-                            : ""
-                        }
+                        value=''
                         onChange={(val) => {
                           const newDate = new Date(val.target.value);
                           const timePart = params.data?.infoAcara.resepsi
@@ -1962,16 +1986,7 @@ function EventInfo(params: {
                         id="eventTime2"
                         name="eventTime2"
                         placeholder="Event Time 2"
-                        value={
-                          params.data?.infoAcara.resepsi.dateResepsi
-                            ? new Date(
-                                params.data.infoAcara.resepsi.dateResepsi
-                              )
-                                .toISOString()
-                                .split("T")[1]
-                                .slice(0, 5)
-                            : ""
-                        }
+                        value=''
                         onChange={(val) => {
                           const newTime = val.target.value;
                           const datePart = params.data?.infoAcara.resepsi
@@ -2001,9 +2016,7 @@ function EventInfo(params: {
                       />
                     </div>
                   </div>
-                  <div className="mb-3">
-                    <button className="btn btn-warning">Apply</button>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -2020,6 +2033,7 @@ function HeroView(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) {
+  const [isImageHeroView, setisImageHeroView] = useState(false);
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -2049,7 +2063,7 @@ function HeroView(params: {
               id="titleHero"
               name="title"
               placeholder="Title Hero"
-              value={params.data?.title || ""}
+              value=''
               onChange={(val) => {
                 console.log(params.data);
 
@@ -2067,16 +2081,14 @@ function HeroView(params: {
               Image Hero
             </label>
             <div>
-              <img
-                id="imageHeroPreview"
-                src={
-                  params.data
-                    ? "data:image/jpeg;base64," + params.data.hero.img
-                    : ""
-                }
-                alt={"imageHero"}
-                style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
-              />
+              {isImageHeroView ? 
+                <img
+                  id="imageHeroPreview"
+                  src=''
+                  alt={"imageHero"}
+                  style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+                /> 
+              : <></>}
               <input
                 type="file"
                 className="form-control"
@@ -2103,15 +2115,12 @@ function HeroView(params: {
                         } as ResultModelGetProjectDetailResponseInterface;
                       });
                     };
+                    setisImageHeroView(true);
                   }
                 }}
               />
             </div>
-          </div>
-          {/* <div className="mb-3">
-                                              <label htmlFor="titleCover" className="form-label">Event Date</label>
-                                              <input type="date" className="form-control" id="titleCover" placeholder="name@example.com"/>
-                                          </div> */}
+          </div> 
           <div className="mb-3 form-check form-switch">
             <input
               className="form-check-input"
@@ -2119,7 +2128,7 @@ function HeroView(params: {
               role="switch"
               id="showHeroSwitch"
               name="showHero"
-              checked={params.data?.hero.isShow || false}
+              checked={false}
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -2138,10 +2147,7 @@ function HeroView(params: {
             >
               Show Hero
             </label>
-          </div>
-          {/* <div className="mb-3">
-                                              <button className="btn btn-warning">Apply</button>
-                                          </div> */}
+          </div> 
         </div>
       </div>
     </div>
@@ -2154,6 +2160,7 @@ function HomeView(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) {
+  const [isImageHomeView, setisImageHomeView] = useState(false);
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -2183,7 +2190,7 @@ function HomeView(params: {
               id="titleHome"
               name="title"
               placeholder="Title Home"
-              value={params.data?.title || ""}
+              value=''
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -2204,7 +2211,7 @@ function HomeView(params: {
               id="quoteHome"
               name="quote"
               placeholder="Quote Home"
-              value={params.data?.home.quotes || ""}
+              value=''
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -2223,16 +2230,13 @@ function HomeView(params: {
               Home Image
             </label>
             <div>
+              {isImageHomeView ? 
               <img
                 id="imageHomePreview"
-                src={
-                  params.data
-                    ? "data:image/jpeg;base64," + params.data.home.img
-                    : ""
-                }
+                src=''
                 alt={"imageHome"}
                 style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
-              />
+              />:<></>}
               <input
                 type="file"
                 className="form-control"
@@ -2259,6 +2263,7 @@ function HomeView(params: {
                         } as ResultModelGetProjectDetailResponseInterface;
                       });
                     };
+                    setisImageHomeView(true);
                   }
                 }}
               />
@@ -2271,7 +2276,7 @@ function HomeView(params: {
               role="switch"
               id="showHomeDepanSwitch"
               name="showHome"
-              checked={params.data?.home.isShow || false}
+              checked={false}
               onChange={(val) => {
                 params.setData((prevState) => {
                   return {
@@ -2287,10 +2292,7 @@ function HomeView(params: {
             <label className="form-check-label" htmlFor="showHomeDepanSwitch">
               Show Home
             </label>
-          </div>
-          {/* <div className="mb-3">
-                                      <button className="btn btn-warning">Apply</button>
-                                  </div> */}
+          </div> 
         </div>
       </div>
     </div>
@@ -2304,7 +2306,7 @@ function CoverDepan(params: {
   >;
 }) {
 
-
+  const [isImageCover, setisImageCover] = useState(false);
   return (
     <div className="accordion-item">
       <h2 className="accordion-header">
@@ -2334,7 +2336,7 @@ function CoverDepan(params: {
               id="titleCover"
               name="title"
               placeholder="Title Cover"
-              value={params.data?.title || ""}
+              value=''
               onChange={(val) => {
                 params.setData((prevState: any) => {
                   return {
@@ -2350,16 +2352,13 @@ function CoverDepan(params: {
               Image Cover
             </label>
             <div>
+              {isImageCover ? 
               <img
                 id="imageCoverPreview"
-                src={
-                  params.data
-                    ? "data:image/jpeg;base64," + params.data.cover.img
-                    : ""
-                }
+                src=''
                 alt={"imageCover"}
                 style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
-              />
+              /> : <></>}
               <input
                 type="file"
                 className="form-control"
@@ -2386,6 +2385,7 @@ function CoverDepan(params: {
                         } as ResultModelGetProjectDetailResponseInterface;
                       });
                     };
+                    setisImageCover(true);
                   }
                 }}
               />
@@ -2401,11 +2401,7 @@ function CoverDepan(params: {
               id="eventDate"
               name="eventDate"
               placeholder="Event Date"
-              value={
-                params.data?.cover.date
-                  ? new Date(params.data.cover.date).toISOString().split("T")[0]
-                  : ""
-              }
+              value=''
               onChange={(val) => {
                 params.setData((prevState: any) => {
                   return {
@@ -2423,7 +2419,7 @@ function CoverDepan(params: {
               role="switch"
               id="showCoverDepanSwitch"
               name="showCover"
-              checked={params.data?.cover.isShow || false}
+              checked={false}
               onChange={(val) => {
                 params.setData((prevState: any) => {
                   return {

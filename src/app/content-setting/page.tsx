@@ -1857,10 +1857,7 @@ function EventInfo(params: {
                         }}
                       />
                     </div>
-                  </div>
-                  <div className="mb-3">
-                    <button className="btn btn-warning">Apply</button>
-                  </div>
+                  </div> 
                 </div>
               </div>
             </div>
@@ -2112,10 +2109,7 @@ function EventInfo(params: {
                         }}
                       />
                     </div>
-                  </div>
-                  <div className="mb-3">
-                    <button className="btn btn-warning">Apply</button>
-                  </div>
+                  </div> 
                 </div>
               </div>
             </div>
