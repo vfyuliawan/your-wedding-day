@@ -6,11 +6,11 @@ import { auth } from '../api/firebase';
 
 import PinkEssence from "../LuxuryTheme/LuxuryTheme";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import { ResultModelSignupResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/SignupResponse/ModelSignupResponseInterface';
 import Service from '../services/Service';
-import { CollectionReference, DocumentData, query, Query, where } from 'firebase/firestore';
+// import { CollectionReference, DocumentData, query, Query, where } from 'firebase/firestore';
 import { ModelSignupRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/SignupRequest/ModelSignupRequestInterface';
 import SignupService from '../Dashboard/Domain/Service/SignupService/SignupService';
 
@@ -27,20 +27,6 @@ export default function Signup() {
   const router = useRouter();
 
     const [signupDetail, setsignupDetail] = useState<ResultModelSignupResponseInterface>();
-    const getMessage = async () => {
-      console.log("run");
-      const res = await Service.GET({
-        collectionName: "UserId",
-        queryGet: function (
-          queryGet: CollectionReference<DocumentData, DocumentData>
-        ): Query<DocumentData, DocumentData> {
-          const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
-          return nameQuery;
-        },
-      });
-      if (res?.length ?? 0 > 0) {
-      }
-    };
 
     const doSignup = async (username: string, email: string,password: string, name: string) => {
         const requestBody: ModelSignupRequestInterface = {

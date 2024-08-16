@@ -3,7 +3,7 @@ import Link from "next/link";
 import { UserAuth } from "../../../services/AuthContext";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.min.css'; 
 import LogoutService from "../../Domain/Service/LogoutService/LogoutService";
 // import { useRouter } from "next/router";

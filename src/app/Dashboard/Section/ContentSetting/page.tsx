@@ -1,41 +1,45 @@
+"use client";
+
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { UserAuth } from "../../../services/AuthContext"; 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 
 import FooterDashboard from "../../Components/Footer/Footer";
 import NavbarDashboard from "../../Components/Navbar/Navbar";
 
 const CMSDashboard = () => {
-    const { user, googleSignIn, logOut } = UserAuth();
+    // const { user, googleSignIn, logOut } = UserAuth();
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(true)
 
-  const handleSignIn = async () => {
-    try {
-      await googleSignIn();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const handleSignIn = async () => {
+//     try {
+//       await googleSignIn();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
-  const handleSignOut = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+//   const handleSignOut = async () => {
+//     try {
+//       await logOut();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 50));
-      setLoading(false);
-    };
-    checkAuthentication();
-  }, [user]);
+//   useEffect(() => {
+//     const checkAuthentication = async () => {
+//       await new Promise((resolve) => setTimeout(resolve, 50));
+//       setLoading(false);
+//     };
+//     checkAuthentication();
+//   }, [user]);
 
     return (
         <>  

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+// import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import { ModelLoginRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
 import { ResultModelLoginResponseInterface } from "../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
@@ -35,6 +35,8 @@ const LoginDashboard = () => {
       checkUserLogin(); 
     }
   }, []);
+
+  
 
   const checkUserLogin = async () => {
     try {

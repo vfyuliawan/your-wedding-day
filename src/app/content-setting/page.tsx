@@ -6,16 +6,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+// import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import Service from "../services/Service";
-import {
-  CollectionReference,
-  DocumentData,
-  query,
-  Query,
-  where,
-} from "firebase/firestore";
+// import Service from "../services/Service";
+// import {
+//   CollectionReference,
+//   DocumentData,
+//   query,
+//   Query,
+//   where,
+// } from "firebase/firestore";
 import LogoutService from "../Dashboard/Domain/Service/LogoutService/LogoutService";
 import FooterDashboard from "../Dashboard/Components/Footer/Footer";
 import Cryptr from "cryptr";
@@ -149,20 +149,20 @@ const ContentSettingPage = () => {
     }
   };
 
-  const getMessage = async () => {
-    console.log("run");
-    const res = await Service.GET({
-      collectionName: "UserId",
-      queryGet: function (
-        queryGet: CollectionReference<DocumentData, DocumentData>
-      ): Query<DocumentData, DocumentData> {
-        const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
-        return nameQuery;
-      },
-    });
-    if (res?.length ?? 0 > 0) {
-    }
-  };
+  // const getMessage = async () => {
+  //   console.log("run");
+  //   const res = await Service.GET({
+  //     collectionName: "UserId",
+  //     queryGet: function (
+  //       queryGet: CollectionReference<DocumentData, DocumentData>
+  //     ): Query<DocumentData, DocumentData> {
+  //       const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
+  //       return nameQuery;
+  //     },
+  //   });
+  //   if (res?.length ?? 0 > 0) {
+  //   }
+  // };
 
   const handleLogout = async () => {
     // Clear token from localStorage

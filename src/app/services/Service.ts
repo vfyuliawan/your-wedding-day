@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CollectionReference,
   DocumentData,
@@ -159,6 +161,7 @@ class Service {
   ): Promise<ModelLoginResponseInterface | null>  {
     const res = await post({
       path: "/auth/authenticate",
+      isNeedToken:false,
       reqBody: {
         username: props.username,
         password: props.password,
