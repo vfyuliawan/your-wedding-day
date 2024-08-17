@@ -4,7 +4,7 @@ const nextConfig = {
       ignoreDuringBuilds: true,
     },
     // Add the output option to export the site as static HTML
-    output: 'export',
+    // output: 'export',
   };
   
   module.exports = nextConfig;
