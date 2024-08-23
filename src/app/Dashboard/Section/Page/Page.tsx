@@ -275,7 +275,7 @@ const DashboardPage = () => {
                     paddingLeft: 5,
                     backgroundColor:"white"
                   }}
-                  placeholder="      Search Your Project"
+                  placeholder="   Search Your Project"
                   onChange={(val) => {
                     setSearchQueary(val.target.value);
                     setPage(0);
@@ -419,7 +419,8 @@ const DashboardPage = () => {
                                   {"<< Previous Page"}
                                 </button>
                               ) : (
-                                <>.</>
+                                // <>.</>
+                                <div style={{color:"white"}}></div>
                               )}
                               {page + 1 < totalPages ? (
                                 <button
@@ -429,7 +430,7 @@ const DashboardPage = () => {
                                   {"Next Page >>"}
                                 </button>
                               ) : (
-                                <>.</>
+                                <div style={{color:"white"}}></div>
                               )}
                             </div>
                           </td>
