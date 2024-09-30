@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import { motion, useAnimation } from "framer-motion";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
+import React from "react";
 
 const RsvpView = (props: RSVPViewInterface) => {
   const {
