@@ -1,0 +1,4 @@
+interface ModelRequestDetailSlug{
+    slug : string;
+
+}

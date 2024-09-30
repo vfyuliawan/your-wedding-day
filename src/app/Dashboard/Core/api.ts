@@ -3,13 +3,15 @@ import ErrorHandler from "./ErrorHandler";
 import useErrorHandler from "./ErrorHandler";
 import Swal from "sweetalert2";
 
-const timeOut = 60000*10; //max request timeout menjadi 3 menit 
+const timeOut = 60000; //max request timeout menjadi 3 menit 
 
 // const errorHandler = useErrorHandler();
 
+const versionAppi  = "/api/v1";
+
 export const baseUrl = (): string => {
   // return "https://innovative-emotion-production.up.railway.app";
-  return "http://localhost:8080";
+  return `http://localhost:8000${versionAppi}`;
 };
 
 export enum CallBackError {
