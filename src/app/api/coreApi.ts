@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import ErrorHandler from "../Dashboard/Core/ErrorHandler";
 
 const timeOut = 60000;
 

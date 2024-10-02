@@ -6,6 +6,7 @@ import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionO
 import HeaderView from '../Header/HeaderView';
 import { HeroViewInterface } from "./HeroModel";
 import { TimeConversionTime, TimeConvertionDate, TimeConvertionInterface } from '../../../utils/TimeConvertion';
+import React from "react";
 
 
 const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
@@ -27,15 +28,15 @@ const HeroView = forwardRef<HTMLDivElement, HeroViewInterface>((props, ref) => {
             width: '100%',
             height: '100%',
             zIndex: -1,
-            backgroundImage: `url(${props?.HeroDetail?.HeroImg})`,
+            backgroundImage: `url(${props?.HeroDetail?.img})`,
             filter: 'grayscale(100%)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
         <main className="inside" style={{display:'flex', flexDirection:'column', position:'relative', bottom:-150}}>
-          <h1 style={{fontFamily:'brilon'}}>{props.HeroDetail.HeroTittle}</h1>
-          <h4>  {TimeConvertionDate(props?.HeroDetail?.HeroDate as TimeConvertionInterface).dateFull}</h4>
+          <h1 style={{fontFamily:'brilon'}}>{props.HeroDetail.title}</h1>
+          <h4>  {TimeConvertionDate(props?.HeroDetail?.date as any).dateFull}</h4>
         </main>
         <div className="gradient-overlay" />
 

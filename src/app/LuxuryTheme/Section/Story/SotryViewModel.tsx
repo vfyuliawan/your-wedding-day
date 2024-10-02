@@ -1,7 +1,8 @@
-import { TimeConvertionInterface } from "@/app/utils/TimeConvertion"
+import { ResultStory } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug"
+import { TimeConvertionInterface } from "../../../utils/TimeConvertion"
 
 export interface StoryViewInterface {
-    OurStory: StoryViewMap
+    OurStory: ResultStory | undefined
   }
   
   export interface StoryViewMap{

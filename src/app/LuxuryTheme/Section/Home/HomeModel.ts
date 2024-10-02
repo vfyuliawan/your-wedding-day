@@ -1,3 +1,5 @@
+import { Cover } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug"
+
 export interface HomeKeyValue {
     HomeImg: string
     HomeQuotes: string
@@ -6,5 +8,5 @@ export interface HomeKeyValue {
 }
 
 export interface HomeViewInterface {
-    HomeDetail : HomeKeyValue
+    HomeDetail : Cover
 }

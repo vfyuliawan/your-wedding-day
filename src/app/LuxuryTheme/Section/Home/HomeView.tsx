@@ -3,8 +3,9 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import { HomeViewInterface } from "./HomeModel";
+import React from "react";
+import AnimationThemeInstance from '../../../utils/AnimationThemes';
 
 const HomeView = (props:HomeViewInterface) => {
 
@@ -34,7 +35,7 @@ const HomeView = (props:HomeViewInterface) => {
               }}
             >
               <img
-                src={props?.HomeDetail?.HomeImg}
+                src={props?.HomeDetail?.img}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -59,7 +60,7 @@ const HomeView = (props:HomeViewInterface) => {
                       fontSize: "3rem",
                     }}
                   >
-                    {props?.HomeDetail?.HomeTittle }
+                    {props?.HomeDetail?.title }
                   </motion.h1>
                   <motion.p
                   animate={controls}
@@ -72,7 +73,7 @@ const HomeView = (props:HomeViewInterface) => {
                       fontSize:'14px'
                     }}
                   >
-                    {props?.HomeDetail?.HomeQuotes}
+                    {props?.HomeDetail?.quotes}
                   </motion.p>
                 </div>
               </div>

@@ -28,11 +28,16 @@ import { DocumentData, Timestamp } from "firebase/firestore";
 import { TimeConvertionDate } from "../utils/TimeConvertion";
 import CoverView from "./Section/Cover/CoverView";
 import GuestScanView from "./Section/GuestScanView/GuestScanView";
+import { ResultDetailSlug } from "../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import React from "react";
+import { MessagesRequest } from "../Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
 // import AOS from 'aos';
 
 interface LuxuryThemeInterface {
-  details: DocumentData | undefined;
-  getDetails: () => void;
+  details: ResultDetailSlug | undefined;
+  message: MessagesRequest[];
+  setMessage:React.Dispatch<React.SetStateAction<MessagesRequest[]>>
+  postMessage:(name: string, text: string, present: string) => Promise<void>;
   guest: string;
   idGuest: string;
 }
@@ -81,7 +86,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   const qrCodeRef = useRef<any>(null);
   const endRef = useRef<any>(null);
 
-  const easeInOutQuad = (t: any) => (t < 0.5 ? 2 * t ** 2 : -1 + (4 - 2 * t) * t);
+  const easeInOutQuad = (t: any) =>
+    t < 0.5 ? 2 * t ** 2 : -1 + (4 - 2 * t) * t;
 
   const scrollToBarcode = (duration: number, ref: MutableRefObject<any>) => {
     const targetElement = ref.current;
@@ -89,19 +95,18 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     const startTime = performance.now();
-  
-  
+
     const scrollStep = (timestamp: any) => {
       const currentTime = timestamp - startTime;
       const progress = currentTime / duration;
-  
+
       window.scrollTo(0, startPosition + distance * easeInOutQuad(progress));
-  
+
       if (currentTime < duration) {
         requestAnimationFrame(scrollStep);
       }
     };
-  
+
     requestAnimationFrame(scrollStep);
   };
 
@@ -153,38 +158,42 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         controls
       >
         <source
-          src={`/music/${props?.details?.ThemeSong}.mp3`}
+          src={`/music/${props?.details?.theme.music}.mp3`}
           type="audio/mp3"
         />
         Your browser does not support the audio element.
       </audio>
       <CoverView
-        hero={props?.details?.Hero}
         guest={props.guest}
         isVisible={coverVisible}
         onCoverClick={handleCoverClick}
-        detailCover={props?.details?.Cover}
+        detailCover={props?.details?.cover}
       />
       <div style={{ overflowY: "scroll" }} ref={containerRef}>
         {!coverVisible ? <NavbarView /> : null}
-        <HeaderView themeName={props?.details?.ThemeName} />
+        <HeaderView themeName={props?.details?.theme.theme ?? ""} />
         <div className="hero-home">
-          {props?.details?.Hero?.Visible ? (
-            <HeroView ref={heroRef} HeroDetail={props?.details?.Hero} />
+          {props?.details?.hero?.isShow ? (
+            <HeroView ref={heroRef} HeroDetail={props?.details?.hero} />
           ) : null}
-          {props?.details?.Home?.Visible ? (
-            <HomeView HomeDetail={props?.details?.Home} />
+          {props?.details?.home?.isShow ? (
+            <HomeView HomeDetail={props?.details?.home} />
           ) : null}
         </div>
-        {props?.details?.MaleFemale?.Visible ? (
-          <MaleFemaleView MaleFemaleDetail={props?.details?.MaleFemale} />
+        {props?.details?.braidInfo?.isShow ? (
+          <MaleFemaleView MaleFemaleDetail={props?.details?.braidInfo} />
         ) : null}
-        {props?.details?.InfoAcara?.Visible ? (
+        {/* {props?.details?.infoAcara?.Visible ? (
           <InfoView Info={props?.details?.InfoAcara} Embeded={props?.details?.Embeded} />
         ) : (
           <InfoView Info={props?.details?.InfoAcara} Embeded={props?.details?.Embeded}/>
-        )}
-        {props?.details?.CountDown?.Visible ? (
+        )} */}
+        <InfoView
+          Info={props?.details?.infoAcara}
+          Embeded={props?.details?.theme.embeded}
+        />
+
+        {/* {props?.details?.CountDown?.Visible ? (
           <CountDownView
             targetDate={
               new Date(
@@ -198,35 +207,35 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               )
             }
           />
-        ) : null}
-        {props?.details?.OurStory.Visible ? (
-          <StoryView OurStory={props?.details?.OurStory} />
+        ) : null} */}
+
+        <CountDownView targetDate={props.details?.countdown} />
+
+        {props?.details?.story.isShow ? (
+          <StoryView OurStory={props?.details?.story} />
         ) : null}
 
-        {props?.details?.Galery.Visible ? (
-          <GaleryView image={props?.details?.Galery.image} />
+        {props?.details?.galery.isShow ? (
+          <GaleryView image={props?.details?.galery.galeries} />
         ) : null}
         <RsvpView
-          Message={props?.details?.Message}
-          slug={props?.details?.Slug}
-          userId={props?.details?.idDoc}
-          getDetail={function (): void {
-            props.getDetails();
-          }}
+          message={props?.message}
+          postMessage={props.postMessage}
+          setMessage={props.setMessage}
         />
-        {props?.details?.Gifts.Visible ? (
+        {/* {props?.details?.gift.isShow ? (
           <GiftsView Gifts={props?.details?.Gifts} />
-        ) : null}
+        ) : null} */}
         <div ref={qrCodeRef}></div>
 
-        {props?.details?.GuestBarcode ? (
+        {/* {props?.details?.GuestBarcode ? (
           <GuestScanView
             idGuest={props.idGuest ?? 0}
             guest={props.guest ?? ""}
           />
-        ) : null}
+        ) : null} */}
 
-        <FooterView Footer={props?.details?.Footer} />
+        {/* <FooterView Footer={props?.details?.Footer} /> */}
         <EndView />
         {!coverVisible ? (
           <button
@@ -270,20 +279,24 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={() =>{scrollToBarcode(10000, endRef)}}          >
+            onClick={() => {
+              scrollToBarcode(10000, endRef);
+            }}
+          >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-arrow-down-circle"
                 style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-lg bi-arrow-down-circle"
-              style={{ fontSize: "2rem" }}
+              <i
+                className="bi bi-lg bi-arrow-down-circle"
+                style={{ fontSize: "2rem" }}
               ></i>
             )}
           </button>
         ) : null}
-         {!coverVisible ? (
+        {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
@@ -298,7 +311,9 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               cursor: "pointer",
               zIndex: "999",
             }}
-            onClick={() =>{scrollToBarcode(2000, qrCodeRef)}}
+            onClick={() => {
+              scrollToBarcode(2000, qrCodeRef);
+            }}
           >
             {isPlaying ? (
               <i
@@ -306,11 +321,13 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
                 style={{ fontSize: "2rem" }}
               ></i>
             ) : (
-              <i className="bi bi-lg bi-qr-code" style={{fontSize:"2rem"}}></i>
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{ fontSize: "2rem" }}
+              ></i>
             )}
           </button>
         ) : null}
-         
       </div>
     </div>
   );

@@ -7,11 +7,12 @@ import "react-image-gallery/styles/css/image-gallery.css";
 // @ts-ignore
 import OwlCarousel from "react-owl-carousel3";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import { useInView } from "react-intersection-observer";
+import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import React from "react";
 
 interface GaleryViewInterface {
-  image: Array<any>;
+  image:  string[];
 }
 
 const GaleryView = (props: GaleryViewInterface) => {

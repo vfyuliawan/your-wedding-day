@@ -12,6 +12,7 @@ export interface ModelResponseDetailSlug {
 }
 
 export interface ResultDetailSlug {
+    id:string;
     title:       string;
     countdown:   Date;
     publishDate: Date;

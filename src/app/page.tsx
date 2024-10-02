@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./page.module.css";
 import PinkEssence from "./LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/router";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -30,6 +29,10 @@ import ReactLoading from "react-loading";
 import FloralTheme from "./FloralTheme/FloralTheme";
 import FullPageTheme from "./FullAnimatedTheme/FullPageTheme";
 import React from "react";
+import { ResultDetailSlug } from "./Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import DetailSlugRepository from "./Dashboard/Domain/Repository/DetailSlugRepository/DetailSlugRepository";
+import MessageService from "./Dashboard/Domain/Service/MessageService/MessageService";
+import { MessagesRequest } from "./Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
 
 export default function Home() {
   const pathname = usePathname();
@@ -41,51 +44,62 @@ export default function Home() {
   const [guest, setGuest] = useState<string>("");
   const [idGuest, setidGuest] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [details, setDetails] = useState<DocumentData | undefined>();
+  const [details, setDetails] = useState<ResultDetailSlug | undefined>();
   const [homePage, setHomePage] = useState(false);
+  const [message, setMessage] = useState<MessagesRequest[]>([]);
 
-  const getTheme = async () => {
+  const getThemeBySlug = async () => {
     setLoading(true);
-    const res = await Service.GET({
-      collectionName: "UserId",
-      queryGet: function (
-        queryGet: CollectionReference<DocumentData, DocumentData>
-      ): Query<DocumentData, DocumentData> {
-        const nameQuery = query(queryGet, where("Slug", "==", getParams));
-        return nameQuery;
-      },
+    const res = await DetailSlugRepository.getDeatailBySlug({
+      slug: getParams ?? "",
     });
-    if (res?.length ?? 0 > 0) {
-      setDetails(res?.[0]);
-      setThemeName(res?.[0].ThemeName);
+    if (res != null) {
+      setDetails(res.result);
+      setThemeName(res.result.theme.theme);
       setGuest(getGuest ?? "");
       setidGuest(getIdGuest ?? "");
       setTimeout(() => {
         setLoading(false);
       }, 2000);
+      return res;
     }
   };
 
-  const getMessage = async () => {
-    console.log("run");
-    const res = await Service.GET({
-      collectionName: "UserId",
-      queryGet: function (
-        queryGet: CollectionReference<DocumentData, DocumentData>
-      ): Query<DocumentData, DocumentData> {
-        const nameQuery = query(queryGet, where("Slug", "==", getParams));
-        return nameQuery;
-      },
+  const getMessage = async (id: string) => {
+    const res = await MessageService.getMessage({
+      projectId: id,
     });
-    if (res?.length ?? 0 > 0) {
-      setDetails(res?.[0]);
-      setThemeName(res?.[0].ThemeName);
+    if (res != null) {
+      setMessage(res.result.messagesRequest);
+    }
+  };
+
+  const postMessage = async (name: string, text: string, present: string) => {
+    try {
+      const res = await MessageService.postMessage(
+        {
+          idProject: details!.id,
+        },
+        {
+          name: name,
+          present: present,
+          text: text,
+        }
+      );
+      if (res != null) {
+        getMessage(details!.id);
+      }
+    } catch (error) {
+      Swal.fire(error);
+      throw error;
     }
   };
 
   useEffect(() => {
     if (getParams !== null) {
-      getTheme();
+      getThemeBySlug().then((res) => {
+        getMessage(res!.result!.id);
+      });
     } else {
       setHomePage(true);
     }
@@ -98,46 +112,46 @@ export default function Home() {
         <Loading />
       ) : themeName == "RedEssence" ? (
         <LuxuryTheme
+          message={message}
+          setMessage={setMessage}
           details={details}
-          getDetails={() => {
-            getMessage();
-          }}
+          postMessage={postMessage}
           guest={guest}
           idGuest={idGuest}
         />
       ) : themeName == "BluePremium" ? (
         <LuxuryTheme
+          message={message}
+          setMessage={setMessage}
           details={details}
-          getDetails={() => {
-            getMessage();
-          }}
+          postMessage={postMessage}
           guest={guest}
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryCream" ? (
         <LuxuryTheme
+          message={message}
+          setMessage={setMessage}
           details={details}
-          getDetails={() => {
-            getMessage();
-          }}
+          postMessage={postMessage}
           guest={guest}
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryGreen" ? (
         <LuxuryTheme
+          message={message}
+          setMessage={setMessage}
           details={details}
-          getDetails={() => {
-            getMessage();
-          }}
+          postMessage={postMessage}
           guest={guest}
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryPink" ? (
         <LuxuryTheme
+          message={message}
+          setMessage={setMessage}
           details={details}
-          getDetails={() => {
-            getMessage();
-          }}
+          postMessage={postMessage}
           guest={guest}
           idGuest={idGuest}
         />
@@ -145,7 +159,7 @@ export default function Home() {
         <FloralTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}
@@ -154,7 +168,7 @@ export default function Home() {
         <FloralTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}
@@ -163,7 +177,7 @@ export default function Home() {
         <FloralTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}
@@ -172,7 +186,7 @@ export default function Home() {
         <FullPageTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}
@@ -181,7 +195,7 @@ export default function Home() {
         <FullPageTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}
@@ -190,16 +204,16 @@ export default function Home() {
         <FullPageTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}
         />
-      ): themeName == "JavaStyle1" ? (
+      ) : themeName == "JavaStyle1" ? (
         <FullPageTheme
           details={details}
           getDetails={() => {
-            getMessage();
+            // getMessage();
           }}
           guest={guest}
           idGuest={idGuest}

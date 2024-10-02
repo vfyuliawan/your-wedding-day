@@ -1,16 +1,15 @@
 import { Timestamp } from "firebase/firestore"
+import { MessagesRequest } from "../../../Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
 
 export interface RSVPViewInterface {
-    Message: RSVPKeyValue[]
-    userId:string,
-    slug:string
-    getDetail: () => void
+    message: MessagesRequest[];
+    setMessage:React.Dispatch<React.SetStateAction<MessagesRequest[]>>
+    postMessage:(name: string, text: string, present: string) => Promise<void>;
 }
 
 
 export interface RSVPKeyValue{
-    Confirm: boolean
-    Date: Timestamp
-    Name: string
-    Text: string
+    present: string
+    name: string
+    text: string
 }

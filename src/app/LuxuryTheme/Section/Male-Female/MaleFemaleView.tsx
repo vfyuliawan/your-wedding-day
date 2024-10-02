@@ -3,8 +3,9 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import { setAnimation } from "@/app/utils/AnimationThemes";
 import { MaleFemaleViewInterface } from "./MaleFemaleModel";
+import React from "react";
+import { setAnimation } from "../../../utils/AnimationThemes";
 
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
@@ -75,7 +76,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 borderTopRightRadius: "20px",
                 borderTopLeftRadius: "20px",
               }}
-              src={props?.MaleFemaleDetail?.Female?.Photo}
+              src={props?.MaleFemaleDetail?.female?.image}
               alt={""}
               srcSet=""
             />
@@ -88,12 +89,12 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               transition={{ duration: 1, delay: 0.5 }}
               className="overlay"
             >
-              <h1 className="">{props?.MaleFemaleDetail?.Female?.Name}</h1>
+              <h1 className="">{props?.MaleFemaleDetail?.female?.name}</h1>
               <h3 className="">
-                Putra Dari Bapaak {props?.MaleFemaleDetail?.Female?.Ayah}
+                Putra Dari Bapak {props?.MaleFemaleDetail?.female?.dad}
               </h3>
               <h3 className="">
-                Putra Dari Bapaak {props?.MaleFemaleDetail?.Female?.Ibu}
+                Putra Dari Ibu {props?.MaleFemaleDetail?.female?.mom}
               </h3>
             </motion.div>
           </div>
@@ -115,8 +116,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontWeight: 800,
               }}
             >
-              {props?.MaleFemaleDetail?.Female?.Name} &{" "}
-              {props?.MaleFemaleDetail?.Male?.Name}
+              {props?.MaleFemaleDetail?.female?.name} &{" "}
+              {props?.MaleFemaleDetail?.male?.name}
             </h2>
           </div>
         </div>
@@ -142,7 +143,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   borderBottomRightRadius: "20px",
                   borderBottomLeftRadius: "20px",
                 }}
-                src={props?.MaleFemaleDetail?.Male?.Photo}
+                src={props?.MaleFemaleDetail?.male?.image}
                 alt=""
                 srcSet=""
                 data-aos="fade-down"
@@ -161,12 +162,12 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 borderBottomLeftRadius: "20px",
               }}
             >
-              <h1 className="">{props?.MaleFemaleDetail?.Male?.Name}</h1>
+              <h1 className="">{props?.MaleFemaleDetail?.male?.name}</h1>
               <h3 className="">
-                Putra Dari Bapaak {props?.MaleFemaleDetail?.Male?.Ayah}
+                Putra Dari Bapak {props?.MaleFemaleDetail?.male?.dad}
               </h3>
               <h3 className="">
-                Putra Dari Bapaak {props?.MaleFemaleDetail?.Male?.Ibu}
+                Putra Dari Ibu {props?.MaleFemaleDetail?.male?.mom}
               </h3>
             </motion.div>
           </div>

@@ -2,32 +2,37 @@
 
 import { useEffect, useRef, useState } from "react";
 import { RSVPKeyValue, RSVPViewInterface } from "./RsvpModel";
-import { RsvpViewModel } from "./RsvpViewModel";
+// import { RsvpViewModel } from "./RsvpViewModel";
 import { Timestamp } from "firebase/firestore";
 import ReactLoading from "react-loading";
 import { TimeConvertionDate } from "../../../utils/TimeConvertion";
 import Swal from "sweetalert2";
 import { motion, useAnimation } from "framer-motion";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import React from "react";
+import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import { MessagesRequest } from "../../../Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
 
 const RsvpView = (props: RSVPViewInterface) => {
-  const {
-    message,
-    setMessage,
-    submitMessage,
-    progress,
-    seTprogress,
-    loading,
-    setLoading,
-  } = RsvpViewModel({
-    slug: props.slug,
-    userId: props.userId,
-    getDetail: function (): void {
-      props.getDetail();
-    },
-  });
+  // const {
+  //   message,
+  //   setMessage,
+  //   submitMessage,
+  //   progress,
+  //   seTprogress,
+  //   loading,
+  //   setLoading,
+  // } = RsvpViewModel({
+  //   slug: props.slug,
+  //   userId: props.userId,
+  //   getDetail: function (): void {
+  //     props.getDetail();
+  //   },
+  // });
+
+  const [sendMessage, setSendMessage] = useState<RSVPKeyValue | undefined>();
+  const [progress, seTprogress] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const targetRef = useRef<any>(null);
   const animate = useAnimation();
@@ -67,7 +72,7 @@ const RsvpView = (props: RSVPViewInterface) => {
             <div className="col-12">
               <div className="row">
                 <div className="col-6">
-                <motion.h2
+                  <motion.h2
                     animate={animate}
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5 }}
@@ -130,16 +135,16 @@ const RsvpView = (props: RSVPViewInterface) => {
                   Nama
                 </label>
                 <input
-                  value={message?.Name}
+                  value={sendMessage?.name}
                   type="text"
                   className="form-control"
                   id="nama"
                   name="nama"
                   onChange={(val) => {
-                    setMessage((prev: RSVPKeyValue | undefined) => {
+                    setSendMessage((prev: RSVPKeyValue | undefined) => {
                       return {
                         ...prev,
-                        Name: val?.target?.value,
+                        name: val?.target?.value,
                       } as RSVPKeyValue;
                     });
                   }}
@@ -153,10 +158,10 @@ const RsvpView = (props: RSVPViewInterface) => {
                   className="form-select"
                   aria-label="Default select example"
                   onChange={(val) => {
-                    setMessage((prev: RSVPKeyValue | undefined) => {
+                    setSendMessage((prev: RSVPKeyValue | undefined) => {
                       return {
                         ...prev,
-                        Confirm: val.target.value == "1" ? true : false,
+                        present: val.target.value,
                       } as RSVPKeyValue;
                     });
                   }}
@@ -172,10 +177,10 @@ const RsvpView = (props: RSVPViewInterface) => {
                 </label>
                 <textarea
                   onChange={(val) => {
-                    setMessage((prev: RSVPKeyValue | undefined) => {
+                    setSendMessage((prev: RSVPKeyValue | undefined) => {
                       return {
                         ...prev,
-                        Text: val.target.value,
+                        text: val.target.value,
                       } as RSVPKeyValue;
                     });
                   }}
@@ -183,7 +188,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   id="pesan"
                   rows={5}
                   name="pesan"
-                  value={message?.Text}
+                  value={sendMessage?.text}
                 />
               </div>
             </div>
@@ -192,13 +197,32 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <button
                   type="button"
                   onClick={() => {
+                    setLoading(true);
                     if (
-                      message?.Name !== "" ||
-                      message?.Text !== "" ||
-                      message.Confirm !== undefined ||
-                      message.Confirm !== " "
+                      sendMessage?.name !== "" ||
+                      sendMessage?.text !== "" ||
+                      sendMessage.present !== undefined ||
+                      sendMessage.present !== " "
                     ) {
-                      submitMessage();
+                      props
+                        .postMessage(
+                          sendMessage!.name,
+                          sendMessage!.text,
+                          sendMessage!.present
+                        )
+                        .then((res) => {
+                          setLoading(false);
+                          props.setMessage((prev: MessagesRequest | any) => [
+                            ...prev,
+                            {
+                              messageId: "res",
+                              name: sendMessage?.name ?? "",
+                              present: sendMessage?.present ?? "",
+                              text: sendMessage?.text ?? "",
+                              time: new Date().getTime(), // Set the current timestamp
+                            },
+                          ]);
+                        });
                     } else {
                       Swal.fire("Harap Jangan Kosongkan Form");
                     }
@@ -249,88 +273,89 @@ const RsvpView = (props: RSVPViewInterface) => {
   );
 
   function MessageView() {
-    return props?.Message?.slice()
-      .reverse()
-      .map((item, index) => {
-        return (
-          <div style={{ borderRadius: "10px" }} className="bg-white mt-3 ">
-            <div className="row justify-content-center align-items-center d-flex">
-              <div className="col-2 justify-content-center d-flex items-content-center">
-                <div
+    return props?.message.map((item, index) => {
+      return (
+        <div style={{ borderRadius: "10px" }} className="bg-white mt-3 ">
+          <div className="row justify-content-center align-items-center d-flex">
+            <div className="col-2 justify-content-center d-flex items-content-center">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  backgroundColor: item.present
+                    ? "rgba(0, 0, 0, 0.25)"
+                    : "rgba(0, 0, 0, 0.25)",
+                  width: "5rem",
+                  height: "5rem",
+                  maxHeight: "5rem",
+                  maxWidth: "5rem",
+                }}
+                className="text-center justify-content-center d-flex align-items-center"
+              >
+                <p
                   style={{
-                    borderRadius: "50%",
-                    backgroundColor: item.Confirm ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.25)",
-                    width: "5rem",
-                    height: "5rem",
-                    maxHeight: "5rem",
-                    maxWidth: "5rem",
-                  }}
-                  className="text-center justify-content-center d-flex align-items-center"
-                >
-                  <p
-                    style={{
-                      color: "white",
-                      fontSize: "22px",
-                      marginTop: "8px",
-                    }}
-                  >
-                    {item?.Name?.split("")[0] !== undefined
-                      ? item?.Name.split("")[0].toLocaleUpperCase()
-                      : ""}
-                  </p>
-                </div>
-              </div>
-              <div key={index} className="col-10 ">
-                <h3
-                  style={{
-                    color: "black",
-                    marginTop: "10px",
-                    fontSize: "18px",
+                    color: "white",
+                    fontSize: "22px",
+                    marginTop: "8px",
                   }}
                 >
-                  {item?.Name}{" "}
-                  {item.Confirm ? (
-                    <span
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.25)",
-                        fontSize: "12px",
-                        paddingRight: "5px",
-                        paddingLeft: "5px",
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <i className="bi bi-check-circle-fill"></i> Hadir
-                    </span>
-                  ) : (
-                    <span
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.25)",
-                        fontSize: "12px",
-                        paddingRight: "5px",
-                        paddingLeft: "5px",
-                        paddingTop: "2px",
-                        paddingBottom: "2px",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <i className="bi bi-dash-circle-fill"></i> Tidak Hadir
-                    </span>
-                  )}
-                </h3>
-                <p style={{ color: "black", fontSize: "12px" }}>
-                  {item.Text}
-                  <br />
-                  <span style={{ fontSize: "0.9rem" }}>
-                    {TimeConvertionDate(item.Date).dateFull}
-                  </span>
+                  {item?.name?.split("")[0] !== undefined
+                    ? item?.name.split("")[0].toLocaleUpperCase()
+                    : ""}
                 </p>
               </div>
             </div>
+            <div key={index} className="col-10 ">
+              <h3
+                style={{
+                  color: "black",
+                  marginTop: "10px",
+                  fontSize: "18px",
+                }}
+              >
+                {item?.name}{" "}
+                {item.present ? (
+                  <span
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.25)",
+                      fontSize: "12px",
+                      paddingRight: "5px",
+                      paddingLeft: "5px",
+                      paddingTop: "2px",
+                      paddingBottom: "2px",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <i className="bi bi-check-circle-fill"></i> Hadir
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.25)",
+                      fontSize: "12px",
+                      paddingRight: "5px",
+                      paddingLeft: "5px",
+                      paddingTop: "2px",
+                      paddingBottom: "2px",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <i className="bi bi-dash-circle-fill"></i> Tidak Hadir
+                  </span>
+                )}
+              </h3>
+              <p style={{ color: "black", fontSize: "12px" }}>
+                {item.text}
+                <br />
+                <span style={{ fontSize: "0.9rem" }}>
+                  {/* {TimeConvertionDate(item.Date).dateFull} */}
+                  {item.time.getTime()}
+                </span>
+              </p>
+            </div>
           </div>
-        );
-      });
+        </div>
+      );
+    });
   }
 };
 

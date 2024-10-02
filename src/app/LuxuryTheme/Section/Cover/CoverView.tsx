@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
 import { HeroViewInterface } from "../Hero/HeroModel";
-import { TimeConvertionDate, TimeConvertionInterface } from "@/app/utils/TimeConvertion";
 import { Timestamp } from "firebase/firestore";
+import { TimeConvertionDate } from '../../../utils/TimeConvertion';
+import React from "react";
 
 const CoverView = (props: CoverModelInterface, ) => {
   const [appear, setAppear] = useState(false);
@@ -19,8 +20,7 @@ const CoverView = (props: CoverModelInterface, ) => {
   const calculateTimeRemaining = () => {
     const now = new Date();
     const targetDate : Date = new Date(
-      props.detailCover.Date.toDate()
-      .toISOString().split(".")[0]
+      props.detailCover?.date ?? ""
     )
 
     const difference =
@@ -95,7 +95,7 @@ const CoverView = (props: CoverModelInterface, ) => {
             height: "100%",
             objectFit: "cover",
           }}
-          src={props.detailCover.ImgCover}
+          src={props.detailCover?.img}
           alt="dfasdfsa"
         />
         <div
@@ -201,7 +201,7 @@ const CoverView = (props: CoverModelInterface, ) => {
               </div>
             </div>
             <div className="row mt-2">
-              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.detailCover.Date as any).dateFull}</p>
+              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.detailCover?.date as any).dateFull}</p>
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@ const CoverView = (props: CoverModelInterface, ) => {
               fontSize: "5rem",
             }}
           >
-            {props.detailCover.TitleCover}
+            {props.detailCover?.title}
           </h2>
           <div
             className="cover2-kepada"

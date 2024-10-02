@@ -1,3 +1,4 @@
+import { ModelRequestDetailSlug } from "../../Models/ModelRequest/ModelRequestDetailSlug/ModelRequestDetailSlug";
 import { ModelResponseDetailSlug } from "../../Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 import DetailSlugRepository from "../../Repository/DetailSlugRepository/DetailSlugRepository";
 

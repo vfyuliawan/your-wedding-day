@@ -3,10 +3,11 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import AnimationThemeInstance from "@/app/utils/AnimationThemes";
+import React from "react";
+import AnimationThemeInstance from "../../../utils/AnimationThemes";
 
 interface CountDownViewInterface {
-  targetDate: Date;
+  targetDate: Date | undefined;
 }
 
 const CountDownView = (props: CountDownViewInterface) => {
