@@ -7,6 +7,7 @@ import {
   TimeConversionTime,
   TimeConvertionDate,
   TimeConvertionDay,
+  TimeConvertionFullDate,
   TimeConvertionInterface,
 } from "../../../utils/TimeConvertion";
 import React from "react";
@@ -100,9 +101,9 @@ const InfoView = (props: InfoViewInterface) => {
               transition={{ duration: 1.5, delay: 0.8 }}
               src={props.Info?.akad.imageAkad}
               style={{
-                borderTopRightRadius: "0%",
+                borderTopRightRadius: 50,
                 backgroundSize: "cover",
-                borderTopLeftRadius: "0%",
+                borderTopLeftRadius: 50,
               }}
               width={"100%"}
               height={"100%"}
@@ -148,9 +149,9 @@ const InfoView = (props: InfoViewInterface) => {
                     }}
                   >
                     {
-                      // TimeConvertionDay(props.Info.akad.dateAkad as any)
-                      //   .dayString
-                      props.Info?.akad.dateAkad.getTime()
+                      TimeConvertionFullDate(
+                        props.Info!.akad.dateAkad.toString()
+                      ).dayOfWeek
                     }{" "}
                   </h4>
                   <h4
@@ -161,8 +162,9 @@ const InfoView = (props: InfoViewInterface) => {
                     }}
                   >
                     {
-                      // TimeConvertionDay(item?.Date, item.Date as any).day
-                      props.Info?.akad.dateAkad.getTime()
+                      TimeConvertionFullDate(
+                        props.Info!.akad.dateAkad.toString()
+                      ).dateToString
                     }
                   </h4>
                 </div>
@@ -177,9 +179,9 @@ const InfoView = (props: InfoViewInterface) => {
                     }}
                   >
                     {
-                      // TimeConvertionDate(item?.Date as TimeConvertionInterface)
-                      //   .dateMonth
-                      props.Info?.akad.dateAkad.getTime()
+                      TimeConvertionFullDate(
+                        props.Info!.akad.dateAkad.toString()
+                      ).monthandYear
                     }
                   </h4>
                 </div>
@@ -207,8 +209,8 @@ const InfoView = (props: InfoViewInterface) => {
                 ></i>
                 <p style={{ letterSpacing: "2px", margin: 0 }}>
                   {
-                    // TimeConversionTime(item?.Date as TimeConvertionInterface)
-                    props.Info?.akad.dateAkad.getTime()
+                    TimeConvertionFullDate(props.Info!.akad.dateAkad.toString())
+                      .formattedTime
                   }
                 </p>
               </span>
@@ -252,9 +254,9 @@ const InfoView = (props: InfoViewInterface) => {
               transition={{ duration: 1.5, delay: 0.8 }}
               src={props.Info?.resepsi.imageResepsi}
               style={{
-                borderTopRightRadius: "0%",
+                borderTopRightRadius: 50,
                 backgroundSize: "cover",
-                borderTopLeftRadius: "0%",
+                borderTopLeftRadius: 50,
               }}
               width={"100%"}
               height={"100%"}
@@ -300,9 +302,9 @@ const InfoView = (props: InfoViewInterface) => {
                     }}
                   >
                     {
-                      // TimeConvertionDay(props.Info?.akad.dateAkad as any)
-                      //   .dayString
-                      props.Info?.resepsi.dateResepsi.getTime()
+                      TimeConvertionFullDate(
+                        props.Info!.resepsi.dateResepsi.toString()
+                      ).dayOfWeek
                     }{" "}
                   </h4>
                   <h4
@@ -313,8 +315,9 @@ const InfoView = (props: InfoViewInterface) => {
                     }}
                   >
                     {
-                      // TimeConvertionDay(item?.Date, item.Date as any).day
-                      props.Info?.resepsi.dateResepsi.getTime()
+                      TimeConvertionFullDate(
+                        props.Info!.resepsi.dateResepsi.toString()
+                      ).dateToString
                     }
                   </h4>
                 </div>
@@ -329,9 +332,9 @@ const InfoView = (props: InfoViewInterface) => {
                     }}
                   >
                     {
-                      // TimeConvertionDate(item?.Date as TimeConvertionInterface)
-                      //   .dateMonth
-                      props.Info?.resepsi.dateResepsi.getTime()
+                      TimeConvertionFullDate(
+                        props.Info!.resepsi.dateResepsi.toString()
+                      ).monthandYear
                     }
                   </h4>
                 </div>
@@ -359,8 +362,8 @@ const InfoView = (props: InfoViewInterface) => {
                 ></i>
                 <p style={{ letterSpacing: "2px", margin: 0 }}>
                   {
-                    // TimeConversionTime(item?.Date as TimeConvertionInterface)
-                    props.Info?.resepsi.dateResepsi.getTime()
+                    TimeConvertionFullDate(props.Info!.resepsi.dateResepsi.toString())
+                      .formattedTime
                   }
                 </p>
               </span>
@@ -405,7 +408,7 @@ const InfoView = (props: InfoViewInterface) => {
               style={{ padding: "24px", borderRadius: "10%" }}
             >
               <iframe
-                src={GetEmbededFromGmap(props.Embeded??"")}
+                src={GetEmbededFromGmap(props.Embeded ?? "")}
                 width="100%"
                 height="400px"
                 style={{ borderRadius: "10%" }}

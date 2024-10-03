@@ -36,8 +36,8 @@ import { MessagesRequest } from "../Dashboard/Domain/Models/ModelResponse/ModalR
 interface LuxuryThemeInterface {
   details: ResultDetailSlug | undefined;
   message: MessagesRequest[];
-  setMessage:React.Dispatch<React.SetStateAction<MessagesRequest[]>>
-  postMessage:(name: string, text: string, present: string) => Promise<void>;
+  setMessage: React.Dispatch<React.SetStateAction<MessagesRequest[]>>;
+  postMessage: (name: string, text: string, present: string) => Promise<void>;
   guest: string;
   idGuest: string;
 }
@@ -223,9 +223,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
           postMessage={props.postMessage}
           setMessage={props.setMessage}
         />
-        {/* {props?.details?.gift.isShow ? (
-          <GiftsView Gifts={props?.details?.Gifts} />
-        ) : null} */}
+        <GiftsView Gifts={props!.details!.gift.gifts} />
+
         <div ref={qrCodeRef}></div>
 
         {/* {props?.details?.GuestBarcode ? (
@@ -235,7 +234,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
           />
         ) : null} */}
 
-        {/* <FooterView Footer={props?.details?.Footer} /> */}
+        <FooterView Footer={props?.details!.hero} />
         <EndView />
         {!coverVisible ? (
           <button

@@ -1,5 +1,7 @@
+import { Cover } from "@/app/Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+
 interface FooterViewInterface{
-  Footer: KeyValueFooter
+  Footer: Cover
 }
 interface KeyValueFooter{
   Qutes: string;
@@ -12,7 +14,7 @@ const FooterView = (props:FooterViewInterface) => {
         <section
         id="footer"
         style={{
-          backgroundImage: `url('${props.Footer.Image}')`,
+          backgroundImage: `url('${props.Footer.img}')`,
           backgroundPosition:'center'
 
         }}
@@ -22,10 +24,10 @@ const FooterView = (props:FooterViewInterface) => {
         <main className="inside" style={{position:'relative', top:'200px'}}>
           <h2>Terimakasih</h2>
           <p>
-            ${props.Footer.Qutes}
+            {props.Footer.quotes}
           </p>
           <h4>Kami Yang Berbahagia</h4>
-          <h3>{props.Footer.Name}</h3>
+          <h3>{props.Footer.title}</h3>
         </main>
       </section>
      );

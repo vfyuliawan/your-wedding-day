@@ -2,9 +2,10 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
+import { GiftElement } from "@/app/Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 
 interface GiftsViewInterface {
-  Gifts: GiftsOption;
+  Gifts: GiftElement[];
 }
 
 interface GiftsOption {
@@ -62,7 +63,7 @@ const GiftsView = (props: GiftsViewInterface) => {
         <div className="container">
           <div className="row mt-4 justify-content-center">
             <div className="col-6 text-end">
-            <motion.h2
+              <motion.h2
                 animate={animate}
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5 }}
@@ -74,15 +75,15 @@ const GiftsView = (props: GiftsViewInterface) => {
                 }}
               >
                 Wedding <br />
-              <span
-                style={{
-                  fontFamily: "Creation",
-                  fontWeight: "10",
-                  fontSize: "65px",
-                }}
-              >
-                Gifts
-              </span>
+                <span
+                  style={{
+                    fontFamily: "Creation",
+                    fontWeight: "10",
+                    fontSize: "65px",
+                  }}
+                >
+                  Gifts
+                </span>
               </motion.h2>
             </div>
             <div className="col-5 d-flex align-items-center">
@@ -113,7 +114,7 @@ const GiftsView = (props: GiftsViewInterface) => {
             </div>
           </div>
           <div className="row justify-content-center">
-            {props.Gifts.First.Visible ? (
+            {/* {props.Gifts.First.Visible ? (
               <motion.div
                 animate={animate}
                 initial={AnimationThemeInstance.FadeLeft}
@@ -232,11 +233,54 @@ const GiftsView = (props: GiftsViewInterface) => {
                   </div>
                 </div>
               </motion.div>
-            ) : null}
+            ) : null} */}
+
+            {props.Gifts.map((item, index) => {
+              return (
+                <motion.div
+                  animate={animate}
+                  initial={AnimationThemeInstance.FadeLeft}
+                  transition={{ duration: 2, delay: 1 }}
+                  className="col-md-4 col-10 col-sm-6 mt-2"
+                >
+                  <div className="card text-center">
+                    <div style={{ padding: 15 }} className="card-header">
+                      <img
+                        src={`/image/rekening/${item.image}.png`}
+                        style={{ height: "3rem" }}
+                      />
+                    </div>
+                    <div className="card-body">
+                      <h5
+                        className="card-title"
+                        style={{
+                          color: "black",
+                          fontFamily: '"Courier New", Courier, monospace',
+                          fontSize: "2rem",
+                        }}
+                      >
+                        {item.noRek}
+                      </h5>
+                      <a
+                        onClick={() => {
+                          copyToClipboard(item.noRek);
+                        }}
+                        className="btn btn-lg"
+                      >
+                        Salin Rekening{" "}
+                      </a>
+                    </div>
+                    <div className="card-footer text-body-secondary text-light">
+                      A/N {item.name}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
           <div
             className="row justify-content-center"
-            style={{ marginTop: "5rem" }}
+            style={{ marginTop: "5rem", marginBottom:'2rem'}}
           >
             <div className="col-10 justify-content-center d-flex">
               <a

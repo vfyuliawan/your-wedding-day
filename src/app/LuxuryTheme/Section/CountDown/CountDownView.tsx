@@ -14,13 +14,19 @@ const CountDownView = (props: CountDownViewInterface) => {
   const calculateTimeRemaining = () => {
     const now = new Date();
 
-    const difference =
-      typeof props.targetDate === "number" || props.targetDate instanceof Date
-        ? +props.targetDate - now.getTime()
-        : 0;
+    // Convert the date string to a Date object
+    const targetDate = props.targetDate!
+      ? new Date(props.targetDate!)
+      : undefined;
+
+    // Check if targetDate is valid
+    if (!(targetDate instanceof Date) || isNaN(targetDate.getTime())) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // Default values if invalid
+    }
+
+    const difference = targetDate.getTime() - now.getTime();
 
     if (difference <= 0) {
-      // Countdown reached, do something here
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
 
@@ -34,15 +40,28 @@ const CountDownView = (props: CountDownViewInterface) => {
     return { days, hours, minutes, seconds };
   };
 
-  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
-
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining());
+      const newTimeRemaining = calculateTimeRemaining();
+      setTimeRemaining(newTimeRemaining);
+
+      // Clear the interval if countdown has finished
+      if (
+        newTimeRemaining.days === 0 &&
+        newTimeRemaining.hours === 0 &&
+        newTimeRemaining.minutes === 0 &&
+        newTimeRemaining.seconds === 0
+      ) {
+        clearInterval(interval);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+
+
 
   const animate = useAnimation();
   const targetRef = useRef<any>(null);

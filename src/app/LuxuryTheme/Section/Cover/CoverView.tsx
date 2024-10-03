@@ -5,10 +5,16 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
 import { HeroViewInterface } from "../Hero/HeroModel";
 import { Timestamp } from "firebase/firestore";
-import { TimeConvertionDate } from '../../../utils/TimeConvertion';
+import {
+  TimeConvertionDate,
+  TimeConvertionDay,
+  TimeConvertionFullDate,
+  TimeConvertionFullDateAndTime,
+  TimeConvertionUSFormat,
+} from "../../../utils/TimeConvertion";
 import React from "react";
 
-const CoverView = (props: CoverModelInterface, ) => {
+const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
   const handleCoverClick = () => {
     props.onCoverClick();
@@ -19,14 +25,18 @@ const CoverView = (props: CoverModelInterface, ) => {
 
   const calculateTimeRemaining = () => {
     const now = new Date();
-    const targetDate : Date = new Date(
-      props.detailCover?.date ?? ""
-    )
 
-    const difference =
-      typeof targetDate === "number" || targetDate instanceof Date
-        ? +targetDate - now.getTime()
-        : 0;
+    // Convert the date string to a Date object
+    const targetDate = props.detailCover!.date
+      ? new Date(props.detailCover!.date)
+      : undefined;
+
+    // Check if targetDate is valid
+    if (!(targetDate instanceof Date) || isNaN(targetDate.getTime())) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // Default values if invalid
+    }
+
+    const difference = targetDate.getTime() - now.getTime();
 
     if (difference <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -42,18 +52,26 @@ const CoverView = (props: CoverModelInterface, ) => {
     return { days, hours, minutes, seconds };
   };
 
-  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
-
-
-
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining());
+      const newTimeRemaining = calculateTimeRemaining();
+      setTimeRemaining(newTimeRemaining);
+
+      // Clear the interval if countdown has finished
+      if (
+        newTimeRemaining.days === 0 &&
+        newTimeRemaining.hours === 0 &&
+        newTimeRemaining.minutes === 0 &&
+        newTimeRemaining.seconds === 0
+      ) {
+        clearInterval(interval);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
   return !appear ? (
     <motion.div
@@ -134,7 +152,7 @@ const CoverView = (props: CoverModelInterface, ) => {
               justifyContent: "center",
               alignItems: "center",
               transform: "translateX(50%)",
-              fontFamily:'Times New Roman'
+              fontFamily: "Times New Roman",
             }}
           >
             <p
@@ -168,7 +186,7 @@ const CoverView = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                  {timeRemaining.hours}
+                    {timeRemaining.hours}
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Jam
@@ -179,8 +197,7 @@ const CoverView = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                  {timeRemaining.minutes}
-
+                    {timeRemaining.minutes}
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Menit
@@ -191,8 +208,7 @@ const CoverView = (props: CoverModelInterface, ) => {
               <div className="box-time" style={{ color: "white" }}>
                 <div className="col">
                   <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                  {timeRemaining.seconds}
-
+                    {timeRemaining.seconds}
                   </p>
                   <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
                     Detik
@@ -201,7 +217,9 @@ const CoverView = (props: CoverModelInterface, ) => {
               </div>
             </div>
             <div className="row mt-2">
-              <p style={{color:'white', fontSize:'14px'}}>{TimeConvertionDate(props.detailCover?.date as any).dateFull}</p>
+              <p style={{ color: "white", fontFamily: "brilon", fontSize: 20 }}>
+                {TimeConvertionUSFormat(props!.detailCover!.date!.toString())}
+              </p>
             </div>
           </div>
         </div>

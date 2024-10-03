@@ -5,7 +5,7 @@ import { RSVPKeyValue, RSVPViewInterface } from "./RsvpModel";
 // import { RsvpViewModel } from "./RsvpViewModel";
 import { Timestamp } from "firebase/firestore";
 import ReactLoading from "react-loading";
-import { TimeConvertionDate } from "../../../utils/TimeConvertion";
+import { TimeConvertionDate, TimeConvertionFullDateAndTime } from "../../../utils/TimeConvertion";
 import Swal from "sweetalert2";
 import { motion, useAnimation } from "framer-motion";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
@@ -347,8 +347,10 @@ const RsvpView = (props: RSVPViewInterface) => {
                 {item.text}
                 <br />
                 <span style={{ fontSize: "0.9rem" }}>
-                  {/* {TimeConvertionDate(item.Date).dateFull} */}
-                  {item.time.getTime()}
+                  {
+                    TimeConvertionFullDateAndTime(item.time.toString())
+                  }
+                  
                 </span>
               </p>
             </div>

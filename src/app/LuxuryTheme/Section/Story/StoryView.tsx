@@ -30,7 +30,7 @@ const StoryView = (props: StoryViewInterface) => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-6 text-end">
-          <motion.h2
+            <motion.h2
               ref={targetRef}
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
@@ -48,8 +48,8 @@ const StoryView = (props: StoryViewInterface) => {
                   fontFamily: "Creation",
                   fontWeight: "normal",
                   fontSize: "8rem",
-                  color:'black',
-                  textTransform:'capitalize'
+                  color: "black",
+                  textTransform: "capitalize",
                 }}
               >
                 Story
@@ -85,111 +85,102 @@ const StoryView = (props: StoryViewInterface) => {
         <div className="row">
           <div className="col">
             <ul className="timeline">
-              {
-                props.OurStory?.stories.map((item, index) => {
-                  if (index%2==0) {
-                    return (
-<li>
-                <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                  <i
-                    className="bi bi-balloon-heart-fill bi-lg bi-love"
-                    style={{
-                      color: "white",
-                      fontSize: "2rem",
-                      position: "absolute",
+              {props.OurStory?.stories.map((item, index) => {
+                if (index % 2 == 0) {
+                  return (
+                    <li>
+                      <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
+                        <i
+                          className="bi bi-balloon-heart-fill bi-lg bi-love"
+                          style={{
+                            color: "white",
+                            fontSize: "2rem",
+                            position: "absolute",
 
-                      top: "10%",
-                    }}
-                  ></i>
-                </div>
-                <motion.div
-                  initial={AnimationThemeInstance.FadeRight}
-                  animate={animate}
-                  transition={{ duration: 1, delay: 1 }}
-                  className="timeline-panel"
-                >
-                  <div className="timeline-heading">
-                    <h3>{item.title}</h3>
-                    <img
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius:'20px'
-                      }}
-                      src={item.image}
-                      alt=""
-                    />
-                    <span style={{ fontSize: "1.2rem" }}>
-                      {" "}
-                      {
-                        item.date.getTime()
-                      }
-                      {/* {TimeConvertionDate(
+                            top: "10%",
+                          }}
+                        ></i>
+                      </div>
+                      <motion.div
+                        initial={AnimationThemeInstance.FadeRight}
+                        animate={animate}
+                        transition={{ duration: 1, delay: 1 }}
+                        className="timeline-panel"
+                      >
+                        <div className="timeline-heading">
+                          <h3>{item.title}</h3>
+                          <img
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              borderRadius: "20px",
+                            }}
+                            src={item.image}
+                            alt=""
+                          />
+                          <span style={{ fontSize: "1.2rem" }}>
+                            {" "}
+                            {/* {item.date.getTime()} */}
+                            {/* {TimeConvertionDate(
                         props?.OurStory?.First.Date as TimeConvertionInterface
                       ).dateMonth}
                       {TimeConversionTime(props?.OurStory?.First.Date as TimeConvertionInterface)}  */}
-                    </span>
-                  </div>
-                  <div className="timeline-body">
-                    <p style={{ fontSize: "1.5rem" }}>
-                      {item.text}
-                    </p>
-                  </div>
-                </motion.div>
-              </li>
-                    );
-                  }else{
-                    return (
-                      <li className="timeline-inverted">
-                <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                  <i
-                    className="bi bi-balloon-heart-fill bi-lg bi-love"
-                    style={{
-                      color: "white",
-                      fontSize: "2rem",
-                      position: "absolute",
+                          </span>
+                        </div>
+                        <div className="timeline-body">
+                          <p style={{ fontSize: "1.5rem" }}>{item.text}</p>
+                        </div>
+                      </motion.div>
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li className="timeline-inverted">
+                      <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
+                        <i
+                          className="bi bi-balloon-heart-fill bi-lg bi-love"
+                          style={{
+                            color: "white",
+                            fontSize: "2rem",
+                            position: "absolute",
 
-                      top: "10%",
-                    }}
-                  ></i>
-                </div>
-                <motion.div
-                  initial={AnimationThemeInstance.FadeLeft}
-                  animate={animate}
-                  transition={{ duration: 1, delay: 2 }}
-                  className="timeline-panel"
-                >
-                  <div className="timeline-heading">
-                    <h3>{item.title}</h3>
-                    <img
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius:'20px'
-
-                      }}
-                      src={item.image}
-                      alt=""
-                    />
-                    <span style={{ fontSize: "1.2rem" }}>
-                      {" "}
-                      {item.date.getTime()}
-                      {/* {TimeConvertionDate(
+                            top: "10%",
+                          }}
+                        ></i>
+                      </div>
+                      <motion.div
+                        initial={AnimationThemeInstance.FadeLeft}
+                        animate={animate}
+                        transition={{ duration: 1, delay: 2 }}
+                        className="timeline-panel"
+                      >
+                        <div className="timeline-heading">
+                          <h3>{item.title}</h3>
+                          <img
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              borderRadius: "20px",
+                            }}
+                            src={item.image}
+                            alt=""
+                          />
+                          <span style={{ fontSize: "1.2rem" }}>
+                            {" "}
+                            {item.date.getTime()}
+                            {/* {TimeConvertionDate(
                         props?.OurStory?.Second?.Date as TimeConvertionInterface
                       ).dateMonth} */}
-                    </span>
-                  </div>
-                  <div className="timeline-body">
-                    <p style={{ fontSize: "1.5rem" }}>
-                      {item.text}
-                    </p>
-                  </div>
-                </motion.div>
-              </li>
-                    );
-                  }
-                })
-              }
+                          </span>
+                        </div>
+                        <div className="timeline-body">
+                          <p style={{ fontSize: "1.5rem" }}>{item.text}</p>
+                        </div>
+                      </motion.div>
+                    </li>
+                  );
+                }
+              })}
               {/* <li>
                 <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
                   <i
