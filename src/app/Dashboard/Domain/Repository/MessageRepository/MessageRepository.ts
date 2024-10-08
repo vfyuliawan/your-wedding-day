@@ -1,4 +1,4 @@
-import { get, post } from "../../../Core/Api";
+import { get, post } from "../../../Core/api";
 import { ConvertModelRequestBodyPostMessage, ModelRequestBodyPostMessage, ModelRequestGetMessage, ModelRequestPostMessage } from "../../Models/ModelRequest/ModelRequestMessage/ModelRequestGetMessage";
 import {
   ConvertModelResponseGetMessage,

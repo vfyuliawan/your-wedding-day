@@ -1,4 +1,4 @@
-import { get } from "../../../Core/Api";
+import { get } from "../../../Core/api";
 import { ModelRequestDetailSlug } from "../../Models/ModelRequest/ModelRequestDetailSlug/ModelRequestDetailSlug";
 import {
   ConvertModelResponseDetailSlug,
