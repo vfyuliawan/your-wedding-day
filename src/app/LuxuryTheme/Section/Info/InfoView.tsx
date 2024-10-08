@@ -140,7 +140,10 @@ const InfoView = (props: InfoViewInterface) => {
             >
               <div className="row">
                 <div className="col-4">
-                  <h4
+                  <motion.h4
+                    animate={controls}
+                    initial={AnimationThemeInstance.FadeLeft}
+                    transition={{ duration: 1.5, delay: 1.3 }}
                     style={{
                       fontSize: "3rem",
                       fontFamily: "Dancing Script",
@@ -153,8 +156,11 @@ const InfoView = (props: InfoViewInterface) => {
                         props.Info!.akad.dateAkad.toString()
                       ).dayOfWeek
                     }{" "}
-                  </h4>
-                  <h4
+                  </motion.h4>
+                  <motion.h4
+                    animate={controls}
+                    initial={AnimationThemeInstance.FadeRight}
+                    transition={{ duration: 1.5, delay: 1.4 }}
                     style={{
                       fontSize: "6rem",
                       fontFamily: "Dancing Script",
@@ -166,10 +172,13 @@ const InfoView = (props: InfoViewInterface) => {
                         props.Info!.akad.dateAkad.toString()
                       ).dateToString
                     }
-                  </h4>
+                  </motion.h4>
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-end">
-                  <h4
+                  <motion.h4
+                    animate={controls}
+                    initial={AnimationThemeInstance.FadeLeft}
+                    transition={{ duration: 1.5, delay: 1.5 }}
                     style={{
                       fontSize: "1.8rem",
                       fontFamily: "Dancing Script",
@@ -183,7 +192,7 @@ const InfoView = (props: InfoViewInterface) => {
                         props.Info!.akad.dateAkad.toString()
                       ).monthandYear
                     }
-                  </h4>
+                  </motion.h4>
                 </div>
               </div>
               <div
@@ -195,7 +204,10 @@ const InfoView = (props: InfoViewInterface) => {
                   marginTop: "1rem",
                 }}
               ></div>
-              <span
+              <motion.span
+                animate={controls}
+                initial={AnimationThemeInstance.FadeRight}
+                transition={{ duration: 1.5, delay: 1.6 }}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -213,11 +225,19 @@ const InfoView = (props: InfoViewInterface) => {
                       .formattedTime
                   }
                 </p>
-              </span>
-              <h4 style={{ marginBottom: "2rem", letterSpacing: "1px" }}>
+              </motion.span>
+              <motion.h4
+                animate={controls}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 1.5, delay: 1.7 }}
+                style={{ marginBottom: "2rem", letterSpacing: "1px" }}
+              >
                 Tempat
-              </h4>
-              <p
+              </motion.h4>
+              <motion.p
+                animate={controls}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 1.5, delay: 1.7 }}
                 style={{
                   fontSize: "1.6rem",
                   letterSpacing: "0.5px",
@@ -225,7 +245,7 @@ const InfoView = (props: InfoViewInterface) => {
                 }}
               >
                 {props.Info?.akad.lokasiAkad}
-              </p>
+              </motion.p>
               <div className="row justify-content-center mb-5">
                 <div className="col-9 d-flex align-items-center justify-content-center">
                   <a
@@ -251,7 +271,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.img
               animate={controls}
               initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              transition={{ duration: 1.5, delay: 1.9 }}
               src={props.Info?.resepsi.imageResepsi}
               style={{
                 borderTopRightRadius: 50,
@@ -267,7 +287,7 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.div
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              transition={{ duration: 1.5, delay: 1.9 }}
               className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
             >
               <h3
@@ -287,13 +307,16 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.div
               animate={controls}
               initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              transition={{ duration: 1.5, delay: 2.3 }}
               className="col-md-9 col-sm-9 col-9 text-center bg-light"
               style={{ color: "black" }}
             >
               <div className="row">
                 <div className="col-4">
-                  <h4
+                  <motion.h4
+                    animate={controls}
+                    initial={AnimationThemeInstance.FadeLeft}
+                    transition={{ duration: 1.5, delay: 2.3 }}
                     style={{
                       fontSize: "3rem",
                       fontFamily: "Dancing Script",
@@ -306,8 +329,11 @@ const InfoView = (props: InfoViewInterface) => {
                         props.Info!.resepsi.dateResepsi.toString()
                       ).dayOfWeek
                     }{" "}
-                  </h4>
-                  <h4
+                  </motion.h4>
+                  <motion.h4
+                    animate={controls}
+                    initial={AnimationThemeInstance.FadeRight}
+                    transition={{ duration: 1.5, delay: 2.3 }}
                     style={{
                       fontSize: "6rem",
                       fontFamily: "Dancing Script",
@@ -319,10 +345,13 @@ const InfoView = (props: InfoViewInterface) => {
                         props.Info!.resepsi.dateResepsi.toString()
                       ).dateToString
                     }
-                  </h4>
+                  </motion.h4>
                 </div>
                 <div className="col-8 d-flex justify-content-start align-items-end">
-                  <h4
+                  <motion.h4
+                    animate={controls}
+                    initial={AnimationThemeInstance.FadeLeft}
+                    transition={{ duration: 1.5, delay: 2.3 }}
                     style={{
                       fontSize: "1.8rem",
                       fontFamily: "Dancing Script",
@@ -336,7 +365,7 @@ const InfoView = (props: InfoViewInterface) => {
                         props.Info!.resepsi.dateResepsi.toString()
                       ).monthandYear
                     }
-                  </h4>
+                  </motion.h4>
                 </div>
               </div>
               <div
@@ -348,7 +377,10 @@ const InfoView = (props: InfoViewInterface) => {
                   marginTop: "1rem",
                 }}
               ></div>
-              <span
+              <motion.span
+                animate={controls}
+                initial={AnimationThemeInstance.FadeRight}
+                transition={{ duration: 1.5, delay: 2.3 }}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -362,15 +394,19 @@ const InfoView = (props: InfoViewInterface) => {
                 ></i>
                 <p style={{ letterSpacing: "2px", margin: 0 }}>
                   {
-                    TimeConvertionFullDate(props.Info!.resepsi.dateResepsi.toString())
-                      .formattedTime
+                    TimeConvertionFullDate(
+                      props.Info!.resepsi.dateResepsi.toString()
+                    ).formattedTime
                   }
                 </p>
-              </span>
+              </motion.span>
               <h4 style={{ marginBottom: "2rem", letterSpacing: "1px" }}>
                 Tempat
               </h4>
-              <p
+              <motion.p
+                animate={controls}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 1.5, delay: 2.3 }}
                 style={{
                   fontSize: "1.6rem",
                   letterSpacing: "0.5px",
@@ -378,9 +414,14 @@ const InfoView = (props: InfoViewInterface) => {
                 }}
               >
                 {props.Info?.resepsi.lokasiResepsi}
-              </p>
+              </motion.p>
               <div className="row justify-content-center mb-5">
-                <div className="col-9 d-flex align-items-center justify-content-center">
+                <motion.div
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeRight}
+                  transition={{ duration: 1.5, delay: 2.3 }}
+                  className="col-9 d-flex align-items-center justify-content-center"
+                >
                   <a
                     className="btn btn-lg text-center"
                     style={{
@@ -393,7 +434,7 @@ const InfoView = (props: InfoViewInterface) => {
                   >
                     <i className="bi bi-geo-alt-fill"> {"    "}Google Map</i>
                   </a>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>

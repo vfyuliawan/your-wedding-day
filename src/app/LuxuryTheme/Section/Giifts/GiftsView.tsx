@@ -3,6 +3,8 @@ import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import { GiftElement } from "@/app/Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import Swal from "sweetalert2";
+import { copyToClipboard } from "@/app/utils/CopytoClipboard";
 
 interface GiftsViewInterface {
   Gifts: GiftElement[];
@@ -28,14 +30,7 @@ const GiftsView = (props: GiftsViewInterface) => {
 
   const textAreaRef = useRef<any>(null);
 
-  const copyToClipboard = async (textToCopy: string) => {
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-      console.log("Text copied to clipboard:", textToCopy);
-    } catch (err) {
-      console.error("Error copying text to clipboard:", err);
-    }
-  };
+
 
   useEffect(() => {
     if (isVisible) {
@@ -263,7 +258,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                       </h5>
                       <a
                         onClick={() => {
-                          copyToClipboard(item.noRek);
+                          copyToClipboard(item.noRek)
                         }}
                         className="btn btn-lg"
                       >
@@ -282,7 +277,7 @@ const GiftsView = (props: GiftsViewInterface) => {
             className="row justify-content-center"
             style={{ marginTop: "5rem", marginBottom:'2rem'}}
           >
-            <div className="col-10 justify-content-center d-flex">
+            {/* <div className="col-10 justify-content-center d-flex">
               <a
                 className="btn btn-lg text-center"
                 style={{
@@ -297,7 +292,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   {"      "}Upload Hadiah dan Kirim Ke Whatsapp
                 </i>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

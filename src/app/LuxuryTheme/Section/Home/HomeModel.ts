@@ -9,4 +9,5 @@ export interface HomeKeyValue {
 
 export interface HomeViewInterface {
     HomeDetail : Cover
+    // ref: any
 }

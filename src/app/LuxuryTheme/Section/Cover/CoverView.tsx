@@ -149,8 +149,8 @@ const CoverView = (props: CoverModelInterface) => {
               right: "50%",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              // justifyContent: "center",
+              // alignItems: "center",
               transform: "translateX(50%)",
               fontFamily: "Times New Roman",
             }}

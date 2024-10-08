@@ -197,6 +197,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <button
                   type="button"
                   onClick={() => {
+
+                    console.log(sendMessage);
+                    
                     setLoading(true);
                     if (
                       sendMessage?.name !== "" ||
@@ -313,11 +316,12 @@ const RsvpView = (props: RSVPViewInterface) => {
                 }}
               >
                 {item?.name}{" "}
-                {item.present ? (
+                {item.present == "1" ? (
                   <span
                     style={{
-                      backgroundColor: "rgba(0, 0, 0, 0.25)",
+                      backgroundColor: "green",
                       fontSize: "12px",
+                      color:"white",
                       paddingRight: "5px",
                       paddingLeft: "5px",
                       paddingTop: "2px",
@@ -332,6 +336,8 @@ const RsvpView = (props: RSVPViewInterface) => {
                     style={{
                       backgroundColor: "rgba(0, 0, 0, 0.25)",
                       fontSize: "12px",
+                      color:"red",
+
                       paddingRight: "5px",
                       paddingLeft: "5px",
                       paddingTop: "2px",

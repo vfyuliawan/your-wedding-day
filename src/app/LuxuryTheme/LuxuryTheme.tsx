@@ -45,11 +45,62 @@ interface LuxuryThemeInterface {
 const LuxuryTheme = (props: LuxuryThemeInterface) => {
   const [visible, setVisible] = useState(false);
   const [removeComp, setRemoveComp] = useState(false);
-  const heroRef = useRef<any>(null);
+  // const heroRef = useRef<any>(null);
   const headerRef = useRef<any>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const containerRef = useRef<any>(null);
+  const [activeSection, setActiveSection] = useState("hero");
+
+  const sectionRefs = useRef<{
+    hero: HTMLDivElement | null;
+    home: HTMLDivElement | null;
+    maleFemale: HTMLDivElement | null;
+    info: HTMLDivElement | null;
+    countdown: HTMLDivElement | null;
+    story: HTMLDivElement | null;
+    galery: HTMLDivElement | null;
+    rsvp: HTMLDivElement | null;
+  }>({
+    hero: null,
+    home: null,
+    maleFemale: null,
+    info: null,
+    countdown: null,
+    story: null,
+    galery: null,
+    rsvp: null,
+  });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log(entry, "entry");
+          if (entry.isIntersecting) {
+            console.log(entry.target.id, "id");
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.3,
+      }
+    );
+
+    // Attach observer to each section
+    Object.values(sectionRefs.current).forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      // Cleanup observer on unmount
+      Object.values(sectionRefs.current).forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
 
   const togglePlay = () => {
     if (isPlaying) {
@@ -170,59 +221,88 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         detailCover={props?.details?.cover}
       />
       <div style={{ overflowY: "scroll" }} ref={containerRef}>
-        {!coverVisible ? <NavbarView /> : null}
+        {!coverVisible ? <NavbarView activeSection={activeSection} /> : null}
         <HeaderView themeName={props?.details?.theme.theme ?? ""} />
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (
-            <HeroView ref={heroRef} HeroDetail={props?.details?.hero} />
+            <HeroView
+              ref={(el) => (sectionRefs.current!.hero = el)}
+              HeroDetail={props?.details?.hero}
+            />
           ) : null}
           {props?.details?.home?.isShow ? (
-            <HomeView HomeDetail={props?.details?.home} />
+            <div
+              id="home"
+              ref={(el) =>
+                (sectionRefs.current!.hero = el as HTMLDivElement | null)
+              }
+            >
+              <HomeView HomeDetail={props?.details?.home} />
+            </div>
           ) : null}
         </div>
         {props?.details?.braidInfo?.isShow ? (
-          <MaleFemaleView MaleFemaleDetail={props?.details?.braidInfo} />
-        ) : null}
-        {/* {props?.details?.infoAcara?.Visible ? (
-          <InfoView Info={props?.details?.InfoAcara} Embeded={props?.details?.Embeded} />
-        ) : (
-          <InfoView Info={props?.details?.InfoAcara} Embeded={props?.details?.Embeded}/>
-        )} */}
-        <InfoView
-          Info={props?.details?.infoAcara}
-          Embeded={props?.details?.theme.embeded}
-        />
-
-        {/* {props?.details?.CountDown?.Visible ? (
-          <CountDownView
-            targetDate={
-              new Date(
-                new Timestamp(
-                  props?.details?.CountDown?.Date?.seconds,
-                  props?.details?.CountDown?.Date?.nanoseconds
-                )
-                  .toDate()
-                  .toISOString()
-                  .split(".")[0]
-              )
+          <div
+            id="maleFemale"
+            ref={(el) =>
+              (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
             }
+          >
+            <MaleFemaleView MaleFemaleDetail={props?.details?.braidInfo} />
+          </div>
+        ) : null}
+        <div
+          id="info"
+          ref={(el) =>
+            (sectionRefs.current!.info = el as HTMLDivElement | null)
+          }
+        >
+          <InfoView
+            Info={props?.details?.infoAcara}
+            Embeded={props?.details?.theme.embeded}
           />
-        ) : null} */}
-
-        <CountDownView targetDate={props.details?.countdown} />
-
+        </div>
+        <div
+          id="countdown"
+          ref={(el) =>
+            (sectionRefs.current!.countdown = el as HTMLDivElement | null)
+          }
+        >
+          <CountDownView targetDate={props.details?.countdown} />
+        </div>
         {props?.details?.story.isShow ? (
-          <StoryView OurStory={props?.details?.story} />
+          <div
+            id="story"
+            ref={(el) =>
+              (sectionRefs.current!.story = el as HTMLDivElement | null)
+            }
+          >
+            <StoryView OurStory={props?.details?.story} />
+          </div>
         ) : null}
-
         {props?.details?.galery.isShow ? (
-          <GaleryView image={props?.details?.galery.galeries} />
+          <div
+            id="galery"
+            ref={(el) =>
+              (sectionRefs.current!.galery = el as HTMLDivElement | null)
+            }
+          >
+            <GaleryView image={props?.details?.galery.galeries} />
+          </div>
         ) : null}
-        <RsvpView
-          message={props?.message}
-          postMessage={props.postMessage}
-          setMessage={props.setMessage}
-        />
+        <div
+          id="rsvp"
+          ref={(el) =>
+            (sectionRefs.current!.rsvp = el as HTMLDivElement | null)
+          }
+        >
+          <RsvpView
+            message={props?.message}
+            postMessage={props.postMessage}
+            setMessage={props.setMessage}
+          />
+        </div>
+
         <GiftsView Gifts={props!.details!.gift.gifts} />
 
         <div ref={qrCodeRef}></div>
@@ -234,14 +314,15 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
           />
         ) : null} */}
 
-        <FooterView Footer={props?.details!.hero} />
+        <FooterView Footer={props?.details!.home} />
         <EndView />
+
         {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               position: "fixed",
-              bottom: "150px",
+              bottom: "90px",
               right: "20px",
               padding: "15px",
               height: "40px",
@@ -263,7 +344,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             )}
           </button>
         ) : null}
-        {!coverVisible ? (
+        {/* {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
@@ -294,13 +375,13 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               ></i>
             )}
           </button>
-        ) : null}
+        ) : null} */}
         {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               position: "fixed",
-              bottom: "200px",
+              bottom: "140px",
               right: "20px",
               padding: "15px",
               height: "40px",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import { forwardRef } from "react";
 
 interface HeaderViewInterface {
@@ -7,7 +7,7 @@ interface HeaderViewInterface {
 
 const HeaderView = (props : HeaderViewInterface) => {
   return (
-    <>
+    <div >
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Fulan &amp; Fulana Weding</title>
@@ -48,7 +48,7 @@ const HeaderView = (props : HeaderViewInterface) => {
 
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
       <link rel="stylesheet" href={`/ThemeStyle/${props.themeName}/assets/css/style.css`} />
-    </>
+    </div>
   );
 };
 

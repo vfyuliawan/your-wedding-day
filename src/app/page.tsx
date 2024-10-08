@@ -90,7 +90,7 @@ export default function Home() {
         getMessage(details!.id);
       }
     } catch (error) {
-      Swal.fire(error);
+      Swal.fire();
       throw error;
     }
   };
