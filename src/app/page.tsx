@@ -65,6 +65,17 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflowY = "hidden"; // Disable scrolling
+    } else {
+      document.body.style.overflowY = "auto"; // Re-enable scrolling
+    }
+    return () => {
+      document.body.style.overflowY = "auto"; // Cleanup to ensure no overflow issues
+    };
+  }, [loading]);
+
   const getMessage = async (id: string) => {
     const res = await MessageService.getMessage({
       projectId: id,
@@ -243,7 +254,12 @@ export default function Home() {
 
   function Loading() {
     return (
-      <>
+      <div
+        style={{
+          overflow: "hidden", // Disable both vertical and horizontal scrolling
+          height: "100vh", // Ensures the div takes up the full viewport height
+        }}
+      >
         <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
 
         <div
@@ -268,7 +284,6 @@ export default function Home() {
               style={{
                 height: "120px",
               }}
-              // className="shake-bl"
               src="/pink-essence/img/LogoNM.png"
               alt=""
             />
@@ -280,7 +295,7 @@ export default function Home() {
             />
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
