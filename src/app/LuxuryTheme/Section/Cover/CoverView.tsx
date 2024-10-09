@@ -264,7 +264,7 @@ const CoverView = (props: CoverModelInterface) => {
             className="cover2-kepada"
             style={{
               position: "absolute",
-              top: "30%",
+              top: "28%",
               left: "50%",
               transform: "translateX(-50%)",
             }}

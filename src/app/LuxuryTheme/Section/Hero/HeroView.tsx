@@ -38,21 +38,21 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             backgroundPosition: "center",
           }}
         />
-        <main
+        <div className="gradient-overlay" />
+        <div
           className="inside"
           style={{
             display: "flex",
             flexDirection: "column",
             position: "relative",
-            bottom: -150,
+            bottom: -180,
           }}
         >
           <h1 style={{ fontFamily: "brilon" }}>{props.HeroDetail.title}</h1>
           <h4 style={{ fontFamily: "serif", fontSize: 20 }}>
             {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
           </h4>
-        </main>
-        <div className="gradient-overlay" />
+        </div>
       </section>
     </>
   );

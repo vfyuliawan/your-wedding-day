@@ -10,11 +10,12 @@ const NavbarView = (props: NavbarInterfaceView) => {
     hero: useRef<HTMLDivElement>(null),
     home: useRef<HTMLDivElement>(null),
     maleFemale: useRef<HTMLDivElement>(null),
-    info: useRef<HTMLDivElement>(null),
+    // information: useRef<HTMLDivElement>(null),
     countdown: useRef<HTMLDivElement>(null),
     story: useRef<HTMLDivElement>(null),
     galery: useRef<HTMLDivElement>(null),
     rsvp: useRef<HTMLDivElement>(null),
+    
   };
 
   // Scroll the navbar when the active section changes
@@ -68,8 +69,8 @@ const NavbarView = (props: NavbarInterfaceView) => {
           {[
             { section: "hero", icon: "bi bi-house-door-fill" },
             { section: "home", icon: "bi bi-valentine2" },
-            { section: "maleFemale", icon: "bi bi-calendar2-week-fill" },
-            { section: "info", icon: "bi bi-info-circle-fill" },
+            { section: "maleFemale", icon: "bi bi-info-circle-fill" },
+            // { section: "information", icon: "bi bi-info-circle-fill" },
             { section: "countdown", icon: "bi bi-alarm-fill" },
             { section: "story", icon: "bi bi-arrow-through-heart-fill" },
             { section: "galery", icon: "bi bi-camera-fill" },

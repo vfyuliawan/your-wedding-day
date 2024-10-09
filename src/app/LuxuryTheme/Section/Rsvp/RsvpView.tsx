@@ -5,7 +5,10 @@ import { RSVPKeyValue, RSVPViewInterface } from "./RsvpModel";
 // import { RsvpViewModel } from "./RsvpViewModel";
 import { Timestamp } from "firebase/firestore";
 import ReactLoading from "react-loading";
-import { TimeConvertionDate, TimeConvertionFullDateAndTime } from "../../../utils/TimeConvertion";
+import {
+  TimeConvertionDate,
+  TimeConvertionFullDateAndTime,
+} from "../../../utils/TimeConvertion";
 import Swal from "sweetalert2";
 import { motion, useAnimation } from "framer-motion";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
@@ -197,9 +200,8 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <button
                   type="button"
                   onClick={() => {
-
                     console.log(sendMessage);
-                    
+
                     setLoading(true);
                     if (
                       sendMessage?.name !== "" ||
@@ -254,11 +256,11 @@ const RsvpView = (props: RSVPViewInterface) => {
           <h4
             style={{
               color: "white",
-              fontFamily: "Times-new-roman",
-              fontSize: "16px",
+              fontFamily: "brilon",
+              fontSize: "20px",
             }}
           >
-            Pesan
+            {`Pesan ( ${props.message.length} )`}
           </h4>
           {loading ? (
             <ReactLoading
@@ -267,8 +269,19 @@ const RsvpView = (props: RSVPViewInterface) => {
               height={200}
               width={70}
             />
-          ) : (
+          ) : props.message.length !== 0 ? (
             <MessageView />
+          ) : (
+            <div style={{ justifyContent: "center", display: "flex" }}>
+              <p
+                style={{
+                  color: "white",
+                  fontSize: "20px",
+                }}
+              >
+                No Comments Yet
+              </p>
+            </div>
           )}
         </div>
       </section>
@@ -321,7 +334,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                     style={{
                       backgroundColor: "green",
                       fontSize: "12px",
-                      color:"white",
+                      color: "white",
                       paddingRight: "5px",
                       paddingLeft: "5px",
                       paddingTop: "2px",
@@ -336,7 +349,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                     style={{
                       backgroundColor: "rgba(0, 0, 0, 0.25)",
                       fontSize: "12px",
-                      color:"red",
+                      color: "red",
 
                       paddingRight: "5px",
                       paddingLeft: "5px",
@@ -353,10 +366,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 {item.text}
                 <br />
                 <span style={{ fontSize: "0.9rem" }}>
-                  {
-                    TimeConvertionFullDateAndTime(item.time.toString())
-                  }
-                  
+                  {TimeConvertionFullDateAndTime(item.time.toString())}
                 </span>
               </p>
             </div>

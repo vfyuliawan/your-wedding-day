@@ -56,7 +56,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     hero: HTMLDivElement | null;
     home: HTMLDivElement | null;
     maleFemale: HTMLDivElement | null;
-    info: HTMLDivElement | null;
+    information: HTMLDivElement | null;
     countdown: HTMLDivElement | null;
     story: HTMLDivElement | null;
     galery: HTMLDivElement | null;
@@ -65,7 +65,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     hero: null,
     home: null,
     maleFemale: null,
-    info: null,
+    information: null,
     countdown: null,
     story: null,
     galery: null,
@@ -220,7 +220,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         onCoverClick={handleCoverClick}
         detailCover={props?.details?.cover}
       />
-      <div style={{ overflowY: "scroll" }} ref={containerRef}>
+      <div style={{ overflowY: "scroll", overflowX:'hidden' }} ref={containerRef}>
         {!coverVisible ? <NavbarView activeSection={activeSection} /> : null}
         <HeaderView themeName={props?.details?.theme.theme ?? ""} />
         <div className="hero-home">
@@ -252,9 +252,9 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
           </div>
         ) : null}
         <div
-          id="info"
+          id="maleFemale"
           ref={(el) =>
-            (sectionRefs.current!.info = el as HTMLDivElement | null)
+            (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
           }
         >
           <InfoView
@@ -307,12 +307,10 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
 
         <div ref={qrCodeRef}></div>
 
-        {/* {props?.details?.GuestBarcode ? (
-          <GuestScanView
+        <GuestScanView
             idGuest={props.idGuest ?? 0}
             guest={props.guest ?? ""}
           />
-        ) : null} */}
 
         <FooterView Footer={props?.details!.home} />
         <EndView />
