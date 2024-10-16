@@ -124,6 +124,7 @@ const CoverView = (props: CoverModelInterface) => {
             position: "absolute",
             bottom: "3%",
             color: "#fff",
+            
             fontSize: "24px",
             textAlign: "center",
           }}
@@ -133,6 +134,8 @@ const CoverView = (props: CoverModelInterface) => {
           style={{
             width: "100%",
             height: "78%",
+            opacity:0.8,
+
             position: "absolute",
             flexDirection: "row",
             bottom: 0,
@@ -242,7 +245,7 @@ const CoverView = (props: CoverModelInterface) => {
             width: "100%",
             height: "100%",
             position: "absolute",
-            top: "200px",
+            top: "150px",
             left: 0,
             color: "#fff",
             fontSize: "24px",
@@ -264,7 +267,7 @@ const CoverView = (props: CoverModelInterface) => {
             className="cover2-kepada"
             style={{
               position: "absolute",
-              top: "28%",
+              top: "15%",
               left: "50%",
               transform: "translateX(-50%)",
             }}
@@ -279,6 +282,8 @@ const CoverView = (props: CoverModelInterface) => {
               className="btn btn-lg text-center"
               style={{
                 width: "250px",
+              opacity:0.7,
+
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",

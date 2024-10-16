@@ -1,9 +1,10 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import Barcode from "react-barcode";
 import QRCode from "react-qr-code";
+import React from "react";
+import AnimationThemeInstance from "../../../utils/AnimationThemes";
 interface GuestScanViewInterface {
   idGuest: string;
   guest: string;
@@ -22,7 +23,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
     return () => {};
   }, [animate, isVisible]);
   return (
-    <section id="guest" style={{ height: "100hv" }} ref={targetRefGift}>
+    <section className="guest" id="guest" style={{ height: "100hv" }} ref={targetRefGift}>
       <div
         className="stright-top"
         style={{ backgroundColor: "white", height: "100px" }}

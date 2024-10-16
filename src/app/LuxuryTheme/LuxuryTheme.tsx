@@ -31,6 +31,7 @@ import GuestScanView from "./Section/GuestScanView/GuestScanView";
 import { ResultDetailSlug } from "../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 import React from "react";
 import { MessagesRequest } from "../Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
+import { convertColor } from "../utils/ConvertColor";
 // import AOS from 'aos';
 
 interface LuxuryThemeInterface {
@@ -71,6 +72,9 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     galery: null,
     rsvp: null,
   });
+
+
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -166,6 +170,9 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   }, []);
 
   useEffect(() => {
+    document.documentElement.style.setProperty('--prim', convertColor(props?.details?.theme?.theme?.primaryColor ?? ""));
+    document.documentElement.style.setProperty('--sec', convertColor(props?.details?.theme?.theme?.secondaryColor ?? ""));
+
     disableScroll();
     return () => {};
   }, []);
@@ -222,7 +229,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       />
       <div style={{ overflowY: "scroll", overflowX:'hidden' }} ref={containerRef}>
         {!coverVisible ? <NavbarView activeSection={activeSection} /> : null}
-        <HeaderView themeName={props?.details?.theme.theme ?? ""} />
+        <HeaderView themeName={props?.details?.theme.theme.themeName ?? ""} />
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (
             <HeroView
@@ -262,6 +269,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             Embeded={props?.details?.theme.embeded}
           />
         </div>
+
+
         <div
           id="countdown"
           ref={(el) =>

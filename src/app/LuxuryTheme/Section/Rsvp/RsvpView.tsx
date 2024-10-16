@@ -320,6 +320,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 </p>
               </div>
             </div>
+            
             <div key={index} className="col-10 ">
               <h3
                 style={{

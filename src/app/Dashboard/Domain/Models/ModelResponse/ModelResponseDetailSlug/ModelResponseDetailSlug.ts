@@ -101,8 +101,15 @@ export interface Theme {
     slug:    string;
     alamat:  string;
     embeded: string;
-    theme:   string;
+    theme:   ThemeUsed;
     music:   string;
+}
+
+
+export interface ThemeUsed {
+    themeName:      string;
+    primaryColor:   string;
+    secondaryColor: string;
 }
 
 // Converts JSON strings to/from your types

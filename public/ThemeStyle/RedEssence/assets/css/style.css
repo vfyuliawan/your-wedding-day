@@ -4,15 +4,14 @@
   src: url("../../../../Font/brilon/brilon-11-regular.ttf") format("brilon11");
 }
 :root {
-  /* --pink: #f14e95; */
-  --pink: hsl(0, 74%, 18%);
-
+  /* --prim: #f14e95; */
+  --prim: hsl(0, 74%, 18%);
   /* sama */
-  --sec: #dadada;
-  --bg: #dadada;
+  --sec: #efefef;
+  --bg: #efefef;
   /* sama */
 
-  --bg2: #cbcbcb;
+  --bg2: #efefef;
   --shadow2: #363636;
   --shadow4: #000000;
   --shadow: 0 2px 2px rgb(0 0 0 / 0.8);
@@ -282,17 +281,17 @@ p {
 }
 
 .cover2 {
-  background-color: var(--pink);
+  background-color: var(--prim);
 }
 
 .our-nav {
-  background-color: var(--pink);
+  background-color: var(--prim);
 }
 
 .cover {
   min-height: 100vh;
   position: relative;
-  background-color: var(--pink);
+  background-color: var(--prim);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -313,7 +312,7 @@ p {
 
 .cover2 .cover2-overlay {
   clip-path: polygon(31% 65%, 100% 78%, 100% 100%, 0 100%, 0 74%);
-  background-color: var(--pink);
+  background-color: var(--prim);
   opacity: 0;
 }
 
@@ -328,7 +327,7 @@ p {
 }
 
 .cover .cover-foto .cover-overlay {
-  background-color: var(--pink);
+  background-color: var(--prim);
   opacity: 0.4;
   height: 100vh;
   width: 100%;
@@ -367,7 +366,7 @@ p {
   min-height: 100vh;
 }
 .hero-home::before {
-  background-color: var(--pink);
+  background-color: var(--prim);
   /* z-index: inherit; */
 }
 
@@ -397,14 +396,14 @@ p {
 .hero a,
 .gifts a {
   color: white;
-  background-color: var(--pink);
+  background-color: var(--prim);
   margin-top: 5px;
 }
 
 .hero a,
 .giftsa:hover {
   background-color: white;
-  color: var(--pink);
+  color: var(--prim);
 }
 
 .my-navbar {
@@ -443,7 +442,7 @@ p {
 .home .couple h3 {
   font-family: "Sacramento", cursive;
   font-size: 3rem;
-  color: var(--pink);
+  color: var(--prim);
 }
 
 .home .couple img {
@@ -460,14 +459,14 @@ p {
 
 .story h2,
 .galery h2 {
-  /* color: var(--pink); */
+  /* color: var(--prim); */
   font-family: "Sacramento", cursive;
   font-size: 4rem;
   /* text-shadow: var(--shadow); */
 }
 
 .message-box {
-  background-color: var(--pink);
+  background-color: var(--prim);
 }
 
 .home h3 {
@@ -501,7 +500,7 @@ p {
 
 .home .heart i {
   margin: auto;
-  color: var(--pink);
+  color: var(--prim);
 }
 
 .info {
@@ -509,7 +508,7 @@ p {
   /* min-height: 100vh; */
   color: white;
   padding-top: 8rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
 }
 
 .info h2 {
@@ -535,7 +534,7 @@ p {
 
 .info a,
 .cover a {
-  color: var(--pink) !important;
+  color: var(--prim) !important;
   background-color: white;
   margin-top: 2rem;
   border-radius: 3%;
@@ -550,7 +549,7 @@ p {
 .cover2 a:hover {
   /* background-color: white; */
   background: white;
-  color: var(--pink) !important;
+  color: var(--prim) !important;
   font-size: 1.5rem !important;
   font-weight: 800 !important;
 }
@@ -562,9 +561,9 @@ p {
   color: white !important;
   background: linear-gradient(
     90deg,
-    var(--pink) 0%,
-    var(--pink) 35%,
-    var(--pink) 100%
+    var(--prim) 0%,
+    var(--prim) 35%,
+    var(--prim) 100%
   );
   /* margin-top: 2rem; */
   padding: 1rem !important;
@@ -576,14 +575,14 @@ p {
 
 .info a:hover {
   /* background-color: white; */
-  background: var(--bg) !important;
+  background: var(--sec) !important;
   color: white !important;
   font-size: 1.5rem !important;
   font-weight: 800 !important;
 }
 
 .info .card {
-  background-color: var(--pink) !important;
+  background-color: var(--prim) !important;
   color: white !important;
   border: 1px solid #9999 !important;
 }
@@ -607,11 +606,11 @@ p {
 }
 
 .info .info-text {
-  background: linear-gradient(to top, var(--pink), var(--bg2));
+  background: linear-gradient(to top, var(--prim), var(--bg2));
 }
 
 .iframeContainer {
-  border: 3px solid var(--pink);
+  border: 3px solid var(--prim);
 }
 
 .story {
@@ -649,7 +648,7 @@ p {
   bottom: 0;
   position: absolute;
   width: 5px;
-  background-color: var(--pink);
+  background-color: var(--prim);
   left: 50%;
 }
 
@@ -674,7 +673,7 @@ p {
 .timeline li .timeline-image {
   width: 120px;
   height: 120px;
-  background-color: var(--pink);
+  background-color: var(--prim);
 
   position: absolute;
   left: 50%;
@@ -688,7 +687,7 @@ p {
 .timeline li .timeline-image2 {
   width: 50px;
   height: 50px;
-  background-color: var(--pink);
+  background-color: var(--prim);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -701,7 +700,7 @@ p {
 .timeline li .timeline-panel {
   width: 40%;
   float: left;
-  border: 1px solid var(--pink);
+  border: 1px solid var(--prim);
   padding: 2rem;
   position: relative;
   border-radius: 10px;
@@ -714,8 +713,8 @@ p {
   position: absolute;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-left: 15px solid var(--pink);
-  border-right: 0 solid var(--pink);
+  border-left: 15px solid var(--prim);
+  border-right: 0 solid var(--prim);
   right: -15px;
   top: 50px;
 }
@@ -733,8 +732,8 @@ p {
 }
 
 .galery {
-  /* background-color: var(--pink); */
-  background: linear-gradient(var(--pink) 0%, white 130%);
+  /* background-color: var(--prim); */
+  background: linear-gradient(var(--prim) 0%, white 130%);
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
@@ -771,20 +770,20 @@ p {
 }
 
 .rsvp .btn {
-  background-color: var(--pink);
+  background-color: var(--prim);
   color: white;
-  border: 1px solid var(--pink);
+  border: 1px solid var(--prim);
   margin-top: 15px;
 }
 
 .rsvp .btn:hover {
   background-color: white;
-  color: var(--pink);
+  color: var(--prim);
   border: 1px solid white;
 }
 
 .gifts {
-  background-color: var(--pink);
+  background-color: var(--prim);
   /* padding-top: 5rem;
   padding-bottom: 5rem; */
   position: relative;
@@ -793,21 +792,21 @@ p {
 .gifts .card-header {
   background: linear-gradient(
     to right,
-    var(--pink) 0%,
-    var(--pink) 40%,
-    var(--pink) 10%,
+    var(--prim) 0%,
+    var(--prim) 40%,
+    var(--prim) 10%,
     white 120%
   );
 }
 
 .gifts h2 {
-  color: var(--bg);
+  color: var(--sec);
   font-weight: 600;
   font-size: 3rem;
 }
 
 .gifts h5 {
-  color: var(--pink);
+  color: var(--prim);
   font-family: "Sacramento", cursive;
   font-size: 5rem;
 }
@@ -816,7 +815,12 @@ p {
   background-color: var(--sec);
 }
 
+.guest{
+  background-color: var(--sec);
+}
+
 .stright-top {
+  background-color: var(--sec);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 77px));
 }
 .stright-bottom {
@@ -829,7 +833,7 @@ p {
 .vertical-line {
   width: 120px;
   height: 3px;
-  background-color: var(--pink);
+  background-color: var(--prim);
   position: absolute;
   right: 50%;
   transform: translateX(120%);
@@ -865,6 +869,14 @@ p {
   /* Add any other styling properties you need */
 }
 
+.footer.gradient-overlay-top{
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0) 20%,
+    var(--sec) 100%
+  );
+}
+
 .footer .gradient-overlay,
 .hero .gradient-overlay {
   position: absolute;
@@ -875,7 +887,7 @@ p {
   background: linear-gradient(
     to bottom,
     rgba(255, 0, 0, 0) 20%,
-    var(--pink) 100%
+    var(--prim) 100%
   );
 }
 
@@ -919,7 +931,7 @@ p {
 .end {
   height: 30rem;
   width: 100%;
-  background-color: var(--pink);
+  background-color: var(--prim);
 }
 
 .new-home {
@@ -930,8 +942,8 @@ p {
   /* background: linear-gradient(
     to bottom,
     rgba(255, 0, 0, 0) 0%,
-    var(--pink) 50%,
-    var(--pink) 100%
+    var(--prim) 50%,
+    var(--prim) 100%
   ); */
   /* background-color:white; */
 }
@@ -940,16 +952,22 @@ p {
   /* background: linear-gradient(
     to bottom,
     rgba(255, 0, 0, 0) 0%,
-    var(--pink) 50%,
-    var(--pink) 100%
+    var(--prim) 50%,
+    var(--prim) 100%
   ); */
-  /* background-color: var(--pink); */
-  background: linear-gradient(var(--pink) 0%, var(--pink) 30%, white 170%);
+  /* background-color: var(--prim); */
+  background: linear-gradient(var(--prim) 0%, var(--prim) 30%, white 170%);
   width: 100%;
 }
 
+
+
 .position-relative {
   position: relative;
+}
+.male-female{
+  background-color: var(--sec);
+  height: 150vh;
 }
 
 .male-female .overlay {
@@ -980,7 +998,7 @@ p {
 }
 
 .male-female .mid-couple {
-  background-color: var(--pink);
+  background-color: var(--prim);
 }
 
 /* .cover2 img{
@@ -1006,14 +1024,14 @@ p {
 
 .count-dowm-btn {
   background-color: white;
-  color: var(--bg);
+  color: var(--sec);
   border: 1px solid white;
 }
 
 .count-dowm-btn:hover {
-  background-color: var(--pink) !important;
+  background-color: var(--prim) !important;
   color: white !important;
-  border: 1px solid var(--pink) !important;
+  border: 1px solid var(--prim) !important;
 }
 
 /* Media Query */

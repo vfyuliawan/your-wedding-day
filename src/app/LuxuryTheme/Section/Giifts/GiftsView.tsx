@@ -1,10 +1,11 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import AnimationThemeInstance from "@/app/utils/AnimationThemes";
-import { GiftElement } from "@/app/Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 import Swal from "sweetalert2";
-import { copyToClipboard } from "@/app/utils/CopytoClipboard";
+import React from "react";
+import { GiftElement } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import { copyToClipboard } from '../../../utils/CopytoClipboard';
 
 interface GiftsViewInterface {
   Gifts: GiftElement[];
@@ -53,6 +54,7 @@ const GiftsView = (props: GiftsViewInterface) => {
           backgroundColor: "white",
           paddingTop: "5rem",
           marginTop: "10rem",
+          height:'100vh'
         }}
       >
         <div className="container">

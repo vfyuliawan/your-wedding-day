@@ -505,7 +505,7 @@ p {
   /* min-height: 100vh; */
   color: white;
   padding-top: 8rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
 }
 
 .info h2 {
@@ -812,7 +812,12 @@ p {
   background-color: var(--sec);
 }
 
+.guest{
+  background-color: var(--sec);
+}
+
 .stright-top {
+  background-color: var(--sec);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 77px));
 }
 .stright-bottom {
@@ -859,6 +864,14 @@ p {
   padding: 10px; /* Add padding as needed */
   text-align: center;
   /* Add any other styling properties you need */
+}
+
+.footer.gradient-overlay-top{
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0) 20%,
+    var(--sec) 100%
+  );
 }
 
 .footer .gradient-overlay,
@@ -912,7 +925,6 @@ p {
   /* text-shadow: var(--shadow); */
 }
 
-
 .end {
   height: 30rem;
   width: 100%;
@@ -945,8 +957,14 @@ p {
   width: 100%;
 }
 
+
+
 .position-relative {
   position: relative;
+}
+.male-female{
+  background-color: var(--sec);
+  height: 150vh;
 }
 
 .male-female .overlay {
@@ -1012,6 +1030,7 @@ p {
   color: white !important;
   border: 1px solid var(--pink) !important;
 }
+
 
 /* Media Query */
 

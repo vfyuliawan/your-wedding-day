@@ -1,4 +1,5 @@
-import { Cover } from "@/app/Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import React from "react";
+import { Cover } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 
 interface FooterViewInterface {
   Footer: Cover;
@@ -19,6 +20,15 @@ const FooterView = (props: FooterViewInterface) => {
       }}
       className="footer w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white"
     >
+      <div className="gradient-overlay-top" style={{
+        position: 'absolute',
+        top: 0,
+        backgroundColor:'var(--sec)',
+        left: 0,
+        right: 0,
+        height:'10rem',
+        zIndex: 1
+    }}></div>
       <div className="gradient-overlay" />
       <main className="inside" style={{ position: "relative", top: 300 }}>
       <h2 style={{ textShadow: 'none  !important' }}>Terimakasih</h2>

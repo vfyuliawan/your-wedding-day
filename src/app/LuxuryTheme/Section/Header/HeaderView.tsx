@@ -47,7 +47,8 @@ const HeaderView = (props : HeaderViewInterface) => {
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
 
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
-      <link rel="stylesheet" href={`/ThemeStyle/${props.themeName}/assets/css/style.css`} />
+      {/* <link rel="stylesheet" href={`/ThemeStyle/${props.themeName}/assets/css/style.css`} /> */}
+      <link rel="stylesheet" href={`/ThemeStyle/RedEssence/assets/css/style.css`} />
     </div>
   );
 };

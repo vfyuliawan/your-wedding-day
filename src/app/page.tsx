@@ -55,7 +55,7 @@ export default function Home() {
     });
     if (res != null) {
       setDetails(res.result);
-      setThemeName(res.result.theme.theme);
+      setThemeName(res.result.theme.theme.themeName);
       setGuest(getGuest ?? "");
       setidGuest(getIdGuest ?? "");
       setTimeout(() => {

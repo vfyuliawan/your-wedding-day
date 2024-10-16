@@ -76,9 +76,9 @@ const CountDownView = (props: CountDownViewInterface) => {
 
   return (
     <section
-      id="count-dowm"
+      id="count-down"
       className="count-down"
-      style={{ marginTop: "5rem" }}
+      // style={{ marginTop: "5rem" }}
     >
       <div className="row justify-content-center">
         <div className="col-md-12">
