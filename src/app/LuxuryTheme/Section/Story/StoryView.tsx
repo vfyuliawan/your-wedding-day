@@ -73,7 +73,7 @@ const StoryView = (props: StoryViewInterface) => {
                 animate={animate}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "black", fontSize: "1.5rem" }}
+                style={{ color: "black", fontSize: "14px", fontFamily:"Times-new-roman" }}
                 className="alamat"
               >
                 Dari pertemuan, aku belajar bahwa setiap momen kebersamaan

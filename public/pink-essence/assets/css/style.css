@@ -124,7 +124,7 @@
 body {
   font-size: 1.5rem;
   font-family: "Work Sans", sans-serif;
-  min-height: 4000px;
+  /* min-height: 4000px; */
 }
 
 p {

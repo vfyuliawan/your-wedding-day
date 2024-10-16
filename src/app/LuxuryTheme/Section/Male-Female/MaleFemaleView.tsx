@@ -46,7 +46,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
         </div>
 
         <div className="row justify-content-center">
-          <div className="col-md-6 col-3 col-sm-3 text-center justify-content-end d-flex align-items-center ">
+          <div className=" col-3 col-sm-3 text-center justify-content-end d-flex align-items-center ">
             <h3
               style={{
                 fontSize: "4rem",
@@ -60,7 +60,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               The Ride
             </h3>
           </div>
-          <div className="col-md-6 col-9 col-sm-9 d-flex align-items-star justify-content-star position-relative">
+          <div className=" col-9 col-sm-9 d-flex align-items-star justify-content-star position-relative">
             <motion.img
               ref={targetRef}
               initial={{
@@ -102,10 +102,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
 
         <div className="row">
           <div
-            className="justify-content-center d-flex p-3 mid-couple"
+            className="justify-content-center align-items-center d-flex p-2 mid-couple"
             style={{
-              height: "5rem",
               width: "100%",
+              // padding:2
             }}
           >
             <h2
@@ -126,7 +126,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           className="row justify-content-center"
           style={{ marginBottom: "2rem" }}
         >
-          <div className="col-md-6 col-9 col-sm-9 d-flex align-items-end justify-content-end position-relative">
+          <div className=" col-9 col-sm-9 d-flex align-items-end justify-content-end position-relative">
             <motion.div
               initial={{
                 opacity: setAnimation["fade-down"].initialX,
@@ -171,7 +171,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               </h3>
             </motion.div>
           </div>
-          <div className="col-md-6 col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
+          <div className=" col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
             <h3
               style={{
                 fontSize: "4rem",

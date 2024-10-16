@@ -81,7 +81,11 @@ const InfoView = (props: InfoViewInterface) => {
                 animate={controls}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "black", fontSize: "1.2rem" }}
+                style={{
+                  color: "black",
+                  fontSize: "1.2rem",
+                  fontFamily: "Times-new-roman",
+                }}
                 className="alamat"
               >
                 Tanpa mengurangi rasa hormat, kami mengundang
@@ -93,7 +97,7 @@ const InfoView = (props: InfoViewInterface) => {
         </div>
       </div>
       <div className="row justify-content-center mt-4">
-        <div key={"123"} className="col-md-6 col-10 mt-3">
+        <div key={"123"} className="col-10 mt-3">
           <div className="row">
             <motion.img
               animate={controls}
@@ -120,8 +124,8 @@ const InfoView = (props: InfoViewInterface) => {
               <h3
                 className="info-h3"
                 style={{
-                  fontSize: "3rem",
-                  fontFamily: "Dancing Script",
+                  fontSize: "4rem",
+                  fontFamily: "Dancing script",
                   fontWeight: 800,
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
@@ -139,15 +143,15 @@ const InfoView = (props: InfoViewInterface) => {
               style={{ color: "black" }}
             >
               <div className="row">
-                <div className="col-4">
+                <div className="col-4  align-items-end">
                   <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5, delay: 1.3 }}
                     style={{
-                      fontSize: "3rem",
-                      fontFamily: "Dancing Script",
-                      fontWeight: 500,
+                      fontSize: "25px",
+                      fontFamily: "brilon",
+                      fontWeight: 400,
                       marginTop: "1rem",
                     }}
                   >
@@ -162,8 +166,8 @@ const InfoView = (props: InfoViewInterface) => {
                     initial={AnimationThemeInstance.FadeRight}
                     transition={{ duration: 1.5, delay: 1.4 }}
                     style={{
-                      fontSize: "6rem",
-                      fontFamily: "Dancing Script",
+                      fontSize: "60px",
+                      fontFamily: "brilon",
                       fontWeight: 500,
                     }}
                   >
@@ -174,14 +178,14 @@ const InfoView = (props: InfoViewInterface) => {
                     }
                   </motion.h4>
                 </div>
-                <div className="col-8 d-flex justify-content-start align-items-end">
+                <div className="col-8 d-flex justify-content-start align-items-end ">
                   <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5, delay: 1.5 }}
                     style={{
-                      fontSize: "1.8rem",
-                      fontFamily: "Dancing Script",
+                      fontSize: "16px",
+                      fontFamily: "brilon",
                       fontWeight: 500,
                       letterSpacing: "1px",
                       marginTop: "2rem",
@@ -219,7 +223,14 @@ const InfoView = (props: InfoViewInterface) => {
                   className="bi bi-alarm-fill"
                   style={{ marginRight: "0.4rem" }}
                 ></i>
-                <p style={{ letterSpacing: "2px", margin: 0 }}>
+                <p
+                  style={{
+                    letterSpacing: "2px",
+                    margin: 0,
+                    fontSize: 25,
+                    fontFamily: "Times-new-roman",
+                  }}
+                >
                   {
                     TimeConvertionFullDate(props.Info!.akad.dateAkad.toString())
                       .formattedTime
@@ -230,7 +241,12 @@ const InfoView = (props: InfoViewInterface) => {
                 animate={controls}
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5, delay: 1.7 }}
-                style={{ marginBottom: "2rem", letterSpacing: "1px" }}
+                style={{
+                  marginBottom: "2rem",
+                  letterSpacing: "1px",
+                  fontFamily: "Times-new-roman",
+                  fontSize: 16,
+                }}
               >
                 Tempat
               </motion.h4>
@@ -239,7 +255,8 @@ const InfoView = (props: InfoViewInterface) => {
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5, delay: 1.7 }}
                 style={{
-                  fontSize: "1.6rem",
+                  fontFamily: "Times-new-roman",
+                  fontSize: 16,
                   letterSpacing: "0.5px",
                   marginBottom: "4rem",
                 }}
@@ -249,16 +266,25 @@ const InfoView = (props: InfoViewInterface) => {
               <div className="row justify-content-center mb-5">
                 <div className="col-9 d-flex align-items-center justify-content-center">
                   <a
-                    className="btn btn-lg text-center"
+                    className="btn ext-center"
                     style={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      // hei
                       minWidth: "100%",
                     }}
                     href={props.Info?.akad.mapAkad}
                   >
-                    <i className="bi bi-geo-alt-fill"> {"    "}Google Map</i>
+                    <i
+                      style={{
+                        fontSize: 12,
+                      }}
+                      className="bi bi-geo-alt-fill"
+                    >
+                      {" "}
+                      {"    "}Google Map
+                    </i>
                   </a>
                 </div>
               </div>
@@ -266,7 +292,7 @@ const InfoView = (props: InfoViewInterface) => {
           </div>
         </div>
 
-        <div key={"123"} className="col-md-6 col-10 mt-3">
+        <div key={"123"} className="col-10 mt-3">
           <div className="row">
             <motion.img
               animate={controls}
@@ -293,8 +319,8 @@ const InfoView = (props: InfoViewInterface) => {
               <h3
                 className="info-h3"
                 style={{
-                  fontSize: "3rem",
-                  fontFamily: "Dancing Script",
+                  fontSize: "4rem",
+                  fontFamily: "Dancing script",
                   fontWeight: 800,
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
@@ -318,9 +344,9 @@ const InfoView = (props: InfoViewInterface) => {
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5, delay: 2.3 }}
                     style={{
-                      fontSize: "3rem",
-                      fontFamily: "Dancing Script",
-                      fontWeight: 500,
+                      fontSize: "25px",
+                      fontFamily: "brilon",
+                      fontWeight: 400,
                       marginTop: "1rem",
                     }}
                   >
@@ -335,8 +361,8 @@ const InfoView = (props: InfoViewInterface) => {
                     initial={AnimationThemeInstance.FadeRight}
                     transition={{ duration: 1.5, delay: 2.3 }}
                     style={{
-                      fontSize: "6rem",
-                      fontFamily: "Dancing Script",
+                      fontSize: "60px",
+                      fontFamily: "brilon",
                       fontWeight: 500,
                     }}
                   >
@@ -353,8 +379,8 @@ const InfoView = (props: InfoViewInterface) => {
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5, delay: 2.3 }}
                     style={{
-                      fontSize: "1.8rem",
-                      fontFamily: "Dancing Script",
+                      fontSize: "16px",
+                      fontFamily: "brilon",
                       fontWeight: 500,
                       letterSpacing: "1px",
                       marginTop: "2rem",
@@ -392,7 +418,14 @@ const InfoView = (props: InfoViewInterface) => {
                   className="bi bi-alarm-fill"
                   style={{ marginRight: "0.4rem" }}
                 ></i>
-                <p style={{ letterSpacing: "2px", margin: 0 }}>
+                <p
+                  style={{
+                    letterSpacing: "2px",
+                    margin: 0,
+                    fontSize: 25,
+                    fontFamily: "Times-new-roman",
+                  }}
+                >
                   {
                     TimeConvertionFullDate(
                       props.Info!.resepsi.dateResepsi.toString()
@@ -400,7 +433,14 @@ const InfoView = (props: InfoViewInterface) => {
                   }
                 </p>
               </motion.span>
-              <h4 style={{ marginBottom: "2rem", letterSpacing: "1px" }}>
+              <h4
+                style={{
+                  marginBottom: "2rem",
+                  letterSpacing: "1px",
+                  fontFamily: "Times-new-roman",
+                  fontSize: 16,
+                }}
+              >
                 Tempat
               </h4>
               <motion.p
@@ -408,7 +448,8 @@ const InfoView = (props: InfoViewInterface) => {
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5, delay: 2.3 }}
                 style={{
-                  fontSize: "1.6rem",
+                  fontFamily: "Times-new-roman",
+                  fontSize: 16,
                   letterSpacing: "0.5px",
                   marginBottom: "4rem",
                 }}
@@ -423,16 +464,25 @@ const InfoView = (props: InfoViewInterface) => {
                   className="col-9 d-flex align-items-center justify-content-center"
                 >
                   <a
-                    className="btn btn-lg text-center"
+                    className="btn btn-md text-center"
                     style={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       minWidth: "100%",
+                      fontSize: 16,
                     }}
                     href={props.Info?.resepsi.mapResepsi}
                   >
-                    <i className="bi bi-geo-alt-fill"> {"    "}Google Map</i>
+                    <i
+                      style={{
+                        fontSize: 12,
+                      }}
+                      className="bi bi-geo-alt-fill"
+                    >
+                      {" "}
+                      {"    "}Google Map
+                    </i>
                   </a>
                 </motion.div>
               </div>
@@ -463,6 +513,176 @@ const InfoView = (props: InfoViewInterface) => {
       </div>
     </section>
   );
+
+  function CardInfo(params: {
+    title: string;
+    image: string;
+    date: Date;
+    lokasi: string;
+    map: string;
+  }) {
+    return (
+      <div key={"123"} className="col-10 mt-3">
+        <div className="row">
+          <motion.img
+            animate={controls}
+            initial={AnimationThemeInstance.FadeRight}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            src={params.image}
+            style={{
+              borderTopRightRadius: 50,
+              backgroundSize: "cover",
+              borderTopLeftRadius: 50,
+            }}
+            width={"100%"}
+            height={"100%"}
+            alt=""
+          />
+        </div>
+        <div className="row justify-content-center m-1 ">
+          <motion.div
+            animate={controls}
+            initial={AnimationThemeInstance.FadeLeft}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
+          >
+            <h3
+              className="info-h3"
+              style={{
+                fontSize: "4rem",
+                fontFamily: "Dancing script",
+                fontWeight: 800,
+                writingMode: "vertical-rl",
+                textOrientation: "mixed",
+                transform: "rotate(180deg)",
+              }}
+            >
+              {params.title}
+            </h3>
+          </motion.div>
+          <motion.div
+            animate={controls}
+            initial={AnimationThemeInstance.FadeRight}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            className="col-md-9 col-sm-9 col-9 text-center bg-light"
+            style={{ color: "black" }}
+          >
+            <div className="row">
+              <div className="col-4  align-items-end">
+                <motion.h4
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeLeft}
+                  transition={{ duration: 1.5, delay: 1.3 }}
+                  style={{
+                    fontSize: "25px",
+                    fontFamily: "brilon",
+                    fontWeight: 400,
+                    marginTop: "1rem",
+                  }}
+                >
+                  {TimeConvertionFullDate(params.date.toString()).dayOfWeek}{" "}
+                </motion.h4>
+                <motion.h4
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeRight}
+                  transition={{ duration: 1.5, delay: 1.4 }}
+                  style={{
+                    fontSize: "60px",
+                    fontFamily: "brilon",
+                    fontWeight: 500,
+                  }}
+                >
+                  {TimeConvertionFullDate(params.date.toString()).dateToString}
+                </motion.h4>
+              </div>
+              <div className="col-8 d-flex justify-content-start align-items-end ">
+                <motion.h4
+                  animate={controls}
+                  initial={AnimationThemeInstance.FadeLeft}
+                  transition={{ duration: 1.5, delay: 1.5 }}
+                  style={{
+                    fontSize: "16px",
+                    marginBottom: "20px",
+                    fontFamily: "brilon",
+                    fontWeight: 500,
+                    letterSpacing: "1px",
+                    marginTop: "2rem",
+                  }}
+                >
+                  {TimeConvertionFullDate(params.date.toString()).monthandYear}
+                </motion.h4>
+              </div>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                height: "1px",
+                backgroundColor: "black",
+                marginBottom: "1rem",
+                marginTop: "1rem",
+              }}
+            ></div>
+            <motion.span
+              animate={controls}
+              initial={AnimationThemeInstance.FadeRight}
+              transition={{ duration: 1.5, delay: 1.6 }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: "2rem ",
+              }}
+            >
+              <i
+                className="bi bi-alarm-fill"
+                style={{ marginRight: "0.4rem" }}
+              ></i>
+              <p style={{ letterSpacing: "2px", margin: 0 }}>
+                {TimeConvertionFullDate(params.date.toString()).formattedTime}
+              </p>
+            </motion.span>
+            <motion.h4
+              animate={controls}
+              initial={AnimationThemeInstance.FadeLeft}
+              transition={{ duration: 1.5, delay: 1.7 }}
+              style={{ marginBottom: "2rem", letterSpacing: "1px" }}
+            >
+              Tempat
+            </motion.h4>
+            <motion.p
+              animate={controls}
+              initial={AnimationThemeInstance.FadeLeft}
+              transition={{ duration: 1.5, delay: 1.7 }}
+              style={{
+                fontSize: "1.6rem",
+                letterSpacing: "0.5px",
+                marginBottom: "4rem",
+              }}
+            >
+              {params.lokasi}
+            </motion.p>
+            <div className="row justify-content-center mb-5">
+              <div className="col-9 d-flex align-items-center justify-content-center">
+                <a
+                  className="btn ext-center"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // hei
+                    minWidth: "100%",
+                  }}
+                  href={params.map}
+                >
+                  <i className="bi bi-geo-alt-fill"> {"    "}Google Map</i>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default InfoView;

@@ -124,6 +124,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                top:90
               }}
             >
               <div className="row text-center">
@@ -134,7 +135,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   style={{
                     color: "white",
                     fontFamily: "Dancing Script",
-                    fontSize: "4rem",
+                    fontSize: "25px",
                   }}
                 >
                   Menuju Hari Bahagia
@@ -229,7 +230,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                     minWidth: "100%",
                   }}
                 >
-                  <i className="bi bi-calendar-check-fill">
+                  <i style={{fontSize:'12px'}} className="bi bi-calendar-check-fill">
                     {" "}
                     {"      "}Save To Calendar
                   </i>

@@ -32,6 +32,7 @@ import { ResultDetailSlug } from "../Dashboard/Domain/Models/ModelResponse/Model
 import React from "react";
 import { MessagesRequest } from "../Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
 import { convertColor } from "../utils/ConvertColor";
+import { isMobile } from "react-device-detect";
 // import AOS from 'aos';
 
 interface LuxuryThemeInterface {
@@ -166,14 +167,14 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // scrollToBottom();
   }, []);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--prim', convertColor(props?.details?.theme?.theme?.primaryColor ?? ""));
     document.documentElement.style.setProperty('--sec', convertColor(props?.details?.theme?.theme?.secondaryColor ?? ""));
 
-    disableScroll();
+    // disableScroll();
     return () => {};
   }, []);
   const [coverVisible, setCoverVisible] = useState(true);
@@ -205,7 +206,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   }, []);
 
   return (
-    <div>
+    <div style={{maxHeight:100}}>
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -228,7 +229,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         detailCover={props?.details?.cover}
       />
       <div style={{ overflowY: "scroll", overflowX:'hidden' }} ref={containerRef}>
-        {!coverVisible ? <NavbarView activeSection={activeSection} /> : null}
+        {!coverVisible && isMobile ? <NavbarView activeSection={activeSection} /> : null}
         <HeaderView themeName={props?.details?.theme.theme.themeName ?? ""} />
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (

@@ -33,7 +33,12 @@ import { ResultDetailSlug } from "./Dashboard/Domain/Models/ModelResponse/ModelR
 import DetailSlugRepository from "./Dashboard/Domain/Repository/DetailSlugRepository/DetailSlugRepository";
 import MessageService from "./Dashboard/Domain/Service/MessageService/MessageService";
 import { MessagesRequest } from "./Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
-
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -117,19 +122,51 @@ export default function Home() {
     return () => {};
   }, []);
 
-  return (
+  return (    
     <>
-      {loading ? (
-        <Loading />
-      ) : themeName == "RedEssence" ? (
-        <LuxuryTheme
-          message={message}
-          setMessage={setMessage}
-          details={details}
-          postMessage={postMessage}
-          guest={guest}
-          idGuest={idGuest}
-        />
+    {loading ? (
+      <Loading />
+    ) : themeName == "RedEssence" ? (
+      <>
+        <BrowserView>
+          <div style={{ display: "flex", flexDirection: "row", height: "100vh", overflow: "hidden" }}>
+            <div style={{ width: "70%", height: "100vh", overflow: "hidden" }}>
+              <img
+                className="kenburns-top"
+                style={{
+                  objectFit: "cover",
+                  width: "100%",
+                  height: "100%",
+                }}
+                src={details?.cover.img}
+                alt="dfasdfsa"
+              />
+            </div>
+            <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
+              <LuxuryTheme
+                message={message}
+                setMessage={setMessage}
+                details={details}
+                postMessage={postMessage}
+                guest={guest}
+                idGuest={idGuest}
+              />
+            </div>
+          </div>
+        </BrowserView>
+        <MobileView>
+        <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
+              <LuxuryTheme
+                message={message}
+                setMessage={setMessage}
+                details={details}
+                postMessage={postMessage}
+                guest={guest}
+                idGuest={idGuest}
+              />
+            </div>
+        </MobileView>
+      </>
       ) : themeName == "BluePremium" ? (
         <LuxuryTheme
           message={message}
@@ -231,7 +268,8 @@ export default function Home() {
         />
       ) : homePage ? (
         <h1>Home</h1>
-      ) : (
+      )
+      : (
         <Loading />
       )}
     </>
@@ -261,6 +299,53 @@ export default function Home() {
         }}
       >
         <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            height: "100vh",
+            backgroundColor: "#3A8891",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              style={{
+                height: "120px",
+              }}
+              src="/pink-essence/img/LogoNM.png"
+              alt=""
+            />
+            <ReactLoading
+              type={"spinningBubbles"}
+              color={"#e3b383"}
+              height={160}
+              width={40}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
+  function Loading2() {
+    return (
+      <div
+        style={{
+          overflow: "hidden", // Disable both vertical and horizontal scrolling
+          height: "100vh", // Ensures the div takes up the full viewport height
+        }}
+      >
 
         <div
           style={{

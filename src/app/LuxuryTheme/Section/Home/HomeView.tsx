@@ -29,16 +29,18 @@ const HomeView = (props: HomeViewInterface) => {
             style={{
               paddingTop: "2rem",
               paddingBottom: "2rem",
+              paddingRight:'2rem',
               display: "flex",
             }}
           >
             <img
               src={props?.HomeDetail?.img}
               style={{
-                width: "100%",
+                width: "90%",
                 height: "100%",
                 borderTopLeftRadius: "10%",
                 borderBottomRightRadius: "10%",
+                objectFit:'cover'
               }}
               alt=""
               srcSet=""
@@ -55,7 +57,7 @@ const HomeView = (props: HomeViewInterface) => {
                   style={{
                     color: "white",
                     fontFamily: "Brilon",
-                    fontSize: "3rem",
+                    fontSize: '28px',
                   }}
                 >
                   {props?.HomeDetail?.title}

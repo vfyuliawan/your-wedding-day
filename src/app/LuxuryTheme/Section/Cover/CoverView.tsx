@@ -13,6 +13,7 @@ import {
   TimeConvertionUSFormat,
 } from "../../../utils/TimeConvertion";
 import React from "react";
+import { isMobile } from 'react-device-detect';
 
 const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
@@ -20,7 +21,7 @@ const CoverView = (props: CoverModelInterface) => {
     props.onCoverClick();
     setTimeout(() => {
       setAppear(true);
-    }, 6000);
+    }, 2000);
   };
 
   const calculateTimeRemaining = () => {
@@ -104,22 +105,28 @@ const CoverView = (props: CoverModelInterface) => {
           justifyContent: "center",
         }}
       >
+        <div style={{position:'absolute', width:'100vh', height:'100vh'}}>
         <img
           className="kenburns-top"
           style={{
             position: "absolute",
             top: 0,
-            width: "40%",
+            width: "100%",
             height: "100%",
             objectFit: "cover",
           }}
           src={props.detailCover?.img}
           alt="dfasdfsa"
         />
-        <div
+        </div>
+       
+        {isMobile?(
+          <>
+          <div
           className="cover2-overlay-shadow"
           style={{
             width: "100%",
+            overflow:'hidden',
             height: "78%",
             position: "absolute",
             bottom: "3%",
@@ -135,6 +142,7 @@ const CoverView = (props: CoverModelInterface) => {
             width: "100%",
             height: "78%",
             opacity:0.8,
+            overflow:'hidden',
 
             position: "absolute",
             flexDirection: "row",
@@ -226,6 +234,9 @@ const CoverView = (props: CoverModelInterface) => {
             </div>
           </div>
         </div>
+          </>
+        ): <div></div> }
+        
         <div
           className="cover2-overlay-img"
           style={{
@@ -267,7 +278,7 @@ const CoverView = (props: CoverModelInterface) => {
             className="cover2-kepada"
             style={{
               position: "absolute",
-              top: "15%",
+              top: "20%",
               left: "50%",
               transform: "translateX(-50%)",
             }}
@@ -281,7 +292,7 @@ const CoverView = (props: CoverModelInterface) => {
             <a
               className="btn btn-lg text-center"
               style={{
-                width: "250px",
+                width: "270px",
               opacity:0.7,
 
                 display: "flex",
