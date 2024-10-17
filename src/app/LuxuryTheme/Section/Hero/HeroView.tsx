@@ -14,8 +14,7 @@ import {
 } from "../../../utils/TimeConvertion";
 import React from "react";
 
-const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {  
-
+const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
   return (
     <>
       <section
@@ -48,8 +47,18 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             bottom: -180,
           }}
         >
-          <h1 style={{ fontFamily: "brilon", color:"var(--third)" }}>{props.HeroDetail.title}</h1>
-          <h4 style={{ fontFamily: "serif", fontSize: 20, color:"var(--third)" }}>
+          <h1
+            style={{
+              fontFamily: "brilon",
+              fontSize: 30,
+              color: "var(--third)",
+            }}
+          >
+            {props.HeroDetail.title.toLowerCase()}
+          </h1>
+          <h4
+            style={{ fontFamily: "serif", fontSize: 16, color: "var(--third)" }}
+          >
             {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
           </h4>
         </div>

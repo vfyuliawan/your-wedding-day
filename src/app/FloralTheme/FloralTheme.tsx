@@ -28,6 +28,7 @@ import { DocumentData, Timestamp } from "firebase/firestore";
 import { TimeConvertionDate } from "../utils/TimeConvertion";
 import CoverView from "./Section/Cover/CoverView";
 import GuestScanView from "./Section/GuestScanView/GuestScanView";
+import React from "react";
 // import AOS from 'aos';
 
 interface FloralThemeInterface {

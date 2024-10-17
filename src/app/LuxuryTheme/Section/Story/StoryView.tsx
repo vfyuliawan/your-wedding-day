@@ -156,8 +156,8 @@ const StoryView = (props: StoryViewInterface) => {
                 alt="story image"
               />
             </div>
-            <h3 className="vertical-timeline-element-title">{item.title}</h3>
-            <p>{item.title}</p>
+            <h3 style={{fontSize:18}} className="vertical-timeline-element-title">{item.title}</h3>
+            <p style={{fontSize:12}}>{item.text}</p>
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>

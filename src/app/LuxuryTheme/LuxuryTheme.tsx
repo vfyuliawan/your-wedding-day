@@ -201,8 +201,14 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       "--sec",
       convertColor(props?.details?.theme?.secondaryColor ?? "")
     );
-    document.documentElement.style.setProperty("--third", convertColor(props?.details?.theme?.textColor1 ?? ""));
-    document.documentElement.style.setProperty("--forth", convertColor(props?.details?.theme?.textColor2 ?? ""));
+    document.documentElement.style.setProperty(
+      "--third",
+      convertColor(props?.details?.theme?.textColor1 ?? "")
+    );
+    document.documentElement.style.setProperty(
+      "--forth",
+      convertColor(props?.details?.theme?.textColor2 ?? "")
+    );
 
     // disableScroll();
     return () => {};
@@ -294,9 +300,12 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
             }
           >
-            <MaleFemaleView ref={(el:any) =>
-              (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
-            } MaleFemaleDetail={props?.details?.braidInfo} />
+            <MaleFemaleView
+              ref={(el: any) =>
+                (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
+              }
+              MaleFemaleDetail={props?.details?.braidInfo}
+            />
           </div>
         ) : null}
         <div
@@ -579,13 +588,13 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               position: "fixed",
-              top: 12  ,
-              right: '39%',
+              top: 12,
+              right: "31%",
               padding: "15px",
               backgroundColor: "var(--prim)",
               opacity: 0.7,
-              height: 57,
-              width: 57,
+              height: 45,
+              width: 45,
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -619,13 +628,13 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               position: "fixed",
-              top: 12  ,
-              right: '35%',
+              top: 12,
+              right: "34.5%",
               padding: "15px",
               backgroundColor: "var(--prim)",
               opacity: 0.7,
-              height: 57,
-              width: 57,
+              height: 45,
+              width: 45,
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -652,11 +661,14 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             )}
           </button>
         ) : null}
-        {
-          !isMobile && !coverVisible? (
-            <NavbarVerticalView activeSection={activeSection}/>
-          ) : null
-        }
+        {!isMobile && !coverVisible ? (
+          <NavbarVerticalView
+            setIsopen={setIsOpen}
+            togglePlay={togglePlay}
+            isPlaying={isPlaying}
+            activeSection={activeSection}
+          />
+        ) : null}
       </div>
     </div>
   );

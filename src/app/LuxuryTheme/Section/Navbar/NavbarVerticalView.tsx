@@ -1,7 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, SetStateAction } from "react";
+import { isMobile } from "react-device-detect";
 
 interface NavbarInterfaceView {
   activeSection: string;
+  isPlaying: boolean;
+  setIsopen: React.Dispatch<SetStateAction<boolean>>
+  togglePlay: () => void
 }
 
 const NavbarVerticalView = (props: NavbarInterfaceView) => {
@@ -34,24 +38,90 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
       style={{
         position: "fixed", // Stick it to one side
         top: 10,
-        right: '30%',
+        right: "31%",
         height: "100%", // Adjust the height to take up full viewport height
-        width: "80px", // Set a fixed width for the vertical navbar
+        width: 70, // Set a fixed width for the vertical navbar
         backgroundColor: "transparent",
         display: "flex",
-        opacity: 0.7,
+        opacity: 0.8,
+        overflow: "hidden",
 
         justifyContent: "center",
-        overflowY: "auto", // Enable scrolling within the navbar
         flexDirection: "column", // Vertical layout
-        zIndex: 1000, // Ensure it stays on top
-      }}>
+        zIndex: -0, // Ensure it stays on top
+      }}
+    >
+        <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+                position: "fixed",
+                top: 20,
+                backgroundColor: "var(--prim)",
+                opacity: 0.7,
+                height: 58,
+                width: 58,
+                borderRadius: "50%",
+            }}
+            onClick={props.togglePlay}
+          >
+            {props.isPlaying ? (
+              <i
+                className="bi bi-music-player-fill"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
+            ) : (
+              <i
+                className="bi bi-pause-fill"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
+            )}
+          </button>
+      <button
+        className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+        style={{
+          position: "fixed",
+          top: 90,
+          backgroundColor: "var(--prim)",
+          opacity: 0.7,
+          height: 58,
+          width: 58,
+          borderRadius: "50%",
+        }}
+        onClick={() => {
+            props.setIsopen(true);
+        }}
+      >
+        {props.isPlaying ? (
+          <i
+            className="bi bi-lg bi-qr-code"
+            style={{
+              fontSize: isMobile ? "2rem" : "1rem",
+              color: "var(--third)",
+            }}
+          ></i>
+        ) : (
+          <i
+            className="bi bi-lg bi-qr-code"
+            style={{
+              fontSize: isMobile ? "2rem" : "1rem",
+              color: "var(--third)",
+            }}
+          ></i>
+        )}
+      </button>
       <div
         className="our-nav"
         style={{
           position: "absolute",
-          left: 0,
+          right: 0,
           height: "60%",
+          //   width:9
           borderRadius: "30px",
           opacity: 0.8,
           justifyContent: "center",
@@ -62,7 +132,7 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
         <div
           className="d-flex"
           style={{
-            flexWrap: "nowrap",
+            flexWrap: "wrap",
             justifyContent: "center",
             padding: 12,
             flexDirection: "column", // Stack the icons vertically
@@ -86,15 +156,17 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
                 backgroundColor:
                   props.activeSection === section ? "black" : "transparent",
                 borderRadius: 5,
-                padding: "0.5rem",
-                margin: "0.5rem 0", // Add vertical space between icons
+                padding: 6,
+                margin: 6, // Add vertical space between icons
                 cursor: "pointer",
               }}
               className="icon-container"
             >
               <i
                 className={`${icon} ${
-                  props.activeSection === section ? "var(--third)" : "var(--third)"
+                  props.activeSection === section
+                    ? "var(--third)"
+                    : "var(--third)"
                 }`}
                 style={{ fontSize: "1rem", color: "var(--third)" }}
               ></i>

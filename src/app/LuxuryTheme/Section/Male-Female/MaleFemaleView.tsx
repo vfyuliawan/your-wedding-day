@@ -34,7 +34,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontSize: "32px",
                 fontFamily: "brilon",
                 color: "var(--forth)",
-                fontWeight: 900,
+                fontWeight: 400,
               }}
             >
               Our <br />
@@ -71,7 +71,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
             <div
               className=" w-100"
               style={{
-                height: isMobile ? 450 : 550,
+                height: isMobile ? 450 : 430,
                 overflow: "hidden",
                 borderTopLeftRadius: 20,
                 borderTopRightRadius: 20,
@@ -111,6 +111,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 <h1
                   style={{
                     color: "var(--third)",
+                    fontSize:30
                   }}
                   className=""
                 >
@@ -119,6 +120,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 <h3
                   style={{
                     color: "var(--third)",
+                    fontSize:12
+
                   }}
                   className=""
                 >
@@ -127,6 +130,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 <h3
                   style={{
                     color: "var(--third)",
+                    fontSize:12
+
                   }}
                   className=""
                 >
@@ -147,10 +152,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           >
             <h2
               style={{
-                fontSize: "3rem",
+                fontSize: "30px",
                 fontFamily: "Dancing Script",
                 color:"var(--third)",
-                fontWeight: 800,
+                fontWeight: 400,
               }}
             >
               {props?.MaleFemaleDetail?.female?.name} &{" "}
@@ -167,7 +172,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
             <div
               className=" w-100"
               style={{
-                height: isMobile ? 450 : 550,
+                height: isMobile ? 450 : 430,
                 overflow: "hidden",
                 borderBottomLeftRadius: 20,
                 borderBottomRightRadius: 20,
@@ -206,15 +211,20 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 className="overlay"
               >
                 <h1 style={{
-                  color:"var(--third)"
+                  color:"var(--third)",
+                  fontSize:30
                 }} className="">{props?.MaleFemaleDetail?.female?.name}</h1>
                 <h3 style={{
-                  color:"var(--third)"
+                  color:"var(--third)",
+                  fontSize:12
+
                 }} className="">
                   Putra Dari Bapak {props?.MaleFemaleDetail?.female?.dad}
                 </h3>
                 <h3 style={{
-                  color:"var(--third)"
+                  color:"var(--third)",
+                  fontSize:12
+
                 }} className="">
                   Putra Dari Ibu {props?.MaleFemaleDetail?.female?.mom}
                 </h3>

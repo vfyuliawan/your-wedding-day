@@ -88,7 +88,7 @@ const InfoView = (props: InfoViewInterface) => {
                 transition={{ duration: 1.5, delay: 0.5 }}
                 style={{
                   color: "var(--forth)",
-                  fontSize: "1.2rem",
+                  fontSize: "14px",
                   fontFamily: "Times-new-roman",
                 }}
                 className="alamat"
@@ -129,7 +129,7 @@ const InfoView = (props: InfoViewInterface) => {
               <h3
                 className="info-h3"
                 style={{
-                  fontSize: "4rem",
+                  fontSize: "38px",
                   fontFamily: "Dancing script",
                   fontWeight: 800,
                   color: "var(--third)",
@@ -338,7 +338,7 @@ const InfoView = (props: InfoViewInterface) => {
               <h3
                 className="info-h3"
                 style={{
-                  fontSize: "4rem",
+                  fontSize: "38px",
                   fontFamily: "Dancing script",
                   fontWeight: 800,
                   writingMode: "vertical-rl",
@@ -528,13 +528,13 @@ const InfoView = (props: InfoViewInterface) => {
           <div className="col-md-10" style={{}}>
             <div
               className="iframeContainer"
-              style={{ padding: "24px", borderRadius: "10%" }}
+              style={{ padding: "24px", }}
             >
               <iframe
                 src={GetEmbededFromGmap(props.Embeded ?? "")}
                 width="100%"
                 height="400px"
-                style={{ borderRadius: "10%" }}
+                style={{ }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

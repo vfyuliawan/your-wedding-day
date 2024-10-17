@@ -158,11 +158,11 @@ const CountDownView = (props: CountDownViewInterface) => {
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
-                        fontSize: "2.4rem",
+                        fontSize: "25px",
                       }}
                     >
                       {timeRemaining.days}
-                      <br /> <span style={{ fontSize: "2rem" }}> Days </span>
+                      <br /> <span style={{ fontSize: "25px" }}> Days </span>
                     </h3>
                   </div>
                 </div>
@@ -180,11 +180,11 @@ const CountDownView = (props: CountDownViewInterface) => {
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
-                        fontSize: "2.4rem",
+                        fontSize: "25px",
                       }}
                     >
                       {timeRemaining.hours}
-                      <br /> <span style={{ fontSize: "2rem" }}> Hours </span>
+                      <br /> <span style={{ fontSize: "25px" }}> Hours </span>
                     </h3>
                   </div>
                 </div>
@@ -198,11 +198,11 @@ const CountDownView = (props: CountDownViewInterface) => {
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
-                        fontSize: "2.4rem",
+                        fontSize: "25px"
                       }}
                     >
                       {timeRemaining.minutes} <br />
-                      <span style={{ fontSize: "2rem" }}> Minute </span>
+                      <span style={{ fontSize: "25px" }}> Minute </span>
                     </h3>
                   </div>
                 </div>
@@ -216,11 +216,11 @@ const CountDownView = (props: CountDownViewInterface) => {
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
-                        fontSize: "2.4rem",
+                        fontSize: "25px",
                       }}
                     >
                       {timeRemaining.seconds} <br />
-                      <span style={{ fontSize: "2rem" }}> Second </span>
+                      <span style={{ fontSize: "25px" }}> Second </span>
                     </h3>
                   </div>
                 </div>
