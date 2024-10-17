@@ -13,7 +13,7 @@ import {
   TimeConvertionUSFormat,
 } from "../../../utils/TimeConvertion";
 import React from "react";
-import { isMobile } from 'react-device-detect';
+import { isMobile } from "react-device-detect";
 
 const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
@@ -21,7 +21,7 @@ const CoverView = (props: CoverModelInterface) => {
     props.onCoverClick();
     setTimeout(() => {
       setAppear(true);
-    }, 2000);
+    }, isMobile?1500: 2000);
   };
 
   const calculateTimeRemaining = () => {
@@ -105,138 +105,156 @@ const CoverView = (props: CoverModelInterface) => {
           justifyContent: "center",
         }}
       >
-        <div style={{position:'absolute', width:'100vh', height:'100vh'}}>
-        <img
-          className="kenburns-top"
-          style={{
-            position: "absolute",
-            top: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-          src={props.detailCover?.img}
-          alt="dfasdfsa"
-        />
-        </div>
-       
-        {isMobile?(
-          <>
-          <div
-          className="cover2-overlay-shadow"
-          style={{
-            width: "100%",
-            overflow:'hidden',
-            height: "78%",
-            position: "absolute",
-            bottom: "3%",
-            color: "#fff",
-            
-            fontSize: "24px",
-            textAlign: "center",
-          }}
-        ></div>
         <div
-          className="cover2-overlay"
           style={{
-            width: "100%",
-            height: "78%",
-            opacity:0.8,
-            overflow:'hidden',
-
             position: "absolute",
-            flexDirection: "row",
-            bottom: 0,
-            fontSize: "24px",
+            width: "100vh",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
             alignItems: "center",
-            textAlign: "center",
+            overflow: "hidden",
           }}
         >
-          <div
-            className="text-center"
+          <img
+            className="kenburns-top"
             style={{
-              position: "absolute",
-              bottom: "5%",
-              right: "50%",
-              display: "flex",
-              flexDirection: "column",
-              // justifyContent: "center",
-              // alignItems: "center",
-              transform: "translateX(50%)",
-              fontFamily: "Times New Roman",
+              width: "70%",
+              height: "100%",
+              objectFit: "cover",
             }}
-          >
-            <p
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                color: "white",
-                marginBottom: "1rem",
-                fontFamily: "Times New Roman",
-              }}
-            >
-              Save The Date
-            </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-              }}
-            >
-              <div className="box-time" style={{ color: "white" }}>
-                <div className="col">
-                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    {timeRemaining.days}
-                  </p>
-                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
-                    Hari
-                  </p>
-                </div>
-              </div>
-              <div style={{ marginRight: "5rem" }} />
-              <div className="box-time" style={{ color: "white" }}>
-                <div className="col">
-                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    {timeRemaining.hours}
-                  </p>
-                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
-                    Jam
-                  </p>
-                </div>
-              </div>
-              <div style={{ marginRight: "5rem" }} />
-              <div className="box-time" style={{ color: "white" }}>
-                <div className="col">
-                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    {timeRemaining.minutes}
-                  </p>
-                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
-                    Menit
-                  </p>
-                </div>
-              </div>
-              <div style={{ marginRight: "5rem" }} />
-              <div className="box-time" style={{ color: "white" }}>
-                <div className="col">
-                  <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
-                    {timeRemaining.seconds}
-                  </p>
-                  <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
-                    Detik
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="row mt-2">
-              <p style={{ color: "white", fontFamily: "brilon", fontSize: 20 }}>
-                {TimeConvertionUSFormat(props!.detailCover!.date!.toString())}
-              </p>
-            </div>
-          </div>
+            src={props.detailCover?.img}
+            alt="centered image"
+          />
         </div>
+
+        {/* {isMobile ? (
+          <>
+            <div
+              className="cover2-overlay-shadow"
+              style={{
+                width: "100%",
+                overflow: "hidden",
+                height: "78%",
+                position: "absolute",
+                bottom: "3%",
+                color: "#fff",
+
+                fontSize: "24px",
+                textAlign: "center",
+              }}
+            ></div>
+            <div
+              className="cover2-overlay"
+              style={{
+                width: "100%",
+                height: "78%",
+                opacity: 0.8,
+                overflow: "hidden",
+
+                position: "absolute",
+                flexDirection: "row",
+                bottom: 0,
+                fontSize: "24px",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <div
+                className="text-center"
+                style={{
+                  position: "absolute",
+                  bottom: "5%",
+                  right: "50%",
+                  display: "flex",
+                  flexDirection: "column",
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                  transform: "translateX(50%)",
+                  fontFamily: "Times New Roman",
+                }}
+              >
+                <p
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    color: "white",
+                    marginBottom: "1rem",
+                    fontFamily: "Times New Roman",
+                  }}
+                >
+                  Save The Date
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  <div className="box-time" style={{ color: "white" }}>
+                    <div className="col">
+                      <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                        {timeRemaining.days}
+                      </p>
+                      <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                        Hari
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ marginRight: "5rem" }} />
+                  <div className="box-time" style={{ color: "white" }}>
+                    <div className="col">
+                      <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                        {timeRemaining.hours}
+                      </p>
+                      <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                        Jam
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ marginRight: "5rem" }} />
+                  <div className="box-time" style={{ color: "white" }}>
+                    <div className="col">
+                      <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                        {timeRemaining.minutes}
+                      </p>
+                      <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                        Menit
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ marginRight: "5rem" }} />
+                  <div className="box-time" style={{ color: "white" }}>
+                    <div className="col">
+                      <p style={{ fontFamily: "sans-serif", fontSize: "21px" }}>
+                        {timeRemaining.seconds}
+                      </p>
+                      <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+                        Detik
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="row mt-2">
+                  <p
+                    style={{
+                      color: "white",
+                      fontFamily: "brilon",
+                      fontSize: 20,
+                    }}
+                  >
+                    {TimeConvertionUSFormat(
+                      props!.detailCover!.date!.toString()
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
           </>
-        ): <div></div> }
-        
+        ) : (
+          <div></div>
+        )} */}
+
         <div
           className="cover2-overlay-img"
           style={{
@@ -257,55 +275,74 @@ const CoverView = (props: CoverModelInterface) => {
             height: "100%",
             position: "absolute",
             top: "150px",
+            // backgroundColor:'red',
             left: 0,
             color: "#fff",
             fontSize: "24px",
             textAlign: "center",
+            // display:'flex',
           }}
         >
-          <p style={{ fontSize: "2rem", fontFamily: "Times New Roman" }}>
-            THE WEDDING OF
-          </p>
-          <h2
-            style={{
-              fontFamily: "brilon",
-              fontSize: "5rem",
-            }}
-          >
-            {props.detailCover?.title}
-          </h2>
-          <div
-            className="cover2-kepada"
-            style={{
-              position: "absolute",
-              top: "20%",
-              left: "50%",
-              transform: "translateX(-50%)",
-            }}
-          >
-            <p className="" style={{ fontSize: "1.4rem", color: "white" }}>
-              Kepada Bpk/Ibu/Saudara/i
-            </p>
-            <p className="" style={{ fontSize: "2rem", color: "white" }}>
-              {props.guest.toLocaleUpperCase()}
-            </p>
-            <a
-              className="btn btn-lg text-center"
+          <div className="row">
+            <div className="col-sm-12">
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "400",
+                  fontFamily: "brilon",
+                }}
+              >
+                the wedding of
+              </p>
+            </div>
+            <div className="col-sm-12">
+              <p
+                style={{
+                  fontFamily: "brilon",
+                  fontSize: "32px",
+                }}
+              >
+                {props.detailCover?.title}
+              </p>
+            </div>
+            <div style={{ marginTop:  isMobile?"40rem":"28rem" }} className="col-12">
+              <p
+                className=""
+                style={{
+                  fontSize: "16px",
+                  color: "white",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                Kepada Bpk/Ibu/Saudara/i
+              </p>
+            </div>
+            <div className="col-12">
+            <button
+              className="btn btn-md text-center"
               style={{
-                width: "270px",
-              opacity:0.7,
-
-                display: "flex",
+                width: "180px",
+                opacity: 0.7,
+                height: 40,
+                backgroundColor:"var(--prim)",
+                fontSize:12,
+                color:"var(--sec)",
+                // padding:8,
                 justifyContent: "center",
                 alignItems: "center",
               }}
               onClick={() => {
                 handleCoverClick();
               }}
-            >
-              <i className="bi bi-envelope-open-fill"> {"    "}Buka Undangan</i>
-            </a>
+            ><i
+            style={{ fontSize: "12px" }}
+            className="bi bi-envelope-open-fill"
+          />{"    "}
+             Buka Undangan
+            </button>
+            </div>
           </div>
+
         </div>
       </div>
     </motion.div>

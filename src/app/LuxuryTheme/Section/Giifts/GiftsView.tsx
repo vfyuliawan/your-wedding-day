@@ -68,7 +68,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   color: "black",
                   fontWeight: "100",
                   fontFamily: "brilon",
-                  fontSize: "4rem",
+                  fontSize: "25px",
                 }}
               >
                 Wedding <br />
@@ -76,7 +76,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   style={{
                     fontFamily: "Creation",
                     fontWeight: "10",
-                    fontSize: "65px",
+                    fontSize: "30px",
                   }}
                 >
                   Gifts
@@ -100,7 +100,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   animate={animate}
                   initial={AnimationThemeInstance.FadeRight}
                   transition={{ duration: 1.5, delay: 0.5 }}
-                  style={{ color: "black", fontSize: "1.2rem" }}
+                  style={{ color: "black", fontSize: "12px", fontFamily:'Times-new-roman' }}
                   className="alamat"
                 >
                   Bagi yang berkeinginan memberikan kado pernikahan atau tanda
@@ -111,126 +111,7 @@ const GiftsView = (props: GiftsViewInterface) => {
             </div>
           </div>
           <div className="row justify-content-center">
-            {/* {props.Gifts.First.Visible ? (
-              <motion.div
-                animate={animate}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 2, delay:1 }}
-                className="col-md-4 col-10 col-sm-6 mt-2"
-              >
-                <div className="card text-center">
-                  <div className="card-header">
-                    <img
-                      src={`/image/rekening/${props.Gifts.First.Image}.png`}
-                      style={{ width: "15rem", height: "5rem" }}
-                    />
-                  </div>
-                  <div className="card-body">
-                    <h5
-                      className="card-title"
-                      style={{
-                        color: "black",
-                        fontFamily: '"Courier New", Courier, monospace',
-                        fontSize: "2rem",
-                      }}
-                    >
-                      {props.Gifts.First.NoRek}
-                    </h5>
-                    <a
-                      onClick={() => {
-                        copyToClipboard(props.Gifts.First.NoRek);
-                      }}
-                      className="btn btn-lg"
-                    >
-                      Salin Rekening{" "}
-                    </a>
-                  </div>
-                  <div className="card-footer text-body-secondary text-light">
-                    A/N {props.Gifts.First.Name}
-                  </div>
-                </div>
-              </motion.div>
-            ) : null}
-            {props.Gifts.Second.Visible ? (
-              <motion.div
-                animate={animate}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 2.5, delay:1.4 }}
-                className="col-md-4 col-10 col-sm-6 mt-2"
-              >
-                <div className="card text-center">
-                  <div className="card-header">
-                    <img
-                      src={`/image/rekening/${props.Gifts.Second.Image}.png`}
-                      style={{ width: "15rem", height: "5rem" }}
-                    />
-                  </div>
-                  <div className="card-body">
-                    <h5
-                      className="card-title"
-                      style={{
-                        color: "black",
-                        fontFamily: '"Courier New", Courier, monospace',
-                        fontSize: "2rem",
-                      }}
-                    >
-                      {props.Gifts.Second.NoRek}
-                    </h5>
-                    <a
-                      onClick={() => {
-                        copyToClipboard(props.Gifts.Second.NoRek);
-                      }}
-                      className="btn btn-lg"
-                    >
-                      Salin Rekening{" "}
-                    </a>{" "}
-                  </div>
-                  <div className="card-footer text-body-secondary text-light">
-                    A/N {props.Gifts.Second.Name}
-                  </div>
-                </div>
-              </motion.div>
-            ) : null}
-            {props.Gifts.Third.Visible ? (
-              <motion.div
-                animate={animate}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 3 , delay:1.8}}
-                className="col-md-4 col-10 col-sm-6 mt-2"
-              >
-                <div className="card text-center">
-                  <div className="card-header">
-                    <img
-                      src={`/image/rekening/${props.Gifts.Third.Image}.png`}
-                      style={{ width: "15rem", height: "5rem" }}
-                    />
-                  </div>
-                  <div className="card-body">
-                    <h5
-                      className="card-title"
-                      style={{
-                        color: "black",
-                        fontFamily: '"Courier New", Courier, monospace',
-                        fontSize: "2rem",
-                      }}
-                    >
-                      {props.Gifts.Third.NoRek}
-                    </h5>
-                    <a
-                      onClick={() => {
-                        copyToClipboard(props.Gifts.Third.NoRek);
-                      }}
-                      className="btn btn-lg"
-                    >
-                      Salin Rekening{" "}
-                    </a>{" "}
-                  </div>
-                  <div className="card-footer text-body-secondary text-light">
-                    A/N {props.Gifts.Third.Name}
-                  </div>
-                </div>
-              </motion.div>
-            ) : null} */}
+            
 
             {props.Gifts.map((item, index) => {
               return (
@@ -238,7 +119,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   animate={animate}
                   initial={AnimationThemeInstance.FadeLeft}
                   transition={{ duration: 2, delay: 1 }}
-                  className="col-md-4 col-10 col-sm-6 mt-2"
+                  className="col-10"
                 >
                   <div className="card text-center">
                     <div style={{ padding: 15 }} className="card-header">

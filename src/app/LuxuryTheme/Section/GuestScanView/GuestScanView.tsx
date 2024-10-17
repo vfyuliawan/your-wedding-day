@@ -34,7 +34,8 @@ const GuestScanView = (props: GuestScanViewInterface) => {
       >
         <div className="row mt-4 justify-content-center">
           <div className="col-6 text-end">
-          <motion.h2
+            <div className="row">
+            <motion.h2
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
@@ -42,26 +43,32 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 color: "black",
                 fontWeight: "100",
                 fontFamily: "brilon",
-                fontSize: "4rem",
+                fontSize: "32px",
               }}
             >
-              scan <span
-                style={{
-                  fontFamily: "Creation",
-                  fontWeight: "normal",
-                  fontSize: "7rem",
-                  color:'black'
-                }}
-              >
-                Barcode
-              </span>
+              scan 
             </motion.h2>
+            <motion.h2
+              animate={animate}
+              initial={AnimationThemeInstance.FadeLeft}
+              transition={{ duration: 1.5 }}
+              style={{
+                color: "black",
+                fontWeight: "100",
+                fontFamily: "Creation",
+                fontSize: "32px",
+              }}
+            >
+              Barcode 
+            </motion.h2>
+            </div>
+          
           </div>
           <div className="col-5 d-flex align-items-center">
             <div
               style={{
                 width: "100%",
-                height: "2px",
+                height: "1px",
                 backgroundColor: "black",
                 marginBottom: "3rem",
                 marginTop: "3rem",
@@ -74,7 +81,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 animate={animate}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "black", fontSize: "1.2rem" }}
+                style={{ color: "black", fontSize: "12px", fontFamily:"Times-new-roman" }}
                 className="alamat"
               >
                 Silahkan Scan barcode tamu di bawah. <br />
@@ -84,7 +91,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-6 col-md-4 col-lg-4 col-sm-4 justify-content-center d-flex">{body()}</div>
+          <div className="col-6 justify-content-center d-flex">{body()}</div>
         </div>
         <div className="row justify-content-center">
           <div className="col-8 text-center">
@@ -92,7 +99,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
               animate={animate}
               initial={AnimationThemeInstance.FadeRight}
               transition={{ duration: 1.5, delay: 0.5 }}
-              style={{ color: "black", fontSize: "1.2rem" }}
+              style={{ color: "black", fontSize: "12px", fontFamily:"Times-new-roman" }}
               className="alamat"
             >
               Terimakasih Akan Kehadiran anda . <br />
@@ -130,7 +137,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
             fgColor="#000000"
             level="L"
           />
-          <p style={{ marginTop: "10px", color: "grey", fontSize: "1.3rem" }}>
+          <p style={{ marginTop: "10px", color: "grey", fontSize: "12px" }}>
             {props.guest.charAt(0).toUpperCase() + props.guest.slice(1) + " With Id Guests " + props.idGuest}
           </p>
         </div>

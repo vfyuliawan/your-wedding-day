@@ -8,9 +8,15 @@ import {
   TimeConversionTime,
   TimeConvertionDate,
   TimeConvertionInterface,
+  TimeConvertionUSFormat,
 } from "../../../utils/TimeConvertion";
 import AnimationThemeInstance from "../../../utils/AnimationThemes";
 import React from "react";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
 
 const StoryView = (props: StoryViewInterface) => {
   const targetRef = useRef<any>(null);
@@ -37,17 +43,18 @@ const StoryView = (props: StoryViewInterface) => {
               transition={{ duration: 1.5 }}
               style={{
                 color: "black",
-                fontSize: "3.8rem",
+                fontSize: "30px",
                 fontFamily: "brilon",
+                fontWeight: "100",
               }}
             >
-              Our
+              Event
               <br />
               <span
                 style={{
                   fontFamily: "Creation",
                   fontWeight: "normal",
-                  fontSize: "8rem",
+                  fontSize: "32px",
                   color: "black",
                   textTransform: "capitalize",
                 }}
@@ -73,7 +80,11 @@ const StoryView = (props: StoryViewInterface) => {
                 animate={animate}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "black", fontSize: "14px", fontFamily:"Times-new-roman" }}
+                style={{
+                  color: "black",
+                  fontSize: "14px",
+                  fontFamily: "Times-new-roman",
+                }}
                 className="alamat"
               >
                 Dari pertemuan, aku belajar bahwa setiap momen kebersamaan
@@ -82,245 +93,75 @@ const StoryView = (props: StoryViewInterface) => {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            <ul className="timeline">
-              {props.OurStory?.stories.map((item, index) => {
-                if (index % 2 == 0) {
-                  return (
-                    <li>
-                      <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                        <i
-                          className="bi bi-balloon-heart-fill bi-lg bi-love"
-                          style={{
-                            color: "white",
-                            fontSize: "2rem",
-                            position: "absolute",
-
-                            top: "10%",
-                          }}
-                        ></i>
-                      </div>
-                      <motion.div
-                        initial={AnimationThemeInstance.FadeRight}
-                        animate={animate}
-                        transition={{ duration: 1, delay: 1 }}
-                        className="timeline-panel"
-                      >
-                        <div className="timeline-heading">
-                          <h3>{item.title}</h3>
-                          <img
-                            style={{
-                              width: "100%",
-                              height: "auto",
-                              borderRadius: "20px",
-                            }}
-                            src={item.image}
-                            alt=""
-                          />
-                          <span style={{ fontSize: "1.2rem" }}>
-                            {" "}
-                            {/* {item.date.getTime()} */}
-                            {/* {TimeConvertionDate(
-                        props?.OurStory?.First.Date as TimeConvertionInterface
-                      ).dateMonth}
-                      {TimeConversionTime(props?.OurStory?.First.Date as TimeConvertionInterface)}  */}
-                          </span>
-                        </div>
-                        <div className="timeline-body">
-                          <p style={{ fontSize: "1.5rem" }}>{item.text}</p>
-                        </div>
-                      </motion.div>
-                    </li>
-                  );
-                } else {
-                  return (
-                    <li className="timeline-inverted">
-                      <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                        <i
-                          className="bi bi-balloon-heart-fill bi-lg bi-love"
-                          style={{
-                            color: "white",
-                            fontSize: "2rem",
-                            position: "absolute",
-
-                            top: "10%",
-                          }}
-                        ></i>
-                      </div>
-                      <motion.div
-                        initial={AnimationThemeInstance.FadeLeft}
-                        animate={animate}
-                        transition={{ duration: 1, delay: 2 }}
-                        className="timeline-panel"
-                      >
-                        <div className="timeline-heading">
-                          <h3>{item.title}</h3>
-                          <img
-                            style={{
-                              width: "100%",
-                              height: "auto",
-                              borderRadius: "20px",
-                            }}
-                            src={item.image}
-                            alt=""
-                          />
-                          <span style={{ fontSize: "1.2rem" }}>
-                            {" "}
-                            {item.date.getTime()}
-                            {/* {TimeConvertionDate(
-                        props?.OurStory?.Second?.Date as TimeConvertionInterface
-                      ).dateMonth} */}
-                          </span>
-                        </div>
-                        <div className="timeline-body">
-                          <p style={{ fontSize: "1.5rem" }}>{item.text}</p>
-                        </div>
-                      </motion.div>
-                    </li>
-                  );
-                }
-              })}
-              {/* <li>
-                <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                  <i
-                    className="bi bi-balloon-heart-fill bi-lg bi-love"
-                    style={{
-                      color: "white",
-                      fontSize: "2rem",
-                      position: "absolute",
-
-                      top: "10%",
-                    }}
-                  ></i>
-                </div>
-                <motion.div
-                  initial={AnimationThemeInstance.FadeRight}
-                  animate={animate}
-                  transition={{ duration: 1, delay: 1 }}
-                  className="timeline-panel"
-                >
-                  <div className="timeline-heading">
-                    <h3>{props?.OurStory?.First.Tittle}</h3>
-                    <img
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius:'20px'
-                      }}
-                      src={props?.OurStory?.First.Photo}
-                      alt=""
-                    />
-                    <span style={{ fontSize: "1.2rem" }}>
-                      {" "}
-                      {TimeConvertionDate(
-                        props?.OurStory?.First.Date as TimeConvertionInterface
-                      ).dateMonth}
-                      {TimeConversionTime(props?.OurStory?.First.Date as TimeConvertionInterface)} 
-                    </span>
-                  </div>
-                  <div className="timeline-body">
-                    <p style={{ fontSize: "1.5rem" }}>
-                      {props?.OurStory?.First.Story}
-                    </p>
-                  </div>
-                </motion.div>
-              </li>
-              <li className="timeline-inverted">
-                <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                  <i
-                    className="bi bi-balloon-heart-fill bi-lg bi-love"
-                    style={{
-                      color: "white",
-                      fontSize: "2rem",
-                      position: "absolute",
-
-                      top: "10%",
-                    }}
-                  ></i>
-                </div>
-                <motion.div
-                  initial={AnimationThemeInstance.FadeLeft}
-                  animate={animate}
-                  transition={{ duration: 1, delay: 2 }}
-                  className="timeline-panel"
-                >
-                  <div className="timeline-heading">
-                    <h3>{props?.OurStory?.Second?.Tittle}</h3>
-                    <img
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius:'20px'
-
-                      }}
-                      src={props?.OurStory?.Second?.Photo}
-                      alt=""
-                    />
-                    <span style={{ fontSize: "1.2rem" }}>
-                      {" "}
-                      {TimeConvertionDate(
-                        props?.OurStory?.Second?.Date as TimeConvertionInterface
-                      ).dateMonth}
-                    </span>
-                  </div>
-                  <div className="timeline-body">
-                    <p style={{ fontSize: "1.5rem" }}>
-                      {props?.OurStory?.Second?.Story}
-                    </p>
-                  </div>
-                </motion.div>
-              </li>
-              <li>
-                <div className="timeline-image2 text-center justify-content-center d-flex align-items-center">
-                  <i
-                    className="bi bi-balloon-heart-fill bi-lg bi-love"
-                    style={{
-                      color: "white",
-                      fontSize: "2rem",
-                      position: "absolute",
-                      top: "10%",
-                    }}
-                  ></i>
-                </div>
-                <motion.div
-                  initial={AnimationThemeInstance.FadeRight}
-                  animate={animate}
-                  transition={{ duration: 1, delay: 2.7 }}
-                  className="timeline-panel"
-                >
-                  <div className="timeline-heading">
-                    <h3>{props?.OurStory?.Third?.Tittle}</h3>
-                    <img
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius:'20px'
-
-                      }}
-                      src={props?.OurStory?.Third?.Photo}
-                      alt=""
-                    />
-                    <span style={{ fontSize: "1.2rem" }}>
-                      {" "}
-                      {TimeConvertionDate(
-                        props?.OurStory?.Third?.Date as TimeConvertionInterface
-                      ).dateMonth}
-                    </span>
-                  </div>
-                  <div className="timeline-body">
-                    <p style={{ fontSize: "1.5rem" }}>
-                      {props?.OurStory?.Third?.Story}
-                    </p>
-                  </div>
-                </motion.div>
-              </li> */}
-            </ul>
-          </div>
-        </div>
+        <motion.div
+          animate={animate}
+          initial={AnimationThemeInstance.FadeLeft}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          style={{
+            marginBottom:30
+          }}
+        >
+          <TimeLineComponent />
+        </motion.div>
       </div>
     </section>
   );
+
+  function TimeLineComponent(params: {}) {
+    return (
+      <VerticalTimeline
+        animate={false}
+        lineColor={props.color}
+        layout="1-column-left"
+      >
+        {props.OurStory?.stories.map((item) => (
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            contentStyle={{ background: "#fff", color: "black" }}
+            contentArrowStyle={{ borderRight: "7px solid  var(--prim)" }}
+            date={TimeConvertionUSFormat(item.date.toString())}
+            iconStyle={{ background: props.color, color: "#fff" }}
+            icon={
+              <i
+                style={{
+                  fontSize: 24,
+                  top: 7,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
+                className="bi bi-arrow-through-heart-fill"
+              ></i>
+            }
+          >
+            <div
+              style={{
+                width: "auto",
+                overflow: "hidden",
+                borderRadius: "5%",
+                marginBottom: 10,
+              }}
+            >
+              <img
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  objectFit: "cover",
+                }}
+                src={item.image}
+                alt="story image"
+              />
+            </div>
+            <h3 className="vertical-timeline-element-title">{item.title}</h3>
+            <p>{item.title}</p>
+          </VerticalTimelineElement>
+        ))}
+      </VerticalTimeline>
+    );
+  }
 };
 
 export default StoryView;

@@ -56,10 +56,10 @@ const GaleryView = (props: GaleryViewInterface) => {
                 color: "white",
                 fontWeight: "100",
                 fontFamily: "brilon",
-                fontSize: "4rem",
+                fontSize: '30px',
               }}
             >
-              Our
+              Moment
             </motion.h2>
             <motion.h4
               animate={animate}
@@ -69,7 +69,7 @@ const GaleryView = (props: GaleryViewInterface) => {
                 fontFamily: "Creation",
                 fontWeight: "normal",
                 color: "white",
-                fontSize: "65px",
+                fontSize: '32px',
               }}
             >
               Galery
@@ -92,8 +92,9 @@ const GaleryView = (props: GaleryViewInterface) => {
                 animate={animate}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "white", fontSize: "1.5rem" }}
+                style={{ color: "white", fontSize: "14px", fontFamily:"Times-new-roman"}}
                 className="alamat"
+                
               >
                 Dari pertemuan, aku belajar bahwa setiap momen kebersamaan
                 adalah waktu yang berharga

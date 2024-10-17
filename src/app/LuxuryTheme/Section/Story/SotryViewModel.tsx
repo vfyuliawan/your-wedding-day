@@ -3,6 +3,7 @@ import { TimeConvertionInterface } from "../../../utils/TimeConvertion"
 
 export interface StoryViewInterface {
     OurStory: ResultStory | undefined
+    color: string;
   }
   
   export interface StoryViewMap{

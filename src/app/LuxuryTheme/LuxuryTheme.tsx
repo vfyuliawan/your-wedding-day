@@ -287,7 +287,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               (sectionRefs.current!.story = el as HTMLDivElement | null)
             }
           >
-            <StoryView OurStory={props?.details?.story} />
+            <StoryView color={convertColor(props?.details?.theme?.theme?.primaryColor ?? "")} OurStory={props?.details?.story} />
           </div>
         ) : null}
         {props?.details?.galery.isShow ? (

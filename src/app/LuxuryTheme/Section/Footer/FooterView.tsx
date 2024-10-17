@@ -31,10 +31,10 @@ const FooterView = (props: FooterViewInterface) => {
     }}></div>
       <div className="gradient-overlay" />
       <main className="inside" style={{ position: "relative", top: 300 }}>
-      <h2 style={{ textShadow: 'none  !important' }}>Terimakasih</h2>
-        <p style={{ textShadow: 'none !important' }}>{props.Footer.quotes}</p>
-        <h4 style={{ textShadow: 'none !important', fontSize:13 }}>Kami Yang Berbahagia</h4>
-        <h3 style={{ textShadow: 'none !important' }}>{props.Footer.title}</h3>
+      <h2 style={{ textShadow: 'none  !important', fontSize:'40px' }}>Terimakasih</h2>
+        <p style={{ textShadow: 'none !important', fontSize:'12px', fontFamily:"Times-new-roman" }}>{props.Footer.quotes}</p>
+        <h4 style={{ textShadow: 'none !important', fontSize:16 , fontFamily:"Times-new-roman"}}>Kami Yang Berbahagia</h4>
+        <h3 style={{ textShadow: 'none !important', fontSize:40}}>{props.Footer.title}</h3>
       </main>
     </section>
   );

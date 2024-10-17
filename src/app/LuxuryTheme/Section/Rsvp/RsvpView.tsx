@@ -81,17 +81,18 @@ const RsvpView = (props: RSVPViewInterface) => {
                     transition={{ duration: 1.5 }}
                     style={{
                       color: "white",
-                      fontSize: "4rem",
+                      fontSize: "32px",
                       fontFamily: "Brilon",
-                      textAlign: "right", // Add this line
+                      textAlign: "right",
+                      letterSpacing: "2px",
                     }}
                   >
-                    Ucapan <br />
+                    ucapan <br />
                     <span
                       style={{
                         fontFamily: "Creation",
-                        fontWeight: "normal",
-                        fontSize: "65px",
+                        fontWeight: "100",
+                        fontSize: "28px",
                       }}
                     >
                       Selamat
@@ -120,8 +121,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                 transition={{ duration: 1.5 }}
                 style={{
                   color: "white",
-                  fontSize: "1.2rem",
+                  fontSize: "12px",
                   textAlign: "center",
+                  fontFamily: "Times-new-roman",
                 }}
               >
                 Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila
@@ -233,6 +235,11 @@ const RsvpView = (props: RSVPViewInterface) => {
                     }
                   }}
                   className="btn btn-lg mb-3"
+                  style={{
+                    width: "100%",
+                    fontSize: "16px",
+                    height: 40,
+                  }}
                 >
                   Submit
                 </button>
@@ -258,9 +265,10 @@ const RsvpView = (props: RSVPViewInterface) => {
               color: "white",
               fontFamily: "brilon",
               fontSize: "20px",
+              letterSpacing: "2px",
             }}
           >
-            {`Pesan ( ${props.message.length} )`}
+            {`pesan ( ${props.message.length} )`}
           </h4>
           {loading ? (
             <ReactLoading
@@ -291,9 +299,9 @@ const RsvpView = (props: RSVPViewInterface) => {
   function MessageView() {
     return props?.message.map((item, index) => {
       return (
-        <div style={{ borderRadius: "10px" }} className="bg-white mt-3 ">
-          <div className="row justify-content-center align-items-center d-flex">
-            <div className="col-2 justify-content-center d-flex items-content-center">
+        <div style={{ borderRadius: "", height:110 }} className="bg-white mt-3 ">
+          <div className="row  mt-4 justify-content-center align-items-center d-flex">
+            <div className="col-3 justify-content-center d-flex items-content-center">
               <div
                 style={{
                   borderRadius: "50%",
@@ -302,8 +310,8 @@ const RsvpView = (props: RSVPViewInterface) => {
                     : "rgba(0, 0, 0, 0.25)",
                   width: "5rem",
                   height: "5rem",
-                  maxHeight: "5rem",
-                  maxWidth: "5rem",
+                  // maxHeight: "5rem",
+                  // maxWidth: "5rem",
                 }}
                 className="text-center justify-content-center d-flex align-items-center"
               >
@@ -320,8 +328,8 @@ const RsvpView = (props: RSVPViewInterface) => {
                 </p>
               </div>
             </div>
-            
-            <div key={index} className="col-10 ">
+
+            <div key={index} className="col-9 ">
               <h3
                 style={{
                   color: "black",

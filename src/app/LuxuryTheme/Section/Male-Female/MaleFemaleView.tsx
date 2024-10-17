@@ -25,7 +25,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           <div className="col-md-8 col-10 text-center">
             <h2
               style={{
-                fontSize: "4rem",
+                fontSize: "32px",
                 fontFamily: "brilon",
                 color: "black",
                 fontWeight: 900,
@@ -36,7 +36,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 style={{
                   fontFamily: "Creation",
                   fontWeight: "normal",
-                  fontSize: "65px",
+                  fontSize: "30px",
                 }}
               >
                 Wedding
@@ -49,7 +49,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           <div className=" col-3 col-sm-3 text-center justify-content-end d-flex align-items-center ">
             <h3
               style={{
-                fontSize: "4rem",
+                fontSize: "30px",
                 fontFamily: "Dancing Script",
                 fontWeight: 400,
                 writingMode: "vertical-rl",
@@ -174,7 +174,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           <div className=" col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
             <h3
               style={{
-                fontSize: "4rem",
+                fontSize: "30px",
                 fontFamily: "Dancing Script",
                 fontWeight: 400,
                 writingMode: "vertical-rl",
