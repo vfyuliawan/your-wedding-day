@@ -41,8 +41,8 @@ const InfoView = (props: InfoViewInterface) => {
 
   const apiKey = "AIzaSyCojsLM-OulTC4CRYYfmLaGGA90tjTLtio";
   return (
-    <section style={{marginTop:-200}} id="info" className="info ">
-      <div className="container" style={{marginTop:0}}>
+    <section style={{ marginTop: -200 }} id="info" className="info ">
+      <div className="container" style={{ marginTop: 0 }}>
         <div className="row justify-content-center">
           <div className="col-6 text-end">
             <motion.h2
@@ -50,7 +50,11 @@ const InfoView = (props: InfoViewInterface) => {
               animate={controls}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 2 }}
-              style={{ fontFamily: "brilon", fontSize: "30px", color:"var(--forth)"}}
+              style={{
+                fontFamily: "brilon",
+                fontSize: "30px",
+                color: "var(--forth)",
+              }}
             >
               Informasi <br />
               <span
@@ -58,7 +62,7 @@ const InfoView = (props: InfoViewInterface) => {
                   fontFamily: "Creation",
                   fontWeight: "normal",
                   fontSize: "40px",
-                  color:"var(--forth)"
+                  color: "var(--forth)",
                 }}
               >
                 Acara
@@ -106,7 +110,7 @@ const InfoView = (props: InfoViewInterface) => {
               transition={{ duration: 1.5, delay: 0.8 }}
               src={props.Info?.akad.imageAkad}
               style={{
-                borderTopRightRadius: '150px',
+                borderTopRightRadius: "150px",
                 backgroundSize: "cover",
                 // borderTopLeftRadius: 50,
               }}
@@ -146,7 +150,7 @@ const InfoView = (props: InfoViewInterface) => {
             >
               <div className="row">
                 <div className="col-4 justify-content-end align-items-end">
-                <motion.h4
+                  <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5, delay: 1.3 }}
@@ -154,15 +158,13 @@ const InfoView = (props: InfoViewInterface) => {
                       fontSize: "22px",
                       fontFamily: "brilon",
                       fontWeight: 400,
-                      letterSpacing:3,
+                      letterSpacing: 3,
                       marginTop: "1rem",
                     }}
                   >
-                    {
-                      TimeConvertionFullDate(
-                        props.Info!.akad.dateAkad.toString()
-                      ).dayOfWeek.toLowerCase()
-                    }{" "}
+                    {TimeConvertionFullDate(
+                      props.Info!.akad.dateAkad.toString()
+                    ).dayOfWeek.toLowerCase()}{" "}
                   </motion.h4>
                 </div>
                 <div className="row">
@@ -174,8 +176,8 @@ const InfoView = (props: InfoViewInterface) => {
                       style={{
                         fontSize: "45px",
                         fontFamily: "brilon",
-                        textAlign:"center",
-                        marginLeft:20,
+                        textAlign: "center",
+                        marginLeft: 20,
                         fontWeight: 500,
                       }}
                     >
@@ -203,15 +205,13 @@ const InfoView = (props: InfoViewInterface) => {
                         fontFamily: "brilon",
                         fontWeight: 400,
                         letterSpacing: "3px",
-                        textAlign:"start",
+                        textAlign: "start",
                         marginLeft: "15px",
                       }}
                     >
-                      {
-                        TimeConvertionFullDate(
-                          props.Info!.akad.dateAkad.toString()
-                        ).monthandYear.toLowerCase()
-                      }
+                      {TimeConvertionFullDate(
+                        props.Info!.akad.dateAkad.toString()
+                      ).monthandYear.toLowerCase()}
                     </motion.h4>
                   </div>
                 </div>
@@ -297,7 +297,7 @@ const InfoView = (props: InfoViewInterface) => {
                     <i
                       style={{
                         fontSize: 12,
-                        color:"var(--third)"
+                        color: "var(--third)",
                       }}
                       className="bi bi-geo-alt-fill"
                     >
@@ -319,7 +319,7 @@ const InfoView = (props: InfoViewInterface) => {
               transition={{ duration: 1.5, delay: 1.9 }}
               src={props.Info?.resepsi.imageResepsi}
               style={{
-                borderTopRightRadius: '150px',
+                borderTopRightRadius: "150px",
                 backgroundSize: "cover",
                 // borderTopLeftRadius: 50,
               }}
@@ -344,7 +344,7 @@ const InfoView = (props: InfoViewInterface) => {
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
                   transform: "rotate(180deg)",
-                  color:"var(--third)"
+                  color: "var(--third)",
                 }}
               >
                 {props.Info?.resepsi.titleResepsi}
@@ -359,7 +359,7 @@ const InfoView = (props: InfoViewInterface) => {
             >
               <div className="row">
                 <div className="col-4 justify-content-end align-items-end">
-                <motion.h4
+                  <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5, delay: 1.3 }}
@@ -371,26 +371,24 @@ const InfoView = (props: InfoViewInterface) => {
                       marginTop: "1rem",
                     }}
                   >
-                    {
-                      TimeConvertionFullDate(
-                        props.Info!.resepsi.dateResepsi.toString()
-                      ).dayOfWeek.toLowerCase()
-                    }{" "}
+                    {TimeConvertionFullDate(
+                      props.Info!.resepsi.dateResepsi.toString()
+                    ).dayOfWeek.toLowerCase()}{" "}
                   </motion.h4>
                 </div>
                 <div className="row">
                   <div className="col-3 d-flex justify-content-start align-items-end">
-                  <motion.h4
+                    <motion.h4
                       animate={controls}
                       initial={AnimationThemeInstance.FadeRight}
                       transition={{ duration: 1.5, delay: 1.4 }}
                       style={{
                         fontSize: "45px",
                         fontFamily: "brilon",
-                        textAlign:"start",
-                        marginLeft:10,
+                        textAlign: "start",
+                        marginLeft: 10,
                         fontWeight: 500,
-                        marginBottom:8
+                        marginBottom: 8,
                       }}
                     >
                       {
@@ -417,15 +415,13 @@ const InfoView = (props: InfoViewInterface) => {
                         fontFamily: "brilon",
                         fontWeight: 400,
                         letterSpacing: "3px",
-                        textAlign:"start",
+                        textAlign: "start",
                         marginLeft: "15px",
                       }}
                     >
-                      {
-                        TimeConvertionFullDate(
-                          props.Info!.resepsi.dateResepsi.toString()
-                        ).monthandYear.toLowerCase()
-                      }
+                      {TimeConvertionFullDate(
+                        props.Info!.resepsi.dateResepsi.toString()
+                      ).monthandYear.toLowerCase()}
                     </motion.h4>
                   </div>
                 </div>
@@ -464,8 +460,9 @@ const InfoView = (props: InfoViewInterface) => {
                   }}
                 >
                   {
-                    TimeConvertionFullDate(props.Info!.resepsi.dateResepsi.toString())
-                      .formattedTime
+                    TimeConvertionFullDate(
+                      props.Info!.resepsi.dateResepsi.toString()
+                    ).formattedTime
                   }
                 </p>
               </motion.span>

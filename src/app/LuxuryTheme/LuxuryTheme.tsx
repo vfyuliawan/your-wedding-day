@@ -195,14 +195,14 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--prim",
-      convertColor(props?.details?.theme?.theme?.primaryColor ?? "")
+      convertColor(props?.details?.theme?.primaryColor ?? "")
     );
     document.documentElement.style.setProperty(
       "--sec",
-      convertColor(props?.details?.theme?.theme?.secondaryColor ?? "")
+      convertColor(props?.details?.theme?.secondaryColor ?? "")
     );
-    document.documentElement.style.setProperty("--third", "#ffffff");
-    document.documentElement.style.setProperty("--forth", "#252525");
+    document.documentElement.style.setProperty("--third", convertColor(props?.details?.theme?.textColor1 ?? ""));
+    document.documentElement.style.setProperty("--forth", convertColor(props?.details?.theme?.textColor2 ?? ""));
 
     // disableScroll();
     return () => {};

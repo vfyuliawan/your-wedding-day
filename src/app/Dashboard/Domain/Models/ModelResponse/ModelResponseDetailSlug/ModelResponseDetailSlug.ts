@@ -103,6 +103,10 @@ export interface Theme {
     embeded: string;
     theme:   ThemeUsed;
     music:   string;
+    primaryColor: string;
+    secondaryColor: string;
+    textColor1: string;
+    textColor2: string
 }
 
 

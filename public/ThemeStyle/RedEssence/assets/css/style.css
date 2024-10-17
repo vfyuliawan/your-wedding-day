@@ -738,7 +738,7 @@ p {
 
 .galery {
   /* background-color: var(--prim); */
-  background: linear-gradient(var(--prim) 0%, white 130%);
+  background: linear-gradient(var(--prim) 0%, var(--sec) 200%);
   padding-top: 5rem;
   padding-bottom: 5rem;
 }

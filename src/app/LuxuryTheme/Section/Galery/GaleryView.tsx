@@ -44,7 +44,9 @@ const GaleryView = (props: GaleryViewInterface) => {
     },
   ];
   return (
-    <section className="galery" id="galery">
+    <section style={{
+      background:"linear-gradient(var(--prim) 0%, var(--sec) 400%)"
+    }} className="galery" id="galery">
       <div className="container">
         <div className="row mt-4 justify-content-center">
           <div className="col-6 text-end">

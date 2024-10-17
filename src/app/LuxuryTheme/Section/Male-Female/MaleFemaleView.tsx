@@ -181,7 +181,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   y: setAnimation["fade-down"].initialY,
                 }}
                 animate={controls}
-                transition={{ duration: 1, delay: 1.4 }}
+                transition={{ duration: 1, delay: 0.8}}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -202,7 +202,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   width: "100%",
                 }}
                 animate={controls}
-                transition={{ duration: 1, delay: 1.4 }}
+                transition={{ duration: 1, delay: 0.84 }}
                 className="overlay"
               >
                 <h1 style={{
