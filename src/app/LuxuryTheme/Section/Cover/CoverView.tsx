@@ -308,6 +308,17 @@ const CoverView = (props: CoverModelInterface) => {
               </p>
             </div>
             <div style={{ marginTop:  isMobile?"40rem":"19rem" }} className="col-12">
+            <p
+                className=""
+                style={{
+                  fontSize: "24px",
+                  color: "white",
+                  letterSpacing:3,
+                  fontFamily: "brilon",
+                }}
+              >
+                {props.guest}
+              </p>
               <p
                 className=""
                 style={{

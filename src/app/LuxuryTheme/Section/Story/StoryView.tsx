@@ -119,7 +119,7 @@ const StoryView = (props: StoryViewInterface) => {
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
             contentStyle={{ background: "#fff", color: "var(--forth)" }}
-            contentArrowStyle={{ borderRight: "7px solid  var(--prim)" }}
+            contentArrowStyle={{ borderRight: `7px solid  ${props.color}` }}
             date={TimeConvertionUSFormat(item.date.toString())}
             iconStyle={{ background: props.color, color: "var(--third)" }}
             icon={

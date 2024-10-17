@@ -44,6 +44,7 @@ export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const getParams = searchParams?.get("a");
+  const getIsTemplate = searchParams?.get("ex")?.includes("true");
   const getGuest = searchParams?.get("to");
   const getIdGuest = searchParams?.get("id");
   const [themeName, setThemeName] = useState("");
@@ -159,6 +160,7 @@ export default function Home() {
               </div>
               <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
                 <LuxuryTheme
+                getIsTemplate={getIsTemplate}
                   message={message}
                   setMessage={setMessage}
                   details={details}
@@ -173,6 +175,7 @@ export default function Home() {
           <MobileView>
             <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
               <LuxuryTheme
+                getIsTemplate={getIsTemplate}
                 message={message}
                 setMessage={setMessage}
                 details={details}

@@ -37,6 +37,8 @@ import { isMobile } from "react-device-detect";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
 import NavbarVerticalView from "./Section/Navbar/NavbarVerticalView";
+import { ColorResult, SketchPicker } from "react-color";
+import Swatches from "react-color/lib/components/swatches/Swatches";
 
 interface LuxuryThemeInterface {
   details: ResultDetailSlug | undefined;
@@ -45,7 +47,8 @@ interface LuxuryThemeInterface {
   postMessage: (name: string, text: string, present: string) => Promise<void>;
   guest: string;
   idGuest: string;
-  getParams?:string | null;
+  getParams?: string | null;
+  getIsTemplate?: boolean;
 }
 
 const LuxuryTheme = (props: LuxuryThemeInterface) => {
@@ -58,6 +61,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   const containerRef = useRef<any>(null);
   const [activeSection, setActiveSection] = useState("hero");
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalEdit, setModalEdit] = React.useState(false);
+  const [isActive, setisActive] = useState(0);
 
   let subtitle: any;
 
@@ -193,23 +198,39 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     // scrollToBottom();
   }, []);
 
-  useEffect(() => {
+  const [primaryColor, setprimaryColor] = useState("");
+  const [secondaryColor, setsecondaryColor] = useState("");
+  const [textColor1, setTextColor1] = useState("");
+  const [textColor2, setTextColor2] = useState("");
+
+  const setAllColor = () => {
     document.documentElement.style.setProperty(
       "--prim",
       convertColor(props?.details?.theme?.primaryColor ?? "")
     );
+    setprimaryColor(convertColor(props?.details?.theme?.primaryColor ?? ""));
     document.documentElement.style.setProperty(
       "--sec",
+      convertColor(props?.details?.theme?.secondaryColor ?? "")
+    );
+    setsecondaryColor(
       convertColor(props?.details?.theme?.secondaryColor ?? "")
     );
     document.documentElement.style.setProperty(
       "--third",
       convertColor(props?.details?.theme?.textColor1 ?? "")
     );
+    setTextColor1(convertColor(props?.details?.theme?.textColor1 ?? ""));
+
     document.documentElement.style.setProperty(
       "--forth",
       convertColor(props?.details?.theme?.textColor2 ?? "")
     );
+    setTextColor2(convertColor(props?.details?.theme?.textColor2 ?? ""));
+  };
+
+  useEffect(() => {
+    setAllColor();
 
     // disableScroll();
     return () => {};
@@ -336,12 +357,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               (sectionRefs.current!.story = el as HTMLDivElement | null)
             }
           >
-            <StoryView
-              color={convertColor(
-                props?.details?.theme?.theme?.primaryColor ?? ""
-              )}
-              OurStory={props?.details?.story}
-            />
+            <StoryView color={primaryColor} OurStory={props?.details?.story} />
           </div>
         ) : null}
         {props?.details?.galery.isShow ? (
@@ -504,6 +520,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             </div>
           </div>
         </Modal>
+        <ModalPickColor />
 
         {!coverVisible && isMobile ? (
           <button
@@ -584,7 +601,37 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             )}
           </button>
         ) : null}
-       
+        {!coverVisible && isMobile && props.getIsTemplate ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              bottom: "200px",
+              right: "20px",
+              padding: "15px",
+              backgroundColor: "black",
+              opacity: 1,
+              height: "50px",
+              width: "50px",
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={() => {
+              setModalEdit(true);
+            }}
+          >
+            <i
+              className="bi bi-pencil-square"
+              style={{
+                fontSize: isMobile ? "2rem" : "1.5rem",
+                color: "var(--third)",
+              }}
+            ></i>
+          </button>
+        ) : null}
+
         {!isMobile && !coverVisible ? (
           <NavbarVerticalView
             setIsopen={setIsOpen}
@@ -596,6 +643,416 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       </div>
     </div>
   );
+
+  function ModalPickColor() {
+    return (
+      <Modal
+        isOpen={modalEdit}
+        // onAfterOpen={()=>()}
+        onRequestClose={() => {
+          setModalEdit(false);
+        }}
+        style={{
+          content: {
+            top: "45%",
+            border: `1px solid var(--prim)`,
+            left: "50%",
+            width: isMobile ? "90%" : "40%",
+            // height: "80vh",
+            backgroundColor: "#ffff",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+          },
+        }}
+        contentLabel="Example Modal"
+      >
+        <h2
+          ref={(_subtitle) => (subtitle = _subtitle)}
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontFamily: "Brilon",
+            letterSpacing: "2px",
+            fontSize: 22,
+          }}
+        >
+          theme trial color
+        </h2>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 25,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              onClick={() => {
+                setisActive(0);
+                setTimeout(() => {
+                  setisActive(1);
+                }, 200);
+              }}
+              style={{
+                height: 50,
+                width: 50,
+
+                borderRadius: 25,
+                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
+                backgroundColor: primaryColor,
+              }}
+            />
+            <h4
+              style={{
+                fontSize: 12,
+                fontFamily: "Times-new-roman",
+                letterSpacing: 1,
+              }}
+            >
+              Primary
+            </h4>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              onClick={() => {
+                setisActive(0);
+                setTimeout(() => {
+                  setisActive(2);
+                }, 200);
+              }}
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 25,
+                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
+                backgroundColor: secondaryColor,
+              }}
+            />
+            <h4
+              style={{
+                fontSize: 12,
+                fontFamily: "Times-new-roman",
+                letterSpacing: 1,
+              }}
+            >
+              Secondary
+            </h4>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              onClick={() => {
+                setisActive(0);
+                setTimeout(() => {
+                  setisActive(3);
+                }, 200);
+              }}
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 25,
+                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
+                backgroundColor: textColor1,
+              }}
+            />
+            <h4
+              style={{
+                fontSize: 12,
+                fontFamily: "Times-new-roman",
+                letterSpacing: 1,
+              }}
+            >
+              Text 1
+            </h4>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              onClick={() => {
+                setisActive(0);
+                setTimeout(() => {
+                  setisActive(4);
+                }, 200);
+              }}
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 25,
+                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
+                backgroundColor: textColor2,
+              }}
+            />
+            <h4
+              style={{
+                fontSize: 12,
+                fontFamily: "Times-new-roman",
+                letterSpacing: 1,
+              }}
+            >
+              Text 2
+            </h4>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <h5
+            onClick={() => {
+              setAllColor();
+            }}
+            style={{ color: "red" }}
+          >
+            Default Color
+          </h5>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginTop: 0,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "transparent",
+          }}
+        >
+          <button
+            className="btn"
+            onClick={() => {
+              setModalEdit(false);
+            }}
+            style={{
+              width: "50%",
+              paddingTop: 4,
+              paddingBottom: 4,
+              backgroundColor: "green",
+              fontSize: 18,
+              fontFamily: "Times-new-roman",
+              color: "white",
+              fontWeight: "bold",
+              borderRadius: 20,
+            }}
+          >
+            Perview
+          </button>
+        </div>
+
+        {isActive == 1 ? (
+          <>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                className="col"
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <p style={{ fontSize: 12 }}>warna: {primaryColor}</p>
+              </div>
+            </div>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Swatches
+                styles={{
+                  default: {},
+                }}
+                height={250}
+                width={240}
+                // color={"#ffff"}
+                onChange={(val: ColorResult) => {
+                  const hexColor = val.hex;
+                  setprimaryColor(hexColor);
+                  setisActive(0);
+                  document.documentElement.style.setProperty(
+                    "--prim",
+                    hexColor
+                  );
+                }}
+              />
+            </div>
+          </>
+        ) : isActive == 2 ? (
+          <>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                className="col"
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <p style={{ fontSize: 12 }}>warna: {secondaryColor}</p>
+              </div>
+            </div>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Swatches
+                styles={{
+                  default: {},
+                }}
+                height={250}
+                width={240}
+                // color={"#ffff"}
+                onChange={(val: ColorResult) => {
+                  const hexColor = val.hex;
+                  setsecondaryColor(hexColor);
+                  setisActive(0);
+                  document.documentElement.style.setProperty("--sec", hexColor);
+                }}
+              />
+            </div>
+          </>
+        ) : isActive == 3 ? (
+          <>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                className="col"
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <p style={{ fontSize: 12 }}>warna: {textColor1}</p>
+              </div>
+            </div>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Swatches
+                styles={{
+                  default: {},
+                }}
+                height={250}
+                width={240}
+                // color={"#ffff"}
+                onChange={(val: ColorResult) => {
+                  const hexColor = val.hex;
+                  setTextColor1(hexColor);
+                  setisActive(0);
+                  document.documentElement.style.setProperty(
+                    "--third",
+                    hexColor
+                  );
+                }}
+              />
+            </div>
+          </>
+        ) : isActive == 4 ? (
+          <>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+              }}
+            >
+              <div
+                className="col"
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <p style={{ fontSize: 12 }}>warna: {textColor2}</p>
+              </div>
+            </div>
+            <div
+              className="row mt-3"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Swatches
+                styles={{
+                  default: {},
+                }}
+                height={250}
+                width={240}
+                // color={"#ffff"}
+                onChange={(val: ColorResult) => {
+                  const hexColor = val.hex;
+                  setTextColor2(hexColor);
+                  setisActive(0);
+                  document.documentElement.style.setProperty(
+                    "--forth",
+                    hexColor
+                  );
+                }}
+              />
+            </div>
+          </>
+        ) : null}
+      </Modal>
+    );
+  }
 };
 
 export default LuxuryTheme;

@@ -4,8 +4,8 @@ import { isMobile } from "react-device-detect";
 interface NavbarInterfaceView {
   activeSection: string;
   isPlaying: boolean;
-  setIsopen: React.Dispatch<SetStateAction<boolean>>
-  togglePlay: () => void
+  setIsopen: React.Dispatch<SetStateAction<boolean>>;
+  togglePlay: () => void;
 }
 
 const NavbarVerticalView = (props: NavbarInterfaceView) => {
@@ -51,37 +51,37 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
         zIndex: -0, // Ensure it stays on top
       }}
     >
-        <button
-            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+      <button
+        className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+        style={{
+          position: "fixed",
+          top: 20,
+          backgroundColor: "var(--prim)",
+          opacity: 0.7,
+          height: 58,
+          width: 58,
+          borderRadius: "50%",
+        }}
+        onClick={props.togglePlay}
+      >
+        {props.isPlaying ? (
+          <i
+            className="bi bi-music-player-fill"
             style={{
-                position: "fixed",
-                top: 20,
-                backgroundColor: "var(--prim)",
-                opacity: 0.7,
-                height: 58,
-                width: 58,
-                borderRadius: "50%",
+              fontSize: isMobile ? "2rem" : "1rem",
+              color: "var(--third)",
             }}
-            onClick={props.togglePlay}
-          >
-            {props.isPlaying ? (
-              <i
-                className="bi bi-music-player-fill"
-                style={{
-                  fontSize: isMobile ? "2rem" : "1rem",
-                  color: "var(--third)",
-                }}
-              ></i>
-            ) : (
-              <i
-                className="bi bi-pause-fill"
-                style={{
-                  fontSize: isMobile ? "2rem" : "1rem",
-                  color: "var(--third)",
-                }}
-              ></i>
-            )}
-          </button>
+          ></i>
+        ) : (
+          <i
+            className="bi bi-pause-fill"
+            style={{
+              fontSize: isMobile ? "2rem" : "1rem",
+              color: "var(--third)",
+            }}
+          ></i>
+        )}
+      </button>
       <button
         className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
         style={{
@@ -94,7 +94,7 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
           borderRadius: "50%",
         }}
         onClick={() => {
-            props.setIsopen(true);
+          props.setIsopen(true);
         }}
       >
         {props.isPlaying ? (
@@ -174,6 +174,29 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
           ))}
         </div>
       </div>
+      <button
+        className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+        style={{
+          position: "fixed",
+          bottom: 70,
+          backgroundColor: "black",
+          opacity: 1,
+          height: 58,
+          width: 58,
+          borderRadius: "50%",
+        }}
+        onClick={()=>{
+            
+        }}
+      >
+        <i
+          className="bi bi-pencil-square"
+          style={{
+            fontSize: isMobile ? "2rem" : "1.5rem",
+            color: "var(--third)",
+          }}
+        ></i>
+      </button>
     </nav>
   );
 };

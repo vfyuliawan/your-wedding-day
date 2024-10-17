@@ -5,13 +5,14 @@ import Swal from "sweetalert2";
 
 const timeOut = 60000; //max request timeout menjadi 3 menit 
 
-// const errorHandler = useErrorHandler();
 
 const versionAppi  = "/api/v1";
 
 export const baseUrl = (): string => {
-  // return "https://innovative-emotion-production.up.railway.app";
-  return `http://localhost:8000${versionAppi}`;
+  const dev =  "https://innovative-emotion-production.up.railway.app";
+  const local = `http://localhost:8000${versionAppi}`;
+  const sit =  `https://tight-kora-nviteme-3bdf504d.koyeb.app${versionAppi}`;
+  return local;
 };
 
 export enum CallBackError {
