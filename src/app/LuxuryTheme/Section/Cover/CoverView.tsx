@@ -258,13 +258,15 @@ const CoverView = (props: CoverModelInterface) => {
         <div
           className="cover2-overlay-img"
           style={{
-            backgroundColor: "transparent",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
             backgroundRepeat: "no-repeat",
             width: "100%",
-            height: "100%",
+            height: "120%",
             opacity: 1,
-            position: "absolute",
-            bottom: 0,
+            marginTop:-90,
+            position: "fixed",
+            // bottom: 0,
+            top:0,
             color: "var(--third)",
             textAlign: "center",
           }}

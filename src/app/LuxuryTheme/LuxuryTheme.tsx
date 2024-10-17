@@ -34,8 +34,9 @@ import { MessagesRequest } from "../Dashboard/Domain/Models/ModelResponse/ModalR
 import { convertColor } from "../utils/ConvertColor";
 import { isMobile } from "react-device-detect";
 // import AOS from 'aos';
-import Modal from 'react-modal';
-import QRCode from 'react-qr-code';
+import Modal from "react-modal";
+import QRCode from "react-qr-code";
+import NavbarVerticalView from "./Section/Navbar/NavbarVerticalView";
 
 interface LuxuryThemeInterface {
   details: ResultDetailSlug | undefined;
@@ -63,23 +64,20 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     subtitle.style.color = "var(--prim)";
   }
 
-
   const customStyles = {
     content: {
       top: "45%",
       border: `3px solid var(--prim)`,
       left: "50%",
-      width: isMobile ? "90%" :"40%",
+      width: isMobile ? "90%" : "40%",
       height: "75vh",
       backgroundColor: "white",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      
     },
   };
-
 
   const sectionRefs = useRef<{
     hero: HTMLDivElement | null;
@@ -101,9 +99,6 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
     rsvp: null,
   });
 
-
-
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -117,7 +112,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       },
       {
         root: null,
-        threshold: 0.3,
+        threshold: 0.6,
       }
     );
 
@@ -198,10 +193,16 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--prim', convertColor(props?.details?.theme?.theme?.primaryColor ?? ""));
-    document.documentElement.style.setProperty('--sec', convertColor(props?.details?.theme?.theme?.secondaryColor ?? ""));
-    document.documentElement.style.setProperty('--third', "#ffffff");
-    document.documentElement.style.setProperty('--forth', "#252525");
+    document.documentElement.style.setProperty(
+      "--prim",
+      convertColor(props?.details?.theme?.theme?.primaryColor ?? "")
+    );
+    document.documentElement.style.setProperty(
+      "--sec",
+      convertColor(props?.details?.theme?.theme?.secondaryColor ?? "")
+    );
+    document.documentElement.style.setProperty("--third", "#ffffff");
+    document.documentElement.style.setProperty("--forth", "#252525");
 
     // disableScroll();
     return () => {};
@@ -235,7 +236,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   }, []);
 
   return (
-    <div style={{maxHeight:100}}>
+    <div style={{ maxHeight: 100 }}>
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -257,9 +258,17 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         onCoverClick={handleCoverClick}
         detailCover={props?.details?.cover}
       />
-      <div style={{ overflowY: "scroll", overflowX:'hidden' }} ref={containerRef}>
-        {!coverVisible && isMobile ? <NavbarView activeSection={activeSection} /> : null}
-        <HeaderView themeName={props?.details?.theme.theme.themeName ?? ""} title={props.details?.title ?? ""} />
+      <div
+        style={{ overflowY: "scroll", overflowX: "hidden" }}
+        ref={containerRef}
+      >
+        {!coverVisible && isMobile ? (
+          <NavbarView activeSection={activeSection} />
+        ) : null}
+        <HeaderView
+          themeName={props?.details?.theme.theme.themeName ?? ""}
+          title={props.details?.title ?? ""}
+        />
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (
             <HeroView
@@ -271,7 +280,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             <div
               id="home"
               ref={(el) =>
-                (sectionRefs.current!.hero = el as HTMLDivElement | null)
+                (sectionRefs.current!.home = el as HTMLDivElement | null)
               }
             >
               <HomeView HomeDetail={props?.details?.home} />
@@ -300,7 +309,6 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
           />
         </div>
 
-
         <div
           id="countdown"
           ref={(el) =>
@@ -316,7 +324,12 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               (sectionRefs.current!.story = el as HTMLDivElement | null)
             }
           >
-            <StoryView color={convertColor(props?.details?.theme?.theme?.primaryColor ?? "")} OurStory={props?.details?.story} />
+            <StoryView
+              color={convertColor(
+                props?.details?.theme?.theme?.primaryColor ?? ""
+              )}
+              OurStory={props?.details?.story}
+            />
           </div>
         ) : null}
         {props?.details?.galery.isShow ? (
@@ -346,145 +359,141 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
 
         <div ref={qrCodeRef}></div>
 
-        <GuestScanView
-            idGuest={props.idGuest ?? 0}
-            guest={props.guest ?? ""}
-          />
+        <GuestScanView idGuest={props.idGuest ?? 0} guest={props.guest ?? ""} />
 
         <FooterView Footer={props?.details!.home} />
         <EndView />
         <Modal
-              isOpen={modalIsOpen}
-              onAfterOpen={afterOpenModal}
-              onRequestClose={()=>{
-                setIsOpen(false)
-              }}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-              <h2
-                ref={(_subtitle) => (subtitle = _subtitle)}
-                style={{
-                  justifyContent: "center",
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  fontFamily: "Brilon",
-                  letterSpacing:"2px",
-                  fontSize:22
-                }}
-              >
-                e-reservation
-              </h2>
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={() => {
+            setIsOpen(false);
+          }}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h2
+            ref={(_subtitle) => (subtitle = _subtitle)}
+            style={{
+              justifyContent: "center",
+              textAlign: "center",
+              fontWeight: "bold",
+              fontFamily: "Brilon",
+              letterSpacing: "2px",
+              fontSize: 22,
+            }}
+          >
+            e-reservation
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: 40,
+              opacity: 0.5,
+              color: "white",
+              backgroundColor: "red",
+              // borderRadius: "50%",
+              paddingLeft: 5,
+              paddingRight: 5,
+              position: "absolute",
+              top: 0,
+              right: isMobile ? 25 : 35,
+              transform: "translate(50%, -0%)",
+            }}
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          >
+            Close
+          </div>
+          <div
+            style={{
+              height: 200,
+              width: "100%",
+              backgroundColor: "var(--prim)",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 20,
+              marginTop: 30,
+              padding: 100,
+              border: `3px solid ${"var(--prim)"}`,
+            }}
+          >
+            <img
+              src={props.details?.cover.img}
+              style={{ objectFit: "fill", height: 200 }}
+              alt=""
+            />
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-10 justify-content-center d-flex">
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: 40,
-                  opacity: 0.5,
-                  color: "white",
-                  backgroundColor: "red",
-                  // borderRadius: "50%",
-                  paddingLeft:5,
-                  paddingRight:5,
-                  position: "absolute",
-                  top: 0,
-                  right: isMobile? 25 : 35,
-                  transform: "translate(50%, -0%)",
-                }}
-                onClick={()=>{
-                  setIsOpen(false)
-                }}
-              >
-                Close
-              </div>
-              <div
-                style={{
-                  height: 200,
                   width: "100%",
-                  backgroundColor: "var(--prim)",
-                  overflow: "hidden",
+                  marginTop: 20,
+                  backgroundColor: "white",
+                  borderRadius: "10%",
+                  justifyContent: "center",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 20,
-                  marginTop: 30,
-                  padding: 100,
-                  border: `3px solid ${"var(--prim)"}`,
+                  flexDirection: "column",
                 }}
               >
-                <img
-                  src={props.details?.cover.img}
-                  style={{ objectFit: "fill", height:200 }}
-                  alt=""
+                <QRCode
+                  value={props.guest + "nviteMe" + props.idGuest}
+                  size={140}
+                  bgColor="#ffffff"
+                  fgColor="#000000"
+                  level="L"
                 />
-              </div>
-              <div className="row justify-content-center">
-                <div className="col-10 justify-content-center d-flex">
+                <div className="col-12">
                   <div
                     style={{
-                      width: "100%",
+                      opacity: 0.5,
                       marginTop: 20,
-                      backgroundColor: "white",
-                      borderRadius: "10%",
-                      justifyContent: "center",
-                      display: "flex",
-                      alignItems: "center",
-                      flexDirection: "column",
+                      borderTop: `2px dotted ${"var(--prim)"}`,
+                      width: "100%",
                     }}
-                  >
-                    <QRCode
-                      value={props.guest + "nviteMe" + props.idGuest}
-                      size={140}
-                      bgColor="#ffffff"
-                      fgColor="#000000"
-                      level="L"
-                    />
-                    <div className="col-12">
-                      <div
-                        style={{
-                          opacity: 0.5,
-                          marginTop: 20,
-                          borderTop: `2px dotted ${"var(--prim)"}`,
-                          width: "100%",
-                        }}
-                      ></div>
-                    </div>
-                    <p
-                      style={{
-                        marginTop: "10px",
-                        color: "grey",
-                        fontSize: "1rem",
-                        fontFamily: "faunaOne",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Nama Tamu
-                      <br />{" "}
-                      <span style={{ color: "black" }}>
-                        {props.guest.charAt(0).toUpperCase() +
-                          props.guest.slice(1)}
-                      </span>
-                      <br />
-                      Guest ID : {props.idGuest}
-                    </p>
-                    <div className="col-12">
-                      <div
-                        style={{
-                          opacity: 0.5,
-                          marginTop: 5,
-                          borderTop: `2px dotted ${"var(--prim)"}`,
-                          width: "100%",
-                        }}
-                      ></div>
-                    </div>
-                  </div>{" "}
+                  ></div>
                 </div>
-              </div>
-            </Modal>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "grey",
+                    fontSize: "1rem",
+                    fontFamily: "faunaOne",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Nama Tamu
+                  <br />{" "}
+                  <span style={{ color: "black" }}>
+                    {props.guest.charAt(0).toUpperCase() + props.guest.slice(1)}
+                  </span>
+                  <br />
+                  Guest ID : {props.idGuest}
+                </p>
+                <div className="col-12">
+                  <div
+                    style={{
+                      opacity: 0.5,
+                      marginTop: 5,
+                      borderTop: `2px dotted ${"var(--prim)"}`,
+                      width: "100%",
+                    }}
+                  ></div>
+                </div>
+              </div>{" "}
+            </div>
+          </div>
+        </Modal>
 
-        {!coverVisible ? (
+        {!coverVisible && isMobile ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
@@ -492,8 +501,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               bottom: "80px",
               right: "20px",
               padding: "15px",
-              backgroundColor:"var(--prim)",
-              opacity:0.7,
+              backgroundColor: "var(--prim)",
+              opacity: 0.7,
               height: "50px",
               width: "50px",
               borderRadius: "50%",
@@ -506,14 +515,23 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-music-player-fill"
-                style={{ fontSize: isMobile ? "2rem" :"1rem" , color:"var(--third)"}}
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill" style={{ fontSize: isMobile ? "2rem" :"1rem" , color:"var(--third)"}}></i>
+              <i
+                className="bi bi-pause-fill"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
             )}
           </button>
         ) : null}
-        {!coverVisible ? (
+        {!coverVisible && isMobile ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
@@ -522,8 +540,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               right: "20px",
               padding: "15px",
 
-              backgroundColor:"var(--prim)",
-              opacity:0.7,
+              backgroundColor: "var(--prim)",
+              opacity: 0.7,
               height: "50px",
               width: "50px",
               borderRadius: "50%",
@@ -532,22 +550,111 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               zIndex: "999",
             }}
             onClick={() => {
-              setIsOpen(true)
+              setIsOpen(true);
             }}
           >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: isMobile ? "2rem" :"1rem", color:"var(--third)" }}
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
               ></i>
             ) : (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: isMobile ? "2rem" :"1rem", color:"var(--third)" }}
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
               ></i>
             )}
           </button>
         ) : null}
+        {!coverVisible && !isMobile ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              top: 12  ,
+              right: '39%',
+              padding: "15px",
+              backgroundColor: "var(--prim)",
+              opacity: 0.7,
+              height: 57,
+              width: 57,
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
+            ) : (
+              <i
+                className="bi bi-lg bi-qr-code"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
+            )}
+          </button>
+        ) : null}
+        {!coverVisible && !isMobile ? (
+          <button
+            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+            style={{
+              position: "fixed",
+              top: 12  ,
+              right: '35%',
+              padding: "15px",
+              backgroundColor: "var(--prim)",
+              opacity: 0.7,
+              height: 57,
+              width: 57,
+              borderRadius: "50%",
+              color: "white",
+              cursor: "pointer",
+              zIndex: "999",
+            }}
+            onClick={togglePlay}
+          >
+            {isPlaying ? (
+              <i
+                className="bi bi-music-player-fill"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
+            ) : (
+              <i
+                className="bi bi-pause-fill"
+                style={{
+                  fontSize: isMobile ? "2rem" : "1rem",
+                  color: "var(--third)",
+                }}
+              ></i>
+            )}
+          </button>
+        ) : null}
+        {
+          !isMobile && !coverVisible? (
+            <NavbarVerticalView activeSection={activeSection}/>
+          ) : null
+        }
       </div>
     </div>
   );
