@@ -45,6 +45,7 @@ interface LuxuryThemeInterface {
   postMessage: (name: string, text: string, present: string) => Promise<void>;
   guest: string;
   idGuest: string;
+  getParams?:string | null;
 }
 
 const LuxuryTheme = (props: LuxuryThemeInterface) => {
@@ -273,7 +274,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         ) : null}
         <HeaderView
           themeName={props?.details?.theme.theme.themeName ?? ""}
-          title={props.details?.title ?? ""}
+          title={props.getParams ?? ""}
         />
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (

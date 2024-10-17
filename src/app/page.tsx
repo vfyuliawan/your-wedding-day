@@ -39,6 +39,7 @@ import {
   isBrowser,
   isMobile,
 } from "react-device-detect";
+import Head from "next/head";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -122,29 +123,55 @@ export default function Home() {
     return () => {};
   }, []);
 
-  return (    
+  return (
     <>
-    {loading ? (
-      <Loading />
-    ) : themeName == "RedEssence" ? (
-      <>
-        <BrowserView>
-          <div style={{ display: "flex", flexDirection: "row", height: "100vh", overflow: "hidden" }}>
-            <div style={{ width: "70%", height: "100vh", overflow: "hidden" }}>
-              <img
-                className="kenburns-top"
-                style={{
-                  objectFit: "cover",
-                  objectPosition:"center ",
+      <Head>
+      <link rel="icon" type="image/png" href="/LogoNM.png" />
+      </Head>
+      {loading ? (
+        <Loading />
+      ) : themeName == "RedEssence" ? (
+        <>
+          <BrowserView>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{ width: "70%", height: "100vh", overflow: "hidden" }}
+              >
+                <img
+                  className="kenburns-top"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "center ",
 
-                  width: "100%",
-                  height: "100%",
-                }}
-                src={details?.cover.img}
-                alt="dfasdfsa"
-              />
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  src={details?.cover.img}
+                  alt="dfasdfsa"
+                />
+              </div>
+              <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
+                <LuxuryTheme
+                  message={message}
+                  setMessage={setMessage}
+                  details={details}
+                  postMessage={postMessage}
+                  guest={guest}
+                  idGuest={idGuest}
+                  getParams={getParams}
+                />
+              </div>
             </div>
-            <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
+          </BrowserView>
+          <MobileView>
+            <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
               <LuxuryTheme
                 message={message}
                 setMessage={setMessage}
@@ -152,23 +179,12 @@ export default function Home() {
                 postMessage={postMessage}
                 guest={guest}
                 idGuest={idGuest}
+                getParams={getParams}
+
               />
             </div>
-          </div>
-        </BrowserView>
-        <MobileView>
-        <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
-              <LuxuryTheme
-                message={message}
-                setMessage={setMessage}
-                details={details}
-                postMessage={postMessage}
-                guest={guest}
-                idGuest={idGuest}
-              />
-            </div>
-        </MobileView>
-      </>
+          </MobileView>
+        </>
       ) : themeName == "BluePremium" ? (
         <LuxuryTheme
           message={message}
@@ -270,8 +286,7 @@ export default function Home() {
         />
       ) : homePage ? (
         <h1>Home</h1>
-      )
-      : (
+      ) : (
         <Loading />
       )}
     </>
@@ -301,6 +316,8 @@ export default function Home() {
         }}
       >
         <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
+        <link rel="icon" type="image/x-icon" href="/LogoNM.png" />
+
 
         <div
           style={{
@@ -339,7 +356,6 @@ export default function Home() {
     );
   }
 
-
   function Loading2() {
     return (
       <div
@@ -348,7 +364,6 @@ export default function Home() {
           height: "100vh", // Ensures the div takes up the full viewport height
         }}
       >
-
         <div
           style={{
             display: "flex",

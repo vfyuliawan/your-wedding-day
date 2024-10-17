@@ -9,9 +9,12 @@ interface HeaderViewInterface {
 const HeaderView = (props : HeaderViewInterface) => {
   return (
     <div >
+      
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>{props.title.split("&")[0]} &amp; {props.title.split("&")[1]} Weding</title>
+      <title>Invite Me Wedding</title>         {/* Favicon Link */}
+         <link rel="icon" type="image/x-icon" href="/LogoNM.png" />
+     
       <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"

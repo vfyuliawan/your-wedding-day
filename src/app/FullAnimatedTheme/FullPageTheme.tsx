@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import CoverView from "./Section/Cover/CoverView";
 import { DocumentData } from "firebase/firestore";
 import Galery from "react-image-gallery";
-import Home from "../page";
 import NavbarView from "./Section/Navbar/NavbarView";
 import BrideInformation from "./Section/BrideInfo/BrideInfo";
 import { ThemeColorClass } from "../Constant/ThemeColor";
