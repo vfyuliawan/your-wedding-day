@@ -8,6 +8,7 @@ export interface MaleFemaleProps {
 
   export interface MaleFemaleViewInterface {
     MaleFemaleDetail: BraidInfo
+    ref:any
   }
   
   export interface MaleFemaleValue{

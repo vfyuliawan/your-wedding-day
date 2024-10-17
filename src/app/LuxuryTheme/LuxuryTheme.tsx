@@ -112,7 +112,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       },
       {
         root: null,
-        threshold: 0.6,
+        threshold: 0.2,
       }
     );
 
@@ -294,7 +294,9 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
             }
           >
-            <MaleFemaleView MaleFemaleDetail={props?.details?.braidInfo} />
+            <MaleFemaleView ref={(el:any) =>
+              (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
+            } MaleFemaleDetail={props?.details?.braidInfo} />
           </div>
         ) : null}
         <div

@@ -21,12 +21,12 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
 
   return (
     <section
-      ref={targetRef}
+    ref={props.ref}
       style={{ marginBottom: 80 }}
       id="male-female"
       className="male-female"
     >
-      <div className="container" style={{ paddingTop: "2rem" }}>
+      <div ref={targetRef} className="container" style={{ paddingTop: "2rem" }}>
         <div className="row justify-content-center mb-3">
           <div className="col-md-8 col-10 text-center">
             <h2
