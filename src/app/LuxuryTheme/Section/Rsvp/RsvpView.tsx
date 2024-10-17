@@ -142,7 +142,7 @@ const RsvpView = (props: RSVPViewInterface) => {
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-12 ">
-                <label htmlFor="nama" className="form-label">
+                <label  style={{fontSize:"14px"}} htmlFor="nama" className="form-label">
                   Nama
                 </label>
                 <input
@@ -162,7 +162,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 />
               </div>
               <div className="col-12 ">
-                <label htmlFor="Pesan" className="form-label">
+                <label style={{fontSize:"14px"}} htmlFor="Pesan" className="form-label">
                   Konfrimasi
                 </label>
                 <select
@@ -183,7 +183,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 </select>
               </div>
               <div className="col-12">
-                <label htmlFor="nama" className="form-label">
+                <label  style={{fontSize:"14px"}} htmlFor="nama" className="form-label">
                   Pesan
                 </label>
                 <textarea

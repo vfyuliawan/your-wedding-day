@@ -136,7 +136,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                         style={{
                           color:"var(--forth)" ,
                           fontFamily: '"Courier New", Courier, monospace',
-                          fontSize: "2rem",
+                          fontSize:"12px"
                         }}
                       >
                         {item.noRek}
@@ -148,6 +148,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                         className="btn btn-lg"
                         style={{
                           color:"var(--third)" ,
+                          fontSize:"12px"
 
                         }}
                       >
@@ -156,6 +157,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                     </div>
                     <div style={{
                                         color:"var(--forth)" ,
+                                        fontSize:"12px"
 
                     }} className="card-footer text-body-secondary text-light">
                       A/N {item.name}
