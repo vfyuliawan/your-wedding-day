@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import React from "react";
 import { GiftElement } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 import AnimationThemeInstance from "../../../utils/AnimationThemes";
-import { copyToClipboard } from '../../../utils/CopytoClipboard';
+import { copyToClipboard } from "../../../utils/CopytoClipboard";
 
 interface GiftsViewInterface {
   Gifts: GiftElement[];
@@ -31,8 +31,6 @@ const GiftsView = (props: GiftsViewInterface) => {
 
   const textAreaRef = useRef<any>(null);
 
-
-
   useEffect(() => {
     if (isVisible) {
       animate.start(AnimationThemeInstance.FadeHorizon);
@@ -44,7 +42,7 @@ const GiftsView = (props: GiftsViewInterface) => {
   return (
     <section
       id="gifts"
-      style={{ paddingTop: "2rem" }}
+      style={{ paddingTop: '1rem', backgroundColor: "var(--sec)" }}
       className="gifts"
       ref={targetRefGift}
     >
@@ -52,9 +50,9 @@ const GiftsView = (props: GiftsViewInterface) => {
         style={{
           borderRadius: "20px 20px 0 0",
           backgroundColor: "white",
-          paddingTop: "5rem",
-          marginTop: "10rem",
-          height:'100vh'
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.80)",                    paddingTop: "5rem",
+          marginTop: "2rem",
+          height: "100vh",
         }}
       >
         <div className="container">
@@ -65,7 +63,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5 }}
                 style={{
-                  color: "black",
+                  color:"var(--forth)" ,
                   fontWeight: "100",
                   fontFamily: "brilon",
                   fontSize: "25px",
@@ -77,6 +75,8 @@ const GiftsView = (props: GiftsViewInterface) => {
                     fontFamily: "Creation",
                     fontWeight: "10",
                     fontSize: "30px",
+                    color:"var(--forth)" ,
+
                   }}
                 >
                   Gifts
@@ -87,8 +87,8 @@ const GiftsView = (props: GiftsViewInterface) => {
               <div
                 style={{
                   width: "100%",
-                  height: "2px",
-                  backgroundColor: "black",
+                  height: "1px",
+                  backgroundColor: "var(--forth)",
                   marginBottom: "3rem",
                   marginTop: "3rem",
                 }}
@@ -100,7 +100,11 @@ const GiftsView = (props: GiftsViewInterface) => {
                   animate={animate}
                   initial={AnimationThemeInstance.FadeRight}
                   transition={{ duration: 1.5, delay: 0.5 }}
-                  style={{ color: "black", fontSize: "12px", fontFamily:'Times-new-roman' }}
+                  style={{
+                    color:"var(--forth)" ,
+                    fontSize: "12px",
+                    fontFamily: "Times-new-roman",
+                  }}
                   className="alamat"
                 >
                   Bagi yang berkeinginan memberikan kado pernikahan atau tanda
@@ -111,8 +115,6 @@ const GiftsView = (props: GiftsViewInterface) => {
             </div>
           </div>
           <div className="row justify-content-center">
-            
-
             {props.Gifts.map((item, index) => {
               return (
                 <motion.div
@@ -132,7 +134,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                       <h5
                         className="card-title"
                         style={{
-                          color: "black",
+                          color:"var(--forth)" ,
                           fontFamily: '"Courier New", Courier, monospace',
                           fontSize: "2rem",
                         }}
@@ -141,14 +143,21 @@ const GiftsView = (props: GiftsViewInterface) => {
                       </h5>
                       <a
                         onClick={() => {
-                          copyToClipboard(item.noRek)
+                          copyToClipboard(item.noRek);
                         }}
                         className="btn btn-lg"
+                        style={{
+                          color:"var(--third)" ,
+
+                        }}
                       >
                         Salin Rekening{" "}
                       </a>
                     </div>
-                    <div className="card-footer text-body-secondary text-light">
+                    <div style={{
+                                        color:"var(--forth)" ,
+
+                    }} className="card-footer text-body-secondary text-light">
                       A/N {item.name}
                     </div>
                   </div>
@@ -158,24 +167,9 @@ const GiftsView = (props: GiftsViewInterface) => {
           </div>
           <div
             className="row justify-content-center"
-            style={{ marginTop: "5rem", marginBottom:'2rem'}}
+            style={{ marginTop: "5rem", marginBottom: "2rem" }}
           >
-            {/* <div className="col-10 justify-content-center d-flex">
-              <a
-                className="btn btn-lg text-center"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  minWidth: "100%",
-                }}
-              >
-                <i className="bi bi-whatsapp">
-                  {" "}
-                  {"      "}Upload Hadiah dan Kirim Ke Whatsapp
-                </i>
-              </a>
-            </div> */}
+            
           </div>
         </div>
       </div>

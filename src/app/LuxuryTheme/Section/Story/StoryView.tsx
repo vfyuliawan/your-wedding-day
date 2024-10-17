@@ -42,20 +42,21 @@ const StoryView = (props: StoryViewInterface) => {
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
               style={{
-                color: "black",
+                color: "var(--forth)",
                 fontSize: "30px",
                 fontFamily: "brilon",
                 fontWeight: "100",
+                letterSpacing: "1px",
               }}
             >
-              Event
+              event
               <br />
               <span
                 style={{
                   fontFamily: "Creation",
                   fontWeight: "normal",
                   fontSize: "32px",
-                  color: "black",
+                  color: "var(--forth)",
                   textTransform: "capitalize",
                 }}
               >
@@ -68,7 +69,7 @@ const StoryView = (props: StoryViewInterface) => {
               style={{
                 width: "100%",
                 height: "2px",
-                backgroundColor: "black",
+                backgroundColor: "var(--forth)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -81,7 +82,7 @@ const StoryView = (props: StoryViewInterface) => {
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
                 style={{
-                  color: "black",
+                  color: "var(--forth)",
                   fontSize: "14px",
                   fontFamily: "Times-new-roman",
                 }}
@@ -98,7 +99,7 @@ const StoryView = (props: StoryViewInterface) => {
           initial={AnimationThemeInstance.FadeLeft}
           transition={{ duration: 1.5, delay: 0.5 }}
           style={{
-            marginBottom:30
+            marginBottom: 30,
           }}
         >
           <TimeLineComponent />
@@ -117,10 +118,10 @@ const StoryView = (props: StoryViewInterface) => {
         {props.OurStory?.stories.map((item) => (
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            contentStyle={{ background: "#fff", color: "black" }}
+            contentStyle={{ background: "#fff", color: "var(--forth)" }}
             contentArrowStyle={{ borderRight: "7px solid  var(--prim)" }}
             date={TimeConvertionUSFormat(item.date.toString())}
-            iconStyle={{ background: props.color, color: "#fff" }}
+            iconStyle={{ background: props.color, color: "var(--third)" }}
             icon={
               <i
                 style={{

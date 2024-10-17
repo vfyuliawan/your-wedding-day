@@ -56,6 +56,7 @@ const RsvpView = (props: RSVPViewInterface) => {
           position: "relative",
           width: "100%",
           height: "auto",
+
           opacity: 1,
           backgroundImage: 'url("/pink-essence/img/weddinigDecor.jpg")',
           backgroundSize: "cover",
@@ -80,35 +81,40 @@ const RsvpView = (props: RSVPViewInterface) => {
                     initial={AnimationThemeInstance.FadeLeft}
                     transition={{ duration: 1.5 }}
                     style={{
-                      color: "white",
+                      color: "var(--third)",
                       fontSize: "32px",
                       fontFamily: "Brilon",
                       textAlign: "right",
                       letterSpacing: "2px",
                     }}
                   >
-                    ucapan <br />
+                    rsvp <br />
                     <span
                       style={{
                         fontFamily: "Creation",
                         fontWeight: "100",
+                        marginLeft: 40,
+                        color: "var(--third)",
+
                         fontSize: "28px",
                       }}
                     >
-                      Selamat
+                      Wishes
                     </span>
                   </motion.h2>
                 </div>
-                <div className="col-6 d-flex justify-content-center align-items-center">
+                <div className="col-6 d-flex justify-content-start align-items-center">
                   <motion.div
                     animate={animate}
                     initial={AnimationThemeInstance.FadeRight}
                     transition={{ duration: 1.5 }}
                     style={{
                       position: "absolute",
-                      width: "50%",
-                      height: "2px",
-                      backgroundColor: "white",
+                      width: "40%",
+                      display: "flex",
+                      alignItems: "start",
+                      height: "1px",
+                      backgroundColor: "var(--third)",
                       marginBottom: "3rem",
                       marginTop: "3rem",
                     }}
@@ -120,7 +126,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5 }}
                 style={{
-                  color: "white",
+                  color: "var(--third)",
                   fontSize: "12px",
                   textAlign: "center",
                   fontFamily: "Times-new-roman",
@@ -205,33 +211,43 @@ const RsvpView = (props: RSVPViewInterface) => {
                     console.log(sendMessage);
 
                     setLoading(true);
-                    if (
-                      sendMessage?.name !== "" ||
-                      sendMessage?.text !== "" ||
-                      sendMessage.present !== undefined ||
-                      sendMessage.present !== " "
-                    ) {
-                      props
-                        .postMessage(
-                          sendMessage!.name,
-                          sendMessage!.text,
-                          sendMessage!.present
-                        )
-                        .then((res) => {
-                          setLoading(false);
-                          props.setMessage((prev: MessagesRequest | any) => [
-                            ...prev,
-                            {
-                              messageId: "res",
-                              name: sendMessage?.name ?? "",
-                              present: sendMessage?.present ?? "",
-                              text: sendMessage?.text ?? "",
-                              time: new Date().getTime(), // Set the current timestamp
-                            },
-                          ]);
-                        });
-                    } else {
+                    console.log(sendMessage);
+                    if (sendMessage == undefined) {
                       Swal.fire("Harap Jangan Kosongkan Form");
+                    } else {
+                      if (
+                        sendMessage!.name !== "" &&
+                        sendMessage!.text !== "" &&
+                        sendMessage!.present !== undefined &&
+                        sendMessage!.present !== " "
+                      ) {
+                        props
+                          .postMessage(
+                            sendMessage!.name,
+                            sendMessage!.text,
+                            sendMessage!.present
+                          )
+                          .then((res) => {
+                            setLoading(false);
+                            props.setMessage((prev: MessagesRequest | any) => [
+                              ...prev,
+                              {
+                                messageId: "res",
+                                name: sendMessage?.name ?? "",
+                                present: sendMessage?.present ?? "",
+                                text: sendMessage?.text ?? "",
+                                time: new Date().getTime(), // Set the current timestamp
+                              },
+                            ]);
+                            Swal.fire({
+                              title: "Berhasil!",
+                              text: "Pesan Berhasil Dikirim!!",
+                              icon: "success"
+                            });
+                          });
+                      } else {
+                        Swal.fire("Harap Jangan Kosongkan Form");
+                      }
                     }
                   }}
                   className="btn btn-lg mb-3"
@@ -239,6 +255,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                     width: "100%",
                     fontSize: "16px",
                     height: 40,
+                    color: "var(--third)",
                   }}
                 >
                   Submit
@@ -255,6 +272,7 @@ const RsvpView = (props: RSVPViewInterface) => {
             overflowY: "auto",
             maxHeight: "500px",
             WebkitOverflowScrolling: "touch",
+            backgroundColor: "var(--sec)",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
             padding: "15px",
@@ -262,7 +280,7 @@ const RsvpView = (props: RSVPViewInterface) => {
         >
           <h4
             style={{
-              color: "white",
+              color: "var(--prim)",
               fontFamily: "brilon",
               fontSize: "20px",
               letterSpacing: "2px",
@@ -280,14 +298,15 @@ const RsvpView = (props: RSVPViewInterface) => {
           ) : props.message.length !== 0 ? (
             <MessageView />
           ) : (
-            <div style={{ justifyContent: "center", display: "flex" }}>
+            <div style={{ justifyContent: "center", display: "flex", marginTop:20}}>
               <p
                 style={{
-                  color: "white",
-                  fontSize: "20px",
+                  color: "var(--forth)",
+                  fontSize: "14px",
+                  fontFamily:"brilon"
                 }}
               >
-                No Comments Yet
+                jadilah yang pertama mengucapkan
               </p>
             </div>
           )}
@@ -299,8 +318,14 @@ const RsvpView = (props: RSVPViewInterface) => {
   function MessageView() {
     return props?.message.map((item, index) => {
       return (
-        <div style={{ borderRadius: "", height:110 }} className="bg-white mt-3 ">
-          <div className="row  mt-4 justify-content-center align-items-center d-flex">
+        <div
+          style={{ borderRadius: "", height: 110 }}
+          className="bg-white mt-1 "
+        >
+          <div
+            style={{ paddingTop: 10 }}
+            className="row justify-content-center align-items-center d-flex"
+          >
             <div className="col-3 justify-content-center d-flex items-content-center">
               <div
                 style={{

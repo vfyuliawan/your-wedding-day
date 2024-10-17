@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 
 interface HeaderViewInterface {
   themeName :string;
+  title:string;
 }
 
 const HeaderView = (props : HeaderViewInterface) => {
@@ -10,7 +11,7 @@ const HeaderView = (props : HeaderViewInterface) => {
     <div >
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Fulan &amp; Fulana Weding</title>
+      <title>{props.title.split("&")[0]} &amp; {props.title.split("&")[1]} Weding</title>
       <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"

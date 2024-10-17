@@ -82,7 +82,7 @@ const NavbarView = (props: NavbarInterfaceView) => {
               ref={sectionsRefs[section]} // Attach ref to each section
               style={{
                 backgroundColor:
-                  props.activeSection === section ? "black" : "transparent",
+                  props.activeSection === section ? "var(--forth)" : "transparent",
                 borderRadius: 5,
 
                 padding: "0.5rem",
@@ -93,9 +93,9 @@ const NavbarView = (props: NavbarInterfaceView) => {
             >
               <i
                 className={`${icon} ${
-                  props.activeSection === section ? "text-white" : "text-white"
+                  props.activeSection === section ? "var(--third)" : "var(--third)"
                 }`}
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: "2rem", color:"var(--third)" }}
               ></i>
             </div>
           ))}

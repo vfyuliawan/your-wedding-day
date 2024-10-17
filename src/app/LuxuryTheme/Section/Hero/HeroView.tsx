@@ -48,8 +48,8 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             bottom: -180,
           }}
         >
-          <h1 style={{ fontFamily: "brilon" }}>{props.HeroDetail.title}</h1>
-          <h4 style={{ fontFamily: "serif", fontSize: 20 }}>
+          <h1 style={{ fontFamily: "brilon", color:"var(--third)" }}>{props.HeroDetail.title}</h1>
+          <h4 style={{ fontFamily: "serif", fontSize: 20, color:"var(--third)" }}>
             {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
           </h4>
         </div>

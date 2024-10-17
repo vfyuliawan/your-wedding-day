@@ -55,12 +55,13 @@ const HomeView = (props: HomeViewInterface) => {
                   transition={{ duration: 1, delay: 0.5 }}
                   className="home-text"
                   style={{
-                    color: "white",
-                    fontFamily: "Brilon",
-                    fontSize: '28px',
+                    color:"var(--third)",
+                                        fontFamily: "Brilon",
+                    fontSize: '20px',
+                    letterSpacing:2
                   }}
                 >
-                  {props?.HomeDetail?.title}
+                  {props?.HomeDetail?.quotes?.split(",")[0].toLowerCase()}
                 </motion.h1>
                 <motion.p
                   animate={controls}
@@ -68,12 +69,12 @@ const HomeView = (props: HomeViewInterface) => {
                   transition={{ duration: 1, delay: 0.8 }}
                   className="home-text"
                   style={{
-                    color: "#ffff",
+                    color:"var(--third)",
                     fontFamily: "Times-new-roman",
                     fontSize: "14px",
                   }}
                 >
-                  {props?.HomeDetail?.quotes}
+                  {props?.HomeDetail?.quotes?.split(",")[1]}
                 </motion.p>
               </div>
             </div>

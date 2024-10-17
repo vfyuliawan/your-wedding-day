@@ -6,6 +6,7 @@ import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionO
 import { MaleFemaleViewInterface } from "./MaleFemaleModel";
 import React from "react";
 import { setAnimation } from "../../../utils/AnimationThemes";
+import { isMobile } from "react-device-detect";
 
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
@@ -19,7 +20,12 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   }, [isVisible, controls]);
 
   return (
-    <section id="male-female" className="male-female">
+    <section
+      ref={targetRef}
+      style={{ marginBottom: 80 }}
+      id="male-female"
+      className="male-female"
+    >
       <div className="container" style={{ paddingTop: "2rem" }}>
         <div className="row justify-content-center mb-3">
           <div className="col-md-8 col-10 text-center">
@@ -27,7 +33,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               style={{
                 fontSize: "32px",
                 fontFamily: "brilon",
-                color: "black",
+                color: "var(--forth)",
                 fontWeight: 900,
               }}
             >
@@ -55,48 +61,79 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 transform: "rotate(180deg)",
+                color: "var(--forth)",
               }}
             >
               The Ride
             </h3>
           </div>
           <div className=" col-9 col-sm-9 d-flex align-items-star justify-content-star position-relative">
-            <motion.img
-              ref={targetRef}
-              initial={{
-                opacity: setAnimation["fade-down"].initialX,
-                y: setAnimation["fade-down"].initialY,
-              }}
-              animate={controls}
-              transition={{ duration: 1 }}
+            <div
+              className=" w-100"
               style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderTopRightRadius: "20px",
-                borderTopLeftRadius: "20px",
+                height: isMobile ? 450 : 550,
+                overflow: "hidden",
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                position: "relative",
               }}
-              src={props?.MaleFemaleDetail?.female?.image}
-              alt={""}
-              srcSet=""
-            />
-            <motion.div
-              initial={{
-                opacity: setAnimation["fade-Up"].initialX,
-                y: setAnimation["fade-Up"].initialY,
-              }}
-              animate={controls}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="overlay"
             >
-              <h1 className="">{props?.MaleFemaleDetail?.female?.name}</h1>
-              <h3 className="">
-                Putra Dari Bapak {props?.MaleFemaleDetail?.female?.dad}
-              </h3>
-              <h3 className="">
-                Putra Dari Ibu {props?.MaleFemaleDetail?.female?.mom}
-              </h3>
-            </motion.div>
+              <motion.img
+                initial={{
+                  opacity: setAnimation["fade-down"].initialX,
+                  y: setAnimation["fade-down"].initialY,
+                }}
+                animate={controls}
+                transition={{ duration: 1 }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                src={props?.MaleFemaleDetail?.female?.image}
+                alt={""}
+                srcSet=""
+              />
+              <motion.div
+                initial={{
+                  opacity: setAnimation["fade-Up"].initialX,
+                  y: setAnimation["fade-Up"].initialY,
+                }}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  width: "100%",
+                }}
+                animate={controls}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="overlay"
+              >
+                <h1
+                  style={{
+                    color: "var(--third)",
+                  }}
+                  className=""
+                >
+                  {props?.MaleFemaleDetail?.female?.name}
+                </h1>
+                <h3
+                  style={{
+                    color: "var(--third)",
+                  }}
+                  className=""
+                >
+                  Putra Dari Bapak {props?.MaleFemaleDetail?.female?.dad}
+                </h3>
+                <h3
+                  style={{
+                    color: "var(--third)",
+                  }}
+                  className=""
+                >
+                  Putra Dari Ibu {props?.MaleFemaleDetail?.female?.mom}
+                </h3>
+              </motion.div>
+            </div>
           </div>
         </div>
 
@@ -112,7 +149,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               style={{
                 fontSize: "3rem",
                 fontFamily: "Dancing Script",
-                color: "white",
+                color:"var(--third)",
                 fontWeight: 800,
               }}
             >
@@ -127,49 +164,62 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           style={{ marginBottom: "2rem" }}
         >
           <div className=" col-9 col-sm-9 d-flex align-items-end justify-content-end position-relative">
-            <motion.div
-              initial={{
-                opacity: setAnimation["fade-down"].initialX,
-                y: setAnimation["fade-down"].initialY,
+            <div
+              className=" w-100"
+              style={{
+                height: isMobile ? 450 : 550,
+                overflow: "hidden",
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+                position: "relative",
               }}
-              animate={controls}
-              transition={{ duration: 1, delay: 1.5 }}
             >
               <motion.img
+                ref={targetRef}
+                initial={{
+                  opacity: setAnimation["fade-down"].initialX,
+                  y: setAnimation["fade-down"].initialY,
+                }}
+                animate={controls}
+                transition={{ duration: 1, delay: 1.4 }}
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  borderBottomRightRadius: "20px",
-                  borderBottomLeftRadius: "20px",
                 }}
-                src={props?.MaleFemaleDetail?.male?.image}
-                alt=""
+                src={props?.MaleFemaleDetail?.female?.image}
+                alt={""}
                 srcSet=""
-                data-aos="fade-down"
               />
-            </motion.div>
-            <motion.div
-              initial={{
-                opacity: setAnimation["fade-Up"].initialX,
-                y: setAnimation["fade-Up"].initialY,
-              }}
-              animate={controls}
-              transition={{ duration: 1, delay: 2 }}
-              className="overlay"
-              style={{
-                borderBottomRightRadius: "20px",
-                borderBottomLeftRadius: "20px",
-              }}
-            >
-              <h1 className="">{props?.MaleFemaleDetail?.male?.name}</h1>
-              <h3 className="">
-                Putra Dari Bapak {props?.MaleFemaleDetail?.male?.dad}
-              </h3>
-              <h3 className="">
-                Putra Dari Ibu {props?.MaleFemaleDetail?.male?.mom}
-              </h3>
-            </motion.div>
+              <motion.div
+                initial={{
+                  opacity: setAnimation["fade-Up"].initialX,
+                  y: setAnimation["fade-Up"].initialY,
+                }}
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  width: "100%",
+                }}
+                animate={controls}
+                transition={{ duration: 1, delay: 1.4 }}
+                className="overlay"
+              >
+                <h1 style={{
+                  color:"var(--third)"
+                }} className="">{props?.MaleFemaleDetail?.female?.name}</h1>
+                <h3 style={{
+                  color:"var(--third)"
+                }} className="">
+                  Putra Dari Bapak {props?.MaleFemaleDetail?.female?.dad}
+                </h3>
+                <h3 style={{
+                  color:"var(--third)"
+                }} className="">
+                  Putra Dari Ibu {props?.MaleFemaleDetail?.female?.mom}
+                </h3>
+              </motion.div>
+            </div>
           </div>
           <div className=" col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
             <h3
@@ -179,6 +229,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontWeight: 400,
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
+                color:"var(--forth)"
               }}
             >
               The Broom

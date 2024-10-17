@@ -8,11 +8,16 @@
   --prim: hsl(0, 74%, 18%);
   /* sama */
   --sec: #efefef;
+  --third: #ffffff;
+  --forth: #252525;
   --bg: #efefef;
+
   /* sama */
 
   --bg2: #efefef;
-  --shadow2: #363636;
+
+
+  --shadow2: #bcbcbc;
   --shadow4: #000000;
   --shadow: 0 2px 2px rgb(0 0 0 / 0.8);
   --shadow3: 0 2px 2px rgba(0, 0, 0, 0.8);

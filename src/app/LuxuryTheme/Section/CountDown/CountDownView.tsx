@@ -61,8 +61,6 @@ const CountDownView = (props: CountDownViewInterface) => {
 
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
-
-
   const animate = useAnimation();
   const targetRef = useRef<any>(null);
   const isVisible = useIntersectionObserver(targetRef);
@@ -124,7 +122,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                top:90
+                top: 90,
               }}
             >
               <div className="row text-center">
@@ -133,7 +131,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   transition={{ duration: 1, delay: 0.5 }}
                   animate={animate}
                   style={{
-                    color: "white",
+                    color: "var(--third)",
                     fontFamily: "Dancing Script",
                     fontSize: "25px",
                   }}
@@ -150,11 +148,15 @@ const CountDownView = (props: CountDownViewInterface) => {
                 <div className="col-md-3 col-3">
                   <div
                     className="text-center jusify-content-center d-flex"
-                    style={{ paddingBottom: "3rm", paddingTop: "3rm" }}
+                    style={{
+                      paddingBottom: "3rm",
+                      paddingTop: "3rm",
+                      color: "var(--third)",
+                    }}
                   >
                     <h3
                       style={{
-                        color: "white",
+                        color: "var(--third)",
                         fontFamily: "Dancing Script",
                         fontSize: "2.4rem",
                       }}
@@ -168,11 +170,15 @@ const CountDownView = (props: CountDownViewInterface) => {
                 <div className="col-md-3 col-3">
                   <div
                     className="text-center jusify-content-center d-flex"
-                    style={{ paddingBottom: "3rm", paddingTop: "3rm" }}
+                    style={{
+                      paddingBottom: "3rm",
+                      paddingTop: "3rm",
+                      color: "var(--third)",
+                    }}
                   >
                     <h3
                       style={{
-                        color: "white",
+                        color: "var(--third)",
                         fontFamily: "Dancing Script",
                         fontSize: "2.4rem",
                       }}
@@ -190,7 +196,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   >
                     <h3
                       style={{
-                        color: "white",
+                        color: "var(--third)",
                         fontFamily: "Dancing Script",
                         fontSize: "2.4rem",
                       }}
@@ -208,7 +214,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   >
                     <h3
                       style={{
-                        color: "white",
+                        color: "var(--third)",
                         fontFamily: "Dancing Script",
                         fontSize: "2.4rem",
                       }}
@@ -230,7 +236,10 @@ const CountDownView = (props: CountDownViewInterface) => {
                     minWidth: "100%",
                   }}
                 >
-                  <i style={{fontSize:'12px'}} className="bi bi-calendar-check-fill">
+                  <i
+                    style={{ fontSize: "12px", color: "var(--third)" }}
+                    className="bi bi-calendar-check-fill"
+                  >
                     {" "}
                     {"      "}Save To Calendar
                   </i>

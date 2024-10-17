@@ -265,7 +265,7 @@ const CoverView = (props: CoverModelInterface) => {
             opacity: 1,
             position: "absolute",
             bottom: 0,
-            color: "#fff",
+            color: "var(--third)",
             textAlign: "center",
           }}
         ></div>
@@ -275,9 +275,8 @@ const CoverView = (props: CoverModelInterface) => {
             height: "100%",
             position: "absolute",
             top: "150px",
-            // backgroundColor:'red',
             left: 0,
-            color: "#fff",
+            color: "var(--third)",
             fontSize: "24px",
             textAlign: "center",
             // display:'flex',
@@ -287,9 +286,10 @@ const CoverView = (props: CoverModelInterface) => {
             <div className="col-sm-12">
               <p
                 style={{
-                  fontSize: "12px",
+                  fontSize: "15px",
                   fontWeight: "400",
                   fontFamily: "brilon",
+                  textShadow:"var(--shadow2)"
                 }}
               >
                 the wedding of

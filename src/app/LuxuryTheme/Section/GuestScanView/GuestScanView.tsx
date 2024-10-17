@@ -23,7 +23,12 @@ const GuestScanView = (props: GuestScanViewInterface) => {
     return () => {};
   }, [animate, isVisible]);
   return (
-    <section className="guest" id="guest" style={{ height: "100hv" }} ref={targetRefGift}>
+    <section
+      className="guest"
+      id="guest"
+      style={{ height: "100hv" }}
+      ref={targetRefGift}
+    >
       <div
         className="stright-top"
         style={{ backgroundColor: "white", height: "100px" }}
@@ -35,41 +40,40 @@ const GuestScanView = (props: GuestScanViewInterface) => {
         <div className="row mt-4 justify-content-center">
           <div className="col-6 text-end">
             <div className="row">
-            <motion.h2
-              animate={animate}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5 }}
-              style={{
-                color: "black",
-                fontWeight: "100",
-                fontFamily: "brilon",
-                fontSize: "32px",
-              }}
-            >
-              scan 
-            </motion.h2>
-            <motion.h2
-              animate={animate}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5 }}
-              style={{
-                color: "black",
-                fontWeight: "100",
-                fontFamily: "Creation",
-                fontSize: "32px",
-              }}
-            >
-              Barcode 
-            </motion.h2>
+              <motion.h2
+                animate={animate}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 1.5 }}
+                style={{
+                  color: "var(--forth)",
+                  fontWeight: "100",
+                  fontFamily: "brilon",
+                  fontSize: "32px",
+                }}
+              >
+                scan
+              </motion.h2>
+              <motion.h2
+                animate={animate}
+                initial={AnimationThemeInstance.FadeLeft}
+                transition={{ duration: 1.5 }}
+                style={{
+                  color: "var(--forth)",
+                  fontWeight: "100",
+                  fontFamily: "Creation",
+                  fontSize: "32px",
+                }}
+              >
+                Barcode
+              </motion.h2>
             </div>
-          
           </div>
           <div className="col-5 d-flex align-items-center">
             <div
               style={{
                 width: "100%",
                 height: "1px",
-                backgroundColor: "black",
+                backgroundColor: "var(--forth)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -81,7 +85,11 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 animate={animate}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "black", fontSize: "12px", fontFamily:"Times-new-roman" }}
+                style={{
+                  color: "var(--forth)",
+                  fontSize: "12px",
+                  fontFamily: "Times-new-roman",
+                }}
                 className="alamat"
               >
                 Silahkan Scan barcode tamu di bawah. <br />
@@ -99,7 +107,11 @@ const GuestScanView = (props: GuestScanViewInterface) => {
               animate={animate}
               initial={AnimationThemeInstance.FadeRight}
               transition={{ duration: 1.5, delay: 0.5 }}
-              style={{ color: "black", fontSize: "12px", fontFamily:"Times-new-roman" }}
+              style={{
+                color:"var(--forth)" ,
+                fontSize: "12px",
+                fontFamily: "Times-new-roman",
+              }}
               className="alamat"
             >
               Terimakasih Akan Kehadiran anda . <br />
@@ -131,14 +143,17 @@ const GuestScanView = (props: GuestScanViewInterface) => {
           }}
         >
           <QRCode
-            value={props.guest +"nviteMe"+props.idGuest}
+            value={props.guest + "nviteMe" + props.idGuest}
             size={128}
             bgColor="#ffffff"
             fgColor="#000000"
             level="L"
           />
           <p style={{ marginTop: "10px", color: "grey", fontSize: "12px" }}>
-            {props.guest.charAt(0).toUpperCase() + props.guest.slice(1) + " With Id Guests " + props.idGuest}
+            {props.guest.charAt(0).toUpperCase() +
+              props.guest.slice(1) +
+              " With Id Guests " +
+              props.idGuest}
           </p>
         </div>
       </>

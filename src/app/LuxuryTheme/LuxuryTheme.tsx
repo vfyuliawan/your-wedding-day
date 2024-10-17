@@ -34,6 +34,8 @@ import { MessagesRequest } from "../Dashboard/Domain/Models/ModelResponse/ModalR
 import { convertColor } from "../utils/ConvertColor";
 import { isMobile } from "react-device-detect";
 // import AOS from 'aos';
+import Modal from 'react-modal';
+import QRCode from 'react-qr-code';
 
 interface LuxuryThemeInterface {
   details: ResultDetailSlug | undefined;
@@ -53,6 +55,31 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const containerRef = useRef<any>(null);
   const [activeSection, setActiveSection] = useState("hero");
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  let subtitle: any;
+
+  function afterOpenModal() {
+    subtitle.style.color = "var(--prim)";
+  }
+
+
+  const customStyles = {
+    content: {
+      top: "45%",
+      border: `3px solid var(--prim)`,
+      left: "50%",
+      width: isMobile ? "90%" :"40%",
+      height: "75vh",
+      backgroundColor: "white",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      
+    },
+  };
+
 
   const sectionRefs = useRef<{
     hero: HTMLDivElement | null;
@@ -173,6 +200,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   useEffect(() => {
     document.documentElement.style.setProperty('--prim', convertColor(props?.details?.theme?.theme?.primaryColor ?? ""));
     document.documentElement.style.setProperty('--sec', convertColor(props?.details?.theme?.theme?.secondaryColor ?? ""));
+    document.documentElement.style.setProperty('--third', "#ffffff");
+    document.documentElement.style.setProperty('--forth', "#252525");
 
     // disableScroll();
     return () => {};
@@ -230,7 +259,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       />
       <div style={{ overflowY: "scroll", overflowX:'hidden' }} ref={containerRef}>
         {!coverVisible && isMobile ? <NavbarView activeSection={activeSection} /> : null}
-        <HeaderView themeName={props?.details?.theme.theme.themeName ?? ""} />
+        <HeaderView themeName={props?.details?.theme.theme.themeName ?? ""} title={props.details?.title ?? ""} />
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (
             <HeroView
@@ -324,17 +353,149 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
 
         <FooterView Footer={props?.details!.home} />
         <EndView />
+        <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={()=>{
+                setIsOpen(false)
+              }}
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+              <h2
+                ref={(_subtitle) => (subtitle = _subtitle)}
+                style={{
+                  justifyContent: "center",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontFamily: "Brilon",
+                  letterSpacing:"2px",
+                  fontSize:22
+                }}
+              >
+                e-reservation
+              </h2>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 40,
+                  opacity: 0.5,
+                  color: "white",
+                  backgroundColor: "red",
+                  // borderRadius: "50%",
+                  paddingLeft:5,
+                  paddingRight:5,
+                  position: "absolute",
+                  top: 0,
+                  right: isMobile? 25 : 35,
+                  transform: "translate(50%, -0%)",
+                }}
+                onClick={()=>{
+                  setIsOpen(false)
+                }}
+              >
+                Close
+              </div>
+              <div
+                style={{
+                  height: 200,
+                  width: "100%",
+                  backgroundColor: "var(--prim)",
+                  overflow: "hidden",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: 20,
+                  marginTop: 30,
+                  padding: 100,
+                  border: `3px solid ${"var(--prim)"}`,
+                }}
+              >
+                <img
+                  src={props.details?.cover.img}
+                  style={{ objectFit: "fill", height:200 }}
+                  alt=""
+                />
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-10 justify-content-center d-flex">
+                  <div
+                    style={{
+                      width: "100%",
+                      marginTop: 20,
+                      backgroundColor: "white",
+                      borderRadius: "10%",
+                      justifyContent: "center",
+                      display: "flex",
+                      alignItems: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <QRCode
+                      value={props.guest + "nviteMe" + props.idGuest}
+                      size={140}
+                      bgColor="#ffffff"
+                      fgColor="#000000"
+                      level="L"
+                    />
+                    <div className="col-12">
+                      <div
+                        style={{
+                          opacity: 0.5,
+                          marginTop: 20,
+                          borderTop: `2px dotted ${"var(--prim)"}`,
+                          width: "100%",
+                        }}
+                      ></div>
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "10px",
+                        color: "grey",
+                        fontSize: "1rem",
+                        fontFamily: "faunaOne",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Nama Tamu
+                      <br />{" "}
+                      <span style={{ color: "black" }}>
+                        {props.guest.charAt(0).toUpperCase() +
+                          props.guest.slice(1)}
+                      </span>
+                      <br />
+                      Guest ID : {props.idGuest}
+                    </p>
+                    <div className="col-12">
+                      <div
+                        style={{
+                          opacity: 0.5,
+                          marginTop: 5,
+                          borderTop: `2px dotted ${"var(--prim)"}`,
+                          width: "100%",
+                        }}
+                      ></div>
+                    </div>
+                  </div>{" "}
+                </div>
+              </div>
+            </Modal>
 
         {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
             style={{
               position: "fixed",
-              bottom: "90px",
+              bottom: "80px",
               right: "20px",
               padding: "15px",
-              height: "40px",
-              width: "40px",
+              backgroundColor:"var(--prim)",
+              opacity:0.7,
+              height: "50px",
+              width: "50px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
@@ -345,45 +506,13 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             {isPlaying ? (
               <i
                 className="bi bi-music-player-fill"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: isMobile ? "2rem" :"1rem" , color:"var(--third)"}}
               ></i>
             ) : (
-              <i className="bi bi-pause-fill" style={{ fontSize: "2rem" }}></i>
+              <i className="bi bi-pause-fill" style={{ fontSize: isMobile ? "2rem" :"1rem" , color:"var(--third)"}}></i>
             )}
           </button>
         ) : null}
-        {/* {!coverVisible ? (
-          <button
-            className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
-            style={{
-              position: "fixed",
-              bottom: "100px",
-              right: "20px",
-              padding: "15px",
-              height: "40px",
-              width: "40px",
-              borderRadius: "50%",
-              color: "white",
-              cursor: "pointer",
-              zIndex: "999",
-            }}
-            onClick={() => {
-              scrollToBarcode(10000, endRef);
-            }}
-          >
-            {isPlaying ? (
-              <i
-                className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "2rem" }}
-              ></i>
-            ) : (
-              <i
-                className="bi bi-lg bi-arrow-down-circle"
-                style={{ fontSize: "2rem" }}
-              ></i>
-            )}
-          </button>
-        ) : null} */}
         {!coverVisible ? (
           <button
             className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
@@ -392,26 +521,29 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               bottom: "140px",
               right: "20px",
               padding: "15px",
-              height: "40px",
-              width: "40px",
+
+              backgroundColor:"var(--prim)",
+              opacity:0.7,
+              height: "50px",
+              width: "50px",
               borderRadius: "50%",
               color: "white",
               cursor: "pointer",
               zIndex: "999",
             }}
             onClick={() => {
-              scrollToBarcode(2000, qrCodeRef);
+              setIsOpen(true)
             }}
           >
             {isPlaying ? (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: isMobile ? "2rem" :"1rem", color:"var(--third)" }}
               ></i>
             ) : (
               <i
                 className="bi bi-lg bi-qr-code"
-                style={{ fontSize: "2rem" }}
+                style={{ fontSize: isMobile ? "2rem" :"1rem", color:"var(--third)" }}
               ></i>
             )}
           </button>

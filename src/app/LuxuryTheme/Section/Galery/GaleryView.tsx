@@ -10,9 +10,10 @@ import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionO
 import { useInView } from "react-intersection-observer";
 import AnimationThemeInstance from "../../../utils/AnimationThemes";
 import React from "react";
+import ReactPlayer from "react-player";
 
 interface GaleryViewInterface {
-  image:  string[];
+  image: string[];
 }
 
 const GaleryView = (props: GaleryViewInterface) => {
@@ -46,17 +47,17 @@ const GaleryView = (props: GaleryViewInterface) => {
     <section className="galery" id="galery">
       <div className="container">
         <div className="row mt-4 justify-content-center">
-          <div  className="col-6 text-end">
+          <div className="col-6 text-end">
             <motion.h2
               ref={targetRef}
               animate={animate}
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
               style={{
-                color: "white",
+                color:"var(--third)" ,
                 fontWeight: "100",
                 fontFamily: "brilon",
-                fontSize: '30px',
+                fontSize: "30px",
               }}
             >
               Moment
@@ -68,8 +69,8 @@ const GaleryView = (props: GaleryViewInterface) => {
               style={{
                 fontFamily: "Creation",
                 fontWeight: "normal",
-                color: "white",
-                fontSize: '32px',
+                color:"var(--third)" ,
+                fontSize: "32px",
               }}
             >
               Galery
@@ -79,8 +80,8 @@ const GaleryView = (props: GaleryViewInterface) => {
             <div
               style={{
                 width: "100%",
-                height: "2px",
-                backgroundColor: "white",
+                height: "1px",
+                backgroundColor: "var(--third)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -92,12 +93,15 @@ const GaleryView = (props: GaleryViewInterface) => {
                 animate={animate}
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                style={{ color: "white", fontSize: "14px", fontFamily:"Times-new-roman"}}
+                style={{
+                  color:"var(--third)" ,
+                  fontSize: "14px",
+                  fontFamily: "Courier New",
+                }}
                 className="alamat"
-                
               >
-                Dari pertemuan, aku belajar bahwa setiap momen kebersamaan
-                adalah waktu yang berharga
+                Bukan karna bertemu lalu kita berjodoh tapi karena berjodohlah
+                maka kami dipertemukan
               </motion.p>
             </div>
           </div>
@@ -106,9 +110,34 @@ const GaleryView = (props: GaleryViewInterface) => {
         <div style={{ marginBottom: "3rem" }}></div>
         {ImageGalleryComponent()}
         {ImageGaleryComponent2()}
+        {videoPlayer()}
       </div>
     </section>
   );
+
+  function videoPlayer() {
+    return (
+      <motion.div
+      animate={animate}
+      initial={AnimationThemeInstance.FadeRight}
+      transition={{ duration: 1.5, delay: 0.5 }}
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "center",
+          marginTop: 20,
+        }}
+      >
+        <ReactPlayer
+          style={{ height: "100px", width: "400px" }} // Ensure valid styling
+          url="https://youtu.be/NrqM4TrlXHA"
+          height={250}
+          width={"85%"}
+          controls
+        />
+      </motion.div>
+    );
+  }
 
   function firstImage() {
     return (
@@ -120,14 +149,11 @@ const GaleryView = (props: GaleryViewInterface) => {
             data-caption="This describes the image"
           >
             <motion.img
-                 
-                 initial={{ opacity: 0, scale: 0.5 }}
-                 animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-                 transition={{ duration: 1.5, delay:0.5 }}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
               src={props.image[0] ?? ""}
-              style={{
-                borderRadius: "8%",
-              }}
+              style={{}}
               className="img-fluid w-100"
             />
           </a>
@@ -150,11 +176,11 @@ const GaleryView = (props: GaleryViewInterface) => {
                 <motion.img
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-                  transition={{ duration: 1.5, delay:1.5 }}
+                  transition={{ duration: 1.5, delay: 1.5 }}
                   src={item}
                   style={{
                     maxHeight: 376,
-                    borderRadius: "8%",
+                    // borderRadius: "8%",
                   }}
                   className="img-fluid w-100 "
                   alt="Image Description"
@@ -188,11 +214,12 @@ const GaleryView = (props: GaleryViewInterface) => {
                     <div>
                       <motion.img
                         initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-                        transition={{ duration: 1.5, delay:2.0 }}
-                        style={{
-                          borderRadius: "8px",
+                        animate={{
+                          opacity: inView ? 1 : 0,
+                          scale: inView ? 1 : 0.5,
                         }}
+                        transition={{ duration: 1.5, delay: 2.0 }}
+                        style={{}}
                         src={item}
                         alt=""
                       />
