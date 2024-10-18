@@ -48,7 +48,7 @@ const GaleryView = (props: GaleryViewInterface) => {
     },
   ];
 
-  const openImageViewer = useCallback((index) => {
+  const openImageViewer = useCallback((index:any) => {
     setCurrImg(index);
     setmodalIsOpen(true);
   }, []);

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import PinkEssence from "../LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 const MainMenu = () => {
   const [first, setFirst] = useState("Pink-Esssence");

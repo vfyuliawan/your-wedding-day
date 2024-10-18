@@ -7,7 +7,7 @@ export const convertColor = (hex: any) => {
     return rgb;
   };
 
- export function hexToRgba(hex, alpha = 1) {
+ export function hexToRgba(hex:any, alpha = 1) {
     // Remove the hash at the start if it's there
     hex = hex.replace(/^#/, '');
   
