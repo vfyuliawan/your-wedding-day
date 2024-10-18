@@ -50,11 +50,17 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
           <h1
             style={{
               fontFamily: "brilon",
-              fontSize: 30,
+              fontSize: 40,
               color: "var(--third)",
             }}
           >
-            {props.HeroDetail.title.toLowerCase()}
+            {`${props.getTitle
+              ?.split("-")[0]
+              .split("")[0]
+              .toUpperCase()}&${props.getTitle
+              ?.split("-")[1]
+              .split("")[0]
+              .toUpperCase()}`}
           </h1>
           <h4
             style={{ fontFamily: "serif", fontSize: 16, color: "var(--third)" }}

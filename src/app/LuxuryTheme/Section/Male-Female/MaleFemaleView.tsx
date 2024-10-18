@@ -7,6 +7,7 @@ import { MaleFemaleViewInterface } from "./MaleFemaleModel";
 import React from "react";
 import { setAnimation } from "../../../utils/AnimationThemes";
 import { isMobile } from "react-device-detect";
+import { hexToRgba } from "../../../utils/ConvertColor";
 
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
@@ -103,6 +104,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   position: "absolute",
                   top: 0,
                   width: "100%",
+                  // backgroundColor:hexToRgba(props.primColor, 0.2)
                 }}
                 animate={controls}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -205,6 +207,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   position: "absolute",
                   bottom: 0,
                   width: "100%",
+                  // backgroundColor:hexToRgba(props.primColor, 0.2)
+
                 }}
                 animate={controls}
                 transition={{ duration: 1, delay: 0.84 }}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Galery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 // @ts-ignore
@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 import AnimationThemeInstance from "../../../utils/AnimationThemes";
 import React from "react";
 import ReactPlayer from "react-player";
+import ImageViewer from "react-simple-image-viewer";
 
 interface GaleryViewInterface {
   image: string[];
@@ -23,6 +24,9 @@ const GaleryView = (props: GaleryViewInterface) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
+
+  const [currImg, setCurrImg] = useState(0);
 
   useEffect(() => {
     if (isVisible) {
@@ -43,10 +47,19 @@ const GaleryView = (props: GaleryViewInterface) => {
       original: "/pink-essence/img/prawed/prawed3.jpg",
     },
   ];
+
+  const openImageViewer = useCallback((index) => {
+    setCurrImg(index);
+    setmodalIsOpen(true);
+  }, []);
   return (
-    <section style={{
-      background:"linear-gradient(var(--prim) 0%, var(--sec) 400%)"
-    }} className="galery" id="galery">
+    <section
+      style={{
+        background: "linear-gradient(var(--prim) 0%, var(--sec) 400%)",
+      }}
+      className="galery"
+      id="galery"
+    >
       <div className="container">
         <div className="row mt-4 justify-content-center">
           <div className="col-6 text-end">
@@ -56,7 +69,7 @@ const GaleryView = (props: GaleryViewInterface) => {
               initial={AnimationThemeInstance.FadeLeft}
               transition={{ duration: 1.5 }}
               style={{
-                color:"var(--third)" ,
+                color: "var(--third)",
                 fontWeight: "100",
                 fontFamily: "brilon",
                 fontSize: "30px",
@@ -71,7 +84,7 @@ const GaleryView = (props: GaleryViewInterface) => {
               style={{
                 fontFamily: "Creation",
                 fontWeight: "normal",
-                color:"var(--third)" ,
+                color: "var(--third)",
                 fontSize: "32px",
               }}
             >
@@ -96,7 +109,7 @@ const GaleryView = (props: GaleryViewInterface) => {
                 initial={AnimationThemeInstance.FadeRight}
                 transition={{ duration: 1.5, delay: 0.5 }}
                 style={{
-                  color:"var(--third)" ,
+                  color: "var(--third)",
                   fontSize: "14px",
                   fontFamily: "Courier New",
                 }}
@@ -114,15 +127,98 @@ const GaleryView = (props: GaleryViewInterface) => {
         {ImageGaleryComponent2()}
         {videoPlayer()}
       </div>
+      {/* <button onClick={() => setmodalIsOpen(true)}>Open Gallery</button> */}
+      <div
+        style={{
+          width: "50%",
+        }}
+      >
+        {modalIsOpen && (
+          <div style={{ position: "relative"}}>
+            <button
+              onClick={() => {}}
+              style={{
+                position: "absolute",
+                top: "10%",
+                left: "10px",
+                zIndex: 1000,
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              <i
+                className="bi bi-arrow-left-circle"
+                style={{ fontSize: "30px", color: "white" }}
+              ></i>
+            </button>
+            <div style={{ width: 300 }}>
+              <ImageViewer
+                backgroundStyle={{
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
+                }}
+                closeComponent={
+                  <div
+                    style={{
+                      display: "flex",
+                      position:"absolute",
+                      top:15,
+                      right:10,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "green",
+                      padding: 10,
+                      height: 40,
+                      borderRadius: 3,
+                      margin: "auto",
+                    }}
+                    onClick={() => {}}
+                  >
+                    <p
+                      style={{
+                        fontSize: 13,
+                        color: "white",
+                        fontWeight: "300",
+                        fontFamily: "Times-new-roman",
+
+                        margin: 0,
+                      }}
+                    >
+                      {" "}
+                      Close
+                    </p>
+                  </div>
+                }
+                src={props.image}
+                currentIndex={currImg}
+                disableScroll={false}
+                closeOnClickOutside={true}
+                onClose={() => {
+                  setCurrImg(0);
+                  setmodalIsOpen(false);
+                }}
+              />
+            </div>
+
+            <button onClick={() => {}}>
+              <i
+                className="bi bi-arrow-left-circle"
+                style={{ fontSize: "30px" }}
+              ></i>
+            </button>
+          </div>
+        )}
+      </div>
     </section>
   );
 
   function videoPlayer() {
     return (
       <motion.div
-      animate={animate}
-      initial={AnimationThemeInstance.FadeRight}
-      transition={{ duration: 1.5, delay: 0.5 }}
+        animate={animate}
+        initial={AnimationThemeInstance.FadeRight}
+        transition={{ duration: 1.5, delay: 0.5 }}
         style={{
           display: "flex",
           width: "100%",
@@ -145,20 +241,17 @@ const GaleryView = (props: GaleryViewInterface) => {
     return (
       <div ref={ref} className="row justify-content-center ">
         <div className="col-10 mt-3">
-          <a
-            href="/pink-essence/img/prawed/prawed4.jpg"
-            data-toggle="lightbox"
-            data-caption="This describes the image"
-          >
-            <motion.img
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-              src={props.image[0] ?? ""}
-              style={{}}
-              className="img-fluid w-100"
-            />
-          </a>
+          <motion.img
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+            src={props.image[0] ?? ""}
+            style={{}}
+            className="img-fluid w-100"
+            onTap={() => {
+              openImageViewer(0);
+            }}
+          />
         </div>
       </div>
     );
@@ -170,24 +263,21 @@ const GaleryView = (props: GaleryViewInterface) => {
         {props.image.map((item, key) => {
           return (
             <div className="col mt-3">
-              <a
-                href={item}
-                data-toggle="lightbox"
-                data-caption="This describes the image"
-              >
-                <motion.img
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
-                  transition={{ duration: 1.5, delay: 1.5 }}
-                  src={item}
-                  style={{
-                    maxHeight: 376,
-                    // borderRadius: "8%",
-                  }}
-                  className="img-fluid w-100 "
-                  alt="Image Description"
-                />
-              </a>
+              <motion.img
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.5 }}
+                transition={{ duration: 1.5, delay: 1.5 }}
+                src={item}
+                style={{
+                  maxHeight: 376,
+                  // borderRadius: "8%",
+                }}
+                className="img-fluid w-100 "
+                alt="Image Description"
+                onClick={() => {
+                  openImageViewer(key);
+                }}
+              />
             </div>
           );
         })}
@@ -213,7 +303,11 @@ const GaleryView = (props: GaleryViewInterface) => {
               >
                 {props.image.map((item, key) => {
                   return (
-                    <div>
+                    <div
+                      onClick={() => {
+                        openImageViewer(key);
+                      }}
+                    >
                       <motion.img
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{

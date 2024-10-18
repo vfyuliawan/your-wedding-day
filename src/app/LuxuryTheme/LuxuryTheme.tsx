@@ -39,6 +39,10 @@ import QRCode from "react-qr-code";
 import NavbarVerticalView from "./Section/Navbar/NavbarVerticalView";
 import { ColorResult, SketchPicker } from "react-color";
 import Swatches from "react-color/lib/components/swatches/Swatches";
+import ModalQRCode from "./Section/GuestScanView/ModalQRCode";
+import ModalQRCodeBgImage from "./Section/GuestScanView/ModalQRCodeBgImage";
+import { ModalEditableForm } from "./Section/EditableForm/ModalEditableForm";
+import HeathProtocol from "./Section/HealtProtocol/HealthProtocol";
 
 interface LuxuryThemeInterface {
   details: ResultDetailSlug | undefined;
@@ -49,6 +53,9 @@ interface LuxuryThemeInterface {
   idGuest: string;
   getParams?: string | null;
   getIsTemplate?: boolean;
+  setDetails: React.Dispatch<
+    React.SetStateAction<ResultDetailSlug | undefined>
+  >;
 }
 
 const LuxuryTheme = (props: LuxuryThemeInterface) => {
@@ -63,6 +70,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalEdit, setModalEdit] = React.useState(false);
   const [isActive, setisActive] = useState(0);
+  const [healtProtocol, sethealtProtocol] = useState(true);
 
   let subtitle: any;
 
@@ -118,7 +126,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       },
       {
         root: null,
-        threshold: 0.2,
+        threshold: 0.1,
       }
     );
 
@@ -300,6 +308,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (
             <HeroView
+              getTitle={props.getParams ?? ""}
               ref={(el) => (sectionRefs.current!.hero = el)}
               HeroDetail={props?.details?.hero}
             />
@@ -323,6 +332,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             }
           >
             <MaleFemaleView
+              primColor={primaryColor}
               ref={(el: any) =>
                 (sectionRefs.current!.maleFemale = el as HTMLDivElement | null)
               }
@@ -350,26 +360,26 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
         >
           <CountDownView targetDate={props.details?.countdown} />
         </div>
-        {props?.details?.story.isShow ? (
-          <div
-            id="story"
-            ref={(el) =>
-              (sectionRefs.current!.story = el as HTMLDivElement | null)
-            }
-          >
+        <div
+          id="story"
+          ref={(el) =>
+            (sectionRefs.current!.story = el as HTMLDivElement | null)
+          }
+        >
+          {props?.details?.story.isShow ? (
             <StoryView color={primaryColor} OurStory={props?.details?.story} />
-          </div>
-        ) : null}
-        {props?.details?.galery.isShow ? (
-          <div
-            id="galery"
-            ref={(el) =>
-              (sectionRefs.current!.galery = el as HTMLDivElement | null)
-            }
-          >
+          ) : null}
+        </div>
+        <div
+          id="galery"
+          ref={(el) =>
+            (sectionRefs.current!.galery = el as HTMLDivElement | null)
+          }
+        >
+          {props?.details?.galery.isShow ? (
             <GaleryView image={props?.details?.galery.galeries} />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
         <div
           id="rsvp"
           ref={(el) =>
@@ -382,145 +392,42 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
             setMessage={props.setMessage}
           />
         </div>
-
-        <GiftsView Gifts={props!.details!.gift.gifts} />
+        {props.details?.gift.isShow ? (
+          <GiftsView Gifts={props!.details!.gift.gifts} />
+        ) : null}
 
         <div ref={qrCodeRef}></div>
 
         <GuestScanView idGuest={props.idGuest ?? 0} guest={props.guest ?? ""} />
-
+        {healtProtocol ? <HeathProtocol /> : null}
         <FooterView Footer={props?.details!.home} />
         <EndView />
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={() => {
-            setIsOpen(false);
-          }}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <h2
-            ref={(_subtitle) => (subtitle = _subtitle)}
-            style={{
-              justifyContent: "center",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontFamily: "Brilon",
-              letterSpacing: "2px",
-              fontSize: 22,
-            }}
-          >
-            e-reservation
-          </h2>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 40,
-              opacity: 0.5,
-              color: "white",
-              backgroundColor: "red",
-              // borderRadius: "50%",
-              paddingLeft: 5,
-              paddingRight: 5,
-              position: "absolute",
-              top: 0,
-              right: isMobile ? 25 : 35,
-              transform: "translate(50%, -0%)",
-            }}
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
-            Close
-          </div>
-          <div
-            style={{
-              height: 200,
-              width: "100%",
-              backgroundColor: "var(--prim)",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 20,
-              marginTop: 30,
-              padding: 100,
-              border: `3px solid ${"var(--prim)"}`,
-            }}
-          >
-            <img
-              src={props.details?.cover.img}
-              style={{ objectFit: "fill", height: 200 }}
-              alt=""
-            />
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-10 justify-content-center d-flex">
-              <div
-                style={{
-                  width: "100%",
-                  marginTop: 20,
-                  backgroundColor: "white",
-                  borderRadius: "10%",
-                  justifyContent: "center",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <QRCode
-                  value={props.guest + "nviteMe" + props.idGuest}
-                  size={140}
-                  bgColor="#ffffff"
-                  fgColor="#000000"
-                  level="L"
-                />
-                <div className="col-12">
-                  <div
-                    style={{
-                      opacity: 0.5,
-                      marginTop: 20,
-                      borderTop: `2px dotted ${"var(--prim)"}`,
-                      width: "100%",
-                    }}
-                  ></div>
-                </div>
-                <p
-                  style={{
-                    marginTop: "10px",
-                    color: "grey",
-                    fontSize: "1rem",
-                    fontFamily: "faunaOne",
-                    textAlign: "center",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Nama Tamu
-                  <br />{" "}
-                  <span style={{ color: "black" }}>
-                    {props.guest.charAt(0).toUpperCase() + props.guest.slice(1)}
-                  </span>
-                  <br />
-                  Guest ID : {props.idGuest}
-                </p>
-                <div className="col-12">
-                  <div
-                    style={{
-                      opacity: 0.5,
-                      marginTop: 5,
-                      borderTop: `2px dotted ${"var(--prim)"}`,
-                      width: "100%",
-                    }}
-                  ></div>
-                </div>
-              </div>{" "}
-            </div>
-          </div>
-        </Modal>
-        <ModalPickColor />
+        <ModalQRCodeBgImage
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          image={props.details?.cover.img ?? ""}
+          guest={props.guest}
+          idGuest={props.idGuest}
+        />
+        <ModalEditableForm
+          modalEdit={modalEdit}
+          setModalEdit={setModalEdit}
+          primaryColor={primaryColor}
+          setPrimaryColor={setprimaryColor}
+          secondaryColor={secondaryColor}
+          setSecondaryColor={setsecondaryColor}
+          textColor1={textColor1}
+          setTextColor1={setTextColor1}
+          textColor2={textColor2}
+          setTextColor2={setTextColor2}
+          setAllColor={setAllColor}
+          gifts={props.details!.gift.isShow}
+          setDetails={props.setDetails}
+          story={props.details!.story.isShow}
+          galery={props.details!.galery.isShow}
+          protocoler={healtProtocol}
+          setProtocoler={sethealtProtocol}
+        />
 
         {!coverVisible && isMobile ? (
           <button
@@ -609,12 +516,12 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               bottom: "200px",
               right: "20px",
               padding: "15px",
-              backgroundColor: "black",
+              backgroundColor: "#25f59f",
               opacity: 1,
               height: "50px",
               width: "50px",
               borderRadius: "50%",
-              color: "white",
+              color: "#25f59f",
               cursor: "pointer",
               zIndex: "999",
             }}
@@ -626,7 +533,8 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
               className="bi bi-pencil-square"
               style={{
                 fontSize: isMobile ? "2rem" : "1.5rem",
-                color: "var(--third)",
+                color: "black",
+                fontWeight: "900",
               }}
             ></i>
           </button>
@@ -634,6 +542,7 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
 
         {!isMobile && !coverVisible ? (
           <NavbarVerticalView
+            setModalEdit={setModalEdit}
             setIsopen={setIsOpen}
             togglePlay={togglePlay}
             isPlaying={isPlaying}
@@ -643,416 +552,6 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
       </div>
     </div>
   );
-
-  function ModalPickColor() {
-    return (
-      <Modal
-        isOpen={modalEdit}
-        // onAfterOpen={()=>()}
-        onRequestClose={() => {
-          setModalEdit(false);
-        }}
-        style={{
-          content: {
-            top: "45%",
-            border: `1px solid var(--prim)`,
-            left: "50%",
-            width: isMobile ? "90%" : "40%",
-            // height: "80vh",
-            backgroundColor: "#ffff",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-          },
-        }}
-        contentLabel="Example Modal"
-      >
-        <h2
-          ref={(_subtitle) => (subtitle = _subtitle)}
-          style={{
-            justifyContent: "center",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontFamily: "Brilon",
-            letterSpacing: "2px",
-            fontSize: 22,
-          }}
-        >
-          theme trial color
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 25,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              onClick={() => {
-                setisActive(0);
-                setTimeout(() => {
-                  setisActive(1);
-                }, 200);
-              }}
-              style={{
-                height: 50,
-                width: 50,
-
-                borderRadius: 25,
-                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
-                backgroundColor: primaryColor,
-              }}
-            />
-            <h4
-              style={{
-                fontSize: 12,
-                fontFamily: "Times-new-roman",
-                letterSpacing: 1,
-              }}
-            >
-              Primary
-            </h4>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              onClick={() => {
-                setisActive(0);
-                setTimeout(() => {
-                  setisActive(2);
-                }, 200);
-              }}
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 25,
-                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
-                backgroundColor: secondaryColor,
-              }}
-            />
-            <h4
-              style={{
-                fontSize: 12,
-                fontFamily: "Times-new-roman",
-                letterSpacing: 1,
-              }}
-            >
-              Secondary
-            </h4>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              onClick={() => {
-                setisActive(0);
-                setTimeout(() => {
-                  setisActive(3);
-                }, 200);
-              }}
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 25,
-                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
-                backgroundColor: textColor1,
-              }}
-            />
-            <h4
-              style={{
-                fontSize: 12,
-                fontFamily: "Times-new-roman",
-                letterSpacing: 1,
-              }}
-            >
-              Text 1
-            </h4>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              onClick={() => {
-                setisActive(0);
-                setTimeout(() => {
-                  setisActive(4);
-                }, 200);
-              }}
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 25,
-                border: "3px solid rgba(26, 26, 26, 0.9)", // Corrected border color
-                backgroundColor: textColor2,
-              }}
-            />
-            <h4
-              style={{
-                fontSize: 12,
-                fontFamily: "Times-new-roman",
-                letterSpacing: 1,
-              }}
-            >
-              Text 2
-            </h4>
-          </div>
-        </div>
-        <div className="row mt-3">
-          <h5
-            onClick={() => {
-              setAllColor();
-            }}
-            style={{ color: "red" }}
-          >
-            Default Color
-          </h5>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginTop: 0,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "transparent",
-          }}
-        >
-          <button
-            className="btn"
-            onClick={() => {
-              setModalEdit(false);
-            }}
-            style={{
-              width: "50%",
-              paddingTop: 4,
-              paddingBottom: 4,
-              backgroundColor: "green",
-              fontSize: 18,
-              fontFamily: "Times-new-roman",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: 20,
-            }}
-          >
-            Perview
-          </button>
-        </div>
-
-        {isActive == 1 ? (
-          <>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <p style={{ fontSize: 12 }}>warna: {primaryColor}</p>
-              </div>
-            </div>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Swatches
-                styles={{
-                  default: {},
-                }}
-                height={250}
-                width={240}
-                // color={"#ffff"}
-                onChange={(val: ColorResult) => {
-                  const hexColor = val.hex;
-                  setprimaryColor(hexColor);
-                  setisActive(0);
-                  document.documentElement.style.setProperty(
-                    "--prim",
-                    hexColor
-                  );
-                }}
-              />
-            </div>
-          </>
-        ) : isActive == 2 ? (
-          <>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <p style={{ fontSize: 12 }}>warna: {secondaryColor}</p>
-              </div>
-            </div>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Swatches
-                styles={{
-                  default: {},
-                }}
-                height={250}
-                width={240}
-                // color={"#ffff"}
-                onChange={(val: ColorResult) => {
-                  const hexColor = val.hex;
-                  setsecondaryColor(hexColor);
-                  setisActive(0);
-                  document.documentElement.style.setProperty("--sec", hexColor);
-                }}
-              />
-            </div>
-          </>
-        ) : isActive == 3 ? (
-          <>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <p style={{ fontSize: 12 }}>warna: {textColor1}</p>
-              </div>
-            </div>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Swatches
-                styles={{
-                  default: {},
-                }}
-                height={250}
-                width={240}
-                // color={"#ffff"}
-                onChange={(val: ColorResult) => {
-                  const hexColor = val.hex;
-                  setTextColor1(hexColor);
-                  setisActive(0);
-                  document.documentElement.style.setProperty(
-                    "--third",
-                    hexColor
-                  );
-                }}
-              />
-            </div>
-          </>
-        ) : isActive == 4 ? (
-          <>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <p style={{ fontSize: 12 }}>warna: {textColor2}</p>
-              </div>
-            </div>
-            <div
-              className="row mt-3"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Swatches
-                styles={{
-                  default: {},
-                }}
-                height={250}
-                width={240}
-                // color={"#ffff"}
-                onChange={(val: ColorResult) => {
-                  const hexColor = val.hex;
-                  setTextColor2(hexColor);
-                  setisActive(0);
-                  document.documentElement.style.setProperty(
-                    "--forth",
-                    hexColor
-                  );
-                }}
-              />
-            </div>
-          </>
-        ) : null}
-      </Modal>
-    );
-  }
 };
 
 export default LuxuryTheme;

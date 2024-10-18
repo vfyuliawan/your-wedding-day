@@ -307,7 +307,7 @@ const CoverView = (props: CoverModelInterface) => {
                 {props.detailCover?.title}
               </p>
             </div>
-            <div style={{ marginTop:  isMobile?"40rem":"19rem" }} className="col-12">
+            <div style={{ marginTop:  isMobile?"30rem":"19rem" }} className="col-12">
             <p
                 className=""
                 style={{

@@ -61,7 +61,7 @@ const HomeView = (props: HomeViewInterface) => {
                     letterSpacing:2
                   }}
                 >
-                  {props?.HomeDetail?.quotes?.split(",")[0].toLowerCase()}
+                  {props?.HomeDetail?.title.toLowerCase()}
                 </motion.h1>
                 <motion.p
                   animate={controls}
@@ -74,7 +74,7 @@ const HomeView = (props: HomeViewInterface) => {
                     fontSize: "14px",
                   }}
                 >
-                  {props?.HomeDetail?.quotes?.split(",")[1]}
+                  {props?.HomeDetail?.quotes}
                 </motion.p>
               </div>
             </div>

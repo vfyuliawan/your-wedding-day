@@ -12,69 +12,76 @@ interface KeyValueFooter {
 
 const FooterView = (props: FooterViewInterface) => {
   return (
-    <section
-      id="footer"
+    <div
       style={{
-        backgroundImage: `url('${props.Footer.img}')`,
-        backgroundPosition: "center",
+        position: "relative",
       }}
-      className="footer w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white"
     >
+     
+      <section
+        id=""
+        style={{
+          backgroundImage: `url('${props.Footer.img}')`,
+          backgroundPosition: "center",
+        }}
+        className="footer w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white"
+      >
+        <div className="gradient-overlay" />
+        <main className="inside" style={{ position: "relative", top: 300 }}>
+          <h2
+            style={{
+              textShadow: "none  !important",
+              fontSize: "40px",
+              color: "var(--third)",
+            }}
+          >
+            Terimakasih
+          </h2>
+          <p
+            style={{
+              textShadow: "none !important",
+              fontSize: "12px",
+              color: "var(--third)",
+              fontFamily: "Times-new-roman",
+            }}
+          >
+            {props.Footer.quotes}
+          </p>
+          <h4
+            style={{
+              textShadow: "none !important",
+              fontSize: 16,
+              color: "var(--third)",
+
+              fontFamily: "Times-new-roman",
+            }}
+          >
+            Kami Yang Berbahagia
+          </h4>
+          <h3
+            style={{
+              textShadow: "none !important",
+              fontSize: 40,
+              color: "var(--third)",
+            }}
+          >
+            {props.Footer.title}
+          </h3>
+        </main>
+      </section>
       <div
-        className="gradient-overlay-top"
+        className=""
         style={{
           position: "absolute",
           top: 0,
-          backgroundColor: "var(--sec)",
+          background: "linear-gradient(var(--prim) -100%, var(--sec) 200%)",
           left: 0,
           right: 0,
           height: "10rem",
           zIndex: 1,
         }}
       ></div>
-      <div className="gradient-overlay" />
-      <main className="inside" style={{ position: "relative", top: 300 }}>
-        <h2
-          style={{
-            textShadow: "none  !important",
-            fontSize: "40px",
-            color: "var(--third)",
-          }}
-        >
-          Terimakasih
-        </h2>
-        <p
-          style={{
-            textShadow: "none !important",
-            fontSize: "12px",
-            color: "var(--third)",
-            fontFamily: "Times-new-roman",
-          }}
-        >
-          {props.Footer.quotes}
-        </p>
-        <h4
-          style={{
-            textShadow: "none !important",
-            fontSize: 16,
-            color: "var(--third)",
-
-            fontFamily: "Times-new-roman",
-          }}
-        >
-          Kami Yang Berbahagia
-        </h4>
-        <h3
-          style={{
-            textShadow: "none !important",
-            fontSize: 40,
-            color: "var(--third)",
-          }}
-        >
-          {props.Footer.title}
-        </h3>
-      </main>
-    </section>
+    </div>
   );
 };
 

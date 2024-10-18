@@ -127,7 +127,7 @@ export default function Home() {
   return (
     <>
       <Head>
-      <link rel="icon" type="image/png" href="/LogoNM.png" />
+        <link rel="icon" type="image/png" href="/LogoNM.png" />
       </Head>
       {loading ? (
         <Loading />
@@ -160,7 +160,8 @@ export default function Home() {
               </div>
               <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
                 <LuxuryTheme
-                getIsTemplate={getIsTemplate}
+                  setDetails={setDetails}
+                  getIsTemplate={getIsTemplate}
                   message={message}
                   setMessage={setMessage}
                   details={details}
@@ -175,6 +176,7 @@ export default function Home() {
           <MobileView>
             <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
               <LuxuryTheme
+                setDetails={setDetails}
                 getIsTemplate={getIsTemplate}
                 message={message}
                 setMessage={setMessage}
@@ -183,7 +185,6 @@ export default function Home() {
                 guest={guest}
                 idGuest={idGuest}
                 getParams={getParams}
-
               />
             </div>
           </MobileView>
@@ -191,6 +192,8 @@ export default function Home() {
       ) : themeName == "BluePremium" ? (
         <LuxuryTheme
           message={message}
+          setDetails={setDetails}
+
           setMessage={setMessage}
           details={details}
           postMessage={postMessage}
@@ -199,6 +202,8 @@ export default function Home() {
         />
       ) : themeName == "LuxuryCream" ? (
         <LuxuryTheme
+        setDetails={setDetails}
+
           message={message}
           setMessage={setMessage}
           details={details}
@@ -208,6 +213,8 @@ export default function Home() {
         />
       ) : themeName == "LuxuryGreen" ? (
         <LuxuryTheme
+        setDetails={setDetails}
+
           message={message}
           setMessage={setMessage}
           details={details}
@@ -217,6 +224,8 @@ export default function Home() {
         />
       ) : themeName == "LuxuryPink" ? (
         <LuxuryTheme
+        setDetails={setDetails}
+
           message={message}
           setMessage={setMessage}
           details={details}
@@ -320,7 +329,6 @@ export default function Home() {
       >
         <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
         <link rel="icon" type="image/x-icon" href="/LogoNM.png" />
-
 
         <div
           style={{

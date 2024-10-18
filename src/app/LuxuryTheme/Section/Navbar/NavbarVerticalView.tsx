@@ -6,6 +6,7 @@ interface NavbarInterfaceView {
   isPlaying: boolean;
   setIsopen: React.Dispatch<SetStateAction<boolean>>;
   togglePlay: () => void;
+  setModalEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
 const NavbarVerticalView = (props: NavbarInterfaceView) => {
@@ -179,21 +180,22 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
         style={{
           position: "fixed",
           bottom: 70,
-          backgroundColor: "black",
+          backgroundColor:  "#25f59f",
+
           opacity: 1,
           height: 58,
           width: 58,
           borderRadius: "50%",
         }}
         onClick={()=>{
-            
+            props.setModalEdit(true)
         }}
       >
         <i
           className="bi bi-pencil-square"
           style={{
             fontSize: isMobile ? "2rem" : "1.5rem",
-            color: "var(--third)",
+            color: "black",
           }}
         ></i>
       </button>
