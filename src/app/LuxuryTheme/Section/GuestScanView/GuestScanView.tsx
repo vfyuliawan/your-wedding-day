@@ -17,7 +17,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
 
   useEffect(() => {
     if (isVisible) {
-      animate.start(AnimationThemeInstance.FadeHorizon);
+      animate.start(AnimationThemeInstance.FadeStartVertical);
     }
 
     return () => {};
@@ -42,8 +42,8 @@ const GuestScanView = (props: GuestScanViewInterface) => {
             <div className="row">
               <motion.h2
                 animate={animate}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.5 }}
                 style={{
                   color: "var(--forth)",
                   fontWeight: "100",
@@ -55,8 +55,8 @@ const GuestScanView = (props: GuestScanViewInterface) => {
               </motion.h2>
               <motion.h2
                 animate={animate}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.5, delay:1 }}
                 style={{
                   color: "var(--forth)",
                   fontWeight: "100",
@@ -83,8 +83,8 @@ const GuestScanView = (props: GuestScanViewInterface) => {
             <div className="col-8 text-center">
               <motion.p
                 animate={animate}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 0.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.5, delay: 1 }}
                 style={{
                   color: "var(--forth)",
                   fontSize: "12px",
@@ -105,8 +105,8 @@ const GuestScanView = (props: GuestScanViewInterface) => {
           <div className="col-8 text-center">
             <motion.p
               animate={animate}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 0.5 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5, delay: 2 }}
               style={{
                 color:"var(--forth)" ,
                 fontSize: "12px",
@@ -127,7 +127,10 @@ const GuestScanView = (props: GuestScanViewInterface) => {
   function body() {
     return (
       <>
-        <div
+        <motion.div
+         animate={animate}
+         initial={AnimationThemeInstance.FadeUp}
+         transition={{ duration: 0.8, delay:1.3 }}
           style={{
             width: "100%",
             backgroundColor: "white",
@@ -155,7 +158,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
               " With Id Guests " +
               props.idGuest}
           </p>
-        </div>
+        </motion.div>
       </>
     );
   }

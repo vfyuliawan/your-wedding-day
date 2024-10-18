@@ -30,7 +30,7 @@ const GaleryView = (props: GaleryViewInterface) => {
 
   useEffect(() => {
     if (isVisible) {
-      animate.start(AnimationThemeInstance.FadeHorizon);
+      animate.start(AnimationThemeInstance.FadeStartVertical);
     }
 
     return () => {};
@@ -66,8 +66,8 @@ const GaleryView = (props: GaleryViewInterface) => {
             <motion.h2
               ref={targetRef}
               animate={animate}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5, delay:0.5 }}
               style={{
                 color: "var(--third)",
                 fontWeight: "100",
@@ -79,8 +79,8 @@ const GaleryView = (props: GaleryViewInterface) => {
             </motion.h2>
             <motion.h4
               animate={animate}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5, delay:0.9 }}
               style={{
                 fontFamily: "Creation",
                 fontWeight: "normal",
@@ -106,8 +106,8 @@ const GaleryView = (props: GaleryViewInterface) => {
             <div className="col-8 text-center">
               <motion.p
                 animate={animate}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 0.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration:0.8, delay: 1 }}
                 style={{
                   color: "var(--third)",
                   fontSize: "14px",
@@ -217,8 +217,8 @@ const GaleryView = (props: GaleryViewInterface) => {
     return (
       <motion.div
         animate={animate}
-        initial={AnimationThemeInstance.FadeRight}
-        transition={{ duration: 1.5, delay: 0.5 }}
+        initial={AnimationThemeInstance.FadeUp}
+        transition={{ duration: 0.5, delay: 0.5 }}
         style={{
           display: "flex",
           width: "100%",

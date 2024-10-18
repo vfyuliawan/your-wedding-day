@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import PinkEssence from "./LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/router";
 import { usePathname, useSearchParams } from "next/navigation";
 import Service from "./services/Service";
@@ -24,7 +23,6 @@ import {
   where,
 } from "firebase/firestore";
 import Swal from "sweetalert2";
-import LuxuryTheme from "./LuxuryTheme/LuxuryTheme";
 import ReactLoading from "react-loading";
 import FloralTheme from "./FloralTheme/FloralTheme";
 import FullPageTheme from "./FullAnimatedTheme/FullPageTheme";
@@ -40,6 +38,7 @@ import {
   isMobile,
 } from "react-device-detect";
 import Head from "next/head";
+import RedEssence from "./LuxuryTheme/RedEssence";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -159,7 +158,7 @@ export default function Home() {
                 />
               </div>
               <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
-                <LuxuryTheme
+                <RedEssence
                   setDetails={setDetails}
                   getIsTemplate={getIsTemplate}
                   message={message}
@@ -175,7 +174,7 @@ export default function Home() {
           </BrowserView>
           <MobileView>
             <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
-              <LuxuryTheme
+              <RedEssence
                 setDetails={setDetails}
                 getIsTemplate={getIsTemplate}
                 message={message}
@@ -190,7 +189,7 @@ export default function Home() {
           </MobileView>
         </>
       ) : themeName == "BluePremium" ? (
-        <LuxuryTheme
+        <RedEssence
           message={message}
           setDetails={setDetails}
 
@@ -201,7 +200,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryCream" ? (
-        <LuxuryTheme
+        <RedEssence
         setDetails={setDetails}
 
           message={message}
@@ -212,7 +211,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryGreen" ? (
-        <LuxuryTheme
+        <RedEssence
         setDetails={setDetails}
 
           message={message}
@@ -223,7 +222,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : themeName == "LuxuryPink" ? (
-        <LuxuryTheme
+        <RedEssence
         setDetails={setDetails}
 
           message={message}

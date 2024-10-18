@@ -25,7 +25,7 @@ const StoryView = (props: StoryViewInterface) => {
 
   useEffect(() => {
     if (isVisible) {
-      animate.start(AnimationThemeInstance.FadeHorizon);
+      animate.start(AnimationThemeInstance.FadeStartVertical);
     }
 
     return () => {};
@@ -39,8 +39,8 @@ const StoryView = (props: StoryViewInterface) => {
             <motion.h2
               ref={targetRef}
               animate={animate}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay:0.6 }}
               style={{
                 color: "var(--forth)",
                 fontSize: "30px",
@@ -79,8 +79,8 @@ const StoryView = (props: StoryViewInterface) => {
             <div className="col-8 text-center">
               <motion.p
                 animate={animate}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 0.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.5, delay: 1 }}
                 style={{
                   color: "var(--forth)",
                   fontSize: "14px",
@@ -96,8 +96,8 @@ const StoryView = (props: StoryViewInterface) => {
         </div>
         <motion.div
           animate={animate}
-          initial={AnimationThemeInstance.FadeLeft}
-          transition={{ duration: 1.5, delay: 0.5 }}
+          initial={AnimationThemeInstance.FadeUp}
+          transition={{ duration: 0.9, delay: 0.5 }}
           style={{
             marginBottom: 30,
           }}

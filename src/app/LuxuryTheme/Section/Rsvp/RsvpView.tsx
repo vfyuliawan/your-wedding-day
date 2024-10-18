@@ -10,7 +10,7 @@ import {
   TimeConvertionFullDateAndTime,
 } from "../../../utils/TimeConvertion";
 import Swal from "sweetalert2";
-import { motion, useAnimation } from "framer-motion";
+import { delay, motion, useAnimation } from "framer-motion";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import React from "react";
 import AnimationThemeInstance from "../../../utils/AnimationThemes";
@@ -41,9 +41,18 @@ const RsvpView = (props: RSVPViewInterface) => {
   const animate = useAnimation();
   const isVisible = useIntersectionObserver(targetRef);
 
+  const bouncing = {
+    type: "spring",
+    duration: 0.8,
+    delay: Math.random() * (2 - 0.5) + 0.5,
+    bounce: 0.5,
+    damping: 3,
+    stiffness: 50,
+  };
+
   useEffect(() => {
     if (isVisible) {
-      animate.start(AnimationThemeInstance.FadeHorizon);
+      animate.start(AnimationThemeInstance.FadeStartVertical);
     }
     return () => {};
   }, [animate, isVisible]);
@@ -78,8 +87,15 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <div className="col-6">
                   <motion.h2
                     animate={animate}
-                    initial={AnimationThemeInstance.FadeLeft}
-                    transition={{ duration: 1.5 }}
+                    initial={AnimationThemeInstance.FadeUp}
+                    transition={{
+                      type: "spring",
+                      duration: 0.8,
+                      delay: Math.random() * (2 - 0.5) + 0.5,
+                      bounce: 0.5,
+                      damping: 3,
+                      stiffness: 50,
+                    }}
                     style={{
                       color: "var(--third)",
                       fontSize: "32px",
@@ -106,8 +122,15 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <div className="col-6 d-flex justify-content-start align-items-center">
                   <motion.div
                     animate={animate}
-                    initial={AnimationThemeInstance.FadeRight}
-                    transition={{ duration: 1.5 }}
+                    initial={AnimationThemeInstance.FadeUp}
+                    transition={{
+                      type: "spring",
+                      duration: 0.8,
+                      delay: Math.random() * (2 - 0.5) + 0.5,
+                      bounce: 0.5,
+                      damping: 3,
+                      stiffness: 50,
+                    }}
                     style={{
                       position: "absolute",
                       width: "40%",
@@ -123,8 +146,15 @@ const RsvpView = (props: RSVPViewInterface) => {
               </div>
               <motion.p
                 animate={animate}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{
+                  type: "spring",
+                  duration: 0.8,
+                  delay: Math.random() * (2 - 0.5) + 0.5,
+                  bounce: 0.5,
+                  damping: 3,
+                  stiffness: 50,
+                }}
                 style={{
                   color: "var(--third)",
                   fontSize: "12px",
@@ -141,8 +171,24 @@ const RsvpView = (props: RSVPViewInterface) => {
 
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col-12 ">
-                <label  style={{fontSize:"14px"}} htmlFor="nama" className="form-label">
+              <motion.div
+                animate={animate}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{
+                  type: "spring",
+                  duration: 0.8,
+                  delay: Math.random() * (2 - 0.5) + 0.5,
+                  bounce: 0.5,
+                  damping: 3,
+                  stiffness: 50,
+                }}
+                className="col-12 "
+              >
+                <label
+                  style={{ fontSize: "14px" }}
+                  htmlFor="nama"
+                  className="form-label"
+                >
                   Nama
                 </label>
                 <input
@@ -160,9 +206,23 @@ const RsvpView = (props: RSVPViewInterface) => {
                     });
                   }}
                 />
-              </div>
-              <div className="col-12 ">
-                <label style={{fontSize:"14px"}} htmlFor="Pesan" className="form-label">
+              </motion.div>
+              <motion.div
+                animate={animate}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={[
+                  bouncing,
+                  {
+                    delay: 2.3,
+                  },
+                ]}
+                className="col-12 "
+              >
+                <label
+                  style={{ fontSize: "14px" }}
+                  htmlFor="Pesan"
+                  className="form-label"
+                >
                   Konfrimasi
                 </label>
                 <select
@@ -181,9 +241,25 @@ const RsvpView = (props: RSVPViewInterface) => {
                   <option value={1}>Yes</option>
                   <option value={2}>No</option>
                 </select>
-              </div>
-              <div className="col-12">
-                <label  style={{fontSize:"14px"}} htmlFor="nama" className="form-label">
+              </motion.div>
+              <motion.div
+                animate={animate}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{
+                  type: "spring",
+                  duration: 0.8,
+                  delay: Math.random() * (2 - 0.5) + 0.5,
+                  bounce: 0.5,
+                  damping: 3,
+                  stiffness: 50,
+                }}
+                className="col-12"
+              >
+                <label
+                  style={{ fontSize: "14px" }}
+                  htmlFor="nama"
+                  className="form-label"
+                >
                   Pesan
                 </label>
                 <textarea
@@ -201,11 +277,21 @@ const RsvpView = (props: RSVPViewInterface) => {
                   name="pesan"
                   value={sendMessage?.text}
                 />
-              </div>
+              </motion.div>
             </div>
             <div className="row justify-content-center">
               <div className="col-8 d-flex align-items-center justify-content-center">
-                <button
+                <motion.button
+                  animate={animate}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{
+                    type: "spring",
+                    duration: 0.8,
+                    delay: Math.random() * (2 - 0.5) + 0.5,
+                    bounce: 0.5,
+                    damping: 3,
+                    stiffness: 50,
+                  }}
                   type="button"
                   onClick={() => {
                     console.log(sendMessage);
@@ -242,7 +328,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                             Swal.fire({
                               title: "Berhasil!",
                               text: "Pesan Berhasil Dikirim!!",
-                              icon: "success"
+                              icon: "success",
                             });
                           });
                       } else {
@@ -259,7 +345,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   }}
                 >
                   Submit
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
@@ -296,14 +382,33 @@ const RsvpView = (props: RSVPViewInterface) => {
               width={70}
             />
           ) : props.message.length !== 0 ? (
-            <MessageView />
+            <motion.div
+              animate={animate}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{
+                type: "spring",
+                duration: 0.8,
+                delay: Math.random() * (2 - 0.5) + 0.5,
+                bounce: 0.5,
+                damping: 2,
+                stiffness: 60,
+              }}
+            >
+              <MessageView />
+            </motion.div>
           ) : (
-            <div style={{ justifyContent: "center", display: "flex", marginTop:20}}>
+            <div
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                marginTop: 20,
+              }}
+            >
               <p
                 style={{
                   color: "var(--forth)",
                   fontSize: "14px",
-                  fontFamily:"brilon"
+                  fontFamily: "brilon",
                 }}
               >
                 jadilah yang pertama mengucapkan
@@ -318,7 +423,7 @@ const RsvpView = (props: RSVPViewInterface) => {
   function MessageView() {
     return props?.message.map((item, index) => {
       return (
-        <div
+        <motion.div
           style={{ borderRadius: "", height: 110 }}
           className="bg-white mt-1 "
         >
@@ -405,7 +510,7 @@ const RsvpView = (props: RSVPViewInterface) => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       );
     });
   }

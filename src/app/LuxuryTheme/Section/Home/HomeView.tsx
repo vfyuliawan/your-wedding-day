@@ -14,7 +14,7 @@ const HomeView = (props: HomeViewInterface) => {
 
   useEffect(() => {
     if (isVisible) {
-      controls.start(AnimationThemeInstance.FadeHorizon);
+      controls.start(AnimationThemeInstance.FadeStartVertical);
     }
   }, [isVisible, controls]);
   return (
@@ -23,13 +23,19 @@ const HomeView = (props: HomeViewInterface) => {
         <div className="row justify-content-center ">
           <motion.div
             animate={controls}
-            initial={AnimationThemeInstance.FadeLeft}
-            transition={{ duration: 1 }}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{
+              type: "spring",     // Keep the spring transition for bouncing
+              duration: 0.8,      // Overall animation duration
+              bounce: 0.8,        // Higher bounce value for more visible bouncing
+              damping: 3,         // Lower damping for a slower stop (more bounce cycles)
+              stiffness: 80,  
+            }}
             className="home-img col-md-6 col-lg-6 col-8 col-sm-8 justify-content-end"
             style={{
               paddingTop: "2rem",
               paddingBottom: "2rem",
-              paddingRight:'2rem',
+              paddingRight: "2rem",
               display: "flex",
             }}
           >
@@ -40,7 +46,7 @@ const HomeView = (props: HomeViewInterface) => {
                 height: "100%",
                 borderTopLeftRadius: "10%",
                 borderBottomRightRadius: "10%",
-                objectFit:'cover'
+                objectFit: "cover",
               }}
               alt=""
               srcSet=""
@@ -50,26 +56,27 @@ const HomeView = (props: HomeViewInterface) => {
             <div className="row">
               <div className="container">
                 <motion.h1
+                  ref={targetRef}
                   animate={controls}
-                  initial={AnimationThemeInstance.FadeRight}
-                  transition={{ duration: 1, delay: 0.5 }}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration: 0.5, delay: 0.5 }}
                   className="home-text"
                   style={{
-                    color:"var(--third)",
-                                        fontFamily: "Brilon",
-                    fontSize: '20px',
-                    letterSpacing:2
+                    color: "var(--third)",
+                    fontFamily: "Brilon",
+                    fontSize: "20px",
+                    letterSpacing: 2,
                   }}
                 >
                   {props?.HomeDetail?.title.toLowerCase()}
                 </motion.h1>
                 <motion.p
                   animate={controls}
-                  initial={AnimationThemeInstance.FadeLeft}
-                  transition={{ duration: 1, delay: 0.8 }}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration: 0.5, delay: 0.8 }}
                   className="home-text"
                   style={{
-                    color:"var(--third)",
+                    color: "var(--third)",
                     fontFamily: "Times-new-roman",
                     fontSize: "14px",
                   }}

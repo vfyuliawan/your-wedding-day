@@ -102,7 +102,14 @@ const CountDownView = (props: CountDownViewInterface) => {
               ref={targetRef}
               initial={AnimationThemeInstance.FadeUp}
               animate={animate}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{
+                type: "spring",
+                duration: 0.5,
+                delay: Math.random() * (0.8 - 0.2) + 0.2,
+                bounce: 0.5,
+                damping: 3,
+                stiffness: 80,
+              }}
               className="count-down-overlay container"
               style={{
                 padding: "2%",
@@ -128,7 +135,14 @@ const CountDownView = (props: CountDownViewInterface) => {
               <div className="row text-center">
                 <motion.h1
                   initial={AnimationThemeInstance.FadeDown}
-                  transition={{ duration: 1, delay: 0.5 }}
+                  transition={{
+                    type: "spring",
+                    duration: 0.5,
+                    delay: Math.random() * (0.8 - 0.2) + 0.2,
+                    bounce: 0.5,
+                    damping: 3,
+                    stiffness: 100,
+                  }}
                   animate={animate}
                   style={{
                     color: "var(--third)",
@@ -141,7 +155,14 @@ const CountDownView = (props: CountDownViewInterface) => {
               </div>
               <motion.div
                 initial={AnimationThemeInstance.FadeUp}
-                transition={{ duration: 1, delay: 1 }}
+                transition={{
+                  type: "spring",
+                  duration: 0.5,
+                  delay: Math.random() * (0.8 - 0.2) + 0.2,
+                  bounce: 0.5,
+                  damping: 3,
+                  stiffness: 60,
+                }}
                 animate={animate}
                 className="row mt-5"
               >
@@ -154,7 +175,17 @@ const CountDownView = (props: CountDownViewInterface) => {
                       color: "var(--third)",
                     }}
                   >
-                    <h3
+                    <motion.h3
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{
+                        type: "spring",
+                        duration: 0.5,
+                        delay: Math.random() * (0.8 - 0.2) + 0.2,
+                        bounce: 0.5,
+                        damping: 3,
+                        stiffness: 60,
+                      }}
+                      animate={animate}
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
@@ -163,7 +194,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                     >
                       {timeRemaining.days}
                       <br /> <span style={{ fontSize: "25px" }}> Days </span>
-                    </h3>
+                    </motion.h3>
                   </div>
                 </div>
 
@@ -176,7 +207,17 @@ const CountDownView = (props: CountDownViewInterface) => {
                       color: "var(--third)",
                     }}
                   >
-                    <h3
+                    <motion.h3
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{
+                        type: "spring",
+                        duration: 0.5,
+                        delay: Math.random() * (0.8 - 0.2) + 0.2,
+                        bounce: 0.5,
+                        damping: 3,
+                        stiffness: 60,
+                      }}
+                      animate={animate}
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
@@ -185,7 +226,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                     >
                       {timeRemaining.hours}
                       <br /> <span style={{ fontSize: "25px" }}> Hours </span>
-                    </h3>
+                    </motion.h3>
                   </div>
                 </div>
 
@@ -194,16 +235,26 @@ const CountDownView = (props: CountDownViewInterface) => {
                     className="text-center jusify-content-center d-flex"
                     style={{ paddingBottom: "3rm", paddingTop: "3rm" }}
                   >
-                    <h3
+                    <motion.h3
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{
+                        type: "spring",
+                        duration: 0.5,
+                        delay: Math.random() * (0.8 - 0.2) + 0.2,
+                        bounce: 0.5,
+                        damping: 3,
+                        stiffness: 60,
+                      }}
+                      animate={animate}
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
-                        fontSize: "25px"
+                        fontSize: "25px",
                       }}
                     >
                       {timeRemaining.minutes} <br />
                       <span style={{ fontSize: "25px" }}> Minute </span>
-                    </h3>
+                    </motion.h3>
                   </div>
                 </div>
 
@@ -212,7 +263,17 @@ const CountDownView = (props: CountDownViewInterface) => {
                     className="text-center jusify-content-center d-flex"
                     style={{ paddingBottom: "3rm", paddingTop: "3rm" }}
                   >
-                    <h3
+                    <motion.h3
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{
+                        type: "spring",
+                        duration: 0.5,
+                        delay: Math.random() * (0.8 - 0.2) + 0.2,
+                        bounce: 0.5,
+                        damping: 3,
+                        stiffness: 60,
+                      }}
+                      animate={animate}
                       style={{
                         color: "var(--third)",
                         fontFamily: "Dancing Script",
@@ -221,7 +282,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                     >
                       {timeRemaining.seconds} <br />
                       <span style={{ fontSize: "25px" }}> Second </span>
-                    </h3>
+                    </motion.h3>
                   </div>
                 </div>
               </motion.div>

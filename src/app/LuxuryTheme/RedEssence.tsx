@@ -44,7 +44,7 @@ import ModalQRCodeBgImage from "./Section/GuestScanView/ModalQRCodeBgImage";
 import { ModalEditableForm } from "./Section/EditableForm/ModalEditableForm";
 import HeathProtocol from "./Section/HealtProtocol/HealthProtocol";
 
-interface LuxuryThemeInterface {
+interface RedEssenceInterface {
   details: ResultDetailSlug | undefined;
   message: MessagesRequest[];
   setMessage: React.Dispatch<React.SetStateAction<MessagesRequest[]>>;
@@ -58,7 +58,7 @@ interface LuxuryThemeInterface {
   >;
 }
 
-const LuxuryTheme = (props: LuxuryThemeInterface) => {
+const RedEssence = (props: RedEssenceInterface) => {
   const [visible, setVisible] = useState(false);
   const [removeComp, setRemoveComp] = useState(false);
   // const heroRef = useRef<any>(null);
@@ -554,4 +554,4 @@ const LuxuryTheme = (props: LuxuryThemeInterface) => {
   );
 };
 
-export default LuxuryTheme;
+export default RedEssence;

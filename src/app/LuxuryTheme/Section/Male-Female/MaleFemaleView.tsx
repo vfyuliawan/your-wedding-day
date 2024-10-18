@@ -5,18 +5,18 @@ import { useEffect, useRef } from "react";
 import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 import { MaleFemaleViewInterface } from "./MaleFemaleModel";
 import React from "react";
-import { setAnimation } from "../../../utils/AnimationThemes";
+import AnimationThemeInstance, { setAnimation } from "../../../utils/AnimationThemes";
 import { isMobile } from "react-device-detect";
 import { hexToRgba } from "../../../utils/ConvertColor";
 
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
-  const targetRef = useRef(null);
+  const targetRef = useRef<any>(null);
   const isVisible = useIntersectionObserver(targetRef);
 
   useEffect(() => {
     if (isVisible) {
-      controls.start({ opacity: 1, y: 0 });
+      controls.start(AnimationThemeInstance.FadeStartVertical);
     }
   }, [isVisible, controls]);
 
@@ -30,7 +30,11 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
       <div ref={targetRef} className="container" style={{ paddingTop: "2rem" }}>
         <div className="row justify-content-center mb-3">
           <div className="col-md-8 col-10 text-center">
-            <h2
+            <motion.h2
+            animate={controls}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.5 }}
+            ref={targetRef} 
               style={{
                 fontSize: "32px",
                 fontFamily: "brilon",
@@ -48,13 +52,17 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               >
                 Wedding
               </span>
-            </h2>
+            </motion.h2>
           </div>
         </div>
 
         <div className="row justify-content-center">
           <div className=" col-3 col-sm-3 text-center justify-content-end d-flex align-items-center ">
-            <h3
+            <motion.h3
+             animate={controls}
+             initial={AnimationThemeInstance.FadeUp}
+             transition={{ duration: 0.5, delay:0.5}}
+             ref={targetRef} 
               style={{
                 fontSize: "30px",
                 fontFamily: "Dancing Script",
@@ -66,7 +74,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               }}
             >
               The Ride
-            </h3>
+            </motion.h3>
           </div>
           <div className=" col-9 col-sm-9 d-flex align-items-star justify-content-star position-relative">
             <div
@@ -80,12 +88,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               }}
             >
               <motion.img
-                initial={{
-                  opacity: setAnimation["fade-down"].initialX,
-                  y: setAnimation["fade-down"].initialY,
-                }}
-                animate={controls}
-                transition={{ duration: 1 }}
+                 animate={controls}
+                 initial={AnimationThemeInstance.FadeUp}
+                 transition={{ duration: 0.5, delay:0.5}}
+                 ref={targetRef} 
                 style={{
                   width: "100%",
                   height: "100%",
@@ -96,18 +102,16 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 srcSet=""
               />
               <motion.div
-                initial={{
-                  opacity: setAnimation["fade-Up"].initialX,
-                  y: setAnimation["fade-Up"].initialY,
-                }}
+                 animate={controls}
+                 initial={AnimationThemeInstance.FadeUp}
+                 transition={{ duration: 0.5, delay:0.5}}
+                 ref={targetRef} 
                 style={{
                   position: "absolute",
                   top: 0,
                   width: "100%",
                   // backgroundColor:hexToRgba(props.primColor, 0.2)
                 }}
-                animate={controls}
-                transition={{ duration: 1, delay: 0.5 }}
                 className="overlay"
               >
                 <h1
@@ -182,13 +186,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               }}
             >
               <motion.img
-                ref={targetRef}
-                initial={{
-                  opacity: setAnimation["fade-down"].initialX,
-                  y: setAnimation["fade-down"].initialY,
-                }}
-                animate={controls}
-                transition={{ duration: 1, delay: 0.8}}
+                 animate={controls}
+                 initial={AnimationThemeInstance.FadeUp}
+                 transition={{ duration: 0.5, delay:1}}
+                 ref={targetRef} 
                 style={{
                   width: "100%",
                   height: "100%",
@@ -199,10 +200,10 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 srcSet=""
               />
               <motion.div
-                initial={{
-                  opacity: setAnimation["fade-Up"].initialX,
-                  y: setAnimation["fade-Up"].initialY,
-                }}
+               animate={controls}
+               initial={AnimationThemeInstance.FadeUp}
+               transition={{ duration: 0.5, delay:1}}
+               ref={targetRef} 
                 style={{
                   position: "absolute",
                   bottom: 0,
@@ -210,8 +211,6 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   // backgroundColor:hexToRgba(props.primColor, 0.2)
 
                 }}
-                animate={controls}
-                transition={{ duration: 1, delay: 0.84 }}
                 className="overlay"
               >
                 <h1 style={{
@@ -236,7 +235,11 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
             </div>
           </div>
           <div className=" col-3 col-sm-3 text-center justify-content-start d-flex align-items-center">
-            <h3
+            <motion.h3
+             animate={controls}
+             initial={AnimationThemeInstance.FadeUp}
+             transition={{ duration: 0.5, delay:1}}
+             ref={targetRef} 
               style={{
                 fontSize: "30px",
                 fontFamily: "Dancing Script",
@@ -247,7 +250,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               }}
             >
               The Broom
-            </h3>
+            </motion.h3>
           </div>
         </div>
       </div>

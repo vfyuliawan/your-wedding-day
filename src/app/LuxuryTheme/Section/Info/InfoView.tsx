@@ -31,13 +31,18 @@ export interface InfoViewKeyValue {
 const InfoView = (props: InfoViewInterface) => {
   const controls = useAnimation();
   const targetRef = useRef<any>(null);
+  const targetRef2 = useRef<any>(null);
   const isVisible = useIntersectionObserver(targetRef);
+  const isVisible2 = useIntersectionObserver(targetRef2);
 
   useEffect(() => {
     if (isVisible) {
-      controls.start(AnimationThemeInstance.FadeHorizon);
+      controls.start(AnimationThemeInstance.FadeStartVertical);
     }
-  }, [isVisible, controls]);
+    if (isVisible2) {
+      controls.start(AnimationThemeInstance.FadeStartVertical);
+    }
+  }, [isVisible, isVisible2, controls]);
 
   const apiKey = "AIzaSyCojsLM-OulTC4CRYYfmLaGGA90tjTLtio";
   return (
@@ -46,10 +51,10 @@ const InfoView = (props: InfoViewInterface) => {
         <div className="row justify-content-center">
           <div className="col-6 text-end">
             <motion.h2
-              ref={targetRef}
+             ref={targetRef} 
               animate={controls}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 2 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5 }}
               style={{
                 fontFamily: "brilon",
                 fontSize: "30px",
@@ -70,7 +75,10 @@ const InfoView = (props: InfoViewInterface) => {
             </motion.h2>
           </div>
           <div className="col-5 d-flex align-items-center">
-            <div
+            <motion.div
+            animate={controls}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5, delay: 0.8 }}
               style={{
                 width: "100%",
                 height: "2px",
@@ -78,14 +86,14 @@ const InfoView = (props: InfoViewInterface) => {
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
-            ></div>
+            ></motion.div>
           </div>
           <div className="row justify-content-center">
             <div className="col-8 text-center">
               <motion.p
                 animate={controls}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 0.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.5, delay: 0.7 }}
                 style={{
                   color: "var(--forth)",
                   fontSize: "14px",
@@ -101,13 +109,13 @@ const InfoView = (props: InfoViewInterface) => {
           </div>
         </div>
       </div>
-      <div className="row justify-content-center mt-4">
+      <div ref={targetRef2} className="row justify-content-center mt-4">
         <div key={"123"} className="col-10 mt-3">
           <div className="row">
             <motion.img
               animate={controls}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 0.9 }}
               src={props.Info?.akad.imageAkad}
               style={{
                 borderTopRightRadius: "150px",
@@ -122,8 +130,8 @@ const InfoView = (props: InfoViewInterface) => {
           <div className="row justify-content-center m-1 ">
             <motion.div
               animate={controls}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5, delay: 1 }}
               className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
             >
               <h3
@@ -143,8 +151,8 @@ const InfoView = (props: InfoViewInterface) => {
             </motion.div>
             <motion.div
               animate={controls}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 1.2 }}
               className="col-md-9 col-sm-9 col-9 text-center bg-light"
               style={{ color: "var(--forth)" }}
             >
@@ -152,8 +160,8 @@ const InfoView = (props: InfoViewInterface) => {
                 <div className="col-4 justify-content-end align-items-end">
                   <motion.h4
                     animate={controls}
-                    initial={AnimationThemeInstance.FadeLeft}
-                    transition={{ duration: 1.5, delay: 1.3 }}
+                    initial={AnimationThemeInstance.FadeUp}
+                    transition={{ duration: 0.8, delay: 1.3 }}
                     style={{
                       fontSize: "22px",
                       fontFamily: "brilon",
@@ -171,8 +179,8 @@ const InfoView = (props: InfoViewInterface) => {
                   <div className="col-3 d-flex  justify-content-center align-items-center">
                     <motion.h4
                       animate={controls}
-                      initial={AnimationThemeInstance.FadeRight}
-                      transition={{ duration: 1.5, delay: 1.4 }}
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{ duration: 0.8, delay: 1.4 }}
                       style={{
                         fontSize: "45px",
                         fontFamily: "brilon",
@@ -198,8 +206,8 @@ const InfoView = (props: InfoViewInterface) => {
                   >
                     <motion.h4
                       animate={controls}
-                      initial={AnimationThemeInstance.FadeLeft}
-                      transition={{ duration: 1.5, delay: 1.5 }}
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{ duration: 0.8, delay: 1.5 }}
                       style={{
                         fontSize: "22px",
                         fontFamily: "brilon",
@@ -228,8 +236,8 @@ const InfoView = (props: InfoViewInterface) => {
               ></div>
               <motion.span
                 animate={controls}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 1.6 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 1.6 }}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -257,8 +265,8 @@ const InfoView = (props: InfoViewInterface) => {
               </motion.span>
               <motion.h4
                 animate={controls}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5, delay: 1.7 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 1.7 }}
                 style={{
                   marginBottom: "2rem",
                   letterSpacing: "1px",
@@ -270,8 +278,8 @@ const InfoView = (props: InfoViewInterface) => {
               </motion.h4>
               <motion.p
                 animate={controls}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5, delay: 1.7 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 1.9 }}
                 style={{
                   fontFamily: "Times-new-roman",
                   fontSize: 16,
@@ -315,8 +323,8 @@ const InfoView = (props: InfoViewInterface) => {
           <div className="row">
             <motion.img
               animate={controls}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 1.9 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 2.5 }}
               src={props.Info?.resepsi.imageResepsi}
               style={{
                 borderTopRightRadius: "150px",
@@ -331,11 +339,14 @@ const InfoView = (props: InfoViewInterface) => {
           <div className="row justify-content-center m-1 ">
             <motion.div
               animate={controls}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5, delay: 1.9 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 2.5 }}
               className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
             >
-              <h3
+              <motion.h3
+               animate={controls}
+               initial={AnimationThemeInstance.FadeUp}
+               transition={{ duration: 0.8, delay:2.6 }}
                 className="info-h3"
                 style={{
                   fontSize: "38px",
@@ -348,12 +359,12 @@ const InfoView = (props: InfoViewInterface) => {
                 }}
               >
                 {props.Info?.resepsi.titleResepsi}
-              </h3>
+              </motion.h3>
             </motion.div>
             <motion.div
               animate={controls}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 0.8 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay:2.7 }}
               className="col-md-9 col-sm-9 col-9 text-center bg-light"
               style={{ color: "var(--forth)" }}
             >
@@ -361,8 +372,8 @@ const InfoView = (props: InfoViewInterface) => {
                 <div className="col-4 justify-content-end align-items-end">
                   <motion.h4
                     animate={controls}
-                    initial={AnimationThemeInstance.FadeLeft}
-                    transition={{ duration: 1.5, delay: 1.3 }}
+                    initial={AnimationThemeInstance.FadeUp}
+                    transition={{ duration: 0.8, delay:2.8 }}
                     style={{
                       fontSize: "22px",
                       letterSpacing: "3px",
@@ -380,8 +391,8 @@ const InfoView = (props: InfoViewInterface) => {
                   <div className="col-3 d-flex justify-content-start align-items-end">
                     <motion.h4
                       animate={controls}
-                      initial={AnimationThemeInstance.FadeRight}
-                      transition={{ duration: 1.5, delay: 1.4 }}
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{ duration: 0.8, delay: 2.9}}
                       style={{
                         fontSize: "45px",
                         fontFamily: "brilon",
@@ -408,8 +419,8 @@ const InfoView = (props: InfoViewInterface) => {
                   >
                     <motion.h4
                       animate={controls}
-                      initial={AnimationThemeInstance.FadeLeft}
-                      transition={{ duration: 1.5, delay: 1.5 }}
+                      initial={AnimationThemeInstance.FadeUp}
+                      transition={{ duration: 0.8, delay: 3 }}
                       style={{
                         fontSize: "22px",
                         fontFamily: "brilon",
@@ -438,8 +449,8 @@ const InfoView = (props: InfoViewInterface) => {
               ></div>
               <motion.span
                 animate={controls}
-                initial={AnimationThemeInstance.FadeRight}
-                transition={{ duration: 1.5, delay: 1.6 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 3.1}}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -468,8 +479,8 @@ const InfoView = (props: InfoViewInterface) => {
               </motion.span>
               <motion.h4
                 animate={controls}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5, delay: 1.7 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 3.2 }}
                 style={{
                   marginBottom: "2rem",
                   letterSpacing: "1px",
@@ -481,8 +492,8 @@ const InfoView = (props: InfoViewInterface) => {
               </motion.h4>
               <motion.p
                 animate={controls}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5, delay: 1.7 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 3.3 }}
                 style={{
                   fontFamily: "Times-new-roman",
                   fontSize: 16,
@@ -558,8 +569,8 @@ const InfoView = (props: InfoViewInterface) => {
         <div className="row">
           <motion.img
             animate={controls}
-            initial={AnimationThemeInstance.FadeRight}
-            transition={{ duration: 1.5, delay: 0.8 }}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay: 0.8 }}
             src={params.image}
             style={{
               borderTopRightRadius: 50,
@@ -574,8 +585,8 @@ const InfoView = (props: InfoViewInterface) => {
         <div className="row justify-content-center m-1 ">
           <motion.div
             animate={controls}
-            initial={AnimationThemeInstance.FadeLeft}
-            transition={{ duration: 1.5, delay: 0.8 }}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
           >
             <h3
@@ -594,8 +605,8 @@ const InfoView = (props: InfoViewInterface) => {
           </motion.div>
           <motion.div
             animate={controls}
-            initial={AnimationThemeInstance.FadeRight}
-            transition={{ duration: 1.5, delay: 0.8 }}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="col-md-9 col-sm-9 col-9 text-center bg-light"
             style={{ color: "black" }}
           >
@@ -603,8 +614,8 @@ const InfoView = (props: InfoViewInterface) => {
               <div className="col-4  align-items-end">
                 <motion.h4
                   animate={controls}
-                  initial={AnimationThemeInstance.FadeLeft}
-                  transition={{ duration: 1.5, delay: 1.3 }}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration: 0.8, delay: 1.3 }}
                   style={{
                     fontSize: "25px",
                     fontFamily: "brilon",
@@ -616,8 +627,8 @@ const InfoView = (props: InfoViewInterface) => {
                 </motion.h4>
                 <motion.h4
                   animate={controls}
-                  initial={AnimationThemeInstance.FadeRight}
-                  transition={{ duration: 1.5, delay: 1.4 }}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration: 0.8, delay: 1.4 }}
                   style={{
                     fontSize: "60px",
                     fontFamily: "brilon",
@@ -630,8 +641,8 @@ const InfoView = (props: InfoViewInterface) => {
               <div className="col-8 d-flex justify-content-start align-items-end ">
                 <motion.h4
                   animate={controls}
-                  initial={AnimationThemeInstance.FadeLeft}
-                  transition={{ duration: 1.5, delay: 1.5 }}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration: 0.8, delay: 1.5 }}
                   style={{
                     fontSize: "16px",
                     marginBottom: "20px",
@@ -656,8 +667,8 @@ const InfoView = (props: InfoViewInterface) => {
             ></div>
             <motion.span
               animate={controls}
-              initial={AnimationThemeInstance.FadeRight}
-              transition={{ duration: 1.5, delay: 1.6 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 1.6 }}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -675,16 +686,16 @@ const InfoView = (props: InfoViewInterface) => {
             </motion.span>
             <motion.h4
               animate={controls}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5, delay: 1.7 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 1.7 }}
               style={{ marginBottom: "2rem", letterSpacing: "1px" }}
             >
               Tempat
             </motion.h4>
             <motion.p
               animate={controls}
-              initial={AnimationThemeInstance.FadeLeft}
-              transition={{ duration: 1.5, delay: 1.7 }}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.8, delay: 1.7 }}
               style={{
                 fontSize: "1.6rem",
                 letterSpacing: "0.5px",

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Cover } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import { useAnimation, motion } from 'framer-motion';
+import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
 
 interface FooterViewInterface {
   Footer: Cover;
@@ -11,8 +14,22 @@ interface KeyValueFooter {
 }
 
 const FooterView = (props: FooterViewInterface) => {
+
+  const targetRef = useRef<any>(null);
+  const animate = useAnimation();
+  const isVisible = useIntersectionObserver(targetRef);
+
+  useEffect(() => {
+    if (isVisible) {
+      animate.start(AnimationThemeInstance.FadeStartVertical);
+    }
+
+    return () => {};
+  }, [animate, isVisible]);
+
   return (
     <div
+    ref={targetRef}
       style={{
         position: "relative",
       }}
@@ -28,7 +45,10 @@ const FooterView = (props: FooterViewInterface) => {
       >
         <div className="gradient-overlay" />
         <main className="inside" style={{ position: "relative", top: 300 }}>
-          <h2
+          <motion.h2
+            animate={animate}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay:0.6 }}
             style={{
               textShadow: "none  !important",
               fontSize: "40px",
@@ -36,8 +56,11 @@ const FooterView = (props: FooterViewInterface) => {
             }}
           >
             Terimakasih
-          </h2>
-          <p
+          </motion.h2>
+          <motion.p
+            animate={animate}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay:1 }}
             style={{
               textShadow: "none !important",
               fontSize: "12px",
@@ -46,8 +69,11 @@ const FooterView = (props: FooterViewInterface) => {
             }}
           >
             {props.Footer.quotes}
-          </p>
-          <h4
+          </motion.p>
+          <motion.h4
+            animate={animate}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay:1.5 }}
             style={{
               textShadow: "none !important",
               fontSize: 16,
@@ -57,8 +83,11 @@ const FooterView = (props: FooterViewInterface) => {
             }}
           >
             Kami Yang Berbahagia
-          </h4>
-          <h3
+          </motion.h4>
+          <motion.h3
+            animate={animate}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.8, delay:2}}
             style={{
               textShadow: "none !important",
               fontSize: 40,
@@ -66,7 +95,7 @@ const FooterView = (props: FooterViewInterface) => {
             }}
           >
             {props.Footer.title}
-          </h3>
+          </motion.h3>
         </main>
       </section>
       <div
