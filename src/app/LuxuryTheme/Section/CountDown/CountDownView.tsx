@@ -145,7 +145,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   }}
                   animate={animate}
                   style={{
-                    color: "var(--third)",
+                    color: "var(--forth)",
                     fontFamily: "Dancing Script",
                     fontSize: "25px",
                   }}
@@ -172,7 +172,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                     style={{
                       paddingBottom: "3rm",
                       paddingTop: "3rm",
-                      color: "var(--third)",
+                      color: "var(--forth)",
                     }}
                   >
                     <motion.h3
@@ -187,7 +187,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                       }}
                       animate={animate}
                       style={{
-                        color: "var(--third)",
+                        color: "var(--forth)",
                         fontFamily: "Dancing Script",
                         fontSize: "25px",
                       }}
@@ -204,7 +204,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                     style={{
                       paddingBottom: "3rm",
                       paddingTop: "3rm",
-                      color: "var(--third)",
+                      color: "var(--forth)",
                     }}
                   >
                     <motion.h3
@@ -219,7 +219,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                       }}
                       animate={animate}
                       style={{
-                        color: "var(--third)",
+                        color: "var(--forth)",
                         fontFamily: "Dancing Script",
                         fontSize: "25px",
                       }}
@@ -247,7 +247,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                       }}
                       animate={animate}
                       style={{
-                        color: "var(--third)",
+                        color: "var(--forth)",
                         fontFamily: "Dancing Script",
                         fontSize: "25px",
                       }}
@@ -275,7 +275,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                       }}
                       animate={animate}
                       style={{
-                        color: "var(--third)",
+                        color: "var(--forth)",
                         fontFamily: "Dancing Script",
                         fontSize: "25px",
                       }}
@@ -298,7 +298,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   }}
                 >
                   <i
-                    style={{ fontSize: "12px", color: "var(--third)" }}
+                    style={{ fontSize: "12px", color: "var(--forth)" }}
                     className="bi bi-calendar-check-fill"
                   >
                     {" "}

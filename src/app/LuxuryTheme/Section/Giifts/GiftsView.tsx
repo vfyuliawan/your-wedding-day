@@ -49,7 +49,7 @@ const GiftsView = (props: GiftsViewInterface) => {
       <div
         style={{
           borderRadius: "20px 20px 0 0",
-          backgroundColor: "white",
+          backgroundColor: "var(--third)",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.80)",                    paddingTop: "5rem",
           marginTop: "2rem",
           height: "100vh",
@@ -63,7 +63,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5 }}
                 style={{
-                  color:"var(--forth)" ,
+                  color:"var(--fiveth)" ,
                   fontWeight: "100",
                   fontFamily: "brilon",
                   fontSize: "25px",
@@ -75,7 +75,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                     fontFamily: "Creation",
                     fontWeight: "10",
                     fontSize: "30px",
-                    color:"var(--forth)" ,
+                    color:"var(--fiveth)" ,
 
                   }}
                 >
@@ -88,7 +88,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                 style={{
                   width: "100%",
                   height: "1px",
-                  backgroundColor: "var(--forth)",
+                  backgroundColor: "var(--fiveth)",
                   marginBottom: "3rem",
                   marginTop: "3rem",
                 }}
@@ -101,7 +101,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   initial={AnimationThemeInstance.FadeRight}
                   transition={{ duration: 1.5, delay: 0.5 }}
                   style={{
-                    color:"var(--forth)" ,
+                    color:"var(--fiveth)" ,
                     fontSize: "12px",
                     fontFamily: "Times-new-roman",
                   }}
@@ -134,7 +134,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                       <h5
                         className="card-title"
                         style={{
-                          color:"var(--forth)" ,
+                          color:"var(--fiveth)" ,
                           fontFamily: '"Courier New", Courier, monospace',
                           fontSize:"12px"
                         }}

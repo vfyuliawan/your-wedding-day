@@ -65,7 +65,7 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             style={{
               fontFamily: "brilon",
               fontSize: 40,
-              color: "var(--third)",
+              color: "var(--forth)",
             }}
           >
             {`${props.getTitle
@@ -81,7 +81,7 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
           animate={controls}
           initial={AnimationThemeInstance.FadeUp}
           transition={{ duration: 0.5 }}
-            style={{ fontFamily: "serif", fontSize: 16, color: "var(--third)" }}
+            style={{ fontFamily: "serif", fontSize: 16, color: "var(--forth)" }}
           >
             {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
           </motion.h4>

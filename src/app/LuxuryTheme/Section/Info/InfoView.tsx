@@ -46,7 +46,7 @@ const InfoView = (props: InfoViewInterface) => {
 
   const apiKey = "AIzaSyCojsLM-OulTC4CRYYfmLaGGA90tjTLtio";
   return (
-    <section style={{ marginTop: -200 }} id="info" className="info ">
+    <section style={{ marginTop: -200, backgroundColor:"var(--third)" }} id="info" className="info ">
       <div className="container" style={{ marginTop: 0 }}>
         <div className="row justify-content-center">
           <div className="col-6 text-end">
@@ -58,7 +58,7 @@ const InfoView = (props: InfoViewInterface) => {
               style={{
                 fontFamily: "brilon",
                 fontSize: "30px",
-                color: "var(--forth)",
+                color: "var(--fiveth)",
               }}
             >
               Informasi <br />
@@ -67,7 +67,7 @@ const InfoView = (props: InfoViewInterface) => {
                   fontFamily: "Creation",
                   fontWeight: "normal",
                   fontSize: "40px",
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                 }}
               >
                 Acara
@@ -81,8 +81,8 @@ const InfoView = (props: InfoViewInterface) => {
               transition={{ duration: 0.5, delay: 0.8 }}
               style={{
                 width: "100%",
-                height: "2px",
-                backgroundColor: "var(--forth)",
+                height: "1px",
+                backgroundColor: "var(--fiveth)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -95,7 +95,7 @@ const InfoView = (props: InfoViewInterface) => {
                 initial={AnimationThemeInstance.FadeUp}
                 transition={{ duration: 0.5, delay: 0.7 }}
                 style={{
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                   fontSize: "14px",
                   fontFamily: "Times-new-roman",
                 }}
@@ -129,6 +129,9 @@ const InfoView = (props: InfoViewInterface) => {
           </div>
           <div className="row justify-content-center m-1 ">
             <motion.div
+            style={{
+              background: "linear-gradient(to top, var(--prim), var(--third))"
+            }}
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.5, delay: 1 }}
@@ -140,7 +143,7 @@ const InfoView = (props: InfoViewInterface) => {
                   fontSize: "38px",
                   fontFamily: "Dancing script",
                   fontWeight: 800,
-                  color: "var(--third)",
+                  color: "var(--forth)",
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
                   transform: "rotate(180deg)",
@@ -153,11 +156,14 @@ const InfoView = (props: InfoViewInterface) => {
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="col-md-9 col-sm-9 col-9 text-center bg-light"
-              style={{ color: "var(--forth)" }}
+              className="col-md-9 col-sm-9 col-9 text-center"
+              style={{ color: "var(--fiveth)",  backgroundColor:"#fff"}}
             >
-              <div className="row">
-                <div className="col-4 justify-content-end align-items-end">
+              <div className="row" style={{
+                
+              }}>
+                <div style={{
+                }} className="col-4 justify-content-end align-items-end">
                   <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeUp}
@@ -229,7 +235,7 @@ const InfoView = (props: InfoViewInterface) => {
                 style={{
                   width: "100%",
                   height: "1px",
-                  backgroundColor: "var(--forth)",
+                  backgroundColor: "var(--fiveth)",
                   marginBottom: "1rem",
                   marginTop: "1rem",
                 }}
@@ -341,7 +347,10 @@ const InfoView = (props: InfoViewInterface) => {
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.8, delay: 2.5 }}
-              className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
+              style={{
+                background: "linear-gradient(to top, var(--prim), var(--third))"
+              }}
+              className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center"
             >
               <motion.h3
                animate={controls}
@@ -352,10 +361,10 @@ const InfoView = (props: InfoViewInterface) => {
                   fontSize: "38px",
                   fontFamily: "Dancing script",
                   fontWeight: 800,
+                  color: "var(--forth)",
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
                   transform: "rotate(180deg)",
-                  color: "var(--third)",
                 }}
               >
                 {props.Info?.resepsi.titleResepsi}
@@ -365,8 +374,8 @@ const InfoView = (props: InfoViewInterface) => {
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.8, delay:2.7 }}
-              className="col-md-9 col-sm-9 col-9 text-center bg-light"
-              style={{ color: "var(--forth)" }}
+              className="col-md-9 col-sm-9 col-9 text-center"
+              style={{ color: "var(--fiveth)",  backgroundColor:"#fff"}}
             >
               <div className="row">
                 <div className="col-4 justify-content-end align-items-end">

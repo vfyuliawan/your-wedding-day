@@ -32,7 +32,9 @@ const StoryView = (props: StoryViewInterface) => {
   }, [animate, isVisible]);
 
   return (
-    <section id="story" className="story">
+    <section style={{
+      backgroundColor:"var(--sec)"
+    }} id="story" className="story">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-6 text-end">
@@ -42,7 +44,7 @@ const StoryView = (props: StoryViewInterface) => {
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.8, delay:0.6 }}
               style={{
-                color: "var(--forth)",
+                color: "var(--fiveth)",
                 fontSize: "30px",
                 fontFamily: "brilon",
                 fontWeight: "100",
@@ -56,7 +58,7 @@ const StoryView = (props: StoryViewInterface) => {
                   fontFamily: "Creation",
                   fontWeight: "normal",
                   fontSize: "32px",
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                   textTransform: "capitalize",
                 }}
               >
@@ -69,7 +71,7 @@ const StoryView = (props: StoryViewInterface) => {
               style={{
                 width: "100%",
                 height: "2px",
-                backgroundColor: "var(--forth)",
+                backgroundColor: "var(--fiveth)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -82,7 +84,7 @@ const StoryView = (props: StoryViewInterface) => {
                 initial={AnimationThemeInstance.FadeUp}
                 transition={{ duration: 0.5, delay: 1 }}
                 style={{
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                   fontSize: "14px",
                   fontFamily: "Times-new-roman",
                 }}
@@ -118,10 +120,10 @@ const StoryView = (props: StoryViewInterface) => {
         {props.OurStory?.stories.map((item) => (
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            contentStyle={{ background: "#fff", color: "var(--forth)" }}
+            contentStyle={{ background: "#fff", color: "var(--fiveth)" }}
             contentArrowStyle={{ borderRight: `7px solid  ${props.color}` }}
             date={TimeConvertionUSFormat(item.date.toString())}
-            iconStyle={{ background: props.color, color: "var(--third)" }}
+            iconStyle={{ background: props.color, color: "var(--sec)" }}
             icon={
               <i
                 style={{

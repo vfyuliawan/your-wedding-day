@@ -62,7 +62,7 @@ const HeathProtocol = () => {
             initial={AnimationThemeInstance.FadeLeft}
             transition={{ duration: 2 }}
             style={{
-              color: "var(--third)",
+              color: "var(--forth)",
               textAlign: "center",
               fontFamily: "Dancing script",
               fontSize: 32,
@@ -79,7 +79,7 @@ const HeathProtocol = () => {
             style={{
               textAlign: "center",
               fontFamily: "Quicksand",
-              color: "var(--third)",
+              color: "var(--forth)",
               fontSize: 16,
             }}
           >
@@ -122,7 +122,7 @@ const HeathProtocol = () => {
                       fontSize: 16,
                       fontFamily: "Quicksand",
                       marginTop: 12,
-                      color: "var(--third)",
+                      color: "var(--forth)",
                     }}
                   >
                     {item.text}

@@ -10,6 +10,7 @@
   --sec: #efefef;
   --third: #ffffff;
   --forth: #252525;
+  --fiveth: #252525;
   --bg: #efefef;
 
   /* sama */
@@ -611,7 +612,7 @@ p {
 }
 
 .info .info-text {
-  background: linear-gradient(to top, var(--prim), var(--bg2));
+  /* background: linear-gradient(to top, var(--prim), var(--bg2)); */
 }
 
 .iframeContainer {

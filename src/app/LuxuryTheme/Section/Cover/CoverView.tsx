@@ -291,7 +291,8 @@ const CoverView = (props: CoverModelInterface) => {
                   fontSize: "15px",
                   fontWeight: "400",
                   fontFamily: "brilon",
-                  textShadow:"var(--shadow2)"
+                  textShadow:"var(--shadow2)",
+                  color:"var(--forth)"
                 }}
               >
                 the wedding of
@@ -302,6 +303,8 @@ const CoverView = (props: CoverModelInterface) => {
                 style={{
                   fontFamily: "brilon",
                   fontSize: "32px",
+                  color:"var(--forth)"
+
                 }}
               >
                 {props.detailCover?.title}

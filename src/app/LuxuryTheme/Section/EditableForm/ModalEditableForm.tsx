@@ -11,8 +11,12 @@ export function ModalEditableForm(props: {
   setModalEdit: React.Dispatch<SetStateAction<boolean>>;
   primaryColor: string;
   setPrimaryColor: React.Dispatch<SetStateAction<string>>;
+
   secondaryColor: string;
   setSecondaryColor: React.Dispatch<SetStateAction<string>>;
+
+  thirdColor: string;
+  setThirdColor: React.Dispatch<SetStateAction<string>>;
 
   textColor1: string;
   setTextColor1: React.Dispatch<SetStateAction<string>>;
@@ -287,6 +291,36 @@ export function ModalEditableForm(props: {
               alignItems: "center",
             }}
           >
+             <input
+              style={{
+                height: 38,
+                width: 38,
+                borderRadius: "50%", 
+                border: "1px solid rgba(26, 26, 26, 0.9)",
+                appearance: "none", 
+                outline: "none", 
+                background: "transparent", 
+                cursor: "pointer",
+              }}
+              type="color"
+              onChange={(e) => {
+                const hexColor = e.target.value;
+                props.setThirdColor(hexColor);
+                setisActive(0);
+                document.documentElement.style.setProperty("--third", hexColor);
+              }}
+              id="colorPicker"
+              value={props.thirdColor}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
            <input
               style={{
                 height: 38,
@@ -303,7 +337,7 @@ export function ModalEditableForm(props: {
                 const hexColor = e.target.value;
                 props.setTextColor1(hexColor);
                 setisActive(0);
-                document.documentElement.style.setProperty("--third", hexColor);
+                document.documentElement.style.setProperty("--forth", hexColor);
               }}
               id="colorPicker"
               value={props.textColor1}
@@ -334,7 +368,7 @@ export function ModalEditableForm(props: {
                 const hexColor = e.target.value;
                 props.setTextColor2(hexColor);
                 setisActive(0);
-                document.documentElement.style.setProperty("--forth", hexColor);
+                document.documentElement.style.setProperty("--fiveth", hexColor);
               }}
               id="colorPicker"
               value={props.textColor2}

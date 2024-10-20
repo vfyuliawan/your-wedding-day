@@ -52,7 +52,7 @@ const FooterView = (props: FooterViewInterface) => {
             style={{
               textShadow: "none  !important",
               fontSize: "40px",
-              color: "var(--third)",
+              color: "var(--forth)",
             }}
           >
             Terimakasih
@@ -64,7 +64,7 @@ const FooterView = (props: FooterViewInterface) => {
             style={{
               textShadow: "none !important",
               fontSize: "12px",
-              color: "var(--third)",
+              color: "var(--forth)",
               fontFamily: "Times-new-roman",
             }}
           >
@@ -77,7 +77,7 @@ const FooterView = (props: FooterViewInterface) => {
             style={{
               textShadow: "none !important",
               fontSize: 16,
-              color: "var(--third)",
+              color: "var(--forth)",
 
               fontFamily: "Times-new-roman",
             }}
@@ -91,7 +91,7 @@ const FooterView = (props: FooterViewInterface) => {
             style={{
               textShadow: "none !important",
               fontSize: 40,
-              color: "var(--third)",
+              color: "var(--forth)",
             }}
           >
             {props.Footer.title}

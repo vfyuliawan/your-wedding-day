@@ -208,6 +208,7 @@ const RedEssence = (props: RedEssenceInterface) => {
 
   const [primaryColor, setprimaryColor] = useState("");
   const [secondaryColor, setsecondaryColor] = useState("");
+  const [thirdColor, setThirdColor] = useState("");
   const [textColor1, setTextColor1] = useState("");
   const [textColor2, setTextColor2] = useState("");
 
@@ -226,12 +227,17 @@ const RedEssence = (props: RedEssenceInterface) => {
     );
     document.documentElement.style.setProperty(
       "--third",
+      convertColor(props?.details?.theme?.thirdColor ?? "")
+    );
+    setThirdColor(convertColor(props?.details?.theme?.thirdColor ?? ""));
+    document.documentElement.style.setProperty(
+      "--forth",
       convertColor(props?.details?.theme?.textColor1 ?? "")
     );
     setTextColor1(convertColor(props?.details?.theme?.textColor1 ?? ""));
 
     document.documentElement.style.setProperty(
-      "--forth",
+      "--fiveth",
       convertColor(props?.details?.theme?.textColor2 ?? "")
     );
     setTextColor2(convertColor(props?.details?.theme?.textColor2 ?? ""));
@@ -427,6 +433,8 @@ const RedEssence = (props: RedEssenceInterface) => {
           galery={props.details!.galery.isShow}
           protocoler={healtProtocol}
           setProtocoler={sethealtProtocol}
+          thirdColor={thirdColor}
+          setThirdColor={setThirdColor}
         />
 
         {!coverVisible && isMobile ? (

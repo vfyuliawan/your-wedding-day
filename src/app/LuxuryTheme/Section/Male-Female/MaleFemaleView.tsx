@@ -38,7 +38,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               style={{
                 fontSize: "32px",
                 fontFamily: "brilon",
-                color: "var(--forth)",
+                color: "var(--fiveth)",
                 fontWeight: 400,
               }}
             >
@@ -70,7 +70,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 transform: "rotate(180deg)",
-                color: "var(--forth)",
+                color: "var(--fiveth)",
               }}
             >
               The Ride
@@ -116,7 +116,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               >
                 <h1
                   style={{
-                    color: "var(--third)",
+                    color: "var(--forth)",
                     fontSize:30
                   }}
                   className=""
@@ -125,7 +125,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 </h1>
                 <h3
                   style={{
-                    color: "var(--third)",
+                    color: "var(--forth)",
                     fontSize:12
 
                   }}
@@ -135,7 +135,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 </h3>
                 <h3
                   style={{
-                    color: "var(--third)",
+                    color: "var(--forth)",
                     fontSize:12
 
                   }}
@@ -160,7 +160,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               style={{
                 fontSize: "30px",
                 fontFamily: "Dancing Script",
-                color:"var(--third)",
+                color:"var(--forth)",
                 fontWeight: 400,
               }}
             >
@@ -214,18 +214,18 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 className="overlay"
               >
                 <h1 style={{
-                  color:"var(--third)",
+                  color:"var(--forth)",
                   fontSize:30
                 }} className="">{props?.MaleFemaleDetail?.female?.name}</h1>
                 <h3 style={{
-                  color:"var(--third)",
+                  color:"var(--forth)",
                   fontSize:12
 
                 }} className="">
                   Putra Dari Bapak {props?.MaleFemaleDetail?.female?.dad}
                 </h3>
                 <h3 style={{
-                  color:"var(--third)",
+                  color:"var(--forth)",
                   fontSize:12
 
                 }} className="">
@@ -246,7 +246,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontWeight: 400,
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
-                color:"var(--forth)"
+                color:"var(--fiveth)"
               }}
             >
               The Broom

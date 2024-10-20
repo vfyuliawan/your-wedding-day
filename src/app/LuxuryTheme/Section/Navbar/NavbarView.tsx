@@ -5,7 +5,6 @@ interface NavbarInterfaceView {
 }
 
 const NavbarView = (props: NavbarInterfaceView) => {
-  // Create refs for each icon container
   const sectionsRefs = {
     hero: useRef<HTMLDivElement>(null),
     home: useRef<HTMLDivElement>(null),
@@ -18,14 +17,13 @@ const NavbarView = (props: NavbarInterfaceView) => {
     
   };
 
-  // Scroll the navbar when the active section changes
   useEffect(() => {
     // @ts-ignore
     const activeRef = sectionsRefs[props.activeSection];
     if (activeRef?.current) {
       activeRef.current.scrollIntoView({
         behavior: "smooth",
-        inline: "center", // Scroll to the center of the container
+        inline: "center", 
         block: "nearest",
       });
     }
@@ -40,7 +38,7 @@ const NavbarView = (props: NavbarInterfaceView) => {
         height: "5rem",
         justifyContent: "center",
         display: "flex",
-        overflowX: "auto", // Enable horizontal scrolling
+        overflowX: "auto", 
       }}
     >
       <div
@@ -52,9 +50,8 @@ const NavbarView = (props: NavbarInterfaceView) => {
           borderRadius: "30px",
           opacity: 0.8,
           justifyContent: "center",
-          // boxShadow: "0 -10px 10px rgba(0, 0, 0, 0.7)", // Add shadow
           display: "flex",
-          overflowX: "auto", // Allow horizontal scrolling
+          overflowX: "auto", 
         }}
       >
         <div
@@ -79,23 +76,23 @@ const NavbarView = (props: NavbarInterfaceView) => {
             <div
               key={section}
               // @ts-ignore
-              ref={sectionsRefs[section]} // Attach ref to each section
+              ref={sectionsRefs[section]} 
               style={{
                 backgroundColor:
-                  props.activeSection === section ? "var(--forth)" : "transparent",
+                  props.activeSection === section ? "var(--fiveth)" : "transparent",
                 borderRadius: 5,
 
                 padding: "0.5rem",
-                margin: "0 0.5rem", // Add some space between icons
+                margin: "0 0.5rem",
                 cursor: "pointer",
               }}
               className="icon-container"
             >
               <i
                 className={`${icon} ${
-                  props.activeSection === section ? "var(--third)" : "var(--third)"
+                  props.activeSection === section ? "var(--forth)" : "var(--forth)"
                 }`}
-                style={{ fontSize: "2rem", color:"var(--third)" }}
+                style={{ fontSize: "2rem", color:"var(--forth)" }}
               ></i>
             </div>
           ))}

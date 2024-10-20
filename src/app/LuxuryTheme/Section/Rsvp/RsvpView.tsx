@@ -97,7 +97,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                       stiffness: 50,
                     }}
                     style={{
-                      color: "var(--third)",
+                      color: "var(--forth)",
                       fontSize: "32px",
                       fontFamily: "Brilon",
                       textAlign: "right",
@@ -110,7 +110,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                         fontFamily: "Creation",
                         fontWeight: "100",
                         marginLeft: 40,
-                        color: "var(--third)",
+                        color: "var(--forth)",
 
                         fontSize: "28px",
                       }}
@@ -137,7 +137,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                       display: "flex",
                       alignItems: "start",
                       height: "1px",
-                      backgroundColor: "var(--third)",
+                      backgroundColor: "var(--forth)",
                       marginBottom: "3rem",
                       marginTop: "3rem",
                     }}
@@ -156,7 +156,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   stiffness: 50,
                 }}
                 style={{
-                  color: "var(--third)",
+                  color: "var(--forth)",
                   fontSize: "12px",
                   textAlign: "center",
                   fontFamily: "Times-new-roman",
@@ -185,9 +185,10 @@ const RsvpView = (props: RSVPViewInterface) => {
                 className="col-12 "
               >
                 <label
-                  style={{ fontSize: "14px" }}
+                  style={{ fontSize: "14px", color:"var(--forth)" }}
                   htmlFor="nama"
                   className="form-label"
+                  
                 >
                   Nama
                 </label>
@@ -195,6 +196,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                   value={sendMessage?.name}
                   type="text"
                   className="form-control"
+                  style={{
+                    backgroundColor:"var(--third)"
+                  }}
                   id="nama"
                   name="nama"
                   onChange={(val) => {
@@ -219,7 +223,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 className="col-12 "
               >
                 <label
-                  style={{ fontSize: "14px" }}
+                  style={{ fontSize: "14px", color:"var(--forth)" }}
                   htmlFor="Pesan"
                   className="form-label"
                 >
@@ -227,6 +231,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                 </label>
                 <select
                   className="form-select"
+                  style={{
+                    backgroundColor:"var(--third)"
+                  }}
                   aria-label="Default select example"
                   onChange={(val) => {
                     setSendMessage((prev: RSVPKeyValue | undefined) => {
@@ -256,7 +263,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 className="col-12"
               >
                 <label
-                  style={{ fontSize: "14px" }}
+                  style={{ fontSize: "14px", color:"var(--forth)" }}
                   htmlFor="nama"
                   className="form-label"
                 >
@@ -275,6 +282,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                   id="pesan"
                   rows={5}
                   name="pesan"
+                  style={{
+                    backgroundColor:"var(--third)"
+                  }}
                   value={sendMessage?.text}
                 />
               </motion.div>
@@ -341,7 +351,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                     width: "100%",
                     fontSize: "16px",
                     height: 40,
-                    color: "var(--third)",
+                    color: "var(--forth)",
                   }}
                 >
                   Submit

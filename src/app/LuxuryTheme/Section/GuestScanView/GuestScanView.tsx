@@ -26,12 +26,12 @@ const GuestScanView = (props: GuestScanViewInterface) => {
     <section
       className="guest"
       id="guest"
-      style={{ height: "100hv" }}
+      style={{ height: "100hv", }}
       ref={targetRefGift}
     >
       <div
         className="stright-top"
-        style={{ backgroundColor: "white", height: "100px" }}
+        style={{ backgroundColor: "var(--third)", height: "100px" }}
       ></div>
       <div
         className="stright-bottom guestContainer"
@@ -45,7 +45,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 initial={AnimationThemeInstance.FadeUp}
                 transition={{ duration: 0.5 }}
                 style={{
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                   fontWeight: "100",
                   fontFamily: "brilon",
                   fontSize: "32px",
@@ -58,7 +58,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 initial={AnimationThemeInstance.FadeUp}
                 transition={{ duration: 0.5, delay:1 }}
                 style={{
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                   fontWeight: "100",
                   fontFamily: "Creation",
                   fontSize: "32px",
@@ -73,7 +73,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
               style={{
                 width: "100%",
                 height: "1px",
-                backgroundColor: "var(--forth)",
+                backgroundColor: "var(--fiveth)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -86,7 +86,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
                 initial={AnimationThemeInstance.FadeUp}
                 transition={{ duration: 0.5, delay: 1 }}
                 style={{
-                  color: "var(--forth)",
+                  color: "var(--fiveth)",
                   fontSize: "12px",
                   fontFamily: "Times-new-roman",
                 }}
@@ -108,7 +108,7 @@ const GuestScanView = (props: GuestScanViewInterface) => {
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.5, delay: 2 }}
               style={{
-                color:"var(--forth)" ,
+                color:"var(--fiveth)" ,
                 fontSize: "12px",
                 fontFamily: "Times-new-roman",
               }}

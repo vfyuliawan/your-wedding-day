@@ -62,7 +62,7 @@ const HomeView = (props: HomeViewInterface) => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="home-text"
                   style={{
-                    color: "var(--third)",
+                    color: "var(--forth)",
                     fontFamily: "Brilon",
                     fontSize: "20px",
                     letterSpacing: 2,
@@ -76,7 +76,7 @@ const HomeView = (props: HomeViewInterface) => {
                   transition={{ duration: 0.5, delay: 0.8 }}
                   className="home-text"
                   style={{
-                    color: "var(--third)",
+                    color: "var(--forth)",
                     fontFamily: "Times-new-roman",
                     fontSize: "14px",
                   }}

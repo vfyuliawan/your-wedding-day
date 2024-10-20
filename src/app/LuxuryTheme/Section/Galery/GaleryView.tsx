@@ -69,7 +69,7 @@ const GaleryView = (props: GaleryViewInterface) => {
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.5, delay:0.5 }}
               style={{
-                color: "var(--third)",
+                color: "var(--forth)",
                 fontWeight: "100",
                 fontFamily: "brilon",
                 fontSize: "30px",
@@ -84,7 +84,7 @@ const GaleryView = (props: GaleryViewInterface) => {
               style={{
                 fontFamily: "Creation",
                 fontWeight: "normal",
-                color: "var(--third)",
+                color: "var(--forth)",
                 fontSize: "32px",
               }}
             >
@@ -96,7 +96,7 @@ const GaleryView = (props: GaleryViewInterface) => {
               style={{
                 width: "100%",
                 height: "1px",
-                backgroundColor: "var(--third)",
+                backgroundColor: "var(--forth)",
                 marginBottom: "3rem",
                 marginTop: "3rem",
               }}
@@ -109,7 +109,7 @@ const GaleryView = (props: GaleryViewInterface) => {
                 initial={AnimationThemeInstance.FadeUp}
                 transition={{ duration:0.8, delay: 1 }}
                 style={{
-                  color: "var(--third)",
+                  color: "var(--forth)",
                   fontSize: "14px",
                   fontFamily: "Courier New",
                 }}
