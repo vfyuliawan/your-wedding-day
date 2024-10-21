@@ -34,6 +34,7 @@ export function ModalEditableForm(props: {
   story: boolean;
   galery: boolean;
   protocoler: boolean;
+  isShowLinkFilter : boolean;
   setProtocoler: React.Dispatch<SetStateAction<boolean>>;
 }) {
   let subtitle: any;
@@ -43,6 +44,8 @@ export function ModalEditableForm(props: {
   }
 
   const [isActive, setisActive] = useState(0);
+
+  
 
   return (
     <Modal
@@ -146,6 +149,7 @@ export function ModalEditableForm(props: {
                 checked={props.story}
               />
             </div>
+            
           </div>
         </div>
 
@@ -193,12 +197,44 @@ export function ModalEditableForm(props: {
                 height={25}
                 // width={49}
                 onChange={() => {
-                  props.setProtocoler(!props.protocoler);
+                  props.setDetails((prev:any) => {
+                    return{
+                      ...prev,
+                      healtProtocol:!props.protocoler
+                    }
+                  })
                 }}
                 checked={props.protocoler}
               />
             </div>
+           
           </div>
+          
+        </div>
+
+        <div className="row d-flex justify-content-start align-items-center">
+        <div className="col-3 d-flex justify-content-start mt-2 align-items-center">
+              <p style={{ fontFamily: "sans-serif", fontSize: 12 }}>
+                {" "}
+                FilterIG <br />
+                Live Streaming
+              </p>
+            </div>
+            <div className="col-3 d-flex justify-content-start align-items-center">
+              <Switch
+                height={25}
+                // width={49}
+                onChange={() => {
+                  props.setDetails((prev:any) => {
+                    return{
+                      ...prev,
+                      isShowLinkFilter:!props.isShowLinkFilter
+                    }
+                  })
+                }}
+                checked={props.isShowLinkFilter}
+              />
+            </div>
         </div>
       </div>
 

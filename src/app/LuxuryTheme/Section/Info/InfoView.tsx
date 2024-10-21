@@ -46,12 +46,16 @@ const InfoView = (props: InfoViewInterface) => {
 
   const apiKey = "AIzaSyCojsLM-OulTC4CRYYfmLaGGA90tjTLtio";
   return (
-    <section style={{ marginTop: -200, backgroundColor:"var(--third)" }} id="info" className="info ">
+    <section
+      style={{ marginTop: -100, backgroundColor: "var(--third)" }}
+      id="info"
+      className="info "
+    >
       <div className="container" style={{ marginTop: 0 }}>
         <div className="row justify-content-center">
           <div className="col-6 text-end">
             <motion.h2
-             ref={targetRef} 
+              ref={targetRef}
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.5 }}
@@ -76,7 +80,7 @@ const InfoView = (props: InfoViewInterface) => {
           </div>
           <div className="col-5 d-flex align-items-center">
             <motion.div
-            animate={controls}
+              animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.5, delay: 0.8 }}
               style={{
@@ -129,9 +133,7 @@ const InfoView = (props: InfoViewInterface) => {
           </div>
           <div className="row justify-content-center m-1 ">
             <motion.div
-            style={{
-              background: "linear-gradient(to top, var(--prim), var(--third))"
-            }}
+              style={{}}
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.5, delay: 1 }}
@@ -157,13 +159,13 @@ const InfoView = (props: InfoViewInterface) => {
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.8, delay: 1.2 }}
               className="col-md-9 col-sm-9 col-9 text-center"
-              style={{ color: "var(--fiveth)",  backgroundColor:"#fff"}}
+              style={{ color: "var(--fiveth)", backgroundColor: "#fff" }}
             >
-              <div className="row" style={{
-                
-              }}>
-                <div style={{
-                }} className="col-4 justify-content-end align-items-end">
+              <div className="row" style={{}}>
+                <div
+                  style={{}}
+                  className="col-4 justify-content-end align-items-end"
+                >
                   <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeUp}
@@ -348,14 +350,13 @@ const InfoView = (props: InfoViewInterface) => {
               initial={AnimationThemeInstance.FadeUp}
               transition={{ duration: 0.8, delay: 2.5 }}
               style={{
-                background: "linear-gradient(to top, var(--prim), var(--third))"
               }}
-              className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center"
+              className="col-md-3 col-sm-3 col-3 text-center d-flex justify-content-center align-items-center info-text"
             >
               <motion.h3
-               animate={controls}
-               initial={AnimationThemeInstance.FadeUp}
-               transition={{ duration: 0.8, delay:2.6 }}
+                animate={controls}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.8, delay: 2.6 }}
                 className="info-h3"
                 style={{
                   fontSize: "38px",
@@ -373,16 +374,16 @@ const InfoView = (props: InfoViewInterface) => {
             <motion.div
               animate={controls}
               initial={AnimationThemeInstance.FadeUp}
-              transition={{ duration: 0.8, delay:2.7 }}
+              transition={{ duration: 0.8, delay: 2.7 }}
               className="col-md-9 col-sm-9 col-9 text-center"
-              style={{ color: "var(--fiveth)",  backgroundColor:"#fff"}}
+              style={{ color: "var(--fiveth)", backgroundColor: "#fff" }}
             >
               <div className="row">
                 <div className="col-4 justify-content-end align-items-end">
                   <motion.h4
                     animate={controls}
                     initial={AnimationThemeInstance.FadeUp}
-                    transition={{ duration: 0.8, delay:2.8 }}
+                    transition={{ duration: 0.8, delay: 2.8 }}
                     style={{
                       fontSize: "22px",
                       letterSpacing: "3px",
@@ -401,7 +402,7 @@ const InfoView = (props: InfoViewInterface) => {
                     <motion.h4
                       animate={controls}
                       initial={AnimationThemeInstance.FadeUp}
-                      transition={{ duration: 0.8, delay: 2.9}}
+                      transition={{ duration: 0.8, delay: 2.9 }}
                       style={{
                         fontSize: "45px",
                         fontFamily: "brilon",
@@ -459,7 +460,7 @@ const InfoView = (props: InfoViewInterface) => {
               <motion.span
                 animate={controls}
                 initial={AnimationThemeInstance.FadeUp}
-                transition={{ duration: 0.8, delay: 3.1}}
+                transition={{ duration: 0.8, delay: 3.1 }}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -546,15 +547,12 @@ const InfoView = (props: InfoViewInterface) => {
       <div className="container mt-5  ">
         <div className="row justify-content-center">
           <div className="col-md-10" style={{}}>
-            <div
-              className="iframeContainer"
-              style={{ padding: "24px", }}
-            >
+            <div className="iframeContainer" style={{ padding: "24px" }}>
               <iframe
                 src={GetEmbededFromGmap(props.Embeded ?? "")}
                 width="100%"
                 height="400px"
-                style={{ }}
+                style={{}}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

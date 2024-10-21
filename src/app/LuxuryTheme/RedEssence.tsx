@@ -25,7 +25,7 @@ import CountDownView from "./Section/CountDown/CountDownView";
 import GaleryView from "./Section/Galery/GaleryView";
 import StoryView from "./Section/Story/StoryView";
 import { DocumentData, Timestamp } from "firebase/firestore";
-import { TimeConvertionDate } from "../utils/TimeConvertion";
+import { TimeConvertionDate, TimeConvertionFullDate } from "../utils/TimeConvertion";
 import CoverView from "./Section/Cover/CoverView";
 import GuestScanView from "./Section/GuestScanView/GuestScanView";
 import { ResultDetailSlug } from "../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
@@ -43,6 +43,7 @@ import ModalQRCode from "./Section/GuestScanView/ModalQRCode";
 import ModalQRCodeBgImage from "./Section/GuestScanView/ModalQRCodeBgImage";
 import { ModalEditableForm } from "./Section/EditableForm/ModalEditableForm";
 import HeathProtocol from "./Section/HealtProtocol/HealthProtocol";
+import LiveIgAndLinkFilter from "./Section/LiveIgAndFilter/LivveIgAndFilter";
 
 interface RedEssenceInterface {
   details: ResultDetailSlug | undefined;
@@ -404,8 +405,20 @@ const RedEssence = (props: RedEssenceInterface) => {
 
         <div ref={qrCodeRef}></div>
 
-        <GuestScanView idGuest={props.idGuest ?? 0} guest={props.guest ?? ""} />
-        {healtProtocol ? <HeathProtocol /> : null}
+        {/* <GuestScanView idGuest={props.idGuest ?? 0} guest={props.guest ?? ""} /> */}
+        {props.details?.isShowLinkFilter ? (
+          <LiveIgAndLinkFilter
+            title={props.details.title}
+            date={TimeConvertionFullDate(
+              props.details.countdown.toString()
+            ).dateMonthandYear}
+            linkFilter={props.details.igFilter}
+            linkStream={props.details.livelink}
+          />
+        ) : null}
+
+        {props.details?.healtProtocol ? <HeathProtocol /> : null}
+
         <FooterView Footer={props?.details!.home} />
         <EndView />
         <ModalQRCodeBgImage
@@ -431,10 +444,11 @@ const RedEssence = (props: RedEssenceInterface) => {
           setDetails={props.setDetails}
           story={props.details!.story.isShow}
           galery={props.details!.galery.isShow}
-          protocoler={healtProtocol}
+          protocoler={props.details!.healtProtocol}
           setProtocoler={sethealtProtocol}
           thirdColor={thirdColor}
           setThirdColor={setThirdColor}
+          isShowLinkFilter={props.details!.isShowLinkFilter}
         />
 
         {!coverVisible && isMobile ? (

@@ -42,7 +42,7 @@ const GiftsView = (props: GiftsViewInterface) => {
   return (
     <section
       id="gifts"
-      style={{ paddingTop: '1rem', backgroundColor: "var(--sec)" }}
+      style={{ paddingTop: "1rem", backgroundColor: "var(--sec)" }}
       className="gifts"
       ref={targetRefGift}
     >
@@ -50,7 +50,8 @@ const GiftsView = (props: GiftsViewInterface) => {
         style={{
           borderRadius: "20px 20px 0 0",
           backgroundColor: "var(--third)",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.80)",                    paddingTop: "5rem",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.80)",
+          paddingTop: "5rem",
           marginTop: "2rem",
           height: "100vh",
         }}
@@ -63,7 +64,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                 initial={AnimationThemeInstance.FadeLeft}
                 transition={{ duration: 1.5 }}
                 style={{
-                  color:"var(--fiveth)" ,
+                  color: "var(--fiveth)",
                   fontWeight: "100",
                   fontFamily: "brilon",
                   fontSize: "25px",
@@ -75,8 +76,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                     fontFamily: "Creation",
                     fontWeight: "10",
                     fontSize: "30px",
-                    color:"var(--fiveth)" ,
-
+                    color: "var(--fiveth)",
                   }}
                 >
                   Gifts
@@ -101,7 +101,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   initial={AnimationThemeInstance.FadeRight}
                   transition={{ duration: 1.5, delay: 0.5 }}
                   style={{
-                    color:"var(--fiveth)" ,
+                    color: "var(--fiveth)",
                     fontSize: "12px",
                     fontFamily: "Times-new-roman",
                   }}
@@ -123,20 +123,31 @@ const GiftsView = (props: GiftsViewInterface) => {
                   transition={{ duration: 2, delay: 1 }}
                   className="col-10"
                 >
-                  <div className="card text-center">
-                    <div style={{ padding: 15 }} className="card-header">
+                  <div style={{
+                  }} className="card text-center f-flex align-items-center">
+                    <div
+                      style={{ padding: 15, backgroundColor: "var(--third)" }}
+                      className=""
+                    >
                       <img
                         src={`/image/rekening/${item.image}.png`}
                         style={{ height: "3rem" }}
                       />
                     </div>
+                    <div
+                      style={{
+                        width: "90%",
+                        height: 1,
+                        backgroundColor: "var(--prim)",
+                      }}
+                    ></div>
                     <div className="card-body">
                       <h5
                         className="card-title"
                         style={{
-                          color:"var(--fiveth)" ,
+                          color: "var(--fiveth)",
                           fontFamily: '"Courier New", Courier, monospace',
-                          fontSize:"12px"
+                          fontSize: "12px",
                         }}
                       >
                         {item.noRek}
@@ -147,19 +158,25 @@ const GiftsView = (props: GiftsViewInterface) => {
                         }}
                         className="btn btn-lg"
                         style={{
-                          color:"var(--third)" ,
-                          fontSize:"12px"
-
+                          backgroundColor:"var(--prim)",
+                          color: "var(--forth)",
+                          fontSize: "12px",
                         }}
                       >
-                        Salin Rekening{" "}
+                       <i className="bi bi-clipboard"></i>  Salin Rekening{" "}
                       </a>
                     </div>
-                    <div style={{
-                                        color:"var(--forth)" ,
-                                        fontSize:"12px"
+                    {/* <div style={{width:"90%", marginBottom:12, height:1, backgroundColor:"var(--prim)"}}></div> */}
 
-                    }} className="card-footer text-body-secondary text-light">
+                    <div
+                      style={{
+                        color: "var(--forth)",
+                        marginTop: 12,
+                        marginBottom: 12,
+                        fontSize: "12px",
+                      }}
+                      className="text-body-secondary mt-2 text-light"
+                    >
                       A/N {item.name}
                     </div>
                   </div>
@@ -170,9 +187,7 @@ const GiftsView = (props: GiftsViewInterface) => {
           <div
             className="row justify-content-center"
             style={{ marginTop: "5rem", marginBottom: "2rem" }}
-          >
-            
-          </div>
+          ></div>
         </div>
       </div>
     </section>

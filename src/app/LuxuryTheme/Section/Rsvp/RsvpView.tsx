@@ -185,10 +185,9 @@ const RsvpView = (props: RSVPViewInterface) => {
                 className="col-12 "
               >
                 <label
-                  style={{ fontSize: "14px", color:"var(--forth)" }}
+                  style={{ fontSize: "14px", color: "var(--forth)" }}
                   htmlFor="nama"
                   className="form-label"
-                  
                 >
                   Nama
                 </label>
@@ -197,7 +196,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   type="text"
                   className="form-control"
                   style={{
-                    backgroundColor:"var(--third)"
+                    backgroundColor: "var(--sec)",
                   }}
                   id="nama"
                   name="nama"
@@ -223,7 +222,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 className="col-12 "
               >
                 <label
-                  style={{ fontSize: "14px", color:"var(--forth)" }}
+                  style={{ fontSize: "14px", color: "var(--forth)" }}
                   htmlFor="Pesan"
                   className="form-label"
                 >
@@ -232,7 +231,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <select
                   className="form-select"
                   style={{
-                    backgroundColor:"var(--third)"
+                    backgroundColor: "var(--sec)",
                   }}
                   aria-label="Default select example"
                   onChange={(val) => {
@@ -263,7 +262,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 className="col-12"
               >
                 <label
-                  style={{ fontSize: "14px", color:"var(--forth)" }}
+                  style={{ fontSize: "14px", color: "var(--forth)" }}
                   htmlFor="nama"
                   className="form-label"
                 >
@@ -283,7 +282,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   rows={5}
                   name="pesan"
                   style={{
-                    backgroundColor:"var(--third)"
+                    backgroundColor: "var(--sec)",
                   }}
                   value={sendMessage?.text}
                 />
@@ -444,22 +443,21 @@ const RsvpView = (props: RSVPViewInterface) => {
             <div className="col-3 justify-content-center d-flex items-content-center">
               <div
                 style={{
-                  borderRadius: "50%",
-                  backgroundColor: item.present
-                    ? "rgba(0, 0, 0, 0.25)"
-                    : "rgba(0, 0, 0, 0.25)",
-                  width: "5rem",
-                  height: "5rem",
-                  // maxHeight: "5rem",
-                  // maxWidth: "5rem",
+                  borderRadius: 30,
+                  backgroundColor: "rgba(0, 0, 0, 0.25)",
+                  padding: 12,
+                  height: 60,
+                  width: 60,
+                  display: "flex", // Ensures flexbox behavior
+                  justifyContent: "center", // Horizontal centering
+                  alignItems: "center", // Vertical centering
                 }}
-                className="text-center justify-content-center d-flex align-items-center"
               >
                 <p
                   style={{
                     color: "white",
-                    fontSize: "22px",
-                    marginTop: "8px",
+                    fontSize: 14,
+                    margin: 0, // Ensure no margin from the p tag
                   }}
                 >
                   {item?.name?.split("")[0] !== undefined
@@ -514,7 +512,7 @@ const RsvpView = (props: RSVPViewInterface) => {
               <p style={{ color: "black", fontSize: "12px" }}>
                 {item.text}
                 <br />
-                <span style={{ fontSize: "0.9rem" }}>
+                <span style={{ fontSize: 9, color: "grey" }}>
                   {TimeConvertionFullDateAndTime(item.time.toString())}
                 </span>
               </p>

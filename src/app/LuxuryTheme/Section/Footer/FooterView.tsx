@@ -98,7 +98,7 @@ const FooterView = (props: FooterViewInterface) => {
           </motion.h3>
         </main>
       </section>
-      <div
+      {/* <div
         className=""
         style={{
           position: "absolute",
@@ -109,7 +109,7 @@ const FooterView = (props: FooterViewInterface) => {
           height: "10rem",
           zIndex: 1,
         }}
-      ></div>
+      ></div> */}
     </div>
   );
 };

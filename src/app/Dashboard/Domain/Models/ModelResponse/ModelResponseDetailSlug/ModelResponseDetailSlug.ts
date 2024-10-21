@@ -17,8 +17,8 @@ export interface ResultDetailSlug {
   countdown: Date;
   publishDate: Date;
   videoLink: string;
-  healtProtocol: true;
-  isShowLinkFilter: true;
+  healtProtocol: boolean;
+  isShowLinkFilter: boolean;
   livelink: string;
   igFilter: string;
   hero: Cover;

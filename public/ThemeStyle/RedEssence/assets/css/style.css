@@ -3,6 +3,17 @@
   font-family: "brilon";
   src: url("../../../../Font/brilon/brilon-11-regular.ttf") format("brilon11");
 }
+@font-face {
+  font-family: "poppins";
+  src: url("../../../../Font/Poppins/Poppins-Regular.ttf") format("Poppins-Regular");
+}
+
+@font-face {
+  font-family: 'Sachettele Signature';
+  src: url('../../../../Font/Sachettele Signature.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
   /* --prim: #f14e95; */
   --prim: hsl(0, 74%, 18%);
@@ -612,7 +623,7 @@ p {
 }
 
 .info .info-text {
-  /* background: linear-gradient(to top, var(--prim), var(--bg2)); */
+  background: linear-gradient(to top, var(--prim), var(--bg2));
 }
 
 .iframeContainer {
