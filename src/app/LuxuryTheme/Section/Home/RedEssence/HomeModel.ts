@@ -1,4 +1,4 @@
-import { Cover } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug"
+import { Cover } from "../../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug"
 
 export interface HomeKeyValue {
     HomeImg: string

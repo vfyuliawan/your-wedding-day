@@ -10,10 +10,25 @@
 
 @font-face {
   font-family: 'Sachettele Signature';
-  src: url('../../../../Font/Sachettele Signature.ttf') format('truetype');
+  src: url('../../../../Font/sachlette-signature/Sachlette\ Signature.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
+
+@font-face {
+  font-family: 'dream evanue';
+  src: url('../../../../Font/dream_evanue/FontsFree-Net-Dream-Avenue.ttf') format('truetype');
+}
+
+
+@font-face {
+  font-family: 'reguler-light';
+  src: url('../../../../Font/regular-light/Regular-Light.ttf') format('truetype');
+}
+
+
+
 :root {
   /* --prim: #f14e95; */
   --prim: hsl(0, 74%, 18%);
@@ -977,6 +992,18 @@ p {
   width: 100%;
 }
 
+.home-bg-dark {
+  /* background: linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0) 0%,
+    var(--prim) 50%,
+    var(--prim) 100%
+  ); */
+  /* background-color: var(--prim); */
+  background: linear-gradient(var(--prim) 0%, var(--prim) 30%, white 170%);
+  width: 100%;
+}
+
 
 
 .position-relative {
@@ -985,6 +1012,10 @@ p {
 .male-female{
   background-color: var(--sec);
   height: 150vh;
+}
+
+.male-female-dark{
+  background-color: var(--sec);
 }
 
 .male-female .overlay {
@@ -1033,6 +1064,36 @@ p {
   top: 50;
 
 } */
+
+
+.timeline-container {
+  width: 100%; /* Full width container */
+  overflow: hidden; /* Hide the overflow to enable scrolling effect */
+  position: relative;
+}
+
+.timeline-wrapper {
+  display: flex; /* Display items in a row */
+  justify-content: flex-start;
+  align-items: center;
+  animation: scrollTimeline 5s linear infinite; /* Infinite scroll animation */
+}
+
+.timeline-item {
+  position: relative;
+  margin-right: 40px;
+  flex-shrink: 0;
+}
+
+/* Animation to scroll horizontally */
+@keyframes scrollTimeline {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
 .count-down-overlay {
   background-color: var(--shadow4);

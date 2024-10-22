@@ -196,7 +196,8 @@ const RsvpView = (props: RSVPViewInterface) => {
                   type="text"
                   className="form-control"
                   style={{
-                    backgroundColor: "var(--sec)",
+                    // color;"white",
+                    // backgroundColor: "var(--sec)",
                   }}
                   id="nama"
                   name="nama"
@@ -231,7 +232,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <select
                   className="form-select"
                   style={{
-                    backgroundColor: "var(--sec)",
+                    // backgroundColor: "var(--sec)",
                   }}
                   aria-label="Default select example"
                   onChange={(val) => {
@@ -282,7 +283,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   rows={5}
                   name="pesan"
                   style={{
-                    backgroundColor: "var(--sec)",
+                    // backgroundColor: "var(--sec)",
                   }}
                   value={sendMessage?.text}
                 />

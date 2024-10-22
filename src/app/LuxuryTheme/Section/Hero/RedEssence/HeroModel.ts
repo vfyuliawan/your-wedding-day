@@ -1,5 +1,5 @@
-import { Cover } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
-import { TimeConvertionInterface } from "../../../utils/TimeConvertion";
+import { Cover } from "../../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import { TimeConvertionInterface } from "../../../../utils/TimeConvertion";
 
 export interface HeroKeyValue{
     HeroImg: string;

@@ -2,15 +2,15 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
 import { StoryViewInterface } from "./SotryViewModel";
 import {
   TimeConversionTime,
   TimeConvertionDate,
   TimeConvertionInterface,
   TimeConvertionUSFormat,
-} from "../../../utils/TimeConvertion";
-import AnimationThemeInstance from "../../../utils/AnimationThemes";
+} from "../../../../utils/TimeConvertion";
+import AnimationThemeInstance from "../../../../utils/AnimationThemes";
 import React from "react";
 import {
   VerticalTimeline,

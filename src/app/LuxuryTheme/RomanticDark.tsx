@@ -16,16 +16,14 @@ import {
   useRef,
   useState,
 } from "react";
-import MaleFemaleView from "./Section/Male-Female/RedEssence/MaleFemaleView";
-import HomeView from "./Section/Home/RedEssence/HomeView";
+import HomeView from "./Section/Home/RomanticDark/HomeView";
 // import CoverView from "./Section/Cover/CoverView";
-import InfoView from "./Section/Info/RedEssence/InfoView";
 import CountDownView from "./Section/CountDown/CountDownView";
 import GaleryView from "./Section/Galery/GaleryView";
-import StoryView from "./Section/Story/RedEssence/StoryView";
+import StoryView from "./Section/Story/RomanticDark/StoryView";
 import { DocumentData, Timestamp } from "firebase/firestore";
 import { TimeConvertionDate, TimeConvertionFullDate } from "../utils/TimeConvertion";
-import CoverView from "./Section/Cover/RedEssence/CoverView";
+import CoverView from "./Section/Cover/RomanticDark/CoverView";
 import GuestScanView from "./Section/GuestScanView/GuestScanView";
 import { ResultDetailSlug } from "../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 import React from "react";
@@ -43,9 +41,11 @@ import ModalQRCodeBgImage from "./Section/GuestScanView/ModalQRCodeBgImage";
 import { ModalEditableForm } from "./Section/EditableForm/ModalEditableForm";
 import HeathProtocol from "./Section/HealtProtocol/HealthProtocol";
 import LiveIgAndLinkFilter from "./Section/LiveIgAndFilter/LivveIgAndFilter";
-import HeroView from "./Section/Hero/RedEssence/HeroView";
+import HeroView from "./Section/Hero/RomanticDark/HeroView";
+import MaleFemaleView from "./Section/Male-Female/RomanticDark/MaleFemaleView";
+import InfoView from "./Section/Info/RomanticDark/InfoView";
 
-interface RedEssenceInterface {
+interface RomanticDarkInterface {
   details: ResultDetailSlug | undefined;
   message: MessagesRequest[];
   setMessage: React.Dispatch<React.SetStateAction<MessagesRequest[]>>;
@@ -59,7 +59,7 @@ interface RedEssenceInterface {
   >;
 }
 
-const RedEssence = (props: RedEssenceInterface) => {
+const RomanticDark = (props: RomanticDarkInterface) => {
   const [visible, setVisible] = useState(false);
   const [removeComp, setRemoveComp] = useState(false);
   // const heroRef = useRef<any>(null);
@@ -576,4 +576,4 @@ const RedEssence = (props: RedEssenceInterface) => {
   );
 };
 
-export default RedEssence;
+export default RomanticDark;

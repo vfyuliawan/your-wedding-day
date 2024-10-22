@@ -1,4 +1,4 @@
-import { BraidInfo } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import { BraidInfo } from "../../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 
 export interface MaleFemaleProps {
     Male:MaleFemaleValue

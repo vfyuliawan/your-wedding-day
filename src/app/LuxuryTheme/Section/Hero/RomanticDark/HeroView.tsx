@@ -1,0 +1,128 @@
+"use client";
+
+import { motion, useAnimation } from "framer-motion";
+import {
+  LegacyRef,
+  MutableRefObject,
+  forwardRef,
+  useEffect,
+  useRef,
+} from "react";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
+import HeaderView from "../../Header/HeaderView";
+import { HeroViewInterface } from "./HeroModel";
+import {
+  TimeConversionTime,
+  TimeConvertionDate,
+  TimeConvertionFullDateAndTime,
+  TimeConvertionInterface,
+  TimeConvertionUSFormat,
+} from "../../../../utils/TimeConvertion";
+import React from "react";
+import AnimationThemeInstance from "../../../../utils/AnimationThemes";
+import { IConstantFont } from "../../../../utils/ConstantFont";
+
+const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
+  const controls = useAnimation();
+  const targetRef = useRef<any>(null);
+  const isVisible = useIntersectionObserver(targetRef);
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start(AnimationThemeInstance.FadeStartVertical);
+    }
+  }, [isVisible, controls]);
+  return (
+    <>
+      <section
+        id="hero"
+        ref={ref}
+        style={{ height: "100vh" }}
+        className="hero w-100 text-center d-flex justify-content-center align-items-center text-white position-relative"
+      >
+        <div
+          className="background-overlay"
+          style={{
+            position: "absolute",
+            top: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: -1,
+            backgroundImage: `url(${props?.HeroDetail?.img})`,
+            filter: "grayscale(30%)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="gradient-overlay" />
+        <div
+          className="inside"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+            bottom: -180,
+          }}
+        >
+          <motion.h1
+            ref={targetRef}
+            animate={controls}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.5, delay: 0 }}
+            style={{
+              fontFamily: IConstantFont.dreamEvanue,
+              fontSize: 40,
+              color: "var(--forth)",
+              textShadow: "none",
+            }}
+          >
+            {`${props.getTitle?.split("-")[0].toUpperCase()} &`}
+            <br /> {props.getTitle?.split("-")[1].toUpperCase()}
+          </motion.h1>
+          <div style={{ width: "100%", height: 1, backgroundColor: "white" }} />
+          <motion.p
+          ref={targetRef}
+          animate={controls}
+          initial={AnimationThemeInstance.FadeUp}
+          transition={{ duration: 0.5, delay: 0.5 }}
+            style={{
+              color: "var(--forth)",
+              textShadow: "none",
+              fontFamily: IConstantFont.regulerLight,
+              fontSize: 16,
+            }}
+          >
+            Acara Akan Dimulai pada
+          </motion.p>
+          <motion.h4
+          ref={targetRef}
+          animate={controls}
+          initial={AnimationThemeInstance.FadeUp}
+          transition={{ duration: 0.5, delay: 0.5 }}
+            style={{
+              color: "var(--forth)",
+              textShadow: "none",
+              fontFamily: IConstantFont.regulerLight,
+              fontSize: 16,
+            }}
+          >
+            19.10.2023
+          </motion.h4>
+          <div style={{ width: "100%", height: 1, backgroundColor: "white" }} />
+          {/* <motion.h4
+            ref={targetRef}
+            animate={controls}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            style={{ fontFamily: "serif", fontSize: 16, color: "var(--forth)" }}
+          >
+            {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
+          </motion.h4> */}
+         
+        </div>
+      </section>
+    </>
+  );
+});
+
+export default HeroView;

@@ -2,12 +2,12 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
 import { MaleFemaleViewInterface } from "./MaleFemaleModel";
 import React from "react";
-import AnimationThemeInstance, { setAnimation } from "../../../utils/AnimationThemes";
+import AnimationThemeInstance, { setAnimation } from "../../../../utils/AnimationThemes";
 import { isMobile } from "react-device-detect";
-import { hexToRgba } from "../../../utils/ConvertColor";
+import { hexToRgba } from "../../../../utils/ConvertColor";
 
 const MaleFemaleView = (props: MaleFemaleViewInterface) => {
   const controls = useAnimation();
@@ -73,7 +73,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 color: "var(--fiveth)",
               }}
             >
-              The Ride
+              The Bride
             </motion.h3>
           </div>
           <div className=" col-9 col-sm-9 d-flex align-items-star justify-content-star position-relative">

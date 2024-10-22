@@ -126,7 +126,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                   <div style={{
                   }} className="card text-center f-flex align-items-center">
                     <div
-                      style={{ padding: 15, backgroundColor: "var(--third)" }}
+                      style={{ padding: 15,  }}
                       className=""
                     >
                       <img

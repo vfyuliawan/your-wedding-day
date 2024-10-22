@@ -2,18 +2,18 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
 import {
   TimeConversionTime,
   TimeConvertionDate,
   TimeConvertionDay,
   TimeConvertionFullDate,
   TimeConvertionInterface,
-} from "../../../utils/TimeConvertion";
+} from "../../../../utils/TimeConvertion";
 import React from "react";
-import AnimationThemeInstance from "../../../utils/AnimationThemes";
-import { GetEmbededFromGmap } from "../../../utils/GetEmbeded";
-import { InfoAcara } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import AnimationThemeInstance from "../../../../utils/AnimationThemes";
+import { GetEmbededFromGmap } from "../../../../utils/GetEmbeded";
+import { InfoAcara } from "../../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 
 export interface InfoViewInterface {
   Info: InfoAcara | undefined;

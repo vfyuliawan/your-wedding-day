@@ -2,10 +2,10 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
 import { HomeViewInterface } from "./HomeModel";
 import React from "react";
-import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import AnimationThemeInstance from "../../../../utils/AnimationThemes";
 
 const HomeView = (props: HomeViewInterface) => {
   const controls = useAnimation();

@@ -15,6 +15,7 @@ import {
 import { ThemeColorClass } from "@/app/Constant/ThemeColor";
 import { GetEmbededFromGmap } from "@/app/utils/GetEmbeded";
 import { useInView } from "react-intersection-observer";
+import React from "react";
 
 export interface InfoViewInterface {
   Info: InfoViewKeyValue[];

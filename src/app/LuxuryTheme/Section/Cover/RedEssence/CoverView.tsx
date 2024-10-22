@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
-import { HeroViewInterface } from "../Hero/HeroModel";
+import { HeroViewInterface } from "../../Hero/HeroModel";
 import { Timestamp } from "firebase/firestore";
 import {
   TimeConvertionDate,
@@ -11,7 +11,7 @@ import {
   TimeConvertionFullDate,
   TimeConvertionFullDateAndTime,
   TimeConvertionUSFormat,
-} from "../../../utils/TimeConvertion";
+} from "../../../../utils/TimeConvertion";
 import React from "react";
 import { isMobile } from "react-device-detect";
 

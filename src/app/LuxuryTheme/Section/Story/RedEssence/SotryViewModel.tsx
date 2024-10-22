@@ -1,5 +1,5 @@
-import { ResultStory } from "../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug"
-import { TimeConvertionInterface } from "../../../utils/TimeConvertion"
+import { ResultStory } from "../../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug"
+import { TimeConvertionInterface } from "../../../../utils/TimeConvertion"
 
 export interface StoryViewInterface {
     OurStory: ResultStory | undefined

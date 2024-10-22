@@ -2,8 +2,8 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { LegacyRef, MutableRefObject, forwardRef, useEffect, useRef } from "react";
-import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
-import HeaderView from "../Header/HeaderView";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
+import HeaderView from "../../Header/HeaderView";
 import { HeroViewInterface } from "./HeroModel";
 import {
   TimeConversionTime,
@@ -11,9 +11,9 @@ import {
   TimeConvertionFullDateAndTime,
   TimeConvertionInterface,
   TimeConvertionUSFormat,
-} from "../../../utils/TimeConvertion";
+} from "../../../../utils/TimeConvertion";
 import React from "react";
-import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import AnimationThemeInstance from "../../../../utils/AnimationThemes";
 
 const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
   const controls = useAnimation();
