@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
-import { HeroViewInterface } from "../../Hero/HeroModel";
 import { Timestamp } from "firebase/firestore";
 import {
   TimeConvertionDate,

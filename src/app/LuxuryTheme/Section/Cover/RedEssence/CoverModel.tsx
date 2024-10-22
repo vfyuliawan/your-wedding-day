@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { HeroViewInterface } from "../../Hero/HeroModel";
 import { Timestamp } from "firebase/firestore";
 import { Cover } from "../../../../Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
 

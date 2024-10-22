@@ -4,10 +4,6 @@ import {
   HomeKeyValue,
   HomeViewInterface,
 } from "@/app/FloralTheme/Section/Home/HomeModel";
-import {
-  InfoViewInterface,
-  InfoViewKeyValue,
-} from "@/app/LuxuryTheme/Section/Info/InfoView";
 import useIntersectionObserver from "@/app/LuxuryTheme/Section/UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import { TimeConvertionDate } from "@/app/utils/TimeConvertion";
@@ -16,6 +12,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import AnimatedImageComponent from "../../component/AnimatedImage";
+import { InfoViewKeyValue } from "../../../LuxuryTheme/Section/Info/RedEssence/InfoView";
 
 const InfoView = (props: { themeName: string; info: InfoViewKeyValue[] }) => {
   const bgImage = new ThemeImageClass(props.themeName);

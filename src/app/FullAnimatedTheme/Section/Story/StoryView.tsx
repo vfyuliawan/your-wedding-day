@@ -5,10 +5,7 @@ import {
   HomeViewInterface,
 } from "@/app/FloralTheme/Section/Home/HomeModel";
 import { StoryViewMap } from "@/app/FloralTheme/Section/Story/SotryViewModel";
-import {
-  InfoViewInterface,
-  InfoViewKeyValue,
-} from "@/app/LuxuryTheme/Section/Info/InfoView";
+
 import useIntersectionObserver from "@/app/LuxuryTheme/Section/UseInterSectionObserver/UseInterSectionObserver";
 import AnimationThemeInstance from "@/app/utils/AnimationThemes";
 import {

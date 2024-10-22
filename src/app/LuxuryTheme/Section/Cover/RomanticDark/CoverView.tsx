@@ -361,7 +361,7 @@ const CoverView = (props: CoverModelInterface) => {
                 className="btn btn-md text-center"
                 style={{
                   width: "180px",
-                  opacity: 0.7,
+                  opacity: 0.8,
                   height: 40,
                   backgroundColor: "var(--prim)",
                   fontSize: 12,
