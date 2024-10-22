@@ -2,9 +2,9 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import useIntersectionObserver from "../UseInterSectionObserver/UseInterSectionObserver";
+import useIntersectionObserver from "../../UseInterSectionObserver/UseInterSectionObserver";
 import React from "react";
-import AnimationThemeInstance from "../../../utils/AnimationThemes";
+import AnimationThemeInstance from "../../../../utils/AnimationThemes";
 
 interface CountDownViewInterface {
   targetDate: Date | undefined;
@@ -102,14 +102,8 @@ const CountDownView = (props: CountDownViewInterface) => {
               ref={targetRef}
               initial={AnimationThemeInstance.FadeUp}
               animate={animate}
-              transition={{
-                type: "spring",
-                duration: 0.5,
-                delay: Math.random() * (0.8 - 0.2) + 0.2,
-                bounce: 0.5,
-                damping: 3,
-                stiffness: 80,
-              }}
+              transition={{ duration: 0.5, delay: 0 }}
+
               className="count-down-overlay container"
               style={{
                 padding: "2%",
@@ -135,14 +129,8 @@ const CountDownView = (props: CountDownViewInterface) => {
               <div className="row text-center">
                 <motion.h1
                   initial={AnimationThemeInstance.FadeDown}
-                  transition={{
-                    type: "spring",
-                    duration: 0.5,
-                    delay: Math.random() * (0.8 - 0.2) + 0.2,
-                    bounce: 0.5,
-                    damping: 3,
-                    stiffness: 100,
-                  }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+
                   animate={animate}
                   style={{
                     color: "var(--forth)",
@@ -155,14 +143,8 @@ const CountDownView = (props: CountDownViewInterface) => {
               </div>
               <motion.div
                 initial={AnimationThemeInstance.FadeUp}
-                transition={{
-                  type: "spring",
-                  duration: 0.5,
-                  delay: Math.random() * (0.8 - 0.2) + 0.2,
-                  bounce: 0.5,
-                  damping: 3,
-                  stiffness: 60,
-                }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+
                 animate={animate}
                 className="row mt-5"
               >
@@ -177,14 +159,8 @@ const CountDownView = (props: CountDownViewInterface) => {
                   >
                     <motion.h3
                       initial={AnimationThemeInstance.FadeUp}
-                      transition={{
-                        type: "spring",
-                        duration: 0.5,
-                        delay: Math.random() * (0.8 - 0.2) + 0.2,
-                        bounce: 0.5,
-                        damping: 3,
-                        stiffness: 60,
-                      }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+
                       animate={animate}
                       style={{
                         color: "var(--forth)",
@@ -209,14 +185,8 @@ const CountDownView = (props: CountDownViewInterface) => {
                   >
                     <motion.h3
                       initial={AnimationThemeInstance.FadeUp}
-                      transition={{
-                        type: "spring",
-                        duration: 0.5,
-                        delay: Math.random() * (0.8 - 0.2) + 0.2,
-                        bounce: 0.5,
-                        damping: 3,
-                        stiffness: 60,
-                      }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+
                       animate={animate}
                       style={{
                         color: "var(--forth)",
@@ -237,14 +207,8 @@ const CountDownView = (props: CountDownViewInterface) => {
                   >
                     <motion.h3
                       initial={AnimationThemeInstance.FadeUp}
-                      transition={{
-                        type: "spring",
-                        duration: 0.5,
-                        delay: Math.random() * (0.8 - 0.2) + 0.2,
-                        bounce: 0.5,
-                        damping: 3,
-                        stiffness: 60,
-                      }}
+                      transition={{ duration: 0.5, delay: 0.7 }}
+
                       animate={animate}
                       style={{
                         color: "var(--forth)",
@@ -265,14 +229,8 @@ const CountDownView = (props: CountDownViewInterface) => {
                   >
                     <motion.h3
                       initial={AnimationThemeInstance.FadeUp}
-                      transition={{
-                        type: "spring",
-                        duration: 0.5,
-                        delay: Math.random() * (0.8 - 0.2) + 0.2,
-                        bounce: 0.5,
-                        damping: 3,
-                        stiffness: 60,
-                      }}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+
                       animate={animate}
                       style={{
                         color: "var(--forth)",

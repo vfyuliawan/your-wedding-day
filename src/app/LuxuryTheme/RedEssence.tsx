@@ -20,7 +20,6 @@ import MaleFemaleView from "./Section/Male-Female/RedEssence/MaleFemaleView";
 import HomeView from "./Section/Home/RedEssence/HomeView";
 // import CoverView from "./Section/Cover/CoverView";
 import InfoView from "./Section/Info/RedEssence/InfoView";
-import CountDownView from "./Section/CountDown/CountDownView";
 import GaleryView from "./Section/Galery/GaleryView";
 import StoryView from "./Section/Story/RedEssence/StoryView";
 import { DocumentData, Timestamp } from "firebase/firestore";
@@ -44,6 +43,7 @@ import { ModalEditableForm } from "./Section/EditableForm/ModalEditableForm";
 import HeathProtocol from "./Section/HealtProtocol/HealthProtocol";
 import LiveIgAndLinkFilter from "./Section/LiveIgAndFilter/LivveIgAndFilter";
 import HeroView from "./Section/Hero/RedEssence/HeroView";
+import CountDownView from "./Section/CountDown/RedEssence/CountDownView";
 
 interface RedEssenceInterface {
   details: ResultDetailSlug | undefined;

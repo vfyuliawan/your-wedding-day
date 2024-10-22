@@ -14,6 +14,7 @@ import { HeroViewInterface } from "./HeroModel";
 import {
   TimeConversionTime,
   TimeConvertionDate,
+  TimeConvertionFullDate,
   TimeConvertionFullDateAndTime,
   TimeConvertionInterface,
   TimeConvertionUSFormat,
@@ -54,7 +55,14 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             backgroundPosition: "center",
           }}
         />
-        <div className="gradient-overlay" />
+        <div className="" style={{
+           position: "absolute",
+           bottom: 0,
+           left: 0,
+           width: "100%",
+           height: "30%",
+          background:"linear-gradient(to bottom,rgba(255, 0, 0, 0) 20%,var(--prim) 80%)"
+        }} />
         <div
           className="inside"
           style={{
@@ -81,10 +89,10 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
           </motion.h1>
           <div style={{ width: "100%", height: 1, backgroundColor: "white" }} />
           <motion.p
-          ref={targetRef}
-          animate={controls}
-          initial={AnimationThemeInstance.FadeUp}
-          transition={{ duration: 0.5, delay: 0.5 }}
+            ref={targetRef}
+            animate={controls}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.5, delay: 0.5 }}
             style={{
               color: "var(--forth)",
               textShadow: "none",
@@ -95,10 +103,10 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             Acara Akan Dimulai pada
           </motion.p>
           <motion.h4
-          ref={targetRef}
-          animate={controls}
-          initial={AnimationThemeInstance.FadeUp}
-          transition={{ duration: 0.5, delay: 0.5 }}
+            ref={targetRef}
+            animate={controls}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.5, delay: 0.5 }}
             style={{
               color: "var(--forth)",
               textShadow: "none",
@@ -106,7 +114,10 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
               fontSize: 16,
             }}
           >
-            19.10.2023
+            {
+              TimeConvertionFullDate(props.HeroDetail!.date!.toString())
+                .dateMonthandYearDot
+            }
           </motion.h4>
           <div style={{ width: "100%", height: 1, backgroundColor: "white" }} />
           {/* <motion.h4
@@ -118,7 +129,6 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
           >
             {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
           </motion.h4> */}
-         
         </div>
       </section>
     </>

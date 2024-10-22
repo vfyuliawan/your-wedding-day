@@ -88,14 +88,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   <motion.h2
                     animate={animate}
                     initial={AnimationThemeInstance.FadeUp}
-                    transition={{
-                      type: "spring",
-                      duration: 0.8,
-                      delay: Math.random() * (2 - 0.5) + 0.5,
-                      bounce: 0.5,
-                      damping: 3,
-                      stiffness: 50,
-                    }}
+                    transition={{ duration: 0.5, delay: 0 }}
                     style={{
                       color: "var(--forth)",
                       fontSize: "32px",
@@ -123,14 +116,7 @@ const RsvpView = (props: RSVPViewInterface) => {
                   <motion.div
                     animate={animate}
                     initial={AnimationThemeInstance.FadeUp}
-                    transition={{
-                      type: "spring",
-                      duration: 0.8,
-                      delay: Math.random() * (2 - 0.5) + 0.5,
-                      bounce: 0.5,
-                      damping: 3,
-                      stiffness: 50,
-                    }}
+                    transition={{ duration: 0.5, delay: 0 }}
                     style={{
                       position: "absolute",
                       width: "40%",
@@ -147,14 +133,8 @@ const RsvpView = (props: RSVPViewInterface) => {
               <motion.p
                 animate={animate}
                 initial={AnimationThemeInstance.FadeUp}
-                transition={{
-                  type: "spring",
-                  duration: 0.8,
-                  delay: Math.random() * (2 - 0.5) + 0.5,
-                  bounce: 0.5,
-                  damping: 3,
-                  stiffness: 50,
-                }}
+                transition={{ duration: 0.5, delay: 0 }}
+
                 style={{
                   color: "var(--forth)",
                   fontSize: "12px",
@@ -174,14 +154,8 @@ const RsvpView = (props: RSVPViewInterface) => {
               <motion.div
                 animate={animate}
                 initial={AnimationThemeInstance.FadeUp}
-                transition={{
-                  type: "spring",
-                  duration: 0.8,
-                  delay: Math.random() * (2 - 0.5) + 0.5,
-                  bounce: 0.5,
-                  damping: 3,
-                  stiffness: 50,
-                }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+
                 className="col-12 "
               >
                 <label
@@ -195,10 +169,12 @@ const RsvpView = (props: RSVPViewInterface) => {
                   value={sendMessage?.name}
                   type="text"
                   className="form-control"
-                  style={{
-                    // color;"white",
-                    // backgroundColor: "var(--sec)",
-                  }}
+                  style={
+                    {
+                      // color;"white",
+                      // backgroundColor: "var(--sec)",
+                    }
+                  }
                   id="nama"
                   name="nama"
                   onChange={(val) => {
@@ -214,12 +190,8 @@ const RsvpView = (props: RSVPViewInterface) => {
               <motion.div
                 animate={animate}
                 initial={AnimationThemeInstance.FadeUp}
-                transition={[
-                  bouncing,
-                  {
-                    delay: 2.3,
-                  },
-                ]}
+                transition={{ duration: 0.5, delay: 0.3 }}
+
                 className="col-12 "
               >
                 <label
@@ -231,9 +203,11 @@ const RsvpView = (props: RSVPViewInterface) => {
                 </label>
                 <select
                   className="form-select"
-                  style={{
-                    // backgroundColor: "var(--sec)",
-                  }}
+                  style={
+                    {
+                      // backgroundColor: "var(--sec)",
+                    }
+                  }
                   aria-label="Default select example"
                   onChange={(val) => {
                     setSendMessage((prev: RSVPKeyValue | undefined) => {
@@ -252,14 +226,8 @@ const RsvpView = (props: RSVPViewInterface) => {
               <motion.div
                 animate={animate}
                 initial={AnimationThemeInstance.FadeUp}
-                transition={{
-                  type: "spring",
-                  duration: 0.8,
-                  delay: Math.random() * (2 - 0.5) + 0.5,
-                  bounce: 0.5,
-                  damping: 3,
-                  stiffness: 50,
-                }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+
                 className="col-12"
               >
                 <label
@@ -282,9 +250,11 @@ const RsvpView = (props: RSVPViewInterface) => {
                   id="pesan"
                   rows={5}
                   name="pesan"
-                  style={{
-                    // backgroundColor: "var(--sec)",
-                  }}
+                  style={
+                    {
+                      // backgroundColor: "var(--sec)",
+                    }
+                  }
                   value={sendMessage?.text}
                 />
               </motion.div>
@@ -294,14 +264,8 @@ const RsvpView = (props: RSVPViewInterface) => {
                 <motion.button
                   animate={animate}
                   initial={AnimationThemeInstance.FadeUp}
-                  transition={{
-                    type: "spring",
-                    duration: 0.8,
-                    delay: Math.random() * (2 - 0.5) + 0.5,
-                    bounce: 0.5,
-                    damping: 3,
-                    stiffness: 50,
-                  }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+
                   type="button"
                   onClick={() => {
                     console.log(sendMessage);

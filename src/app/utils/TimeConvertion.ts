@@ -106,6 +106,7 @@ export const TimeConvertionFullDate = (date: string) => {
   const dateToString = fullDate.split("-")[2]
   const monthandYear = `${monthToString} ${year}`
   const dateMonthandYear = `${dateToString} ${monthToString} ${year}`
+  const dateMonthandYearDot = `${dateToString}.${month}.${year}`
 
   return {
       formattedTime,
@@ -114,6 +115,7 @@ export const TimeConvertionFullDate = (date: string) => {
       monthToString,
       dateToString,
       year,
+      dateMonthandYearDot,
       monthandYear
   };
 };

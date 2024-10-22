@@ -262,7 +262,7 @@ const CoverView = (props: CoverModelInterface) => {
         <div
           className="cover2-overlay-img"
           style={{
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            backgroundColor: isMobile ? "rgba(0, 0, 0, 0.9)": "rgba(0, 0, 0, 0.6)",
             backgroundRepeat: "no-repeat",
             width: "100%",
             height: "120%",
@@ -304,7 +304,7 @@ const CoverView = (props: CoverModelInterface) => {
             </div>
 
             <div
-              style={{ marginTop: isMobile ? "30rem" : "24rem" }}
+              style={{ marginTop: isMobile ? "25rem" : "24rem" }}
               className="col-12 align-items-center d-flex  justify-content-center"
             >
               <div className="row">
@@ -314,17 +314,19 @@ const CoverView = (props: CoverModelInterface) => {
                       fontFamily: IConstantFont.dreamEvanue,
                       fontSize: "32px",
                       color: "var(--forth)",
+                      letterSpacing:3
                     }}
                   >
                     {props.detailCover?.title.toUpperCase()}
                   </p>
                 </div>
-                <div className="col-12 justify-content-center d-flex">
+                <div className="col-12 justify-content-center align-items-end d-flex">
                   <div
                     style={{
-                      width: 250,
-                      height: 0.5,
+                      width: 200,
+                      height: 1,
                       backgroundColor: "white",
+                      marginBottom:4
                     }}
                   ></div>
                 </div>
@@ -335,10 +337,11 @@ const CoverView = (props: CoverModelInterface) => {
                       fontSize: 18,
                       fontFamily: "dream evanue",
                       color: "white",
-                      letterSpacing: 3,
+                      letterSpacing: 12,
+                      fontWeight:800
                     }}
                   >
-                    19.10.2024
+                    {TimeConvertionFullDate(props.detailCover!.date!.toString()).dateMonthandYearDot}
                   </p>
                 </div>
                 <div className="col-12 mt-4">
@@ -351,6 +354,18 @@ const CoverView = (props: CoverModelInterface) => {
                     }}
                   >
                     Kepada Bpk/Ibu/Saudara/i
+                  </p>
+                </div>
+                <div className="col">
+                <p
+                    className=""
+                    style={{
+                      fontSize: 24,
+                      color: "white",
+                      fontFamily: IConstantFont.regulerLight,
+                    }}
+                  >
+                    {props.guest.toUpperCase()}
                   </p>
                 </div>
               </div>

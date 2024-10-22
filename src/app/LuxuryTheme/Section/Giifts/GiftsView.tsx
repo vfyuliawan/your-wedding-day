@@ -33,7 +33,7 @@ const GiftsView = (props: GiftsViewInterface) => {
 
   useEffect(() => {
     if (isVisible) {
-      animate.start(AnimationThemeInstance.FadeHorizon);
+      animate.start(AnimationThemeInstance.FadeStartVertical);
     }
 
     return () => {};
@@ -61,8 +61,8 @@ const GiftsView = (props: GiftsViewInterface) => {
             <div className="col-6 text-end">
               <motion.h2
                 animate={animate}
-                initial={AnimationThemeInstance.FadeLeft}
-                transition={{ duration: 1.5 }}
+                initial={AnimationThemeInstance.FadeUp}
+                transition={{ duration: 0.5 }}
                 style={{
                   color: "var(--fiveth)",
                   fontWeight: "100",
@@ -98,8 +98,8 @@ const GiftsView = (props: GiftsViewInterface) => {
               <div className="col-8 text-center">
                 <motion.p
                   animate={animate}
-                  initial={AnimationThemeInstance.FadeRight}
-                  transition={{ duration: 1.5, delay: 0.5 }}
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration:0.5, delay: 0.5 }}
                   style={{
                     color: "var(--fiveth)",
                     fontSize: "12px",
@@ -119,14 +119,23 @@ const GiftsView = (props: GiftsViewInterface) => {
               return (
                 <motion.div
                   animate={animate}
-                  initial={AnimationThemeInstance.FadeLeft}
-                  transition={{ duration: 2, delay: 1 }}
-                  className="col-10"
+                  initial={AnimationThemeInstance.FadeUp}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="col-11"
+                  style={{
+                  }}
                 >
                   <div style={{
-                  }} className="card text-center f-flex align-items-center">
+                    backgroundColor:"white",
+                    borderRadius:15,
+                    flexDirection:"row",
+                    justifyContent:"center",
+                    alignItems:"center",
+                    padding:20
+
+                  }} className=" text-center justify-content-center align-items-center">
                     <div
-                      style={{ padding: 15,  }}
+                      style={{ padding: 10, }}
                       className=""
                     >
                       <img
@@ -134,24 +143,33 @@ const GiftsView = (props: GiftsViewInterface) => {
                         style={{ height: "3rem" }}
                       />
                     </div>
+                    <div style={{height:3}}></div>
+
                     <div
                       style={{
-                        width: "90%",
-                        height: 1,
+                        width: "100%",
+                        height: 3,
+                        alignItems:"center",
+                        alignSelf:"center",
                         backgroundColor: "var(--prim)",
                       }}
                     ></div>
-                    <div className="card-body">
+                    <div style={{height:10}}></div>
+                    <div style={{
+                    }} className="card-body mt-4">
                       <h5
-                        className="card-title"
+                        className="card-title mt-4"
                         style={{
                           color: "var(--fiveth)",
                           fontFamily: '"Courier New", Courier, monospace',
                           fontSize: "12px",
+                          marginTop:12
                         }}
                       >
                         {item.noRek}
                       </h5>
+                      <div style={{height:10}}></div>
+
                       <a
                         onClick={() => {
                           copyToClipboard(item.noRek);
@@ -167,6 +185,7 @@ const GiftsView = (props: GiftsViewInterface) => {
                       </a>
                     </div>
                     {/* <div style={{width:"90%", marginBottom:12, height:1, backgroundColor:"var(--prim)"}}></div> */}
+                    <div style={{height:10}}></div>
 
                     <div
                       style={{

@@ -18,7 +18,7 @@ import {
 } from "react";
 import HomeView from "./Section/Home/RomanticDark/HomeView";
 // import CoverView from "./Section/Cover/CoverView";
-import CountDownView from "./Section/CountDown/CountDownView";
+import CountDownView from "./Section/CountDown/RomanticDark/CountDownView";
 import GaleryView from "./Section/Galery/GaleryView";
 import StoryView from "./Section/Story/RomanticDark/StoryView";
 import { DocumentData, Timestamp } from "firebase/firestore";
@@ -365,7 +365,7 @@ const RomanticDark = (props: RomanticDarkInterface) => {
             (sectionRefs.current!.countdown = el as HTMLDivElement | null)
           }
         >
-          <CountDownView targetDate={props.details?.countdown} />
+          <CountDownView img={props.details?.home.img} targetDate={props.details?.countdown} />
         </div>
         <div
           id="story"
