@@ -8,8 +8,8 @@ const timeOut = 60000*10; //max request timeout menjadi 3 menit
 // const errorHandler = useErrorHandler();
 
 export const baseUrl = (): string => {
-  // return "https://innovative-emotion-production.up.railway.app";
-  return "http://localhost:8080";
+  return "https://tight-kora-nviteme-3bdf504d.koyeb.app";
+  // return "http://localhost:8080";
 };
 
 export enum CallBackError {

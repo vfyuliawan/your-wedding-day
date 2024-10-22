@@ -8,6 +8,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Service from "./services/Service";
 import { useEffect, useState } from "react";
 import { app } from "./api/firebase";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   CollectionReference,

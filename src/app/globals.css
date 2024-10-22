@@ -1,4 +1,7 @@
 /* @import '~bootstrap/scss/bootstrap'; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -312,7 +315,7 @@ a {
   transition: all 0.4s ease;
 }
 a:hover {
-  color: var(--main) !important;
+  color: var(--main2) !important;
 } 
 
 p {
@@ -702,7 +705,7 @@ b, strong {
   margin: 5px 0;
 }
 .social-links .uil:hover {
-  color: var(--main);
+  color: var(--main2);
 }
 
 
@@ -805,10 +808,17 @@ height: 150px;
   background-color: red;
 }
 
-.tutorial ,footer{
-  padding: 3rem;
+.tutorial ,footer{ 
   background-color: var(--main);
   color: white;
+}
+
+.tutorial {
+  padding: 3rem;
+}
+
+footer{
+  padding: 1rem;
 }
 
 
@@ -871,8 +881,9 @@ footer a{
     text-decoration: none;
 } */
 
-footer .socmed:hover{
+footer a:hover{
     font-weight: normal;
+    color: red;
 }
 
 footer li{

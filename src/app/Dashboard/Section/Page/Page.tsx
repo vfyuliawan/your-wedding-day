@@ -257,7 +257,7 @@ const DashboardPage = () => {
               {/* <h2 style={{ textAlign: "center" }}>My Invitations List</h2> */}
               <div className="col d-flex justify-content-between">  
               <Link
-                href="/content-setting"
+                href="/create"
                 className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
                 style={{
                   marginLeft: "15px",
