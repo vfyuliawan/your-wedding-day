@@ -7,6 +7,7 @@ import { HomeViewInterface } from "./HomeModel";
 import React from "react";
 import AnimationThemeInstance from "../../../../utils/AnimationThemes";
 import { IConstantFont } from "../../../../utils/ConstantFont";
+import { isMobile } from "react-device-detect";
 
 const HomeView = (props: HomeViewInterface) => {
   const controls = useAnimation();
@@ -27,8 +28,77 @@ const HomeView = (props: HomeViewInterface) => {
           backgroundColor: "var(--prim)",
         }}
       >
-        <div className="row justify-content-center ">
+        <div
+          style={{ position: "relative" }}
+          className="row justify-content-center"
+        >
           <motion.div
+            animate={controls}
+            initial={AnimationThemeInstance.FadeUp}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="col-auto"
+          >
+            <div
+              style={{
+                height: isMobile ? 270 : 300,
+                width: isMobile ? 270 : 300,
+                overflow: "hidden",
+                backgroundColor: "transparent",
+              }}
+            >
+              <img
+                src={"/image/Jade_Garden/homeFrame.png"}
+                style={{
+                  objectFit: "contain",
+                  width: "100%",
+                  height: "100%",
+                }}
+                alt="test bg"
+              />
+            </div>
+            <div
+              style={{
+                height: isMobile ? 260 : 320,
+                width: isMobile ? 260 : 320,
+                position: "absolute",
+                top: 30,
+                overflow: "hidden",
+                backgroundColor: "transparent",
+              }}
+            >
+              {!props.HomeDetail.title.includes("template") ? (
+                <h1
+                  style={{
+                    textAlign: "center",
+                    marginTop: 28,
+                    fontSize: 38,
+                    fontWeight: 600,
+                    color: "var(--forth)",
+                    fontFamily: IConstantFont.Brittany,
+                  }}
+                >
+                  Template <br /> & <br />
+                  Design
+                </h1>
+              ) : (
+                <h1
+                  style={{
+                    textAlign: "center",
+                    marginTop: 28,
+                    fontSize: 38,
+                    fontWeight: 600,
+                    color: "var(--forth)",
+                    fontFamily: IConstantFont.Brittany,
+                  }}
+                >
+                  {props.HomeDetail.title.split(" ")[0]} <br /> & <br />
+                  {props.HomeDetail.title.split(" ")[2]}
+                </h1>
+              )}
+            </div>
+          </motion.div>
+
+          {/* <motion.div
             animate={controls}
             initial={AnimationThemeInstance.FadeUp}
             transition={{
@@ -67,6 +137,7 @@ const HomeView = (props: HomeViewInterface) => {
               >
                 {" "}
                 {props.HomeDetail.title.split("&")[0].split("")[0]}
+
               </h4>
               <svg
                 data-v-0c5a5448=""
@@ -143,11 +214,14 @@ const HomeView = (props: HomeViewInterface) => {
                   : props.HomeDetail.title.split("&")[1].split("")[0]}
               </h4>
             </div>
-          </motion.div>
-          <div className="row mt-5 justify-content-center">
-            <div
+          </motion.div> */}
+          <div className="row mt-1 justify-content-center">
+            <motion.div
+              animate={controls}
+              initial={AnimationThemeInstance.FadeUp}
+              transition={{ duration: 0.5, delay: 0.9 }}
               style={{
-                width: "35%",
+                width: "50%",
                 height: 1,
                 backgroundColor: "var(--forth)",
               }}
@@ -155,7 +229,7 @@ const HomeView = (props: HomeViewInterface) => {
           </div>
           <div className="row mt-5 justify-content-center">
             <div className="col-8">
-              <motion.h1
+              {/* <motion.h1
                 ref={targetRef}
                 animate={controls}
                 initial={AnimationThemeInstance.FadeUp}
@@ -164,12 +238,13 @@ const HomeView = (props: HomeViewInterface) => {
                 style={{
                   color: "var(--forth)",
                   fontFamily: "Brilon",
+                  textAlign: "center",
                   fontSize: "20px",
                   letterSpacing: 2,
                 }}
               >
                 {props?.HomeDetail?.title.toLowerCase()}
-              </motion.h1>
+              </motion.h1> */}
               <motion.p
                 animate={controls}
                 initial={AnimationThemeInstance.FadeUp}
@@ -179,6 +254,7 @@ const HomeView = (props: HomeViewInterface) => {
                   color: "var(--forth)",
                   fontFamily: "Times-new-roman",
                   fontSize: "14px",
+                  textAlign: "center",
                 }}
               >
                 {props?.HomeDetail?.quotes !== "string"
@@ -187,38 +263,6 @@ const HomeView = (props: HomeViewInterface) => {
               </motion.p>
             </div>
           </div>
-
-          {/* <motion.div
-            animate={controls}
-            initial={AnimationThemeInstance.FadeUp}
-            transition={{
-              type: "spring", // Keep the spring transition for bouncing
-              duration: 0.8, // Overall animation duration
-              bounce: 0.8, // Higher bounce value for more visible bouncing
-              damping: 3, // Lower damping for a slower stop (more bounce cycles)
-              stiffness: 80,
-            }}
-            className="home-img col-md-6 col-lg-6 col-8 col-sm-8 justify-content-end"
-            style={{
-              paddingTop: "2rem",
-              paddingBottom: "2rem",
-              paddingRight: "2rem",
-              display: "flex",
-            }}
-          >
-            <img
-              src={props?.HomeDetail?.img}
-              style={{
-                width: "90%",
-                height: "100%",
-                borderTopLeftRadius: "10%",
-                borderBottomRightRadius: "10%",
-                objectFit: "cover",
-              }}
-              alt=""
-              srcSet=""
-            />
-          </motion.div> */}
           <div className="home-quotes col-md-6 col-lg-6 col-sm-8 col-8 text-start d-flex align-items-center"></div>
         </div>
       </div>

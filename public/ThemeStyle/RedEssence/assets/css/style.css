@@ -292,6 +292,16 @@
 }
 
 
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+
 
 /* Animation */
 
@@ -1236,6 +1246,8 @@ p {
     text-align: center;
     font-size: "10rem" !important;
   }
+
+  
 
   .male-female img {
     height: 600px;

@@ -7,7 +7,7 @@ export const convertColor = (hex: any) => {
     return rgb;
   };
 
- export function hexToRgba(hex:any, alpha = 1) {
+ export function hexToRgba(hex:any, alpha : number) {
     // Remove the hash at the start if it's there
     hex = hex.replace(/^#/, '');
   
@@ -17,6 +17,8 @@ export const convertColor = (hex: any) => {
     const b = parseInt(hex.substring(4, 6), 16);
   
     // Return the rgba string
+    console.log( `rgba(${r}, ${g}, ${b}, ${alpha})`);
+    
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
   

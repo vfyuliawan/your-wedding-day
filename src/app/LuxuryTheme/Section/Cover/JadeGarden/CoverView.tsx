@@ -21,21 +21,19 @@ const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
 
   const handleCoverClick = () => {
-    props.onCoverClick();
     setAppear(true);
+    props.onCoverClick();
   };
 
   const calculateTimeRemaining = () => {
     const now = new Date();
 
-    // Convert the date string to a Date object
     const targetDate = props.detailCover!.date
       ? new Date(props.detailCover!.date)
       : undefined;
 
-    // Check if targetDate is valid
     if (!(targetDate instanceof Date) || isNaN(targetDate.getTime())) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // Default values if invalid
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 }; 
     }
 
     const difference = targetDate.getTime() - now.getTime();
@@ -94,7 +92,7 @@ const CoverView = (props: CoverModelInterface) => {
             justifyContent: "center",
             alignItems: "center",
             zIndex: 999,
-            backgroundColor: "black",
+            backgroundColor: appear ? "var(--third)" : "black",
           }}
         >
           {/* Cover content */}
@@ -298,7 +296,7 @@ const CoverView = (props: CoverModelInterface) => {
                         style={{
                           fontSize: 18,
                           fontFamily: "dream evanue",
-                          color: "white",
+                          color: "var(--forth)",
                           letterSpacing: 12,
                           fontWeight: 800,
                         }}
@@ -315,7 +313,7 @@ const CoverView = (props: CoverModelInterface) => {
                         className=""
                         style={{
                           fontSize: "16px",
-                          color: "white",
+                          color: "var(--forth)",
                           fontFamily: IConstantFont.regulerLight,
                         }}
                       >
@@ -327,7 +325,7 @@ const CoverView = (props: CoverModelInterface) => {
                         className=""
                         style={{
                           fontSize: 24,
-                          color: "white",
+                          color: "var(--forth)",
                           fontFamily: IConstantFont.regulerLight,
                         }}
                       >
@@ -349,7 +347,7 @@ const CoverView = (props: CoverModelInterface) => {
                       width: "180px",
                       opacity: 0.8,
                       height: 40,
-                      backgroundColor: "#344843",
+                      backgroundColor: "var(--third)",
                       fontSize: 12,
                       color: "var(--forth)",
                       // padding:8,

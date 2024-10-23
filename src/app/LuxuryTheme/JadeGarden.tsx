@@ -3,7 +3,7 @@
 import { motion, useAnimation } from "framer-motion";
 import EndView from "./Section/End/EndView";
 import FooterView from "./Section/Footer/FooterView";
-import GiftsView from "./Section/Giifts/GiftsView";
+import GiftsView from "./Section/Giifts/JadeGarden/GiftsView";
 import HeaderView from "./Section/Header/HeaderView";
 import FadeDownAnimation from "./Section/MotionText";
 import NavbarView from "./Section/Navbar/NavbarView";
@@ -16,7 +16,7 @@ import {
   useRef,
   useState,
 } from "react";
-import HomeView from "./Section/Home/RomanticDark/HomeView";
+import HomeView from "./Section/Home/JadeGarden/HomeView";
 // import CoverView from "./Section/Cover/CoverView";
 import CountDownView from "./Section/CountDown/RomanticDark/CountDownView";
 import GaleryView from "./Section/Galery/GaleryView";
@@ -41,9 +41,9 @@ import ModalQRCodeBgImage from "./Section/GuestScanView/ModalQRCodeBgImage";
 import { ModalEditableForm } from "./Section/EditableForm/ModalEditableForm";
 import HeathProtocol from "./Section/HealtProtocol/HealthProtocol";
 import LiveIgAndLinkFilter from "./Section/LiveIgAndFilter/LivveIgAndFilter";
-import HeroView from "./Section/Hero/RomanticDark/HeroView";
-import MaleFemaleView from "./Section/Male-Female/RomanticDark/MaleFemaleView";
-import InfoView from "./Section/Info/RomanticDark/InfoView";
+import HeroView from "./Section/Hero/JadeGarden/HeroView";
+import MaleFemaleView from "./Section/Male-Female/JadeGarden/MaleFemaleView";
+import InfoView from "./Section/Info/JadeGarden/InfoView";
 
 interface JadeGardenInterface {
   details: ResultDetailSlug | undefined;
@@ -113,6 +113,8 @@ const JadeGarden = (props: JadeGardenInterface) => {
     galery: null,
     rsvp: null,
   });
+
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -257,6 +259,9 @@ const JadeGarden = (props: JadeGardenInterface) => {
     enableScroll();
   };
 
+
+  console.log(`${primaryColor}, ${secondaryColor} ,${thirdColor} ,${textColor1}`);
+
   const scrollToBottom = useCallback(() => {
     const container = containerRef.current;
     const scrollHeight = qrCodeRef.current.offsetTop - container.offsetTop;
@@ -315,6 +320,7 @@ const JadeGarden = (props: JadeGardenInterface) => {
         <div className="hero-home">
           {props?.details?.hero?.isShow ? (
             <HeroView
+            backgroundColor={thirdColor}
               getTitle={props.getParams ?? ""}
               ref={(el) => (sectionRefs.current!.hero = el)}
               HeroDetail={props?.details?.hero}
