@@ -40,6 +40,7 @@ import {
 import Head from "next/head";
 import RedEssence from "./LuxuryTheme/RedEssence";
 import RomanticDark from "./LuxuryTheme/RomanticDark";
+import JadeGarden from "./LuxuryTheme/JadeGarden";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -234,6 +235,64 @@ export default function Home() {
           <MobileView>
             <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
               <RomanticDark
+                setDetails={setDetails}
+                getIsTemplate={getIsTemplate}
+                message={message}
+                setMessage={setMessage}
+                details={details}
+                postMessage={postMessage}
+                guest={guest}
+                idGuest={idGuest}
+                getParams={getParams}
+              />
+            </div>
+          </MobileView>
+        </>
+      ) : themeName == "Jade Garden" ? (
+        <>
+          <BrowserView>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{ width: "70%", height: "100vh", overflow: "hidden" }}
+              >
+                <img
+                  className="kenburns-top"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "center ",
+
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  src={details?.cover.img}
+                  alt="dfasdfsa"
+                />
+              </div>
+              <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
+                <JadeGarden
+                  setDetails={setDetails}
+                  getIsTemplate={getIsTemplate}
+                  message={message}
+                  setMessage={setMessage}
+                  details={details}
+                  postMessage={postMessage}
+                  guest={guest}
+                  idGuest={idGuest}
+                  getParams={getParams}
+                />
+              </div>
+            </div>
+          </BrowserView>
+          <MobileView>
+            <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
+              <JadeGarden
                 setDetails={setDetails}
                 getIsTemplate={getIsTemplate}
                 message={message}

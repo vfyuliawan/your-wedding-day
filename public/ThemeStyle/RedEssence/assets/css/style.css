@@ -27,6 +27,20 @@
   src: url('../../../../Font/regular-light/Regular-Light.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Brittany';
+  src: url('../../../../Font/brittany_signature/BrittanySignature.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Forum';
+  src: url('../../../../Font/Forum/Forum-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Belleza-Regular';
+  src: url('../../../../Font/Belleza/Belleza-Regular.ttf') format('truetype');
+}
 
 
 :root {
@@ -396,6 +410,8 @@ p {
 .hero {
   position: relative;
   min-height: 100vh;
+  /* background-image: url("/public/image/Jade_Garden/coverbg.png"); */
+
 }
 .hero-home::before {
   background-color: var(--prim);

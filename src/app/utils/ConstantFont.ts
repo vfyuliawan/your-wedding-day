@@ -8,6 +8,11 @@ export enum IConstantFont {
     regulerLight = "reguler-light",
     sansSerif = "sans-serif",
     montserrat= "montserrat",
-    creation = "Creation"
+    creation = "Creation",
+    
+    // Jade Garden
+    Brittany="Brittany",
+    Forum="Forum",
+    BellezaRegular="Belleza-Regular"
   }
   

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
 import { HeroViewInterface } from "../../Hero/RedEssence/HeroModel";
@@ -20,12 +20,8 @@ const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
   const handleCoverClick = () => {
     props.onCoverClick();
-    setTimeout(
-      () => {
-        setAppear(true);
-      },
-      isMobile ? 1500 : 2000
-    );
+    setAppear(true);
+
   };
 
   const calculateTimeRemaining = () => {
@@ -78,25 +74,28 @@ const CoverView = (props: CoverModelInterface) => {
 
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
-  return !appear ? (
-    <motion.div
-      className="cover2"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: props.isVisible ? 1 : 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1, delay: props.isVisible ? 0 : 1 }}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 999,
-      }}
-    >
+  return (
+    <AnimatePresence>
+      {!appear && (
+        <motion.div
+          className="cover2"
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ y: props.isVisible ? 0 : -1000 }}
+          exit={{ y: -1000 }}
+          transition={{ duration: 2, delay: props.isVisible ? 0 : 1 }}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 999,
+            backgroundColor: "var(--prim)",
+          }}
+        >
       <div
         className="figure"
         style={{
@@ -262,7 +261,9 @@ const CoverView = (props: CoverModelInterface) => {
         <div
           className="cover2-overlay-img"
           style={{
-            backgroundColor: isMobile ? "rgba(0, 0, 0, 0.9)": "rgba(0, 0, 0, 0.6)",
+            backgroundColor: isMobile
+              ? "rgba(0, 0, 0, 0.9)"
+              : "rgba(0, 0, 0, 0.6)",
             backgroundRepeat: "no-repeat",
             width: "100%",
             height: "120%",
@@ -314,7 +315,7 @@ const CoverView = (props: CoverModelInterface) => {
                       fontFamily: IConstantFont.dreamEvanue,
                       fontSize: "32px",
                       color: "var(--forth)",
-                      letterSpacing:3
+                      letterSpacing: 3,
                     }}
                   >
                     {props.detailCover?.title.toUpperCase()}
@@ -326,7 +327,7 @@ const CoverView = (props: CoverModelInterface) => {
                       width: 200,
                       height: 1,
                       backgroundColor: "white",
-                      marginBottom:4
+                      marginBottom: 4,
                     }}
                   ></div>
                 </div>
@@ -338,10 +339,14 @@ const CoverView = (props: CoverModelInterface) => {
                       fontFamily: "dream evanue",
                       color: "white",
                       letterSpacing: 12,
-                      fontWeight:800
+                      fontWeight: 800,
                     }}
                   >
-                    {TimeConvertionFullDate(props.detailCover!.date!.toString()).dateMonthandYearDot}
+                    {
+                      TimeConvertionFullDate(
+                        props.detailCover!.date!.toString()
+                      ).dateMonthandYearDot
+                    }
                   </p>
                 </div>
                 <div className="col-12 mt-4">
@@ -357,7 +362,7 @@ const CoverView = (props: CoverModelInterface) => {
                   </p>
                 </div>
                 <div className="col">
-                <p
+                  <p
                     className=""
                     style={{
                       fontSize: 24,
@@ -390,7 +395,7 @@ const CoverView = (props: CoverModelInterface) => {
                 }}
               >
                 <i
-                  style={{ fontSize: "12px", color:"var(--forth)" }}
+                  style={{ fontSize: "12px", color: "var(--forth)" }}
                   className="bi bi-envelope-open-fill"
                 />
                 {"    "}
@@ -400,8 +405,10 @@ const CoverView = (props: CoverModelInterface) => {
           </div>
         </div>
       </div>
-    </motion.div>
-  ) : null;
+      </motion.div>
+      )}
+    </AnimatePresence>
+    );
 };
 
 export default CoverView;

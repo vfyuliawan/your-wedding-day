@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CoverModelInterface } from "./CoverModel";
 import { Timestamp } from "firebase/firestore";
@@ -18,9 +18,8 @@ const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
   const handleCoverClick = () => {
     props.onCoverClick();
-    setTimeout(() => {
-      setAppear(true);
-    }, isMobile?1500: 2000);
+    setAppear(true);
+
   };
 
   const calculateTimeRemaining = () => {
@@ -73,25 +72,28 @@ const CoverView = (props: CoverModelInterface) => {
 
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
-  return !appear ? (
-    <motion.div
-      className="cover2"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: props.isVisible ? 1 : 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1, delay: props.isVisible ? 0 : 1 }}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 999,
-      }}
-    >
+  return (
+    <AnimatePresence>
+      {!appear && (
+        <motion.div
+          className="cover2"
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ y: props.isVisible ? 0 : -1000 }}
+          exit={{ y: -1000 }}
+          transition={{ duration: 2, delay: props.isVisible ? 0 : 1 }}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 999,
+            backgroundColor: "var(--prim)",
+          }}
+        >
       <div
         className="figure"
         style={{
@@ -262,10 +264,10 @@ const CoverView = (props: CoverModelInterface) => {
             width: "100%",
             height: "120%",
             opacity: 1,
-            marginTop:-90,
+            marginTop: -90,
             position: "fixed",
             // bottom: 0,
-            top:0,
+            top: 0,
             color: "var(--third)",
             textAlign: "center",
           }}
@@ -290,8 +292,8 @@ const CoverView = (props: CoverModelInterface) => {
                   fontSize: "15px",
                   fontWeight: "400",
                   fontFamily: "brilon",
-                  textShadow:"var(--shadow2)",
-                  color:"var(--forth)"
+                  textShadow: "var(--shadow2)",
+                  color: "var(--forth)",
                 }}
               >
                 the wedding of
@@ -302,20 +304,22 @@ const CoverView = (props: CoverModelInterface) => {
                 style={{
                   fontFamily: "brilon",
                   fontSize: "32px",
-                  color:"var(--forth)"
-
+                  color: "var(--forth)",
                 }}
               >
                 {props.detailCover?.title}
               </p>
             </div>
-            <div style={{ marginTop:  isMobile?"30rem":"19rem" }} className="col-12">
-            <p
+            <div
+              style={{ marginTop: isMobile ? "30rem" : "19rem" }}
+              className="col-12"
+            >
+              <p
                 className=""
                 style={{
                   fontSize: "24px",
                   color: "white",
-                  letterSpacing:3,
+                  letterSpacing: 3,
                   fontFamily: "brilon",
                 }}
               >
@@ -333,35 +337,38 @@ const CoverView = (props: CoverModelInterface) => {
               </p>
             </div>
             <div className="col-12">
-            <button
-              className="btn btn-md text-center"
-              style={{
-                width: "180px",
-                opacity: 0.7,
-                height: 40,
-                backgroundColor:"var(--prim)",
-                fontSize:12,
-                color:"var(--sec)",
-                // padding:8,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onClick={() => {
-                handleCoverClick();
-              }}
-            ><i
-            style={{ fontSize: "12px" }}
-            className="bi bi-envelope-open-fill"
-          />{"    "}
-             Buka Undangan
-            </button>
+              <button
+                className="btn btn-md text-center"
+                style={{
+                  width: "180px",
+                  opacity: 0.7,
+                  height: 40,
+                  backgroundColor: "var(--prim)",
+                  fontSize: 12,
+                  color: "var(--sec)",
+                  // padding:8,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                onClick={() => {
+                  handleCoverClick();
+                }}
+              >
+                <i
+                  style={{ fontSize: "12px" }}
+                  className="bi bi-envelope-open-fill"
+                />
+                {"    "}
+                Buka Undangan
+              </button>
             </div>
           </div>
-
         </div>
       </div>
-    </motion.div>
-  ) : null;
+      </motion.div>
+      )}
+    </AnimatePresence>
+    );
 };
 
 export default CoverView;
