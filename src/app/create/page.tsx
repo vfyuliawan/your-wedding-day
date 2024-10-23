@@ -206,7 +206,7 @@ const CreatePage = () => {
     // console.log("Rendering data:", data);
     return (
       <div className="tw-max-h-screen">
-        <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
+        {/* <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
           <div className="container">
             <a href="/" className="navbar-brand">
               <i className="bi bi-envelope-paper-heart" />
@@ -266,7 +266,7 @@ const CreatePage = () => {
               </div>
             </div>
           </div>
-        </nav>
+        </nav> */}
         <div className="setting-content">
           
           
@@ -323,7 +323,7 @@ const CreatePage = () => {
                   <div className="mb-3 col-md-8">
                   <div className="tw-max-h-screen tw-flex tw-items-center tw-justify-center tw-w-full">
                     <div className="tw-flex tw-flex-col "> 
-                        <div className="card " style={{ 
+                      {/* <div className="card " style={{ 
                         }}>
                           <img src="image/background/prewed-bg.jpg" /> 
                           <div className="card-buttons">
@@ -332,7 +332,7 @@ const CreatePage = () => {
                               Preview
                             </button>
                           </div> 
-                      </div>
+                      </div> */}
                     </div>
                   </div> 
                   </div>
@@ -356,7 +356,7 @@ function AccordionItem(params: {
   return (
     <div className={`tw-bg-gradient-to-r tw-from-indigo-100 tw-to-sky-200 tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${params.isExpanded ? "" : "tw-max-h-14"}`}>
       <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer tw-items-center" onClick={params.onClick}>
-        <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${params.isExpanded ? "tw-rotate-90" : ""}`} />
+        <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${params.isExpanded ? "tw-rotate-45" : ""}`} />
         <div className="tw-text-1xl tw-font-bold">{params.title}</div>
         <i className="bi bi-grid-3x2-gap-fill tw-rotate-90" />
       </div>
@@ -1764,6 +1764,9 @@ function GiftsView(params: {
             name: "",
             noRek: "",
           } as GiftElementModelGetProjectDetailResponseInterface;
+
+          setGiftForm((prevForm) => [...prevForm, newForm]);
+
           params.setData((prev) => {
             return {
               ...prev,
@@ -1803,6 +1806,12 @@ function StoryView(params: {
     SetStateAction<ResultModelGetProjectDetailResponseInterface | undefined>
   >;
 }) { 
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+    const toggleAccordion = (id: number) => {
+        setOpenIndex(openIndex === id ? null : id);
+    };
+ 
   const [storyForm, setstoryForm] = useState<StoryElementModelGetProjectDetailResponseInterface[]>([
     {
       title: "",
@@ -1813,249 +1822,236 @@ function StoryView(params: {
   ]);
     const [isGambarStory, setisGambarStory] = useState('');
   return ( 
-    <div className="accordion-body" style={{backgroundColor:'white'}}>
+    <div className=""> 
+    {/* <div className="accordion-body" style={{backgroundColor:'white'}}> */}
       {storyForm.map((item, index) => (
-        <div
+        <AccordionItemSmall
           key={index}
-          className="accordion mb-2"
-          id="accordionPanelsStayOpenExample"
-        >
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={`#panelsStayOpen-collapseSeven-${
-                  index + 1
-                }`}
-                aria-expanded="true"
-                aria-controls={`panelsStayOpen-collapseSeven-${index + 1}`}
-              >
-                Story {index + 1}
-              </button>
-            </h2>
-            <div
-              id={`panelsStayOpen-collapseSeven-${index + 1}`}
-              className="accordion-collapse collapse show"
-            >
-                <div className="accordion-body"> 
-                    <div className="mb-3">
-                        <label htmlFor={`titleStoryPreview${index+1}`} className="form-label">
-                            Story Title
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id={`titleStoryPreview${index+1}`}
-                            name={`titleStoryPreview${index+1}`}
-                            placeholder="Event Date" 
-                            onChange={(val) => {
+          title={`Story ${index+1}` }
+          content={<>
+            <div className="mb-3">
+            <label htmlFor={`titleStoryPreview${index+1}`} className="form-label">
+                Story Title
+            </label>
+            <input
+                type="text"
+                className="form-control"
+                id={`titleStoryPreview${index+1}`}
+                name={`titleStoryPreview${index+1}`}
+                placeholder="Event Date" 
+                onChange={(val) => {
+                    
+                    params.setData((prevState) => {
+                        // console.log(prevState);
+                    return {
+                        ...prevState,
+                        story: {
+                        ...prevState?.story,
+                        stories: prevState?.story.stories.map((item, i) => {
+                            if (i === index) {
+                            return {
+                                ...item,
+                                title: val.target.value,
+                            };
+                            }
+                            return item;
+                        }),
+                        },
+                    } as ResultModelGetProjectDetailResponseInterface;
+                    });
+                }}
+            />
+            </div>  
+            <div className="mb-3">
+                <label htmlFor="imageStory" className="form-label">
+                    Image Story
+                </label>
+                <div>
+                    {(isGambarStory) ? (
+                        <img
+                        id={`imageStoryPreview${index+1}`}
+                        src={isGambarStory}
+                        alt={`imageStoryPreview${index+1}`}
+                        style={{
+                            maxWidth: "180px",
+                            margin: "5px",
+                            borderRadius: "5%",
+                        }}
+                    />) : (<></>) }
+                    <input
+                        type="file"
+                        className="form-control"
+                        id="imageSotry"
+                        name="imageSotry"
+                        onChange={(val) => {
+                            
+                            const fileImageStory = val?.target?.files?.[0];
+                            if (fileImageStory) {
                                 
-                                params.setData((prevState) => {
-                                    // console.log(prevState);
-                                return {
-                                    ...prevState,
-                                    story: {
-                                    ...prevState?.story,
-                                    stories: prevState?.story.stories.map((item, i) => {
-                                        if (i === index) {
-                                        return {
-                                            ...item,
-                                            title: val.target.value,
-                                        };
-                                        }
-                                        return item;
-                                    }),
-                                    },
-                                } as ResultModelGetProjectDetailResponseInterface;
-                                });
-                            }}
-                        />
-                    </div>  
-                    <div className="mb-3">
-                        <label htmlFor="imageStory" className="form-label">
-                            Image Story
-                        </label>
-                        <div>
-                            {(isGambarStory) ? (
-                                <img
-                                id={`imageStoryPreview${index+1}`}
-                                src={isGambarStory}
-                                alt={`imageStoryPreview${index+1}`}
-                                style={{
-                                    maxWidth: "180px",
-                                    margin: "5px",
-                                    borderRadius: "5%",
-                                }}
-                            />) : (<></>) }
-                            <input
-                                type="file"
-                                className="form-control"
-                                id="imageSotry"
-                                name="imageSotry"
-                                onChange={(val) => {
-                                    
-                                    const fileImageStory = val?.target?.files?.[0];
-                                    if (fileImageStory) {
-                                        
-                                      const reader = new FileReader();
-                                      reader.readAsDataURL(fileImageStory);
-                                      reader.onloadend = () => {
-                                          const imageStoryDataUrl =
-                                          reader.result as string;
-                                          const base64StoryData = imageStoryDataUrl.replace(
-                                          /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                                          ""
-                                          );
-                                          
-                                          params.setData((prevState) => {
-                                          return {
-                                              ...prevState,
-                                              story: {
-                                              ...prevState?.story,
-                                                  stories: prevState?.story.stories.map(
-                                                      (item, i) => {
-                                                      if (i === index) {
-                                                          
-                                                          return {
-                                                          ...item,
-                                                          image: base64StoryData,
-                                                          
-                                                          };
-                                                      }
-                                                      return item;
-                                                      }
-                                                  ),
-                                              },
-                                          } as ResultModelGetProjectDetailResponseInterface;
-                                          });
-                                          setisGambarStory(imageStoryDataUrl);
-                                      };
-                                    }
-                                }}
-                            />
-                        </div>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor={`dateStoryPreview${index+1}`} className="form-label">
-                        Story Date Meet
-                        </label>
-                        <input
-                            type="date"
-                            className="form-control"
-                            id={`dateStoryPreview${index+1}`}
-                            name={`dateStoryPreview${index+1}`}
-                            placeholder="Event Date" 
-                            onChange={(val) => {
-                                params.setData((prevState) => {
-                                return {
-                                    ...prevState,
-                                    story: {
-                                    ...prevState?.story,
-                                    stories: prevState?.story.stories.map((item, i) => {
-                                        if (i === index) {
-                                        return {
-                                            ...item,
-                                            date: new Date(val.target.value),
-                                        };
-                                        }
-                                        return item;
-                                    }),
-                                    },
-                                } as ResultModelGetProjectDetailResponseInterface;
-                                });
-                            }}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor={`textStoryPreview${index+1}`} className="form-label">
-                            Story Description
-                        </label>
-                        <textarea
-                            className="form-control"
-                            id={`textStoryPreview${index+1}`}
-                            style={{
-                                height: 80,
-                            }}
-                            name={`textStoryPreview${index+1}`}
-                            placeholder="My story begin when ..." 
-                            onChange={(val) => {
-                                params.setData((prevState) => {
-                                return {
-                                    ...prevState,
-                                    story: {
-                                    ...prevState?.story,
-                                    stories: prevState?.story.stories.map((item, i) => {
-                                        if (i === index) {
-                                        return {
-                                            ...item,
-                                            text: val.target.value,
-                                        };
-                                        }
-                                        return item;
-                                    }),
-                                    },
-                                } as ResultModelGetProjectDetailResponseInterface;
-                                });
-                            }}
-                        /> 
-                    </div>              
+                              const reader = new FileReader();
+                              reader.readAsDataURL(fileImageStory);
+                              reader.onloadend = () => {
+                                  const imageStoryDataUrl =
+                                  reader.result as string;
+                                  const base64StoryData = imageStoryDataUrl.replace(
+                                  /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                  ""
+                                  );
+                                  
+                                  params.setData((prevState) => {
+                                  return {
+                                      ...prevState,
+                                      story: {
+                                      ...prevState?.story,
+                                          stories: prevState?.story.stories.map(
+                                              (item, i) => {
+                                              if (i === index) {
+                                                  
+                                                  return {
+                                                  ...item,
+                                                  image: base64StoryData,
+                                                  
+                                                  };
+                                              }
+                                              return item;
+                                              }
+                                          ),
+                                      },
+                                  } as ResultModelGetProjectDetailResponseInterface;
+                                  });
+                                  setisGambarStory(imageStoryDataUrl);
+                              };
+                            }
+                        }}
+                    />
                 </div>
             </div>
-          </div>
-        </div>
+            <div className="mb-3">
+                <label htmlFor={`dateStoryPreview${index+1}`} className="form-label">
+                Story Date Meet
+                </label>
+                <input
+                    type="date"
+                    className="form-control"
+                    id={`dateStoryPreview${index+1}`}
+                    name={`dateStoryPreview${index+1}`}
+                    placeholder="Event Date" 
+                    onChange={(val) => {
+                        params.setData((prevState) => {
+                        return {
+                            ...prevState,
+                            story: {
+                            ...prevState?.story,
+                            stories: prevState?.story.stories.map((item, i) => {
+                                if (i === index) {
+                                return {
+                                    ...item,
+                                    date: new Date(val.target.value),
+                                };
+                                }
+                                return item;
+                            }),
+                            },
+                        } as ResultModelGetProjectDetailResponseInterface;
+                        });
+                    }}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor={`textStoryPreview${index+1}`} className="form-label">
+                    Story Description
+                </label>
+                <textarea
+                    className="form-control"
+                    id={`textStoryPreview${index+1}`}
+                    style={{
+                        height: 80,
+                    }}
+                    name={`textStoryPreview${index+1}`}
+                    placeholder="My story begin when ..." 
+                    onChange={(val) => {
+                        params.setData((prevState) => {
+                        return {
+                            ...prevState,
+                            story: {
+                            ...prevState?.story,
+                            stories: prevState?.story.stories.map((item, i) => {
+                                if (i === index) {
+                                return {
+                                    ...item,
+                                    text: val.target.value,
+                                };
+                                }
+                                return item;
+                            }),
+                            },
+                        } as ResultModelGetProjectDetailResponseInterface;
+                        });
+                    }}
+                /> 
+            </div> 
+          </>}
+          isOpen={openIndex === index}
+          onToggle={() => toggleAccordion(index)}
+        />
+        
+         
+         
       ))}
-      <button
-        className="btn btn-primary mt-3"
-        onClick={() => { 
-          const newForm = {
-            title: "",
-            text: "",
-            image: "",
-            date: new Date(),
-          } as StoryElementModelGetProjectDetailResponseInterface;
-          params.setData((prev) => {
-            return {
-              ...prev,
-              story: {
-                ...prev?.story,
-                stories: [...(prev?.story?.stories ?? []), newForm],
-              },
-            } as ResultModelGetProjectDetailResponseInterface;
-          });
-        }}
-      >
-        Add Story
-      </button>
-      <div className="mb-3 mt-3 form-check form-switch">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="showstorySwitch"
-          name="showstory"
-          checked={false}
-          onChange={(val) => {
-            params.setData((prevState) => {
+        <button
+          className="btn btn-primary tw-m-2"
+          onClick={() => { 
+            const newForm = {
+              title: "",
+              text: "",
+              image: "",
+              date: new Date(),
+            } as StoryElementModelGetProjectDetailResponseInterface;
+
+            setstoryForm((prevForm) => [...prevForm, newForm]);
+
+            params.setData((prev) => {
+              console.log('sini');
+              
               return {
-                ...prevState,
+                ...prev,
                 story: {
-                  ...prevState?.story,
-                  isShow: val.target.checked,
+                  ...prev?.story,
+                  stories: [...(prev?.story?.stories ?? []), newForm],
                 },
               } as ResultModelGetProjectDetailResponseInterface;
             });
           }}
-        />
-        <label
-          className="form-check-label"
-          htmlFor="flexSwitchCheckDefault"
         >
-          Show Story
-        </label>
-      </div>
-    </div> 
+          Add Story
+        </button>
+        <div className="mb-2 mt-2 form-check form-switch tw-mx-2">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="showstorySwitch"
+            name="showstory" 
+            onChange={(val) => {
+              params.setData((prevState) => {
+                return {
+                  ...prevState,
+                  story: {
+                    ...prevState?.story,
+                    isShow: val.target.checked,
+                  },
+                } as ResultModelGetProjectDetailResponseInterface;
+              });
+            }}
+          />
+          <label
+            className="form-check-label "
+            htmlFor="flexSwitchCheckDefault"
+          >
+            Show Story
+          </label>
+        </div>
+      </div>  
   );
 }
 
@@ -2518,33 +2514,27 @@ function GaleryView(params: {
   );
 }
 
-
-
-
+function AccordionItemSmall(params: { 
+  title: string; 
+  content: React.ReactNode; 
+  isOpen?: boolean; // Use optional chaining
+  onToggle: () => void 
+}){
+  return (
+    <div className={`tw-bg-white tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${params.isOpen ? "" : "tw-max-h-14"}`}>
+    <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer tw-items-center" onClick={params.onToggle}>
+      <div className="tw-text-1xl tw-font-bold">{params.title}</div> 
+      <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${params.isOpen ? "tw-rotate-90" : ""}`} />
+    </div>
+    <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${params.isOpen ? "tw-opacity-100" : "tw-opacity-0"}`}>
+      <p className="tw-text-gray-700 tw-text-base">{params.content}</p>
+    </div>
+  </div>
+ 
+  );
+};
+ 
 
 export default CreatePage;
 
-
-// [
-//   {
-//       "galeries": [   
-//           "data:image/png;base64,iVBORw0KGgoAAAAN3",
-//         ],
-//       "isShow": false
-//   },
-//   {
-//       "galeries": [
-//           "data:image/png;base64,iVBORw0KGgoAAAAN2",
-//           "data:image/png;base64,iVBORw0KGgoAAAAN2",
-//         ],
-//       "isShow": false
-//   },
-//   {
-//       "galeries": [
-//           "data:image/png;base64,iVBORw0KGgoAAAAN1",
-//           "data:image/png;base64,iVBORw0KGgoAAAAN1",
-//           "data:image/png;base64,iVBORw0KGgoAAAAN1"
-//        ],
-//       "isShow": false
-//   }
-// ]
+ 
