@@ -23,16 +23,17 @@ self.addEventListener('install', event => {
     event.waitUntil(
       caches.open('font-cache').then(cache => {
         return cache.addAll([
-          '/Font/Belleza/Belleza-Regular.ttf',
+          '/Font/belleza/Belleza-Regular.ttf',
           '/Font/brilon/brilon-11-regular.ttf',
-          '/Font/brittany_signature/BrittanySignature.ttf',
-          '/Font/dream_evanue/FontsFree-Net-Dream-Avenue.ttf',
+          '/Font/brittany/BrittanySignature.ttf',
           '/Font/creattion/CreattionDemo.otf',
+          '/Font/dream_evanue/FontsFree-Net-Dream-Avenue.ttf',
           '/Font/faunaone/FaunaOne-Regular.ttf',
-          '/Font/Forum/Forum-Regular.ttf',
-          '/Font/sachlette-signature/Sachlette Signature.ttf',
-          '/Font/Poppins/Poppins-Regular.ttf',
-          '/Font/regular-light/Regular-Light.ttf'
+          '/Font/forum/Forum-Regular.ttf',
+          '/Font/lavishlyYours/LavishlyYours-Regular.ttf',
+          '/Font/regular-light/Regular-Light.ttf',
+          '/Font/poppins/Poppins-Regular.ttf',
+          '/Font/sachlette-signature/Sachlette Signature.ttf'
         ]);
       })
     );

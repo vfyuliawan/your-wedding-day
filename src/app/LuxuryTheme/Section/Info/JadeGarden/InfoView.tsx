@@ -158,8 +158,8 @@ const InfoView = (props: InfoViewInterface) => {
                 className="mt-4"
                 style={{
                   color: "var(--fiveth)",
-                  fontFamily: IConstantFont.dreamEvanue,
-                  fontSize: 26,
+                  fontFamily: IConstantFont.parisienne,
+                  fontSize: 36,
                 }}
               >
                 Akad Nikah
@@ -259,8 +259,8 @@ const InfoView = (props: InfoViewInterface) => {
                 className="mt-4"
                 style={{
                   color: "var(--fiveth)",
-                  fontFamily: IConstantFont.dreamEvanue,
-                  fontSize: 26,
+                  fontFamily: IConstantFont.parisienne,
+                  fontSize: 36,
                 }}
               >
                 Resepsi

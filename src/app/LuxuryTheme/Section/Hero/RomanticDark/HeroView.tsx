@@ -22,6 +22,7 @@ import {
 import React from "react";
 import AnimationThemeInstance from "../../../../utils/AnimationThemes";
 import { IConstantFont } from "../../../../utils/ConstantFont";
+import { toEachUpperCase } from "@/app/utils/ConvertionCase";
 
 const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
   const controls = useAnimation();
@@ -78,14 +79,14 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             initial={AnimationThemeInstance.FadeUp}
             transition={{ duration: 0.5, delay: 0 }}
             style={{
-              fontFamily: IConstantFont.dreamEvanue,
+              fontFamily: IConstantFont.parisienne,
               fontSize: 40,
               color: "var(--forth)",
               textShadow: "none",
             }}
           >
-            {`${props.getTitle?.split("-")[0].toUpperCase()} &`}
-            <br /> {props.getTitle?.split("-")[1].toUpperCase()}
+            {`${toEachUpperCase(props.getTitle?.split("-")[0] ??"")} &`}
+            <br /> {toEachUpperCase(props.getTitle?.split("-")[1] ??"")}
           </motion.h1>
           <div style={{ width: "100%", height: 1, backgroundColor: "white" }} />
           <motion.p
@@ -112,6 +113,7 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
               textShadow: "none",
               fontFamily: IConstantFont.regulerLight,
               fontSize: 16,
+              letterSpacing:4
             }}
           >
             {

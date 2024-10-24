@@ -137,7 +137,7 @@ const CountDownView = (props: CountDownViewInterface) => {
                   animate={animate}
                   style={{
                     color: "var(--forth)",
-                    fontFamily: IConstantFont.dreamEvanue,
+                    fontFamily: IConstantFont.homadeApple,
                     fontSize: 28,
                     fontWeight: 800,
                   }}

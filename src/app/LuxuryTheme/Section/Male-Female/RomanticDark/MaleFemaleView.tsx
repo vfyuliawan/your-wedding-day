@@ -40,7 +40,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               ref={targetRef}
               style={{
                 fontSize: 40,
-                fontFamily: IConstantFont.dreamEvanue,
+                fontFamily: IConstantFont.parisienne,
                 color: "var(--forth)",
                 fontWeight: 400,
               }}
@@ -59,7 +59,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               ref={targetRef}
               style={{
                 fontSize: 60,
-                fontFamily: IConstantFont.dreamEvanue,
+                fontFamily: IConstantFont.parisienne,
                 fontWeight: 400,
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
@@ -104,7 +104,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 style={{
                   color: "var(--forth)",
                   fontSize: 32,
-                  fontFamily: IConstantFont.dreamEvanue,
+                  fontFamily: IConstantFont.parisienne,
                 }}
               >
                 {props.MaleFemaleDetail.female.name}
@@ -116,7 +116,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   style={{
                     color: "var(--forth)",
                     fontSize: 14,
-                    fontFamily: IConstantFont.dreamEvanue,
+                    fontFamily: IConstantFont.regulerLight,
                   }}
                 >
                   Putri Dari :
@@ -252,7 +252,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               transition={{ duration: 0.5, delay: 1.7 }}
               style={{
                 fontSize: 60,
-                fontFamily: IConstantFont.dreamEvanue,
+                fontFamily: IConstantFont.parisienne,
                 fontWeight: 400,
                 marginLeft: 10,
                 writingMode: "vertical-rl",
@@ -272,7 +272,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 style={{
                   color: "var(--forth)",
                   fontSize: 32,
-                  fontFamily: IConstantFont.dreamEvanue,
+                  fontFamily: IConstantFont.parisienne,
                 }}
               >
                 {props.MaleFemaleDetail.male.name}
@@ -284,7 +284,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                   style={{
                     color: "var(--forth)",
                     fontSize: 14,
-                    fontFamily: IConstantFont.dreamEvanue,
+                    fontFamily: IConstantFont.regulerLight,
                   }}
                 >
                   Putra Dari :

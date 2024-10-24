@@ -83,9 +83,10 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             initial={AnimationThemeInstance.FadeUp}
             transition={{ duration: 0.5, delay: 0.5 }}
             style={{
-              fontFamily: IConstantFont.dreamEvanue,
+              fontFamily: IConstantFont.delius,
               fontSize: 35,
               color: "var(--forth)",
+              fontWeight:100,
               textShadow: "none",
             }}
           >

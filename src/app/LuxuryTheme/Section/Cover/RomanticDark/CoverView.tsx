@@ -15,6 +15,7 @@ import {
 import React from "react";
 import { isMobile } from "react-device-detect";
 import { IConstantFont } from "../../../../utils/ConstantFont";
+import { toEachUpperCase } from "@/app/utils/ConvertionCase";
 
 const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
@@ -294,13 +295,13 @@ const CoverView = (props: CoverModelInterface) => {
               <p
                 style={{
                   fontSize: 24,
-                  fontWeight: "400",
-                  fontFamily: IConstantFont.dreamEvanue,
+                  fontWeight: 100,
+                  fontFamily: IConstantFont.Forum,
                   textShadow: "var(--shadow2)",
                   color: "var(--forth)",
                 }}
               >
-                THE WEDDING OF
+                    THE WEDDING OF
               </p>
             </div>
 
@@ -312,13 +313,13 @@ const CoverView = (props: CoverModelInterface) => {
                 <div className="col-12">
                   <p
                     style={{
-                      fontFamily: IConstantFont.dreamEvanue,
+                      fontFamily: IConstantFont.parisienne,
                       fontSize: "32px",
                       color: "var(--forth)",
                       letterSpacing: 3,
                     }}
                   >
-                    {props.detailCover?.title.toUpperCase()}
+                    {toEachUpperCase(props.detailCover!.title)}
                   </p>
                 </div>
                 <div className="col-12 justify-content-center align-items-end d-flex">
@@ -336,7 +337,7 @@ const CoverView = (props: CoverModelInterface) => {
                     className=""
                     style={{
                       fontSize: 18,
-                      fontFamily: "dream evanue",
+                      fontFamily: IConstantFont.brilon,
                       color: "white",
                       letterSpacing: 12,
                       fontWeight: 800,

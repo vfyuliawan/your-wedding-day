@@ -62,7 +62,7 @@ const HomeView = (props: HomeViewInterface) => {
                 style={{
                   fontSize: 48,
                   color: "var(--forth)",
-                  fontFamily: IConstantFont.dreamEvanue,
+                  fontFamily: IConstantFont.parisienne,
                 }}
               >
                 {" "}
@@ -134,7 +134,7 @@ const HomeView = (props: HomeViewInterface) => {
                 style={{
                   fontSize: 78,
                   color: "var(--forth)",
-                  fontFamily: IConstantFont.dreamEvanue,
+                  fontFamily: IConstantFont.parisienne,
                 }}
               >
                 {" "}

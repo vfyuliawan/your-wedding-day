@@ -22,6 +22,7 @@ import { IConstantFont } from "../../../../utils/ConstantFont";
 
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import { toEachUpperCase } from "@/app/utils/ConvertionCase";
 
 const StoryView = (props: StoryViewInterface) => {
   const targetRef = useRef<any>(null);
@@ -70,16 +71,16 @@ const StoryView = (props: StoryViewInterface) => {
               style={{
                 color: "var(--forth)",
                 fontSize: 38,
-                fontFamily: IConstantFont.dreamEvanue,
-                fontWeight: "100",
+                fontFamily: IConstantFont.parisienne,
+                fontWeight: 100,
                 letterSpacing: "1px",
               }}
             >
               Event
               <span
                 style={{
-                  fontFamily: IConstantFont.dreamEvanue,
-                  fontWeight: "normal",
+                  fontFamily: IConstantFont.parisienne,
+                  fontWeight: 100,
                   fontSize: 38,
                   color: "var(--forth)",
                   textTransform: "capitalize",
@@ -212,9 +213,9 @@ const StoryView = (props: StoryViewInterface) => {
               <h3 style={{
                 color:"var(--forth)",
                 fontSize:22,
-                fontFamily:IConstantFont.dreamEvanue
+                fontFamily:IConstantFont.brilon
               }}>
-                {story.title.toUpperCase()} {TimeConvertionFullDate(story.date.toString()).year}
+                {toEachUpperCase(story.title)} {TimeConvertionFullDate(story.date.toString()).year}
               </h3>
               <h3 style={{
                 color:"var(--forth)",

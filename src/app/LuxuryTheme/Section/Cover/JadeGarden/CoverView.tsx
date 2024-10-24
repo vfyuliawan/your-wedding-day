@@ -16,6 +16,7 @@ import React from "react";
 import { isMobile } from "react-device-detect";
 import { IConstantFont } from "../../../../utils/ConstantFont";
 import { hexToRgba } from "../../../../utils/ConvertColor";
+import { toEachUpperCase } from "@/app/utils/ConvertionCase";
 
 const CoverView = (props: CoverModelInterface) => {
   const [appear, setAppear] = useState(false);
@@ -270,14 +271,14 @@ const CoverView = (props: CoverModelInterface) => {
                     <div className="col-12">
                       <p
                         style={{
-                          fontFamily: IConstantFont.lavishlyYours,
+                          fontFamily: IConstantFont.parisienne,
                           fontSize: 30,
                           color: "var(--forth)",
                           letterSpacing: 3,
                           fontWeight: 500,
                         }}
                       >
-                        {props.detailCover?.title.toLocaleLowerCase()}
+                        {toEachUpperCase(props.detailCover?.title ??"") }
                       </p>
                     </div>
                     <div className="col-12 justify-content-center align-items-end d-flex">
@@ -295,7 +296,7 @@ const CoverView = (props: CoverModelInterface) => {
                         className=""
                         style={{
                           fontSize: 18,
-                          fontFamily: "dream evanue",
+                          fontFamily: IConstantFont.homadeApple,
                           color: "var(--forth)",
                           letterSpacing: 12,
                           fontWeight: 800,
@@ -566,7 +567,7 @@ const CoverView = (props: CoverModelInterface) => {
                 <div className="col-12">
                   <p
                     style={{
-                      fontFamily: IConstantFont.lavishlyYours,
+                      fontFamily: IConstantFont.Lavishly_Yours,
                       fontSize: 30,
                       color: "var(--forth)",
                       letterSpacing: 3,

@@ -72,10 +72,10 @@ const HomeView = (props: HomeViewInterface) => {
                   style={{
                     textAlign: "center",
                     marginTop: 28,
-                    fontSize: 38,
+                    fontSize: 48,
                     fontWeight: 600,
                     color: "var(--forth)",
-                    fontFamily: IConstantFont.lavishlyYours,
+                    fontFamily: IConstantFont.Lavishly_Yours,
                   }}
                 >
                   Template <br /> & <br />
@@ -89,7 +89,7 @@ const HomeView = (props: HomeViewInterface) => {
                     fontSize: 38,
                     fontWeight: 600,
                     color: "var(--forth)",
-                    fontFamily: IConstantFont.lavishlyYours,
+                    fontFamily: IConstantFont.Lavishly_Yours,
                   }}
                 >
                   {props.HomeDetail.title.split(" ")[0]} <br /> & <br />

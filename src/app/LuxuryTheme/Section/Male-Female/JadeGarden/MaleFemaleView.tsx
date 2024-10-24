@@ -195,7 +195,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontWeight: 600,
                 marginTop: isMobile ? 2 : 25,
                 color: "var(--third)",
-                fontFamily: IConstantFont.lavishlyYours,
+                fontFamily: IConstantFont.Lavishly_Yours,
               }}
             >
               {params.name == "string" ? "Template Design" : params.name}
@@ -206,7 +206,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 marginTop: 0,
                 fontSize: 18,
                 color: "var(--third)",
-                fontFamily: IConstantFont.BellezaRegular,
+                fontFamily: IConstantFont.Belleza,
               }}
             >
               Putri Dari
@@ -216,7 +216,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               style={{
                 fontSize: 18,
                 color: "var(--third)",
-                fontFamily: IConstantFont.BellezaRegular,
+                fontFamily: IConstantFont.Belleza,
               }}
             >
               Ibu {params.ibu}
@@ -226,7 +226,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
               style={{
                 fontSize: 18,
                 color: "var(--third)",
-                fontFamily: IConstantFont.BellezaRegular,
+                fontFamily: IConstantFont.Belleza,
               }}
             >
               Ayah {params.ayah}

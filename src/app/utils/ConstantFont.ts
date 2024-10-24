@@ -1,6 +1,5 @@
 export enum IConstantFont {
-    dreamEvanue = "dream evanue",
-    sachetteleSignature = "Sachettele Signature",
+    
     poppins= "poppins",
     brilon="brilon",
     monsieur="Monsieur",
@@ -9,11 +8,18 @@ export enum IConstantFont {
     sansSerif = "sans-serif",
     montserrat= "montserrat",
     creation = "Creation",
+
+    //RomaticDark
+    parisienne="Parisienne",
+    homadeApple = "Homemade Apple",
+    delius = "Delius Swash Caps",
     
-    // Jade Garden
-    Brittany="brittany",
-    Forum="forum",
-    BellezaRegular="belleza-Regular",
-    lavishlyYours="LavishlyYours-Regular"
+    //JadeGarden
+    Belleza = "Belleza",
+    Lavishly_Yours="Lavishly Yours",
+    Forum="Forum",
+    middle = "Delius Swash",
+    normal="Playwrite GB"
+
   }
   
