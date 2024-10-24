@@ -90,8 +90,8 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
           width: "100%",
           height: 100,
           position: "absolute",
-          top: isMobile ? 260 : 320,
-          left: 200,
+          top: isMobile ? 270 : 320,
+          left: 170,
           zIndex: 2,
           display: "flex",
           flexDirection: "column",
@@ -195,7 +195,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
                 fontWeight: 600,
                 marginTop: isMobile ? 2 : 25,
                 color: "var(--third)",
-                fontFamily: IConstantFont.Brittany,
+                fontFamily: IConstantFont.lavishlyYours,
               }}
             >
               {params.name == "string" ? "Template Design" : params.name}
@@ -203,7 +203,7 @@ const MaleFemaleView = (props: MaleFemaleViewInterface) => {
             <h4
            
               style={{
-                marginTop: 20,
+                marginTop: 0,
                 fontSize: 18,
                 color: "var(--third)",
                 fontFamily: IConstantFont.BellezaRegular,

@@ -5,7 +5,7 @@
 }
 @font-face {
   font-family: "poppins";
-  src: url("../../../../Font/Poppins/Poppins-Regular.ttf") format("Poppins-Regular");
+  src: url("../../../../Font/poppins/Poppins-Regular.ttf") format("Poppins-Regular");
 }
 
 @font-face {
@@ -28,18 +28,23 @@
 }
 
 @font-face {
-  font-family: 'Brittany';
-  src: url('../../../../Font/brittany_signature/BrittanySignature.ttf') format('truetype');
+  font-family: 'brittany';
+  src: url('../../../../Font/brittany_signature/brittanySignature.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Forum';
-  src: url('../../../../Font/Forum/Forum-Regular.ttf') format('truetype');
+  font-family: 'forum';
+  src: url('../../../../Font/forum/Forum-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Belleza-Regular';
-  src: url('../../../../Font/Belleza/Belleza-Regular.ttf') format('truetype');
+  font-family: 'belleza-Regular';
+  src: url('../../../../Font/belleza/Belleza-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'LavishlyYours-Regular';
+  src: url('../../../../Font/LavishlyYours/LavishlyYours-Regular.ttf') format('truetype');
 }
 
 

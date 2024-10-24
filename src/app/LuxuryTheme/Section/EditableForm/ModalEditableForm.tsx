@@ -65,6 +65,10 @@ export function ModalEditableForm(props: {
           bottom: "auto",
           marginRight: "-50%",
           transform: "translate(-50%, -50%)",
+          zIndex: 9999, // Set a high zIndex value to ensure the modal stays on top
+        },
+        overlay: {
+          zIndex: 9998, // Set a slightly lower zIndex for the overlay, if needed
         },
       }}
       contentLabel="Example Modal"

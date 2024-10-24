@@ -47,13 +47,14 @@ const HomeView = (props: HomeViewInterface) => {
               }}
             >
               <img
-                src={"/image/Jade_Garden/homeFrame.png"}
+                className=""
                 style={{
-                  objectFit: "contain",
                   width: "100%",
                   height: "100%",
+                  objectFit: "contain",
                 }}
-                alt="test bg"
+                src={"/image/Jade_Garden/homeFrame.png"}
+                alt="centered image"
               />
             </div>
             <div
@@ -74,7 +75,7 @@ const HomeView = (props: HomeViewInterface) => {
                     fontSize: 38,
                     fontWeight: 600,
                     color: "var(--forth)",
-                    fontFamily: IConstantFont.Brittany,
+                    fontFamily: IConstantFont.lavishlyYours,
                   }}
                 >
                   Template <br /> & <br />
@@ -88,7 +89,7 @@ const HomeView = (props: HomeViewInterface) => {
                     fontSize: 38,
                     fontWeight: 600,
                     color: "var(--forth)",
-                    fontFamily: IConstantFont.Brittany,
+                    fontFamily: IConstantFont.lavishlyYours,
                   }}
                 >
                   {props.HomeDetail.title.split(" ")[0]} <br /> & <br />

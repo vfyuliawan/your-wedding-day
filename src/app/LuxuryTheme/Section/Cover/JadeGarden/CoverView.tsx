@@ -270,7 +270,7 @@ const CoverView = (props: CoverModelInterface) => {
                     <div className="col-12">
                       <p
                         style={{
-                          fontFamily: IConstantFont.Brittany,
+                          fontFamily: IConstantFont.lavishlyYours,
                           fontSize: 30,
                           color: "var(--forth)",
                           letterSpacing: 3,
@@ -566,7 +566,7 @@ const CoverView = (props: CoverModelInterface) => {
                 <div className="col-12">
                   <p
                     style={{
-                      fontFamily: IConstantFont.Brittany,
+                      fontFamily: IConstantFont.lavishlyYours,
                       fontSize: 30,
                       color: "var(--forth)",
                       letterSpacing: 3,

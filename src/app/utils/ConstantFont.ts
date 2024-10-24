@@ -11,8 +11,9 @@ export enum IConstantFont {
     creation = "Creation",
     
     // Jade Garden
-    Brittany="Brittany",
-    Forum="Forum",
-    BellezaRegular="Belleza-Regular"
+    Brittany="brittany",
+    Forum="forum",
+    BellezaRegular="belleza-Regular",
+    lavishlyYours="LavishlyYours-Regular"
   }
   
