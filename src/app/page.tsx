@@ -41,6 +41,7 @@ import Head from "next/head";
 import RedEssence from "./Theme/LuxuryTheme/RedEssence";
 import RomanticDark from "./Theme/LuxuryTheme/RomanticDark";
 import JadeGarden from "./Theme/LuxuryTheme/JadeGarden";
+import DashboardView from "./WebApp/Dashboard/page";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -426,7 +427,7 @@ export default function Home() {
           idGuest={idGuest}
         />
       ) : homePage ? (
-        <h1>Home</h1>
+        <DashboardView/>
       ) : (
         <Loading />
       )}
