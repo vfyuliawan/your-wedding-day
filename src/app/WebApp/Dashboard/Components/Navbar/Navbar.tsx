@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { UserAuth } from "../../../services/AuthContext";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.min.js';

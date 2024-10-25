@@ -8,12 +8,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FooterDashboard from "./Components/Footer/Footer";
 import NavbarDashboard from "./Components/Navbar/Navbar";
 import DashboardPage from "./Section/Page/Page"; 
+import HeaderView from '@/app/Theme/LuxuryTheme/Section/Header/HeaderView';
+import HeaderDashboard from './Components/Header/Header';
 
 const DashboardView = () => { 
 
     return (
       < >  
         {/* <NavbarDashboard />  */}
+        <HeaderDashboard/>
         <DashboardPage /> 
         <FooterDashboard />
 

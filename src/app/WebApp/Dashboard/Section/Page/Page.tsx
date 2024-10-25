@@ -127,7 +127,14 @@ const DashboardPage = () => {
       <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
         <div className="container">
           {/* <Link href="/"> */}
-          <a href="/" className="navbar-brand">
+          <a
+            style={{
+              color: "var(--main)",
+              fontSize: "3rem",
+            }}
+            href="/"
+            className="navbar-brand"
+          >
             <i className="bi bi-envelope-paper-heart" /> Nvite Me
           </a>
           {/* </Link> */}
@@ -210,7 +217,7 @@ const DashboardPage = () => {
                           <div className="flex">
                             <button
                               onClick={handleLogout}
-                              className="btn custom-btn login-btn custom-btn-bg custom-btn-link" 
+                              className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
                             >
                               <i className="bi bi-box-arrow-in-right " /> Logout
                             </button>
@@ -238,8 +245,8 @@ const DashboardPage = () => {
       {token && isUserLoggedIn ? (
         <section className="home" id="home">
           <div className="container">
-            <div className="col mb-3 d-flex justify-content-center"> 
-              <h2>My Invitation</h2>  
+            <div className="col mb-3 d-flex justify-content-center">
+              <h2>My Invitation</h2>
             </div>
 
             <div
@@ -254,45 +261,51 @@ const DashboardPage = () => {
             >
               {/* {" "} */}
               {/* <h2 style={{ textAlign: "center" }}>My Invitations List</h2> */}
-              <div className="col d-flex justify-content-between">  
-              <Link
-                href="/create"
-                className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
-                style={{
-                  marginLeft: "15px",
-                  width: "135px",
-                //   marginBottom: "0px",
-                }}
-              >
-                <i className="bi bi-pencil " /> Create
-              </Link>
-              <div style={{ display: "flex", flexDirection: "row", marginRight:"15px" }}>
-                <input
-                  style={{
-                    borderColor: "black",
-                    borderRadius: 15,
-                    paddingLeft: 5,
-                    backgroundColor:"white"
-                  }}
-                  placeholder="   Search Your Project"
-                  onChange={(val) => {
-                    setSearchQueary(val.target.value);
-                    setPage(0);
-                  }}
-                />
-                <div style={{ width: 5 }}></div>
-                <button
-                  onClick={() => {
-                    handleGetMyProjects(page, 4, searchQueary);
-                    console.log(totalPages);
-                  }}
+              <div className="col d-flex justify-content-between">
+                <Link
+                  href="/create"
                   className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
+                  style={{
+                    marginLeft: "15px",
+                    width: "135px",
+                    //   marginBottom: "0px",
+                  }}
                 >
-                  {" "}
-                  <i className="bi bi-search " />
-                </button>
+                  <i className="bi bi-pencil " /> Create
+                </Link>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginRight: "15px",
+                  }}
+                >
+                  <input
+                    style={{
+                      borderColor: "black",
+                      borderRadius: 15,
+                      paddingLeft: 5,
+                      backgroundColor: "white",
+                    }}
+                    placeholder="   Search Your Project"
+                    onChange={(val) => {
+                      setSearchQueary(val.target.value);
+                      setPage(0);
+                    }}
+                  />
+                  <div style={{ width: 5 }}></div>
+                  <button
+                    onClick={() => {
+                      handleGetMyProjects(page, 4, searchQueary);
+                      console.log(totalPages);
+                    }}
+                    className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
+                  >
+                    {" "}
+                    <i className="bi bi-search " />
+                  </button>
+                </div>
               </div>
-            </div>
               <div
                 style={{
                   // height: '90vh',
@@ -395,7 +408,9 @@ const DashboardPage = () => {
                                   height: "50px", // Height can be adjusted as needed
                                 }}
                               >
-                                <h4 style={{color:"#116A7B"}}>Project Not Found</h4>
+                                <h4 style={{ color: "#116A7B" }}>
+                                  Project Not Found
+                                </h4>
                               </div>
                             </td>
                           </tr>
@@ -419,7 +434,7 @@ const DashboardPage = () => {
                                 </button>
                               ) : (
                                 // <>.</>
-                                <div style={{color:"white"}}></div>
+                                <div style={{ color: "white" }}></div>
                               )}
                               {page + 1 < totalPages ? (
                                 <button
@@ -429,7 +444,7 @@ const DashboardPage = () => {
                                   {"Next Page >>"}
                                 </button>
                               ) : (
-                                <div style={{color:"white"}}></div>
+                                <div style={{ color: "white" }}></div>
                               )}
                             </div>
                           </td>
@@ -464,34 +479,75 @@ const DashboardPage = () => {
               </div>
             ) : (
               <div className="row dflex ">
-                <div className="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+                {/* <div className="col-lg-6 col-md-6 col-sm-8 col-6 d-flex align-items-center">
+                  <div
+                    style={{
+                      borderRadius: 18,
+                      padding: 13,
+                      width: 280,
+                      opacity: 0.3,
+                      backgroundColor: "var(--main)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "#ffff",
+                        fontSize: "0.8rem",
+                        fontWeight: "bold",
+                      }}
+                      className="mr-2 first-animated-word"
+                    >
+                      PLATFORM #1 UNDANGAN DIGITAL
+                    </span>
+                  </div>
+                </div> */}
+                <div className=" mt-2 col-lg-8 col-md-8 col-12 col-sm-12 d-flex align-items-center">
                   <div className="cover-text">
-                    <small className="small-text">
-                      Welcome to{" "}
-                      <span className="mobile-block">
-                        Wedding Invitation website!
-                      </span>
-                    </small>
                     <h2 className="animated animated-text">
-                      <span className="mr-2 first-animated-word">We are</span>
+                      <span className="mt-5 first-animated-word">We are</span>
                       <div className="animated-info">
-                        <span className="animated-item">Nvite Me</span>
-                        <span className="animated-item">
+                        <span className="animated-item mt-2">Nvite Me</span>
+                        <span className="animated-item mt-2">
                           Wedding Invitation
                         </span>
                       </div>
                     </h2>
+                    <small
+                      style={{
+                        fontSize: "1.5rem",
+                        // color:"var(--main)",
+                        fontWeight: "normal",
+                      }}
+                      className="medium-text"
+                    >
+                      <span
+                        style={{
+                          fontWeight: "bold",
+                        }}
+                        className="mobile-block"
+                      >
+                        Undangan menjadi lebih modern, keren dan efisien
+                      </span>
+                    </small>
                     <p>
-                      Create invitations for free in minutes, download or share
-                      your invitations with RSVP online. We are good in organize
-                      your wedding guest at your special day.
+                      Buat undangan dalam hitungan menit, unduh atau bagikan
+                      undangan Anda dengan RSVP online. Kami pandai mengatur
+                      tamu pernikahan Anda di hari istimewa Anda
                     </p>
-                    <div className="custom-btn-group mt-4">
+                    <div style={{}} className="custom-btn-group mt-4">
                       <a
                         href="design/list-design.html"
                         className="btn mr-lg-2 custom-btn"
+                        style={{
+                          backgroundColor: "var(--main)",
+                          color: "#ffff",
+                        }}
                       >
-                        <i className="bi bi-card-list" /> Design
+                        <i
+                          style={{ fontSize: "1.4rem" }}
+                          className="bi bi-chat-left-heart me-3"
+                        />{" "}
+                        Buat Sekarang
                       </a>
                       {/* <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a> */}
                     </div>
