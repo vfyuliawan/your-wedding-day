@@ -42,7 +42,7 @@ const StoryView = (props: StoryViewInterface) => {
       ref={targetRef}
       style={{
         backgroundColor: "var(--prim)",
-        height:"120vh"
+        height:"135vh"
       }}
       id="story"
       className="story"

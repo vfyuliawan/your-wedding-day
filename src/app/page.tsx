@@ -125,19 +125,15 @@ export default function Home() {
     return () => {};
   }, []);
 
-
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('/service_worker.js')
-          .then(registration => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch(error => {
-            console.error('Service Worker registration failed:', error);
-          });
-      }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service_worker.js').then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }).catch(error => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+      });
     }
   }, []);
 
@@ -460,7 +456,7 @@ export default function Home() {
           height: "100vh", // Ensures the div takes up the full viewport height
         }}
       >
-        <link rel="stylesheet" href="/pink-essence/assets/css/style.css" />
+        <link rel="stylesheet" href="/ThemeStyle/RedEssence/assets/css/style.css" />
         <link rel="icon" type="image/x-icon" href="/LogoNM.png" />
 
         <div
