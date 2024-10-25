@@ -12,7 +12,7 @@ export const baseUrl = (): string => {
   const dev =  "https://innovative-emotion-production.up.railway.app";
   const local = `http://localhost:8000${versionAppi}`;
   const sit =  `https://tight-kora-nviteme-3bdf504d.koyeb.app${versionAppi}`;
-  return sit;
+  return local;
 };
 
 export enum CallBackError {

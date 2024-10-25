@@ -44,9 +44,8 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
         width: 70, // Set a fixed width for the vertical navbar
         backgroundColor: "transparent",
         display: "flex",
-        opacity: 0.8,
+        opacity: 1,
         overflow: "hidden",
-
         justifyContent: "center",
         flexDirection: "column", // Vertical layout
         zIndex: -0, // Ensure it stays on top
@@ -58,7 +57,7 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
           position: "fixed",
           top: 20,
           backgroundColor: "var(--prim)",
-          opacity: 0.7,
+          opacity: 1,
           height: 58,
           width: 58,
           borderRadius: "50%",
@@ -89,7 +88,7 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
           position: "fixed",
           top: 90,
           backgroundColor: "var(--prim)",
-          opacity: 0.7,
+          opacity: 1,
           height: 58,
           width: 58,
           borderRadius: "50%",
@@ -124,7 +123,7 @@ const NavbarVerticalView = (props: NavbarInterfaceView) => {
           height: "60%",
           //   width:9
           borderRadius: "30px",
-          opacity: 0.8,
+          opacity: 1,
           justifyContent: "center",
           display: "flex",
           flexDirection: "column", // Align items vertically
