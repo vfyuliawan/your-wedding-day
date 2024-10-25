@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { usePathname, useSearchParams } from "next/navigation";
-import Service from "./services/Service";
+import Service from "./Firebase/services/Service";
 import { useEffect, useState } from "react";
-import { app } from "./api/firebase";
+import { app } from "./Firebase/api/firebase";
 
 import {
   CollectionReference,
@@ -24,13 +24,13 @@ import {
 } from "firebase/firestore";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
-import FloralTheme from "./FloralTheme/FloralTheme";
-import FullPageTheme from "./FullAnimatedTheme/FullPageTheme";
+import FloralTheme from "./Theme/FloralTheme/FloralTheme";
+import FullPageTheme from "./Theme/FullAnimatedTheme/FullPageTheme";
 import React from "react";
-import { ResultDetailSlug } from "./Dashboard/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
-import DetailSlugRepository from "./Dashboard/Domain/Repository/DetailSlugRepository/DetailSlugRepository";
-import MessageService from "./Dashboard/Domain/Service/MessageService/MessageService";
-import { MessagesRequest } from "./Dashboard/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
+import { ResultDetailSlug } from "./Manifest/Domain/Models/ModelResponse/ModelResponseDetailSlug/ModelResponseDetailSlug";
+import DetailSlugRepository from "./Manifest/Domain/Repository/DetailSlugRepository/DetailSlugRepository";
+import MessageService from "./Manifest/Domain/Service/MessageService/MessageService";
+import { MessagesRequest } from "./Manifest/Domain/Models/ModelResponse/ModalResponseMessage/ModelResponseGetMessage";
 import {
   BrowserView,
   MobileView,
@@ -38,9 +38,9 @@ import {
   isMobile,
 } from "react-device-detect";
 import Head from "next/head";
-import RedEssence from "./LuxuryTheme/RedEssence";
-import RomanticDark from "./LuxuryTheme/RomanticDark";
-import JadeGarden from "./LuxuryTheme/JadeGarden";
+import RedEssence from "./Theme/LuxuryTheme/RedEssence";
+import RomanticDark from "./Theme/LuxuryTheme/RomanticDark";
+import JadeGarden from "./Theme/LuxuryTheme/JadeGarden";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
