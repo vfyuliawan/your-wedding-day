@@ -469,77 +469,141 @@ const DashboardPage = () => {
       )}
       {SectionCarousell()}
       <section
-        style={{ backgroundColor: "var(--main3)" }}
-        className="project"
+        style={{
+          position: "relative",
+          height: "100vh",
+        }}
+        // className="project"
         id="project"
       >
-        <div className="container">
-          <div className="row justify-content-center">
-            <div style={{width:700}} className="text-center">
-              {/* <span>Memori kisah kami</span> */}
-              <h2 style={{ fontSize:"3rem"}}>Apa kata mereka</h2>
-              <p style={{backgroundColor:""}}>
-                The Nvite Me Digital Invitation website has a lot of projects
-                and invitation templates Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae autem vel mollitia illum.
-              </p>
+        <div
+          style={{
+            background: `url("/image/background/prewed5.jpeg") no-repeat center center`,
+            backgroundSize: "cover",
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            top: 0,
+            left: 0,
+            opacity: 0.4,
+            transition: "transform 0.5s ease", // Smooth rotation transition
+          }}
+          className="responsive-rotate"
+        />
+        <div
+          style={{
+            backgroundColor: "var(--main3)",
+            backgroundSize: "cover",
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            top: 0,
+            left: 0,
+            opacity: 0.6,
+            transition: "transform 0.5s ease", // Smooth rotation transition
+          }}
+          className="responsive-rotate"
+        />
+        <div
+          style={{
+            backgroundColor: "transparent",
+            backgroundSize: "cover",
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            top: 0,
+            left: 0,
+            transition: "transform 0.5s ease", // Smooth rotation transition
+          }}
+          className="responsive-rotate"
+        >
+          <div className="container">
+            <div className="row justify-content-center">
+              <div
+                style={{ width: 700, marginTop: "2rem" }}
+                className="text-center"
+              >
+                {/* <span>Memori kisah kami</span> */}
+                <h2
+                  style={{
+                    fontSize: 36,
+                    color: "var(--main)",
+                    fontWeight:"bold",
+                    fontFamily: "Maven Pro",
+                    letterSpacing: 0.5,
+                  }}
+                >
+                  #15.453 <span style={{fontSize:36, color:"pink"}}> Pasangan Berbahagia</span>
+                </h2>
+                <p style={{ fontSize: 12, fontFamily: IConstantFont.poppins }}>
+                {`Dari luar dan dalam negeri sudah membuat undangannya. giliran kamu untuk mencoba ;)`}
+                </p>
+              </div>
             </div>
-          </div>
-          <div
-            id="carouselExampleAutoplaying"
-            className="carousel slide"
-            data-bs-ride="true"
-          >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  src="image/project/project-image01.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
+            <div
+              id="carouselExampleAutoplaying"
+              className="carousel slide"
+              data-bs-ride="true"
+            >
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img
+                    src="image/project/project-image01.png"
+                    className="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div className="carousel-item active">
+                  <img
+                    src="image/project/project-image02.png"
+                    className="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div className="carousel-item active">
+                  <img
+                    src="image/project/project-image03.png"
+                    className="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div className="carousel-item active">
+                  <img
+                    src="image/project/project-image04.png"
+                    className="d-block w-100"
+                    alt="..."
+                  />
+                </div>
               </div>
-              <div className="carousel-item active">
-                <img
-                  src="image/project/project-image02.png"
-                  className="d-block w-100"
-                  alt="..."
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
                 />
-              </div>
-              <div className="carousel-item active">
-                <img
-                  src="image/project/project-image03.png"
-                  className="d-block w-100"
-                  alt="..."
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
                 />
-              </div>
-              <div className="carousel-item active">
-                <img
-                  src="image/project/project-image04.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleAutoplaying"
-              data-bs-slide="prev"
-            >
-              <span className="carousel-control-prev-icon" aria-hidden="true" />
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleAutoplaying"
-              data-bs-slide="next"
-            >
-              <span className="carousel-control-next-icon" aria-hidden="true" />
-              <span className="visually-hidden">Next</span>
-            </button>
           </div>
         </div>
       </section>
+
       <section style={{ display: "flex" }} id="fiture" className="fiture">
         <div className="container">
           <div className="row justify-content-center">
@@ -841,6 +905,78 @@ const DashboardPage = () => {
         title: "Akikah dan Tasyakuran",
         img: "/image/background/prewed5.jpeg",
       },
+      {
+        title: "Filter Instagram Available",
+        img: "/image/background/prewed5.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed1.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed2.jpeg",
+      },
+      {
+        title: "Download on Playstore",
+        img: "/image/background/prewed3.jpeg",
+      },
+      {
+        title: "Promo Eid Al Fitri",
+        img: "/image/background/prewed4.jpeg",
+      },
+      {
+        title: "Akikah dan Tasyakuran",
+        img: "/image/background/prewed5.jpeg",
+      },
+      {
+        title: "Filter Instagram Available",
+        img: "/image/background/prewed5.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed1.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed2.jpeg",
+      },
+      {
+        title: "Download on Playstore",
+        img: "/image/background/prewed3.jpeg",
+      },
+      {
+        title: "Promo Eid Al Fitri",
+        img: "/image/background/prewed4.jpeg",
+      },
+      {
+        title: "Akikah dan Tasyakuran",
+        img: "/image/background/prewed5.jpeg",
+      },
+      {
+        title: "Filter Instagram Available",
+        img: "/image/background/prewed5.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed1.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed2.jpeg",
+      },
+      {
+        title: "Download on Playstore",
+        img: "/image/background/prewed3.jpeg",
+      },
+      {
+        title: "Promo Eid Al Fitri",
+        img: "/image/background/prewed4.jpeg",
+      },
+      {
+        title: "Akikah dan Tasyakuran",
+        img: "/image/background/prewed5.jpeg",
+      },
     ];
 
     return (
@@ -857,79 +993,51 @@ const DashboardPage = () => {
           scrollPaddingLeft: 20, // Ensures the first item isn’t cut off
         }}
       >
-        <div
-          style={{
-            display: "flex",
-          }}
-          className="col-12"
-        >
-          {dataCard.map((item, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
-                margin: "0 10px", // Horizontal spacing between cards
-                borderRadius: 20, // Rounded corners
-                width: 370, // Width of each card
-                overflow: "hidden",
-                height: 180,
-                position: "relative",
-                flex: "0 0 auto", // Prevents shrinking/growing for each card
-              }}
-            >
-              <img
-                // src={`https://picsum.photos/seed/wedding${index}/200/300`}
-                src={item.img}
-                alt=""
-                style={{
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
+        <div className="scroll-container">
+          <div className="scroll-content">
+            {dataCard.map((item, index) => (
               <div
+                key={index}
                 style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  height: "100%",
-                  width: "100%",
-                  backgroundColor: "black",
-                  opacity: 0.7,
+                  borderRadius: 20,
+                  overflow: "hidden",
                 }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  height: "100%",
-                  width: "100%",
-                  display:"flex",
-                  padding:50
-                }}
+                className="card"
               >
-                <small
-                  style={{
-                    fontSize: 18,
-                    color: "white",
-                    marginLeft: 18,
-                  }}
-                >
-                  {item.title}
-                </small>
                 <img
-                style={{
-                  height:100,
-                  width:100,
-                  borderRadius:20
-                }}
-                  src={`https://picsum.photos/seed/wedding${index}/200/300`}
+                  src={item.img}
                   alt=""
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "100%",
+                  }}
                 />
+                <div className="overlay" />
+                <div
+                  style={{
+                    justifyContent: "start",
+                    alignItems: "center",
+                    textAlign: "start",
+                    width: 400,
+                  }}
+                  className="content"
+                >
+                  <small>{item.title}</small>
+                  <img
+                    src={`https://picsum.photos/seed/wedding${index}/200/300`}
+                    alt=""
+                    style={{
+                      height: 100,
+                      marginLeft: 20,
+                      width: 100,
+                      borderRadius: 20,
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     );
@@ -987,25 +1095,12 @@ const DashboardPage = () => {
             position: "absolute",
 
             height: 80,
-            bottom: -130,
+            width: "100%",
+            bottom: -120,
             left: 0,
           }}
         >
-          {layout.isPhoneScreen || layout.isTabletScreen ? (
-            <small
-              style={{
-                margin: 22,
-                textAlign: "center",
-                color: "var(--main)",
-                fontSize: 19,
-                fontFamily: IConstantFont.Forum,
-                marginTop: 20,
-                fontWeight: "bold",
-              }}
-            >
-              #12.000 lebih pasangan menggunakan kami
-            </small>
-          ) : null}
+         
         </div>
       </section>
     );
