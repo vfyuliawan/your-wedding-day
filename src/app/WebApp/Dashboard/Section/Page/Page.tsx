@@ -209,6 +209,21 @@ const DashboardPage = () => {
     }
   };
 
+  const [userContentFirst, setuserContentFirst] = useState(0);
+  const [userContentSecond, setuserContentSecond] = useState(6);
+
+  const toggleNext = () => {
+    setuserContentFirst((prev) => prev + 6);
+    setuserContentSecond((prev) => prev + 6);
+  };
+
+  const togglePrev = () => {
+    if (userContentFirst != 0) {
+      setuserContentFirst((prev) => prev - 6);
+      setuserContentSecond((prev) => prev - 6);
+    }
+  };
+
   const handleLogout = async () => {
     // Clear token from localStorage
 
@@ -230,6 +245,7 @@ const DashboardPage = () => {
 
   return (
     <>
+    
       <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
         <div className="container">
           {/* <Link href="/"> */}
@@ -567,10 +583,173 @@ const DashboardPage = () => {
         SectionHero()
       )}
       {SectionCarousell()}
+
+      {SectionUserReview()}
+      {SectionFeature()}
+      {SectionTutorial()}
+
+      <section className="design" id="design">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-8 col-10 text-center">
+              {/* <span>Memori kisah kami</span> */}
+              <h2>Our Design</h2>
+              <p>
+                The Nvite Me Digital Invitation website has a lot of design that
+                can use easily.
+              </p>
+            </div>
+          </div>
+          <a className="view-all-btn" href="design/list-design.html">
+            View all &gt;&gt;
+          </a>
+          <div className="scrolling-wrapper">
+            <div className="card card-block  ">
+              <img src="image/background/prewed1.jpeg" alt="Card Image" />
+              <div className="card-buttons">
+                <button className="view-btn">
+                  <i className="bi bi-eye" /> Preview
+                </button>
+                <button className="add-btn">
+                  <i className="bi bi-pencil-square" /> Create Now
+                </button>
+              </div>
+            </div>
+            <div className="card card-block  ">
+              <img src="image/background/prewed2.jpeg" alt="Card Image" />
+              <div className="card-buttons">
+                <button className="view-btn">
+                  <i className="bi bi-eye" /> Preview
+                </button>
+                <button className="add-btn">
+                  <i className="bi bi-pencil-square" /> Create Now
+                </button>
+              </div>
+            </div>
+            <div className="card card-block  ">
+              <img src="image/background/prewed3.jpeg" alt="Card Image" />
+              <div className="card-buttons">
+                <button className="view-btn">
+                  <i className="bi bi-eye" /> Preview
+                </button>
+                <button className="add-btn">
+                  <i className="bi bi-pencil-square" /> Create Now
+                </button>
+              </div>
+            </div>
+            <div className="card card-block  ">
+              <img src="image/background/prewed5.jpeg" alt="Card Image" />
+              <div className="card-buttons">
+                <button className="view-btn">
+                  <i className="bi bi-eye" /> Preview
+                </button>
+                <button className="add-btn">
+                  <i className="bi bi-pencil-square" /> Create Now
+                </button>
+              </div>
+            </div>
+            <div className="card card-block  ">
+              <img src="image/background/prewed6.jpeg" alt="Card Image" />
+              <div className="card-buttons">
+                <button className="view-btn">
+                  <i className="bi bi-eye" /> Preview
+                </button>
+                <button className="add-btn">
+                  <i className="bi bi-pencil-square" /> Create Now
+                </button>
+              </div>
+            </div>
+            {/* <div className="card card-block card-2">
+                    <img src="image/background/prewed4.jpeg" alt="Card Image" />
+                    <div className="card-buttons">
+                        <button href="design/list-design.html" className="view-btn"><i className="bi bi-eye" /> Preview</button>
+                        <button href="login/login.html" className="add-btn"><i className="bi bi-pencil-square" /> Create Now</button>
+                    </div>
+                    </div>  */}
+          </div>
+        </div>
+      </section>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossOrigin="anonymous"></script>
+
+    </>
+  );
+
+  function navbarBootstrap() {
+    return (
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            Navbar
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
+                  Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Link
+                </a>
+              </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link disabled" aria-disabled="true">
+                  Disabled
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
+  function SectionUserReview() {
+    return (
       <section
         style={{
           position: "relative",
-          height: "210vh",
+          height: "80vh",
         }}
         // className="project"
         id="project"
@@ -644,55 +823,93 @@ const DashboardPage = () => {
               </div>
             </div>
             <div className="row justify-content-center">
-              {dataCard.map((item) => {
-                return (
-                  <div
-                    style={{
-                      height: 170,
-                      marginTop: 15,
-                    }}
-                    className="col-4"
-                  >
+              {dataCard
+                .slice(userContentFirst, userContentSecond)
+                .map((item) => {
+                  return (
                     <div
                       style={{
-                        height: "100%",
-                        width: "100%",
-                        overflow: "hidden",
-                        borderRadius: 15,
-                        position: "relative",
+                        height: 170,
+                        marginTop: 15,
                       }}
+                      className="col-4"
                     >
-                      <img
-                        src={item.img}
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          objectFit: "cover",
-                        }}
-                        alt=""
-                      />
-
-                      {/* Overlay div */}
                       <div
                         style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          width: "100%",
                           height: "100%",
-                          backgroundColor: "black",
-                          opacity: 0.4,
+                          width: "100%",
+                          overflow: "hidden",
+                          borderRadius: 15,
+                          position: "relative",
                         }}
-                      />
+                      >
+                        <img
+                          src={item.img}
+                          style={{
+                            height: "100%",
+                            width: "100%",
+                            objectFit: "cover",
+                          }}
+                          alt=""
+                        />
+
+                        {/* Overlay div */}
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: "black",
+                            opacity: 0.4,
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
+            <div className="row mt-2 justify-content-center">
+              <div
+                style={{}}
+                className="col-6 p-3 align-items-center justify-content-center d-flex"
+              >
+                {userContentFirst !== 0 ? (
+                  <button
+                    style={{
+                      backgroundColor: "var(--main)",
+                    }}
+                    onClick={() => {
+                      togglePrev();
+                    }}
+                    className="btn btn-success me-2"
+                  >
+                    {`<< Prev `}
+                  </button>
+                ) : null}
+
+                <button
+                  style={{
+                    backgroundColor: "var(--main)",
+                  }}
+                  onClick={() => {
+                    toggleNext();
+                  }}
+                  className="btn btn-success"
+                >
+                  {"Next >>"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
+    );
+  }
 
+  function SectionFeature() {
+    return (
       <section style={{ display: "flex" }} id="fiture" className="fiture">
         <div className="container">
           <div className="row justify-content-center">
@@ -818,7 +1035,12 @@ const DashboardPage = () => {
           </div>
         </div>
       </section>
-      <section className="tutorial" id="tutorial">
+    );
+  }
+
+  function SectionTutorial() {
+    return (
+      <section className="" id="tutorial">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-8 col-10 text-center mt-5">
@@ -884,89 +1106,8 @@ const DashboardPage = () => {
           </div>
         </div>
       </section>
-      <section className="design" id="design">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-8 col-10 text-center">
-              {/* <span>Memori kisah kami</span> */}
-              <h2>Our Design</h2>
-              <p>
-                The Nvite Me Digital Invitation website has a lot of design that
-                can use easily.
-              </p>
-            </div>
-          </div>
-          <a className="view-all-btn" href="design/list-design.html">
-            View all &gt;&gt;
-          </a>
-          <div className="scrolling-wrapper">
-            <div className="card card-block  ">
-              <img src="image/background/prewed1.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed2.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed3.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed5.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed6.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            {/* <div className="card card-block card-2">
-                    <img src="image/background/prewed4.jpeg" alt="Card Image" />
-                    <div className="card-buttons">
-                        <button href="design/list-design.html" className="view-btn"><i className="bi bi-eye" /> Preview</button>
-                        <button href="login/login.html" className="add-btn"><i className="bi bi-pencil-square" /> Create Now</button>
-                    </div>
-                    </div>  */}
-          </div>
-        </div>
-      </section>
-    </>
-  );
+    );
+  }
 
   function SectionCarousell() {
     return (
@@ -983,16 +1124,35 @@ const DashboardPage = () => {
           scrollPaddingLeft: 20, // Ensures the first item isn’t cut off
         }}
       >
-        <div className="scroll-container">
-          <div className="scroll-content">
+        <div
+          style={{
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            width: "100%",
+          }}
+          className=""
+        >
+          <div
+            style={{
+              display: "inline-flex",
+              animation: "scroll 120s linear infinite",
+            }}
+            className=""
+          >
             {dataCard.map((item, index) => (
               <div
                 key={index}
                 style={{
                   borderRadius: 20,
                   overflow: "hidden",
+                  backgroundColor: "rgba(0, 0, 0, 0.2)",
+                  margin: "0 10px",
+                  width: 390,
+                  height: 190,
+                  position: "relative",
+                  flex: "0 0 auto",
                 }}
-                className="card"
+                className=""
               >
                 <img
                   src={item.img}
@@ -1003,13 +1163,20 @@ const DashboardPage = () => {
                     height: "100%",
                   }}
                 />
-                <div className="overlay" />
+                <div className="" />
                 <div
                   style={{
                     justifyContent: "start",
                     alignItems: "center",
                     textAlign: "start",
                     width: 400,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    // width: "100%",
+                    backgroundColor: "black",
+                    opacity: 0.7,
                   }}
                   className="content"
                 >
@@ -1173,8 +1340,6 @@ const DashboardPage = () => {
         style={{
           marginTop: -40,
           marginBottom: 40,
-          // marginRight:
-          //   useLayout().isTabletScreen || useLayout().isPhoneScreen ? 20 : 0,
         }}
         className="row justify-content-center col-lg-4 col-md-12 col-12"
       >

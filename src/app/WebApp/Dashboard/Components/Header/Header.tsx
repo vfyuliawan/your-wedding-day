@@ -48,7 +48,7 @@ const HeaderDashboard = () => {
       {/* <link rel="stylesheet" href={`/ThemeStyle/${props.themeName}/assets/css/style.css`} /> */}
       <link
         rel="stylesheet"
-        href={`/Global/style.css`}
+        href={`/Global/style-v2.css`}
       />
     </div>
   );
