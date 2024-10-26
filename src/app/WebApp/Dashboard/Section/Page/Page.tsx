@@ -6,7 +6,12 @@ import CekUserLoginService from "../../Domain/Service/CekUserLoginService/CekUse
 import Link from "next/link";
 import LogoutService from "../../Domain/Service/LogoutService/LogoutService";
 import ReactLoading from "react-loading";
+import { useMediaQuery } from "react-responsive";
+
 import { useRouter } from "next/navigation";
+import useLayout from "@/app/WebApp/utils/useLayout";
+import { IConstantFont } from "@/app/Utils/ConstantFont";
+import { Slide } from "react-slideshow-image";
 
 const DashboardPage = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -21,6 +26,8 @@ const DashboardPage = () => {
   const router = useRouter();
   const [isLoading, setisLoading] = useState(false);
   const [isLoadingMain, setisLoadingMain] = useState(false);
+
+  const layout = useLayout();
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -130,7 +137,7 @@ const DashboardPage = () => {
           <a
             style={{
               color: "var(--main)",
-              fontSize: "3rem",
+              fontSize: "1.4rem",
             }}
             href="/"
             className="navbar-brand"
@@ -458,140 +465,22 @@ const DashboardPage = () => {
           </div>
         </section>
       ) : (
-        <section
-          className="cover full-screen d-lg-flex justify-content-center align-items-center mt-3"
-          id="home"
-        >
-          <div className="container">
-            {isLoadingMain ? (
-              <div
-                style={{
-                  display: "grid",
-                  placeItems: "center",
-                }}
-              >
-                <ReactLoading
-                  type={"spinningBubbles"}
-                  color={"#116A7B"}
-                  height={100} // Specify a fixed size
-                  width={100} // Specify a fixed size
-                />
-              </div>
-            ) : (
-              <div className="row dflex ">
-                {/* <div className="col-lg-6 col-md-6 col-sm-8 col-6 d-flex align-items-center">
-                  <div
-                    style={{
-                      borderRadius: 18,
-                      padding: 13,
-                      width: 280,
-                      opacity: 0.3,
-                      backgroundColor: "var(--main)",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#ffff",
-                        fontSize: "0.8rem",
-                        fontWeight: "bold",
-                      }}
-                      className="mr-2 first-animated-word"
-                    >
-                      PLATFORM #1 UNDANGAN DIGITAL
-                    </span>
-                  </div>
-                </div> */}
-                <div className=" mt-2 col-lg-8 col-md-8 col-12 col-sm-12 d-flex align-items-center">
-                  <div className="cover-text">
-                    <h2 className="animated animated-text">
-                      <span className="mt-5 first-animated-word">We are</span>
-                      <div className="animated-info">
-                        <span className="animated-item mt-2">Nvite Me</span>
-                        <span className="animated-item mt-2">
-                          Wedding Invitation
-                        </span>
-                      </div>
-                    </h2>
-                    <small
-                      style={{
-                        fontSize: "1.5rem",
-                        // color:"var(--main)",
-                        fontWeight: "normal",
-                      }}
-                      className="medium-text"
-                    >
-                      <span
-                        style={{
-                          fontWeight: "bold",
-                        }}
-                        className="mobile-block"
-                      >
-                        Undangan menjadi lebih modern, keren dan efisien
-                      </span>
-                    </small>
-                    <p>
-                      Buat undangan dalam hitungan menit, unduh atau bagikan
-                      undangan Anda dengan RSVP online. Kami pandai mengatur
-                      tamu pernikahan Anda di hari istimewa Anda
-                    </p>
-                    <div style={{}} className="custom-btn-group mt-4">
-                      <a
-                        href="design/list-design.html"
-                        className="btn mr-lg-2 custom-btn"
-                        style={{
-                          backgroundColor: "var(--main)",
-                          color: "#ffff",
-                        }}
-                      >
-                        <i
-                          style={{ fontSize: "1.4rem" }}
-                          className="bi bi-chat-left-heart me-3"
-                        />{" "}
-                        Buat Sekarang
-                      </a>
-                      {/* <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="row justify-content-center col-lg-5 col-md-12 col-12">
-                  <div className="cover-image">
-                    <div className="mac-frame">
-                      <img
-                        src="image/background/prewed-bg.jpg"
-                        className="mac-image"
-                        alt="Mac Frame"
-                      />
-                      <div className="iphone-frame">
-                        <img
-                          src="image/background/prewed2.jpeg"
-                          className="iphone-img-frame"
-                          id="iphone-img-frame"
-                          alt="iPhone Frame"
-                        />
-                        <img
-                          className="iphone-image iphone-img-image"
-                          src="image/background/iphone.png"
-                          alt="iPhone Image"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
+        SectionHero()
       )}
-
-      <section className="project" id="project">
+      {SectionCarousell()}
+      <section
+        style={{ backgroundColor: "var(--main3)" }}
+        className="project"
+        id="project"
+      >
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-md-7 col-10 text-center">
+            <div style={{width:700}} className="text-center">
               {/* <span>Memori kisah kami</span> */}
-              <h2>Our Projects</h2>
-              <p>
+              <h2 style={{ fontSize:"3rem"}}>Apa kata mereka</h2>
+              <p style={{backgroundColor:""}}>
                 The Nvite Me Digital Invitation website has a lot of projects
-                and invitation templates
+                and invitation templates Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae autem vel mollitia illum.
               </p>
             </div>
           </div>
@@ -651,7 +540,7 @@ const DashboardPage = () => {
           </div>
         </div>
       </section>
-      <section id="fiture" className="fiture">
+      <section style={{ display: "flex" }} id="fiture" className="fiture">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-8 col-10 text-center">
@@ -925,6 +814,305 @@ const DashboardPage = () => {
       </section>
     </>
   );
+
+  function SectionCarousell() {
+    const dataCard = [
+      {
+        title: "Filter Instagram Available",
+        img: "/image/background/prewed5.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed1.jpeg",
+      },
+      {
+        title: "Diskon Up To 30%",
+        img: "/image/background/prewed2.jpeg",
+      },
+      {
+        title: "Download on Playstore",
+        img: "/image/background/prewed3.jpeg",
+      },
+      {
+        title: "Promo Eid Al Fitri",
+        img: "/image/background/prewed4.jpeg",
+      },
+      {
+        title: "Akikah dan Tasyakuran",
+        img: "/image/background/prewed5.jpeg",
+      },
+    ];
+
+    return (
+      <section
+        style={{
+          backgroundColor: "white",
+          display: "flex",
+          padding: 20,
+          justifyContent: "center",
+          alignItems: "center",
+          overflowX: "auto", // Enables horizontal scrolling
+          overflowY: "hidden", // Hides vertical overflow
+          // whiteSpace: "nowrap", // Prevents line break for horizontal scroll
+          scrollPaddingLeft: 20, // Ensures the first item isn’t cut off
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+          }}
+          className="col-12"
+        >
+          {dataCard.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                margin: "0 10px", // Horizontal spacing between cards
+                borderRadius: 20, // Rounded corners
+                width: 370, // Width of each card
+                overflow: "hidden",
+                height: 180,
+                position: "relative",
+                flex: "0 0 auto", // Prevents shrinking/growing for each card
+              }}
+            >
+              <img
+                // src={`https://picsum.photos/seed/wedding${index}/200/300`}
+                src={item.img}
+                alt=""
+                style={{
+                  objectFit: "cover",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor: "black",
+                  opacity: 0.7,
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  height: "100%",
+                  width: "100%",
+                  display:"flex",
+                  padding:50
+                }}
+              >
+                <small
+                  style={{
+                    fontSize: 18,
+                    color: "white",
+                    marginLeft: 18,
+                  }}
+                >
+                  {item.title}
+                </small>
+                <img
+                style={{
+                  height:100,
+                  width:100,
+                  borderRadius:20
+                }}
+                  src={`https://picsum.photos/seed/wedding${index}/200/300`}
+                  alt=""
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  function SectionHero() {
+    return (
+      <section
+        style={{
+          backgroundColor: "var(--main3)",
+          width: "100%",
+          paddingRight: layout.isPhoneScreen || layout.isTabletScreen ? 0 : 180,
+        }}
+        className="full-screen cover d-lg-flex justify-content-center align-items-center mt-3"
+        id="home"
+      >
+        <div className="container">
+          {isLoadingMain ? (
+            <div
+              style={{
+                display: "grid",
+                placeItems: "center",
+              }}
+            >
+              <ReactLoading
+                type={"spinningBubbles"}
+                color={"#116A7B"}
+                height={100} // Specify a fixed size
+                width={100} // Specify a fixed size
+              />
+            </div>
+          ) : (
+            <div className="row dflex " style={{}}>
+              {heroDesc()}
+              {imgHero()}
+            </div>
+          )}
+        </div>
+        <div
+          className="col-12 text-center"
+          style={{
+            position: "absolute",
+            background:
+              layout.isPhoneScreen || layout.isTabletScreen
+                ? "linear-gradient(to top, var(--main3) 70%, transparent)"
+                : "none",
+            height: 80,
+            bottom: -100,
+            left: 0,
+          }}
+        />
+        <div
+          className="col-12 text-center"
+          style={{
+            position: "absolute",
+
+            height: 80,
+            bottom: -130,
+            left: 0,
+          }}
+        >
+          {layout.isPhoneScreen || layout.isTabletScreen ? (
+            <small
+              style={{
+                margin: 22,
+                textAlign: "center",
+                color: "var(--main)",
+                fontSize: 19,
+                fontFamily: IConstantFont.Forum,
+                marginTop: 20,
+                fontWeight: "bold",
+              }}
+            >
+              #12.000 lebih pasangan menggunakan kami
+            </small>
+          ) : null}
+        </div>
+      </section>
+    );
+  }
+
+  function heroDesc() {
+    return (
+      <div className="col-lg-8 col-md-8 col-12 col-sm-12 d-flex align-items-center">
+        <div className="cover-text">
+          <h2 className="animated animated-text">
+            <span
+              style={{ color: "var(--main)", letterSpacing: 0.4 }}
+              className="mt-5 first-animated-word"
+            >
+              No #1 Platform
+            </span>
+          </h2>
+          <h2 className="animated animated-text">
+            <span
+              style={{
+                fontFamily: IConstantFont.Forum,
+              }}
+              className="mt-5 first-animated-word"
+            >
+              Undangan Digital
+            </span>
+          </h2>
+
+          <p
+            style={{
+              fontFamily: IConstantFont.poppins,
+              fontSize: 14,
+
+              letterSpacing: 0.3,
+            }}
+          >
+            Buat undangan dalam hitungan menit, unduh atau bagikan undangan Anda
+            dengan RSVP online. Kami pandai mengatur tamu pernikahan Anda di
+            hari istimewa Anda
+          </p>
+
+          <small
+            style={{
+              fontSize: "1.5rem",
+              // color:"var(--main)",
+              fontWeight: "normal",
+            }}
+            className="medium-text"
+          >
+            <span
+              style={{
+                // fontWeight: "bold",
+                letterSpacing: 0.5,
+                // fontFamily: IConstantFont.poppins,
+              }}
+              className="mobile-block"
+            >
+              Undangan menjadi lebih modern, keren dan efisien
+            </span>
+          </small>
+          <div style={{}} className="custom-btn-group mt-4">
+            <a
+              href="design/list-design.html"
+              className="btn mr-lg-2 custom-btn"
+              style={{
+                backgroundColor: "var(--main)",
+                color: "#ffff",
+              }}
+            >
+              <i style={{}} className="bi bi-whatsapp me-3" /> Pesan Sekarang
+            </a>
+            {/* <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a> */}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function imgHero() {
+    return (
+      <div
+        style={{
+          marginTop: -40,
+          marginBottom: 40,
+          // marginRight:
+          //   useLayout().isTabletScreen || useLayout().isPhoneScreen ? 20 : 0,
+        }}
+        className="row justify-content-center col-lg-4 col-md-12 col-12"
+      >
+        <div className="cover-image">
+          <div className="">
+            <img
+              style={{
+                width:
+                  useLayout().isTabletScreen || useLayout().isPhoneScreen
+                    ? "105%"
+                    : "160%",
+              }}
+              src="/image/background/landingPage/main-banner.gif"
+              className=""
+              alt="Mac Frame"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default DashboardPage;

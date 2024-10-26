@@ -2,14 +2,14 @@
 // import { createUserWithUsernameAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { auth } from '../api/firebase';  
+// import { auth } from '../api/firebase';  
 
-import PinkEssence from "../LuxuryTheme/LuxuryTheme";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import PinkEssence from "../LuxuryTheme/LuxuryTheme";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.min.js';
-import 'bootstrap-icons/font/bootstrap-icons.min.css';
+// import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import { ResultModelSignupResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/SignupResponse/ModelSignupResponseInterface';
-import Service from '../services/Service';
+// import Service from '../services/Service';
 // import { CollectionReference, DocumentData, query, Query, where } from 'firebase/firestore';
 import { ModelSignupRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/SignupRequest/ModelSignupRequestInterface';
 import SignupService from '../Dashboard/Domain/Service/SignupService/SignupService';

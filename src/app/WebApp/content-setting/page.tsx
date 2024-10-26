@@ -1,13 +1,13 @@
 "use client";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 // import { useState } from "react";
-import PinkEssence from "../LuxuryTheme/LuxuryTheme";
+// import PinkEssence from "../LuxuryTheme/LuxuryTheme";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.min.js";
-import "bootstrap-icons/font/bootstrap-icons.min.css";
+// import "bootstrap-icons/font/bootstrap-icons.min.css";
 // import Service from "../services/Service";
 // import {
 //   CollectionReference,
@@ -18,7 +18,7 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 // } from "firebase/firestore";
 import LogoutService from "../Dashboard/Domain/Service/LogoutService/LogoutService";
 import FooterDashboard from "../Dashboard/Components/Footer/Footer";
-import Cryptr from "cryptr";
+// import Cryptr from "cryptr";
 import { ModelGetProjectDetailRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/GetProjectDetailRequest/GetProjectDetailRequest";
 import {
   GiftElementModelGetProjectDetailResponseInterface,
@@ -36,7 +36,6 @@ import {
 } from "../Dashboard/Domain/Models/ModelRequest/MyprojectRequest/ModelRequestUpdateProjectInterface";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
-import Constant from "../Constant/Constant";
 
 const ContentSettingPage = () => {
   const [first, setFirst] = useState("Pink-Esssence");
@@ -487,9 +486,9 @@ function ThemeView(params: {
             >
               <option>-- {params.data?.theme.theme} --</option>
               {/* <option selected>-- {params.data?.theme.theme} --</option> */}
-              {Constant.listTheme.map((item) => {
+              {/* {Constant.listTheme.map((item) => {
                 return <option key={item.key} value={item.key}>{item.val}</option>;
-              })}
+              })} */}
             </select>
           </div>
           <div className="mb-3">

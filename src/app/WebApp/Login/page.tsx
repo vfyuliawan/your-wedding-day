@@ -1,18 +1,18 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 // import { useState } from "react";
-import PinkEssence from "../LuxuryTheme/LuxuryTheme";
+// import PinkEssence from "../LuxuryTheme/LuxuryTheme";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.min.js";
-import "bootstrap-icons/font/bootstrap-icons.min.css";
+// import "bootstrap-icons/font/bootstrap-icons.min.css";
 import { ModelLoginRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
 import { ResultModelLoginResponseInterface } from "../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
 import LoginService from "../Dashboard/Domain/Service/LoginService/LoginService";
-import Service from "../services/Service";
+// import Service from "../services/Service";
 import { CollectionReference, DocumentData, query, Query, where } from "firebase/firestore";
 import LoginRepository from "../Dashboard/Domain/Repository/LoginRepository/LoginRepository";
 import CekUserLoginService from "../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService";
@@ -53,17 +53,17 @@ const LoginDashboard = () => {
     
   const getMessage = async () => {
     console.log("run");
-    const res = await Service.GET({
-      collectionName: "UserId",
-      queryGet: function (
-        queryGet: CollectionReference<DocumentData, DocumentData>
-      ): Query<DocumentData, DocumentData> {
-        const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
-        return nameQuery;
-      },
-    });
-    if (res?.length ?? 0 > 0) {
-    }
+    // const res = await Service.GET({
+    //   collectionName: "UserId",
+    //   queryGet: function (
+    //     queryGet: CollectionReference<DocumentData, DocumentData>
+    //   ): Query<DocumentData, DocumentData> {
+    //     const nameQuery = query(queryGet, where("Slug", "==", "getParams"));
+    //     return nameQuery;
+    //   },
+    // });
+    // if (res?.length ?? 0 > 0) {
+    // }
   };
   
   const doLogin = async (username: string, password: string) => {

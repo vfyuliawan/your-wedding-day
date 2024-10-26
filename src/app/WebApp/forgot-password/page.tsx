@@ -3,11 +3,8 @@ import { useState } from 'react';
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
-import PinkEssence from "../LuxuryTheme/LuxuryTheme";
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.min.js';
-import 'bootstrap-icons/font/bootstrap-icons.min.css';
-import { auth } from '../api/firebase';
+// import PinkEssence from "../LuxuryTheme/LuxuryTheme";
+// import { auth } from '../api/firebase';
 
 export default function ForgotPassword() {
   const [first, setFirst] = useState("Pink-Esssence");
@@ -16,7 +13,7 @@ export default function ForgotPassword() {
   const router = useRouter();
 
   const resetEmail = () => {
-    sendPasswordResetEmail(auth, email);
+    // sendPasswordResetEmail(auth, email);
   };
   if (first === "Pink-Essence") {
     // return <RedEssence />;
