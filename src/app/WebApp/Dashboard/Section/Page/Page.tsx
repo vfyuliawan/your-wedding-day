@@ -56,6 +56,105 @@ const DashboardPage = () => {
     }
   };
 
+  const dataCard = [
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed2.jpeg",
+    },
+    {
+      title: "Download on Playstore",
+      img: "/image/background/prewed3.jpeg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed2.jpeg",
+    },
+    {
+      title: "Download on Playstore",
+      img: "/image/background/prewed3.jpeg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed2.jpeg",
+    },
+    {
+      title: "Download on Playstore",
+      img: "/image/background/prewed3.jpeg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed2.jpeg",
+    },
+    {
+      title: "Download on Playstore",
+      img: "/image/background/prewed3.jpeg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+    },
+  ];
+
   const handleNextPage = async () => {
     // setPage(page + 1);
     let nextPage = page + 1;
@@ -471,7 +570,7 @@ const DashboardPage = () => {
       <section
         style={{
           position: "relative",
-          height: "100vh",
+          height: "210vh",
         }}
         // className="project"
         id="project"
@@ -528,77 +627,67 @@ const DashboardPage = () => {
                   style={{
                     fontSize: 36,
                     color: "var(--main)",
-                    fontWeight:"bold",
+                    fontWeight: "bold",
                     fontFamily: "Maven Pro",
                     letterSpacing: 0.5,
                   }}
                 >
-                  #15.453 <span style={{fontSize:36, color:"pink"}}> Pasangan Berbahagia</span>
+                  #25.453{" "}
+                  <span style={{ fontSize: 36, color: "pink" }}>
+                    {" "}
+                    Pasangan Berbahagia
+                  </span>
                 </h2>
                 <p style={{ fontSize: 12, fontFamily: IConstantFont.poppins }}>
-                {`Dari luar dan dalam negeri sudah membuat undangannya. giliran kamu untuk mencoba ;)`}
+                  {`Dari luar dan dalam negeri sudah membuat undangannya. giliran kamu untuk mencoba ;)`}
                 </p>
               </div>
             </div>
-            <div
-              id="carouselExampleAutoplaying"
-              className="carousel slide"
-              data-bs-ride="true"
-            >
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    src="image/project/project-image01.png"
-                    className="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-                <div className="carousel-item active">
-                  <img
-                    src="image/project/project-image02.png"
-                    className="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-                <div className="carousel-item active">
-                  <img
-                    src="image/project/project-image03.png"
-                    className="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-                <div className="carousel-item active">
-                  <img
-                    src="image/project/project-image04.png"
-                    className="d-block w-100"
-                    alt="..."
-                  />
-                </div>
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleAutoplaying"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                />
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleAutoplaying"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                />
-                <span className="visually-hidden">Next</span>
-              </button>
+            <div className="row justify-content-center">
+              {dataCard.map((item) => {
+                return (
+                  <div
+                    style={{
+                      height: 170,
+                      marginTop: 15,
+                    }}
+                    className="col-4"
+                  >
+                    <div
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        overflow: "hidden",
+                        borderRadius: 15,
+                        position: "relative",
+                      }}
+                    >
+                      <img
+                        src={item.img}
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          objectFit: "cover",
+                        }}
+                        alt=""
+                      />
+
+                      {/* Overlay div */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "black",
+                          opacity: 0.4,
+                        }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -880,105 +969,6 @@ const DashboardPage = () => {
   );
 
   function SectionCarousell() {
-    const dataCard = [
-      {
-        title: "Filter Instagram Available",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed1.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed2.jpeg",
-      },
-      {
-        title: "Download on Playstore",
-        img: "/image/background/prewed3.jpeg",
-      },
-      {
-        title: "Promo Eid Al Fitri",
-        img: "/image/background/prewed4.jpeg",
-      },
-      {
-        title: "Akikah dan Tasyakuran",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Filter Instagram Available",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed1.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed2.jpeg",
-      },
-      {
-        title: "Download on Playstore",
-        img: "/image/background/prewed3.jpeg",
-      },
-      {
-        title: "Promo Eid Al Fitri",
-        img: "/image/background/prewed4.jpeg",
-      },
-      {
-        title: "Akikah dan Tasyakuran",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Filter Instagram Available",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed1.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed2.jpeg",
-      },
-      {
-        title: "Download on Playstore",
-        img: "/image/background/prewed3.jpeg",
-      },
-      {
-        title: "Promo Eid Al Fitri",
-        img: "/image/background/prewed4.jpeg",
-      },
-      {
-        title: "Akikah dan Tasyakuran",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Filter Instagram Available",
-        img: "/image/background/prewed5.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed1.jpeg",
-      },
-      {
-        title: "Diskon Up To 30%",
-        img: "/image/background/prewed2.jpeg",
-      },
-      {
-        title: "Download on Playstore",
-        img: "/image/background/prewed3.jpeg",
-      },
-      {
-        title: "Promo Eid Al Fitri",
-        img: "/image/background/prewed4.jpeg",
-      },
-      {
-        title: "Akikah dan Tasyakuran",
-        img: "/image/background/prewed5.jpeg",
-      },
-    ];
-
     return (
       <section
         style={{
@@ -1099,9 +1089,7 @@ const DashboardPage = () => {
             bottom: -120,
             left: 0,
           }}
-        >
-         
-        </div>
+        ></div>
       </section>
     );
   }
