@@ -56,6 +56,69 @@ const DashboardPage = () => {
     }
   };
 
+  const dataFiture = [
+    {
+      title: "Elegant & Responsive Design",
+      desc: "Design yang elegan dengan berbagai macam tema",
+      icon: "bi bi-brush",
+    },
+    {
+      title: "Bagikan dengan nama tamu",
+      desc: "Sebarkan langsung ke tamu undangan anda tanpa batas",
+      icon: "bi bi-list-ol",
+    },
+    {
+      title: "Hitungan Mundur",
+      desc: "Jangan sampai terlewatkan moment acara kamu, hitung mundur acara pernikahan",
+      icon: "bi bi-clipboard-check",
+    },
+    {
+      title: "Daftar hadir Tamu",
+      desc: "Dilengkapi dengan fitur daftar hadir tamu, cukup download aplikasi nviteme di playsotre, dan scann tamu yang hadir di pager ayu",
+      icon: "bi bi-qr-code-scan",
+    },
+    {
+      title: "Music Backgorund",
+      desc: "Kaya akan latar belakang music yang dapat kamu pilih sesuai lagu romantis kamu dengan pasangan",
+      icon: "bi bi-music-note-beamed",
+    },
+    {
+      title: "Galery Foto",
+      desc: "Bagikan momoent foto bersama anda dangan slide show yang keren ",
+      icon: "bi bi-images",
+    },
+    {
+      title: "Amplop Digital",
+      desc: "Untuk tamu yang berhalangan hadir, dapat mengirim  amplop secara digital dengan mudah",
+      icon: "bi bi-envelope",
+    },
+    {
+      title: "Navigasi Lokasi",
+      desc: "All in one navigasi lengkap, agar para tamu tidak tersesat saat berkunjung ke acara pernikahan anda",
+      icon: "bi bi-geo-alt-fill",
+    },
+    {
+      title: "Love Story",
+      desc: "Bagikan Love Story anda bersama pasangan anda ",
+      icon: "bi bi-postage-heart",
+    },
+    {
+      title: "Dashboard Editing",
+      desc: "setelah memilih tema yang anda suka, anda dapat dengan mudah mennetukan warna, serta isi undnangan anda sesuaka hati dengan Dashboard yang keren dan mudah digunakan",
+      icon: "bi bi-menu-app-fill",
+    },
+    {
+      title: "Kirim Ucapan Doa",
+      desc: "Untuk tamu dapat mengirimkan ucapan doa kepada ada dengan fiture RSVP Wishes, (tanpa biaya tambahan)",
+      icon: "bi bi-envelope-paper-heart",
+    },
+    {
+      title: "Akan Segera hadir (order backdrop)",
+      desc: "Akan Segera Hadir pemesanan backdrop yang cantik dan menarik dengan harga yang sangat terjangkau",
+      icon: "bi bi-camera2",
+    },
+  ];
+
   const dataCard = [
     {
       title: "Filter Instagram Available",
@@ -210,17 +273,17 @@ const DashboardPage = () => {
   };
 
   const [userContentFirst, setuserContentFirst] = useState(0);
-  const [userContentSecond, setuserContentSecond] = useState(6);
+  const [userContentSecond, setuserContentSecond] = useState(9);
 
   const toggleNext = () => {
-    setuserContentFirst((prev) => prev + 6);
-    setuserContentSecond((prev) => prev + 6);
+    setuserContentFirst((prev) => prev + 9);
+    setuserContentSecond((prev) => prev + 9);
   };
 
   const togglePrev = () => {
     if (userContentFirst != 0) {
-      setuserContentFirst((prev) => prev - 6);
-      setuserContentSecond((prev) => prev - 6);
+      setuserContentFirst((prev) => prev - 9);
+      setuserContentSecond((prev) => prev - 9);
     }
   };
 
@@ -245,7 +308,6 @@ const DashboardPage = () => {
 
   return (
     <>
-    
       <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
         <div className="container">
           {/* <Link href="/"> */}
@@ -669,8 +731,11 @@ const DashboardPage = () => {
           </div>
         </div>
       </section>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossOrigin="anonymous"></script>
-
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossOrigin="anonymous"
+      ></script>
     </>
   );
 
@@ -749,7 +814,7 @@ const DashboardPage = () => {
       <section
         style={{
           position: "relative",
-          height: "80vh",
+          height: "100vh",
         }}
         // className="project"
         id="project"
@@ -879,6 +944,7 @@ const DashboardPage = () => {
                   <button
                     style={{
                       backgroundColor: "var(--main)",
+                      fontSize: "12px",
                     }}
                     onClick={() => {
                       togglePrev();
@@ -892,6 +958,7 @@ const DashboardPage = () => {
                 <button
                   style={{
                     backgroundColor: "var(--main)",
+                    fontSize: "12px",
                   }}
                   onClick={() => {
                     toggleNext();
@@ -910,129 +977,152 @@ const DashboardPage = () => {
 
   function SectionFeature() {
     return (
-      <section style={{ display: "flex" }} id="fiture" className="fiture">
-        <div className="container">
+      <section
+        style={{ display: "flex", backgroundColor: "#f4f4f4" }}
+        id="fiture"
+        className=""
+      >
+        <div className="container mt-4">
           <div className="row justify-content-center">
             <div className="col-md-8 col-10 text-center">
               {/* <span>Memori kisah kami</span> */}
-              <h2>Our Features</h2>
-              <p>
-                The Nvite Me Digital Invitation website is accompanied by
-                various features that can make it easier for you to invite the
-                people closest to you to your special event.
+              <h3
+                style={{
+                  fontFamily: IConstantFont.poppins,
+                  color: "var(--main)",
+                  marginTop: 20,
+                }}
+              >
+                Kaya akan Fitur yang keren dan Lengkap
+              </h3>
+              <p style={{ fontSize: 12 }}>
+                Disertai dengan berbagai fitur yang dapat memudahkan anda dalam
+                mengundang orang-orang terdekat anda ke acara spesial,
+                <span style={{ fontWeight: "bold" }}>
+                  Cukup Satu Kali Bayar{" "}
+                </span>
+                .
               </p>
             </div>
           </div>
-          <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center">
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-brush" />
-                    &nbsp; Elegant &amp; Impressive Design
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Invitations are designed elegantly &amp; impressively.
-                  </p>
+          {layout.isDesktopScreen ||
+          layout.isLargeDesktopScreen ||
+          layout.isExtraLargeScreen ? (
+            <div className="row justify-content-center">
+              {dataFiture.map((item) => (
+                <div className="col-12 mt-2 col-md-4 mb-2">
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      paddingRight: 15,
+                      paddingLeft: 15,
+                      borderRadius: 12,
+                    }}
+                    className="card"
+                  >
+                    <div
+                      style={{ height: "100%" }}
+                      className="row justify-content-start, align-items-center"
+                    >
+                      <div
+                        className="col-3"
+                        style={{
+                          justifyContent: "end",
+                          alignItems: "center",
+                          display: "flex",
+                        }}
+                      >
+                        <div
+                          style={{
+                            height: 50,
+                            width: 50,
+                            borderRadius: 25,
+                            backgroundColor: "var(--main)",
+                            opacity: 0.4,
+                            overflow: "hidden",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                          }}
+                        >
+                          <i
+                            style={{ fontSize: 25, color: "white" }}
+                            className={item.icon}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-9">
+                        <h6 className="card-title mt-3 mb-3">{item.title}</h6>
+                        <p style={{ fontSize: 14 }} className="mt-0 mb-0 pb-0">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-list-ol" />
-                    &nbsp; Unlimited Number of Guests
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    The Number of Guests can be adjusted as request without
-                    additional cost{" "}
-                  </p>
+          ) : (
+            <Slide
+              arrows={false}
+              autoplay={true}
+              infinite={true}
+              duration={500}
+            >
+              {dataFiture.concat(dataFiture).map((item, index) => (
+                <div key={index} className="col-12 mt-2 col-md-4 mb-2">
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      paddingRight: 15,
+                      paddingLeft: 15,
+                      borderRadius: 12,
+                    }}
+                    className="card"
+                  >
+                    <div
+                      style={{ height: "100%" }}
+                      className="row justify-content-start align-items-center"
+                    >
+                      <div
+                        className="col-3"
+                        style={{
+                          justifyContent: "end",
+                          alignItems: "center",
+                          display: "flex",
+                        }}
+                      >
+                        <div
+                          style={{
+                            height: 50,
+                            width: 50,
+                            borderRadius: 25,
+                            backgroundColor: "var(--main)",
+                            opacity: 0.4,
+                            overflow: "hidden",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            display: "flex",
+                          }}
+                        >
+                          <i
+                            style={{ fontSize: 25, color: "white" }}
+                            className={item.icon}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-9">
+                        <h6 className="card-title mt-3 mb-3">{item.title}</h6>
+                        <p style={{ fontSize: 14 }} className="mt-0 mb-0 pb-0">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-clipboard-check" />
-                    &nbsp; Custom Guests Name
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    The Invitation Guest's Name can be customize
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-phone" />
-                    &nbsp; Flexible Access
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    All can access the invitation through website
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-qr-code-scan" />
-                    &nbsp; Simply Guest Presence
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Barcode Scan for Confirm The Invitation presence
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-file-earmark-music" />
-                    &nbsp; Music Background
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Strengthen the impression of your special event with your
-                    choice of music on your invitations.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-images" />
-                    &nbsp; Photo Gallery
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Share your special moment through Photo or Video with your
-                    guest.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <h6 className="card-title mt-3 mb-3">
-                    <i className="bi bi-envelope-paper-heart" />
-                    &nbsp; Wedding Wishes
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Leave an invitation to share impressions &amp; messages or
-                    prayers for your happy day.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+              ))}
+            </Slide>
+          )}
         </div>
       </section>
     );
@@ -1180,17 +1270,40 @@ const DashboardPage = () => {
                   }}
                   className="content"
                 >
-                  <small>{item.title}</small>
-                  <img
-                    src={`https://picsum.photos/seed/wedding${index}/200/300`}
-                    alt=""
-                    style={{
-                      height: 100,
-                      marginLeft: 20,
-                      width: 100,
-                      borderRadius: 20,
-                    }}
-                  />
+                  <div className="col-6 ">
+                    <p
+                      style={{
+                        color: "white",
+                        fontSize: 14,
+                        fontWeight: "bold",
+                        fontFamily: IConstantFont.poppins,
+                      }}
+                    >
+                      {item.title}
+                    </p>
+                  </div>
+                  <div className="col-6 justify-content-center">
+                    <div
+                      style={{
+                        height: 100,
+                        width: 100,
+                        overflow: "hidden",
+                        borderRadius: 20,
+                      }}
+                    >
+                      {" "}
+                      <img
+                        src={`https://picsum.photos/seed/wedding${index}/200/300`}
+                        alt=""
+                        style={{
+                          height: "100%",
+                          marginLeft: 20,
+                          width: "100%",
+                          borderRadius: 20,
+                        }}
+                      />
+                    </div>{" "}
+                  </div>
                 </div>
               </div>
             ))}
@@ -1233,7 +1346,7 @@ const DashboardPage = () => {
             </div>
           )}
         </div>
-        <div
+        {/* <div
           className="col-12 text-center"
           style={{
             position: "absolute",
@@ -1245,7 +1358,7 @@ const DashboardPage = () => {
             bottom: -100,
             left: 0,
           }}
-        />
+        /> */}
         <div
           className="col-12 text-center"
           style={{
@@ -1348,11 +1461,11 @@ const DashboardPage = () => {
             <img
               style={{
                 width:
-                  useLayout().isTabletScreen || useLayout().isPhoneScreen
-                    ? "105%"
+                  layout.isTabletScreen || layout.isPhoneScreen
+                    ? "93%"
                     : "160%",
               }}
-              src="/image/background/landingPage/main-banner.gif"
+              src="/image/background/landingPage/main-banner2.gif"
               className=""
               alt="Mac Frame"
             />

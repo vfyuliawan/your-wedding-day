@@ -1,14 +1,20 @@
 import React, { MutableRefObject } from "react";
 import { forwardRef } from "react";
-
+import Head from "next/head";
 
 const HeaderDashboard = () => {
   return (
-    <div>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Invite Me Wedding</title> {/* Favicon Link */}
-      <link rel="icon" type="image/x-icon" href="/LogoNM.png" />
+    <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Invite Me Wedding</title> {/* Favicon Link */}
+        <link rel="icon" type="image/x-icon" href="/LogoNM.png" />
+        <meta name="description" content="Create beautiful, personalized digital wedding invitations effortlessly with our web application. Customize designs, manage RSVPs, and share your special day with friends and family in a modern, eco-friendly way." />
+        <meta name="keywords" content="nvite-me, invite me, digital wedding invitations, online wedding invitations, wedding e-invitations, digital RSVP, personalized wedding invites, eco-friendly wedding invitations, wedding invitation maker, custom wedding invitations, RSVP management, digital save the date, virtual wedding invitations, nvite-me app, wedding invite designer" />
+        <link rel="canonical" href="https://nvite-me.com/" />
+      </Head>
+
       <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -46,11 +52,8 @@ const HeaderDashboard = () => {
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
       {/* <link rel="stylesheet" href={`/ThemeStyle/${props.themeName}/assets/css/style.css`} /> */}
-      <link
-        rel="stylesheet"
-        href={`/Global/style-v2.css`}
-      />
-    </div>
+      <link rel="stylesheet" href={`/Global/style-v2.css`} />
+    </>
   );
 };
 
