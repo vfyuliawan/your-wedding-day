@@ -91,6 +91,8 @@ const CustomNavbar = () => {
             opacity:0.9,
             backgroundColor: "var(--main)",
             padding: "1rem 0",
+        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4)",
+
             zIndex: 1,
           }}
         >
@@ -100,7 +102,7 @@ const CustomNavbar = () => {
            }}
             href="#home"
             style={{
-              padding: "0.5rem 2rem",
+              padding: "0.8rem 2rem",
               color: "white",
               textDecoration: "none",
               fontSize: "1rem",
@@ -115,7 +117,7 @@ const CustomNavbar = () => {
           }}
             href="#design"
             style={{
-              padding: "0.5rem 2rem",
+              padding: "0.8rem 2rem",
               color: "white",
               textDecoration: "none",
               fontSize: "1rem",
@@ -131,7 +133,7 @@ const CustomNavbar = () => {
           }}
             href="#testimoni"
             style={{
-              padding: "0.5rem 2rem",
+              padding: "0.8rem 2rem",
               color: "white",
               textDecoration: "none",
               fontSize: "1rem",
@@ -147,7 +149,7 @@ const CustomNavbar = () => {
           }}
             href="#fiture"
             style={{
-              padding: "0.5rem 2rem",
+              padding: "0.8rem 2rem",
               color: "white",
               textDecoration: "none",
               fontSize: "1rem",
@@ -163,7 +165,7 @@ const CustomNavbar = () => {
           }}
             href="#tutorial"
             style={{
-              padding: "0.5rem 2rem",
+              padding: "0.8rem 2rem",
               color: "white",
               textDecoration: "none",
               fontSize: "1rem",
@@ -181,11 +183,12 @@ const CustomNavbar = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around",
-          width: "24px",
-          height: "24px",
+          width: 28,
+          height: 28,
+          
           cursor: "pointer",
           alignItems: "center",
-          padding: "0.25rem",
+          padding: "0.4rem",
           marginRight: "1rem",
         }}
       >
@@ -193,21 +196,21 @@ const CustomNavbar = () => {
           style={{
             width: "100%",
             height: "2px",
-            backgroundColor: "black",
+            backgroundColor: "var(--main)",
           }}
         />
         <span
           style={{
             width: "100%",
             height: "2px",
-            backgroundColor: "black",
+            backgroundColor: "var(--main)",
           }}
         />
         <span
           style={{
             width: "100%",
             height: "2px",
-            backgroundColor: "black",
+            backgroundColor: "var(--main)",
           }}
         />
       </div>

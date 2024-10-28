@@ -13,6 +13,14 @@ import useLayout from "@/app/WebApp/utils/useLayout";
 import { IConstantFont } from "@/app/Utils/ConstantFont";
 import { Slide } from "react-slideshow-image";
 import CustomNavbar from "../../Components/Navbar/ICustomNavbar";
+import { isMobile } from "react-device-detect";
+
+interface DataPresetInterface {
+  title: string;
+  img: string;
+  href: string;
+  onHover: boolean;
+}
 
 const DashboardPage = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -27,6 +35,8 @@ const DashboardPage = () => {
   const router = useRouter();
   const [isLoading, setisLoading] = useState(false);
   const [isLoadingMain, setisLoadingMain] = useState(false);
+
+  const [isHovered, setIsHovered] = useState(false);
 
   const layout = useLayout();
 
@@ -56,6 +66,30 @@ const DashboardPage = () => {
       setError("An error occurred. Please try again later.");
     }
   };
+
+  const dataPresetTheme: DataPresetInterface[] = [
+    {
+      title: "Jade Garden",
+      img: "/image/themeIcon/JadeGarden.png",
+      href: "?a=template-2&to=cang&ex=true",
+      onHover: false,
+    },
+    {
+      title: "Auntum Wood",
+      img: "/image/themeIcon/AuntumWoods.png",
+      href: "?a=template-5&to=cang&ex=true",
+      onHover: false,
+    },
+    {
+      title: "Ruby RedVelvet",
+      img: "/image/themeIcon/RedEssence.png",
+      href: "?a=template-5&to=cang&ex=true",
+      onHover: false,
+    },
+  ];
+
+  const [dataPresetState, setdataPresetState] =
+    useState<DataPresetInterface[]>(dataPresetTheme);
 
   const dataReserve = [
     {
@@ -152,179 +186,291 @@ const DashboardPage = () => {
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
-      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
-          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
-
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
     },
     {
-      title: "Diskon Up To 30%",
+      title: "First Launching ALL Thema Only 45.000",
       img: "/image/background/prewed2.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
     },
     {
-      title: "Download on Playstore",
+      title: "Available On Playstore",
       img: "/image/background/prewed3.jpeg",
-          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
-
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
-      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
-          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
-
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
     },
     {
-      title: "Diskon Up To 30%",
+      title: "First Launching ALL Thema Only 45.000",
       img: "/image/background/prewed2.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
     },
     {
-      title: "Download on Playstore",
+      title: "Available On Playstore",
       img: "/image/background/prewed3.jpeg",
-          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
-
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
-      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
-          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
-
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
     },
     {
-      title: "Diskon Up To 30%",
+      title: "First Launching ALL Thema Only 45.000",
       img: "/image/background/prewed2.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
     },
     {
-      title: "Download on Playstore",
+      title: "Available On Playstore",
       img: "/image/background/prewed3.jpeg",
-          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
-
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
-          forGround:"https://awsimages.detik.net.id/community/media/visual/2023/04/17/kartu-ucapan-idul-fitri-7_169.jpeg?w=620"
-
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
-      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
-          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
-
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
     },
     {
-      title: "Diskon Up To 30%",
+      title: "First Launching ALL Thema Only 45.000",
       img: "/image/background/prewed2.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
     },
     {
-      title: "Download on Playstore",
+      title: "Available On Playstore",
       img: "/image/background/prewed3.jpeg",
-          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
-
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
-          forGround:"https://awsimages.detik.net.id/community/media/visual/2023/04/17/kartu-ucapan-idul-fitri-7_169.jpeg?w=620"
-
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
-      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
-          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
-
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
     },
     {
-      title: "Diskon Up To 30%",
+      title: "First Launching ALL Thema Only 45.000",
       img: "/image/background/prewed2.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
     },
     {
-      title: "Download on Playstore",
+      title: "Available On Playstore",
       img: "/image/background/prewed3.jpeg",
-          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
-
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
-          forGround:"https://awsimages.detik.net.id/community/media/visual/2023/04/17/kartu-ucapan-idul-fitri-7_169.jpeg?w=620"
-
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
-          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
-
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
     },
-   
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
+    },
+    {
+      title: "First Launching ALL Thema Only 45.000",
+      img: "/image/background/prewed2.jpeg",
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
+    },
+    {
+      title: "Available On Playstore",
+      img: "/image/background/prewed3.jpeg",
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
+    },
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
+    },
+    {
+      title: "First Launching ALL Thema Only 45.000",
+      img: "/image/background/prewed2.jpeg",
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
+    },
+    {
+      title: "Available On Playstore",
+      img: "/image/background/prewed3.jpeg",
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
+    },
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+      forGround:
+        "https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg",
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+      forGround:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s",
+    },
+    {
+      title: "First Launching ALL Thema Only 45.000",
+      img: "/image/background/prewed2.jpeg",
+      forGround:
+        "https://media.licdn.com/dms/image/D4D12AQF6LEqH6sttpA/article-cover_image-shrink_720_1280/0/1661147946996?e=2147483647&v=beta&t=0eX483rU4IeOLzuf-gYoREbZbcZPi1qBK-GxS9aaReg",
+    },
+    {
+      title: "Available On Playstore",
+      img: "/image/background/prewed3.jpeg",
+      forGround:
+        "https://www.sammyfans.com/wp-content/uploads/2022/07/Google-Play-Store.jpg",
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+      forGround:
+        "https://awsimages.detik.net.id/community/media/visual/2022/04/19/ucapan-idul-fitri-bahasa-inggris-lihat-infonya-di-sini_169.jpeg?w=1200",
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+      forGround:
+        "https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp",
+    },
   ];
 
   const handleNextPage = async () => {
@@ -411,15 +557,12 @@ const DashboardPage = () => {
       console.error("Login error:", error);
       setError("An error occurred. Please try again later.");
     }
-    // Redirect to login page or any other desired page
-    // router.push("/");
+
   };
 
   return (
     <>
-     
-
-      {<CustomNavbar/>}
+      {<CustomNavbar />}
 
       {token && isUserLoggedIn ? (
         <section className="home" id="home">
@@ -515,7 +658,7 @@ const DashboardPage = () => {
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
-                              height: "50px", // Height can be adjusted as needed
+                              height: "50px", 
                             }}
                           >
                             <ReactLoading
@@ -643,89 +786,12 @@ const DashboardPage = () => {
 
       {SectionUserReview()}
       {SectionFeature()}
+      {SectionPreset()}
+
       {SectionTutorial()}
 
-      <section className="design" id="design">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-8 col-10 text-center">
-              {/* <span>Memori kisah kami</span> */}
-              <h2>Our Design</h2>
-              <p>
-                The Nvite Me Digital Invitation website has a lot of design that
-                can use easily.
-              </p>
-            </div>
-          </div>
-          <a className="view-all-btn" href="design/list-design.html">
-            View all &gt;&gt;
-          </a>
-          <div className="scrolling-wrapper">
-            <div className="card card-block  ">
-              <img src="image/background/prewed1.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed2.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed3.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed5.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            <div className="card card-block  ">
-              <img src="image/background/prewed6.jpeg" alt="Card Image" />
-              <div className="card-buttons">
-                <button className="view-btn">
-                  <i className="bi bi-eye" /> Preview
-                </button>
-                <button className="add-btn">
-                  <i className="bi bi-pencil-square" /> Create Now
-                </button>
-              </div>
-            </div>
-            {/* <div className="card card-block card-2">
-                    <img src="image/background/prewed4.jpeg" alt="Card Image" />
-                    <div className="card-buttons">
-                        <button href="design/list-design.html" className="view-btn"><i className="bi bi-eye" /> Preview</button>
-                        <button href="login/login.html" className="add-btn"><i className="bi bi-pencil-square" /> Create Now</button>
-                    </div>
-                    </div>  */}
-          </div>
-        </div>
-      </section>
+      {WhatsappButton()}
+
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -733,6 +799,186 @@ const DashboardPage = () => {
       ></script>
     </>
   );
+
+  function SectionPreset() {
+
+
+    function openWhatsAppRequest(themeName:string) {
+      const whatsappUrl = `https://wa.me/081283589073?text="Halo Admin Nviteme, Saya Ingin Membeli Thema ini ${themeName}"`;
+      window.open(whatsappUrl)
+    }
+
+    return (
+      <section style={{backgroundColor:"#f4f4f4"}} className="" id="design">
+        <div className="container">
+          <div className="row justify-content-center ">
+            <div className="col-md-8 col-10 text-center mt-5">
+              {/* <span>Memori kisah kami</span> */}
+              <h3
+                style={{
+                  color: "var(--main)",
+                  fontSize: 35,
+                  fontFamily: IConstantFont.Belleza,
+                }}
+              >
+                Preset &{" "}
+                <span style={{ color: "pink", fontSize: 35 }}>Theme </span>
+              </h3>
+              <p style={{ fontSize: 14 }}>
+                Pesan undangan dengan mudah, tanpa pake ribet, bisa isi form
+                undangan sendiri atau di bantu oleh admin kami
+              </p>
+              <h2 style={{fontFamily:"serif", color:"red"}}>Buruan!! hanya 45 ribu bebas pilih Tema</h2>
+            </div>
+          </div>
+
+          <div className="row justify-content-center mb-5">
+            {dataPresetState.map((item, index) => (
+              <div
+                style={{}}
+                className="col-12 col-md-4 justify-content-center d-flex mt-4"
+              >
+                <div
+                  
+                  onMouseEnter={() => {
+                    setdataPresetState((prev) => {
+                      const newState = [...prev];
+                      newState[index] = { ...newState[index], onHover: true };
+                      return newState;
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    setdataPresetState((prev) => {
+                      const newState = [...prev];
+                      newState[index] = { ...newState[index], onHover: false };
+                      return newState;
+                    });
+                  }}
+                  onTouchStart={() => {
+                    setdataPresetState((prev) => {
+                      return prev.map((data, idx) => ({
+                        ...data,
+                        onHover: idx === index,
+                      }));
+                    });
+                  }}
+                  style={{
+                    height: 225,
+                    width: 460,
+                    overflow: "hidden",
+                    borderRadius: 20,
+                    backgroundColor: "red",
+                    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
+                    position: "relative",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    src={item.img}
+                    style={{ height: "100%", width: "100%" }}
+                    alt=""
+                  />
+
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "1.5rem",
+                      opacity: item.onHover ? 1 : 0,
+                      transition: "opacity 0.3s ease",
+                    }}
+                  >
+                    <div className="row justify-content-center align-items-center text-center">
+                      <p
+                        style={{
+                          color: "white",
+                          fontSize: 24,
+                          fontFamily: IConstantFont.Belleza,
+                        }}
+                      >
+                        {item.title}
+                      </p>
+                      <div style={{display:"grid", justifyContent:"center"}}>
+                      <button
+                      onClick={() => {
+                        window.open(item.href);
+                      }}
+                        style={{ opacity: 0.7, width:140, backgroundColor: "var(--main)", fontSize:12}}
+                        className="btn mb-1 btn-dark"
+                      >
+                        <i className="bi bi-eye me-2"/>Perview
+                      </button>
+
+                      <button
+                      onClick={() => {
+                        openWhatsAppRequest(item.title)
+                      }}
+                        style={{ opacity: 0.7, width:140, backgroundColor: "var(--main)" ,  fontSize:12}}
+                        className="btn mb-1 btn-dark"
+                      >
+                        <i className="bi bi-bag-check me-2"/>Pesan Langsung
+                      </button>
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  function WhatsappButton() {
+    const whatsappUrl = `https://wa.me/081283589073?text="Halo Admin Nviteme, Saya Ingin Bertanya Terkait Pembuatan Undangan Digital"`;
+
+    return (
+      <button
+        className="onPlay btn btn-dark text-center d-flex justify-content-center align-items-center"
+        style={{
+          position: "fixed",
+          bottom: 50,
+          right: "20px",
+          border: "none",
+          backgroundColor: "#008489",
+          opacity: 1,
+          height: 40,
+          width: 110,
+          borderRadius: 12,
+          paddingLeft: 20,
+          paddingRight: 20,
+          color: "white",
+          fontSize: 12,
+          cursor: "pointer",
+          zIndex: "999",
+        }}
+        onClick={() => {
+          window.open(whatsappUrl);
+        }}
+      >
+        <i
+          className="bi bi-whatsapp"
+          style={{
+            fontSize: isMobile ? "1.2rem" : "1.5rem",
+            color: "white",
+            fontWeight: 900,
+            marginRight: 8,
+          }}
+        />{" "}
+        {"  "}Whatsapp
+      </button>
+    );
+  }
 
   function navbarBootstrap() {
     return (
@@ -824,7 +1070,7 @@ const DashboardPage = () => {
             top: 0,
             left: 0,
             opacity: 0.4,
-            transition: "transform 0.5s ease", // Smooth rotation transition
+            transition: "transform 0.5s ease", 
           }}
           className="responsive-rotate"
         />
@@ -838,7 +1084,7 @@ const DashboardPage = () => {
             top: 0,
             left: 0,
             opacity: 0.6,
-            transition: "transform 0.5s ease", // Smooth rotation transition
+            transition: "transform 0.5s ease", 
           }}
           className="responsive-rotate"
         />
@@ -851,7 +1097,7 @@ const DashboardPage = () => {
             width: "100%",
             top: 0,
             left: 0,
-            transition: "transform 0.5s ease", // Smooth rotation transition
+            transition: "transform 0.5s ease", 
           }}
           className="responsive-rotate"
         >
@@ -1066,7 +1312,11 @@ const DashboardPage = () => {
               duration={1000}
             >
               {dataFiture.concat(dataFiture).map((item, index) => (
-                <div key={index} className="col-12 mt-2 col-md-4 mb-2">
+                <div
+                  style={{ paddingLeft: 5, paddingRight: 5 }}
+                  key={index}
+                  className="col-11 mt-2 col-md-4 mb-2"
+                >
                   <div
                     style={{
                       backgroundColor: "white",
@@ -1127,7 +1377,7 @@ const DashboardPage = () => {
   function SectionTutorial() {
     return (
       <section
-        style={{ backgroundColor: "#f4f4f4" }}
+        style={{ backgroundColor: "#f2e9e1" }}
         className=""
         id="tutorial"
       >
@@ -1150,11 +1400,8 @@ const DashboardPage = () => {
               </p>
             </div>
           </div>
-          {/* <div className="row justify-content-between">
-            <div className="container bg-dark video-tutorial">VIDEO</div>
-          </div> */}
           <div className="row justify-content-center ">
-            <div className="col-sm-6 col-md-3 mt-3  mb-5">
+            <div className="col-sm-6 col-md-4 col-lg-4 mt-3 mb-5">
               {dataReserve.map((item) => (
                 <div style={{ backgroundColor: "white" }} className="card mt-3">
                   <div className="card-body text-center">
@@ -1193,10 +1440,9 @@ const DashboardPage = () => {
           padding: 20,
           justifyContent: "center",
           alignItems: "center",
-          overflowX: "auto", // Enables horizontal scrolling
-          overflowY: "hidden", // Hides vertical overflow
-          // whiteSpace: "nowrap", // Prevents line break for horizontal scroll
-          scrollPaddingLeft: 20, // Ensures the first item isn’t cut off
+          overflowX: "auto", 
+          overflowY: "hidden",
+          scrollPaddingLeft: 20,
         }}
       >
         <div
@@ -1244,7 +1490,7 @@ const DashboardPage = () => {
                     justifyContent: "start",
                     alignItems: "center",
                     textAlign: "start",
-                    width: 400,
+                    width: "100%",
                     position: "absolute",
                     top: 0,
                     left: 0,
@@ -1269,19 +1515,19 @@ const DashboardPage = () => {
                           fontSize: 21,
                           fontWeight: "bold",
                           fontFamily: IConstantFont.poppins,
-                          whiteSpace: "normal", // Allows text to wrap to the next line
-                          wordWrap: "break-word", // Breaks long words to avoid overflow
+                          whiteSpace: "normal", 
+                          wordWrap: "break-word", 
                         }}
                       >
                         {item.title}
                       </p>
                     </div>
                   </div>
-                  <div className="col-6  justify-content-center">
+                  <div className="col-6 justify-content-center">
                     <div
                       style={{
                         height: 100,
-                        width: "100%",
+                        width: 180,
                         overflow: "hidden",
                         borderRadius: 20,
                       }}
@@ -1292,7 +1538,7 @@ const DashboardPage = () => {
                         alt=""
                         style={{
                           height: "100%",
-                          objectFit:"cover",
+                          objectFit: "cover",
                           marginLeft: 20,
                           width: "100%",
                           borderRadius: 20,
@@ -1332,8 +1578,8 @@ const DashboardPage = () => {
               <ReactLoading
                 type={"spinningBubbles"}
                 color={"#116A7B"}
-                height={100} // Specify a fixed size
-                width={100} // Specify a fixed size
+                height={100} 
+                width={100} 
               />
             </div>
           ) : (
@@ -1343,19 +1589,6 @@ const DashboardPage = () => {
             </div>
           )}
         </div>
-        {/* <div
-          className="col-12 text-center"
-          style={{
-            position: "absolute",
-            background:
-              layout.isPhoneScreen || layout.isTabletScreen
-                ? "linear-gradient(to top, var(--main3) 70%, transparent)"
-                : "none",
-            height: 80,
-            bottom: -100,
-            left: 0,
-          }}
-        /> */}
         <div
           className="col-12 text-center"
           style={{
@@ -1394,7 +1627,7 @@ const DashboardPage = () => {
             </span>
           </h2>
 
-          <h2 style={{ fontSize: 21 }} className="">
+          <h2 style={{ fontSize: 21, fontWeight:300 }} className="">
             <span
               style={{
                 fontFamily: "Maven Pro",
@@ -1402,13 +1635,12 @@ const DashboardPage = () => {
               className="mt-5 first-animated-word"
             >
               <span style={{ fontWeight: "bold", color: "red" }}>
-                First Launching Promo !! 
-              </span>
-              {" "}
+                First Launching Promo !!
+              </span>{" "}
               {
-                "Semua Tema (Basic, Premium, Luxury, Include semua fitur Paket) Only "
+                "Semua Tema (Basic, Premium, Luxury, Include semua fitur Paket) Hanya "
               }{" "}
-              <span style={{ fontWeight: "bold", color: "var(--main)" }}>
+              <span style={{ fontWeight: "bold", color: "red" }}>
                 Rp.45.000
               </span>
             </span>
@@ -1438,24 +1670,23 @@ const DashboardPage = () => {
             <span
               style={{
                 // fontWeight: "bold",
-                letterSpacing: 0.5,
-                // fontFamily: IConstantFont.poppins,
+                fontFamily: "Maven Pro",
               }}
-              className="mobile-block"
+              className=""
             >
               Undangan menjadi lebih modern, keren dan efisien
             </span>
           </small>
           <div style={{}} className="custom-btn-group mt-4">
             <a
-              href="design/list-design.html"
+              href="#design"
               className="btn mr-lg-2 custom-btn"
               style={{
                 backgroundColor: "var(--main)",
                 color: "#ffff",
               }}
             >
-              <i style={{}} className="bi bi-whatsapp me-3" /> Pesan Sekarang
+              <i style={{}} className="bi bi-bag-check" /> Pesan Sekarang
             </a>
             {/* <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Get a free quote</a> */}
           </div>
@@ -1463,8 +1694,6 @@ const DashboardPage = () => {
       </div>
     );
   }
-
-  
 
   function imgHero() {
     return (
@@ -1495,11 +1724,6 @@ const DashboardPage = () => {
       </div>
     );
   }
-
-
-
-
-
 };
 
 export default DashboardPage;

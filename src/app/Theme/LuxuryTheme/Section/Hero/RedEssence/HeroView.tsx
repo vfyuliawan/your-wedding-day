@@ -71,10 +71,7 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             {`${props.getTitle
               ?.split("-")[0]
               .split("")[0]
-              .toUpperCase()}&${props.getTitle
-              ?.split("-")[1]
-              .split("")[0]
-              .toUpperCase()}`}
+              .toUpperCase()}&P`}
           </motion.h1>
           <motion.h4
           ref={targetRef}
