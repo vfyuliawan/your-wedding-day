@@ -56,6 +56,34 @@ const DashboardPage = () => {
     }
   };
 
+  const dataReserve = [
+    {
+      title: "1. Pilih paket",
+      desc: "Pilih paket yang sesuai dengan anda",
+      icon: "bi bi-card-list",
+    },
+    {
+      title: "2. Payment",
+      desc: "Pilih methode pembayaran, lakukan pembayaran",
+      icon: "bi bi-cash-coin",
+    },
+    {
+      title: "3. Isi Data Form ",
+      desc: " Isi Data Form Info Pernikahan & Foto yang anda inginkan tidak sampai hitungan jam sudah jadi",
+      icon: "bi bi-clipboard-check",
+    },
+    {
+      title: "4.Revisi sesuai keinginan anda",
+      desc: "Download dan Review design anda lalu edit sesuai keinginan",
+      icon: "bi bi-images",
+    },
+    {
+      title: "5. Shere Undangan anda ",
+      desc: "Shere undandan anda baik secara manual maupun menggunakan Aplikasi (jika mengaktifkan barcode tamu)",
+      icon: "bi bi-send",
+    },
+  ];
+
   const dataFiture = [
     {
       title: "Elegant & Responsive Design",
@@ -311,6 +339,24 @@ const DashboardPage = () => {
       <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
         <div className="container">
           {/* <Link href="/"> */}
+          <div
+            style={{
+              height: 40,
+              borderRadius: 8,
+              width: 40,
+              backgroundColor: "#e3b480",
+              color: "white",
+              fontSize: 18,
+              fontWeight: "bold",
+              justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+              fontFamily: "cursive",
+              marginRight: 4,
+            }}
+          >
+            Nm
+          </div>
           <a
             style={{
               color: "var(--main)",
@@ -319,7 +365,7 @@ const DashboardPage = () => {
             href="/"
             className="navbar-brand"
           >
-            <i className="bi bi-envelope-paper-heart" /> Nvite Me
+            Nvite Me
           </a>
           {/* </Link> */}
           <button
@@ -993,7 +1039,8 @@ const DashboardPage = () => {
                   marginTop: 20,
                 }}
               >
-                Kaya akan Fitur yang keren dan Lengkap
+                Kaya akan Fitur yang{" "}
+                <span style={{ color: "pink" }}>keren dan Lengkap</span>
               </h3>
               <p style={{ fontSize: 12 }}>
                 Disertai dengan berbagai fitur yang dapat memudahkan anda dalam
@@ -1067,7 +1114,7 @@ const DashboardPage = () => {
               arrows={false}
               autoplay={true}
               infinite={true}
-              duration={500}
+              duration={1000}
             >
               {dataFiture.concat(dataFiture).map((item, index) => (
                 <div key={index} className="col-12 mt-2 col-md-4 mb-2">
@@ -1130,68 +1177,57 @@ const DashboardPage = () => {
 
   function SectionTutorial() {
     return (
-      <section className="" id="tutorial">
+      <section
+        style={{ backgroundColor: "#f4f4f4" }}
+        className=""
+        id="tutorial"
+      >
         <div className="container">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center ">
             <div className="col-md-8 col-10 text-center mt-5">
               {/* <span>Memori kisah kami</span> */}
-              <h2>Reserve Tutorial</h2>
-              <p>
-                The Nvite Me Digital Invitation website is easy to use with some
-                video and step that we already prepared
+              <h3
+                style={{
+                  color: "var(--main)",
+                  fontSize: 35,
+                  fontFamily: IConstantFont.Belleza,
+                }}
+              >
+                Reserve <span style={{ color: "pink" }}>Tutorial</span>
+              </h3>
+              <p style={{ fontSize: 14 }}>
+                Pesan undangan dengan mudah, tanpa pake ribet, bisa isi form
+                undangan sendiri atau di bantu oleh admin kami
               </p>
             </div>
           </div>
-          <div className="row justify-content-between">
+          {/* <div className="row justify-content-between">
             <div className="container bg-dark video-tutorial">VIDEO</div>
-          </div>
-          <div className="row row-cols-lg-4 row-cols-md-4 row-cols-sm-2 row-cols-1 justify-content-center">
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <i className="bi bi-card-list" />
-                  <h6 className="card-title mt-3 mb-3">1. Choose Package</h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Choose a package that suits your needs.
-                  </p>
+          </div> */}
+          <div className="row justify-content-center ">
+            <div className="col-sm-6 col-md-3 mt-3  mb-5">
+              {dataReserve.map((item) => (
+                <div style={{ backgroundColor: "white" }} className="card mt-3">
+                  <div className="card-body text-center">
+                    <i style={{ fontSize: 25 }} className={item.icon} />
+                    <h3
+                      style={{
+                        fontFamily: IConstantFont.Belleza,
+                        fontSize: 18,
+                      }}
+                      className="mt-3 mb-3"
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      style={{ fontSize: 14 }}
+                      className="mt-3 mb-0 pb-0 text-center"
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <i className="bi bi-cash-coin" />
-                  <h6 className="card-title mt-3 mb-3">2. Payment</h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Make orders &amp; payments.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <i className="bi bi-pencil" />
-                  <h6 className="card-title mt-3 mb-3">3. Fill Data Form</h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Fill in your data, your partner, events &amp; upload photos.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col mt-3">
-              <div className="card">
-                <div className="card-body text-center">
-                  <i className="bi bi-send" />
-                  <h6 className="card-title mt-3 mb-3">
-                    4. Share Your Invitation
-                  </h6>
-                  <p className="mt-3 mb-0 pb-0 text-center">
-                    Review your invitation and once the design is complete, you
-                    can start distributing your website link to invited guests.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1318,7 +1354,7 @@ const DashboardPage = () => {
       <section
         style={{
           backgroundColor: "var(--main3)",
-          width: "100%",
+          width: "100%",height:"120vh",
           paddingRight: layout.isPhoneScreen || layout.isTabletScreen ? 0 : 180,
         }}
         className="full-screen cover d-lg-flex justify-content-center align-items-center mt-3"
@@ -1383,7 +1419,7 @@ const DashboardPage = () => {
               style={{ color: "var(--main)", letterSpacing: 0.4 }}
               className="mt-5 first-animated-word"
             >
-              No #1 Platform
+              No #1 <span style={{ color: "pink" }}>Platform</span>
             </span>
           </h2>
           <h2 className="animated animated-text">
@@ -1394,6 +1430,20 @@ const DashboardPage = () => {
               className="mt-5 first-animated-word"
             >
               Undangan Digital
+            </span>
+          </h2>
+
+          <h2 style={{ fontSize: 21 }} className="">
+            <span
+              style={{
+                fontFamily: IConstantFont.Forum,
+              }}
+              className="mt-5 first-animated-word"
+            >
+              {
+                "All Theme (Basic, Premium, Luxury, Include semua fitur Paket) Only "
+              }{" "}
+              <span style={{ fontWeight:"bold", color:"var(--main)" }}>Rp.45.000</span>
             </span>
           </h2>
 
@@ -1451,8 +1501,8 @@ const DashboardPage = () => {
     return (
       <div
         style={{
-          marginTop: -40,
-          marginBottom: 40,
+          // marginTop: -80,
+          // marginBottom: 40,
         }}
         className="row justify-content-center col-lg-4 col-md-12 col-12"
       >
@@ -1462,8 +1512,8 @@ const DashboardPage = () => {
               style={{
                 width:
                   layout.isTabletScreen || layout.isPhoneScreen
-                    ? "93%"
-                    : "160%",
+                    ? "108%"
+                    : "170%",
               }}
               src="/image/background/landingPage/main-banner2.gif"
               className=""
