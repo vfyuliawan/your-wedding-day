@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import useLayout from "@/app/WebApp/utils/useLayout";
 import { IConstantFont } from "@/app/Utils/ConstantFont";
 import { Slide } from "react-slideshow-image";
+import CustomNavbar from "../../Components/Navbar/ICustomNavbar";
 
 const DashboardPage = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -151,99 +152,179 @@ const DashboardPage = () => {
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
+      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
+          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
+
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed2.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Download on Playstore",
       img: "/image/background/prewed3.jpeg",
+          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
+
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
+      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
+          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
+
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed2.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Download on Playstore",
       img: "/image/background/prewed3.jpeg",
+          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
+
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
+      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
+          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
+
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed2.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Download on Playstore",
       img: "/image/background/prewed3.jpeg",
+          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
+
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
+          forGround:"https://awsimages.detik.net.id/community/media/visual/2023/04/17/kartu-ucapan-idul-fitri-7_169.jpeg?w=620"
+
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Filter Instagram Available",
       img: "/image/background/prewed5.jpeg",
+      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed1.jpeg",
+          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
+
     },
     {
       title: "Diskon Up To 30%",
       img: "/image/background/prewed2.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
     {
       title: "Download on Playstore",
       img: "/image/background/prewed3.jpeg",
+          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
+
     },
     {
       title: "Promo Eid Al Fitri",
       img: "/image/background/prewed4.jpeg",
+          forGround:"https://awsimages.detik.net.id/community/media/visual/2023/04/17/kartu-ucapan-idul-fitri-7_169.jpeg?w=620"
+
     },
     {
       title: "Akikah dan Tasyakuran",
       img: "/image/background/prewed5.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
     },
+    {
+      title: "Filter Instagram Available",
+      img: "/image/background/prewed5.jpeg",
+      forGround:"https://i.pinimg.com/originals/6f/d6/cf/6fd6cf47bea2b47652626631e07992ca.jpg"
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed1.jpeg",
+          forGround:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa74CFVjCzpWack6IJPJ2KbfS9oD1r-mIxug&s"
+
+    },
+    {
+      title: "Diskon Up To 30%",
+      img: "/image/background/prewed2.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
+    },
+    {
+      title: "Download on Playstore",
+      img: "/image/background/prewed3.jpeg",
+          forGround:"https://thumbs.dreamstime.com/b/google-play-app-store-icons-google-play-app-store-icons-editable-vector-illustration-isolated-white-background-123024624.jpg"
+
+    },
+    {
+      title: "Promo Eid Al Fitri",
+      img: "/image/background/prewed4.jpeg",
+          forGround:"https://awsimages.detik.net.id/community/media/visual/2023/04/17/kartu-ucapan-idul-fitri-7_169.jpeg?w=620"
+
+    },
+    {
+      title: "Akikah dan Tasyakuran",
+      img: "/image/background/prewed5.jpeg",
+          forGround:"https://arina.id/images/post/16_9/kurban-akikah_1718061841.webp"
+
+    },
+   
   ];
 
   const handleNextPage = async () => {
@@ -336,141 +417,9 @@ const DashboardPage = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-light sticky-top mynavbar">
-        <div className="container">
-          {/* <Link href="/"> */}
-          <div
-            style={{
-              height: 40,
-              borderRadius: 8,
-              width: 40,
-              backgroundColor: "#e3b480",
-              color: "white",
-              fontSize: 18,
-              fontWeight: "bold",
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-              fontFamily: "cursive",
-              marginRight: 4,
-            }}
-          >
-            Nm
-          </div>
-          <a
-            style={{
-              color: "var(--main)",
-              fontSize: "1.4rem",
-            }}
-            href="/"
-            className="navbar-brand"
-          >
-            Nvite Me
-          </a>
-          {/* </Link> */}
-          <button
-            className="navbar-toggler border-0"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex={-1}
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                <i className="bi bi-envelope-paper-heart" /> Nvite Me
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              />
-            </div>
-            <div className="offcanvas-body">
-              <ul className="navbar-nav mx-auto">
-                <li className="nav-item">
-                  <Link href="/#home" className="nav-link">
-                    <span data-hover="Home">Home</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/#project" className="nav-link">
-                    <span data-hover="Project">Project</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/#fiture" className="nav-link">
-                    <span data-hover="Fiture">Fiture</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/#tutorial" className="nav-link">
-                    <span data-hover="Tutorial">Tutorial</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/#design" className="nav-link">
-                    <span data-hover="Design">Design</span>
-                  </Link>
-                </li>
-                {/* Add other list items */}
-              </ul>
-              <ul className="navbar-nav ml-lg-auto">
-                <li className="nav-item ml-lg-4">
-                  <div className="custom-btn-group">
-                    {isLoadingMain ? (
-                      <div
-                        style={{
-                          display: "grid",
-                          placeItems: "center",
-                        }}
-                      >
-                        <ReactLoading
-                          type={"spinningBubbles"}
-                          color={"#116A7B"}
-                          height={30} // Specify a fixed size
-                          width={30} // Specify a fixed size
-                        />
-                      </div>
-                    ) : (
-                      <>
-                        {token && isUserLoggedIn ? (
-                          <div className="flex">
-                            <button
-                              onClick={handleLogout}
-                              className="btn custom-btn login-btn custom-btn-bg custom-btn-link"
-                            >
-                              <i className="bi bi-box-arrow-in-right " /> Logout
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="flex">
-                            <Link href="/login">
-                              <span className="btn custom-btn login-btn custom-btn-bg custom-btn-link">
-                                <i className="bi bi-box-arrow-in-right " />{" "}
-                                Login
-                              </span>
-                            </Link>
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
+     
+
+      {<CustomNavbar/>}
 
       {token && isUserLoggedIn ? (
         <section className="home" id="home">
@@ -863,7 +812,7 @@ const DashboardPage = () => {
           height: "100vh",
         }}
         // className="project"
-        id="project"
+        id="testimoni"
       >
         <div
           style={{
@@ -1307,32 +1256,43 @@ const DashboardPage = () => {
                   className="content"
                 >
                   <div className="col-6 ">
-                    <p
+                    <div
                       style={{
-                        color: "white",
-                        fontSize: 14,
-                        fontWeight: "bold",
-                        fontFamily: IConstantFont.poppins,
+                        width: "100%",
+                        backgroundColor: "transparent",
+                        overflow: "hidden",
                       }}
                     >
-                      {item.title}
-                    </p>
+                      <p
+                        style={{
+                          color: "white",
+                          fontSize: 21,
+                          fontWeight: "bold",
+                          fontFamily: IConstantFont.poppins,
+                          whiteSpace: "normal", // Allows text to wrap to the next line
+                          wordWrap: "break-word", // Breaks long words to avoid overflow
+                        }}
+                      >
+                        {item.title}
+                      </p>
+                    </div>
                   </div>
-                  <div className="col-6 justify-content-center">
+                  <div className="col-6  justify-content-center">
                     <div
                       style={{
                         height: 100,
-                        width: 100,
+                        width: "100%",
                         overflow: "hidden",
                         borderRadius: 20,
                       }}
                     >
                       {" "}
                       <img
-                        src={`https://picsum.photos/seed/wedding${index}/200/300`}
+                        src={`${item.forGround}`}
                         alt=""
                         style={{
                           height: "100%",
+                          objectFit:"cover",
                           marginLeft: 20,
                           width: "100%",
                           borderRadius: 20,
@@ -1354,7 +1314,8 @@ const DashboardPage = () => {
       <section
         style={{
           backgroundColor: "var(--main3)",
-          width: "100%",height:"120vh",
+          width: "100%",
+          height: "123vh",
           paddingRight: layout.isPhoneScreen || layout.isTabletScreen ? 0 : 180,
         }}
         className="full-screen cover d-lg-flex justify-content-center align-items-center mt-3"
@@ -1425,7 +1386,7 @@ const DashboardPage = () => {
           <h2 className="animated animated-text">
             <span
               style={{
-                fontFamily: IConstantFont.Forum,
+                fontFamily: "Maven Pro",
               }}
               className="mt-5 first-animated-word"
             >
@@ -1436,14 +1397,20 @@ const DashboardPage = () => {
           <h2 style={{ fontSize: 21 }} className="">
             <span
               style={{
-                fontFamily: IConstantFont.Forum,
+                fontFamily: "Maven Pro",
               }}
               className="mt-5 first-animated-word"
             >
+              <span style={{ fontWeight: "bold", color: "red" }}>
+                First Launching Promo !! 
+              </span>
+              {" "}
               {
-                "All Theme (Basic, Premium, Luxury, Include semua fitur Paket) Only "
+                "Semua Tema (Basic, Premium, Luxury, Include semua fitur Paket) Only "
               }{" "}
-              <span style={{ fontWeight:"bold", color:"var(--main)" }}>Rp.45.000</span>
+              <span style={{ fontWeight: "bold", color: "var(--main)" }}>
+                Rp.45.000
+              </span>
             </span>
           </h2>
 
@@ -1497,13 +1464,17 @@ const DashboardPage = () => {
     );
   }
 
+  
+
   function imgHero() {
     return (
       <div
-        style={{
-          // marginTop: -80,
-          // marginBottom: 40,
-        }}
+        style={
+          {
+            // marginTop: -80,
+            // marginBottom: 40,
+          }
+        }
         className="row justify-content-center col-lg-4 col-md-12 col-12"
       >
         <div className="cover-image">
@@ -1524,6 +1495,11 @@ const DashboardPage = () => {
       </div>
     );
   }
+
+
+
+
+
 };
 
 export default DashboardPage;
