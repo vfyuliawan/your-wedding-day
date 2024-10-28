@@ -43,6 +43,73 @@ const featuresData = [
   }
 ];
 
+const invitationCards = [
+  {
+    title: 'Akad Nikah',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+    image: 'https://picsum.photos/600/300',
+    premium: true,
+  },
+  {
+    title: 'Akad Nikah',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+    image: 'https://picsum.photos/600/301',
+    premium: false,
+  },
+  {
+    title: 'Akad Nikah',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+    image: 'https://picsum.photos/601/300',
+    premium: false,
+  },
+  {
+    title: 'Akad Nikah',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+    image: 'https://picsum.photos/600/302',
+    premium: false,
+  },
+  {
+    title: 'Akad Nikah',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+    image: 'https://picsum.photos/601/301',
+    premium: false,
+  },
+  {
+    title: 'Akad Nikah',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+    image: 'https://picsum.photos/602/301',
+    premium: false,
+  },
+]
+const tutorialSteps = [
+  {
+    title: 'Tutorial x',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+  },
+  {
+    title: 'Tutorial x',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+  },
+  {
+    title: 'Tutorial x',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+  },
+  {
+    title: 'Tutorial x',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
+  },
+]
+
 import { useState, useEffect } from "react";
 import React from "react";
 import useLayout from "../WebApp/utils/useLayout";
@@ -71,23 +138,26 @@ const MainMenu = () => {
     <>
       <div className="tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-100">
         {header()}
-
         <div className="tw-relative tw-isolate tw-px-6 tw-pt-14 lg:tw-px-8">
-          <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6">
+          <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6  ">
             {heroDescMain()}
-            <div className="tw-p-6"></div>
+            {/*<div className="tw-p-6"></div>*/}
             {imgHero()}
           </div>
         </div> 
         {dataSection()}
         {ourFeatures()}
+        {videoSection()}
+        {productList()}
+        <div className="tw-p-6"></div> 
       </div>
 
-      <div className="tw-container tw-mx-auto tw-p-5 tw-h-screen tw-flex tw-justify-center tw-items-center">
-        <div className="tw-w-1/2 tw-bg-blue-500 tw-p-4 tw-text-center">
-          <h2 className="tw-text-white">Centered Content</h2>
-          <p className="tw-text-white">This content is centered both horizontally and vertically.</p>
-        </div>
+      <div className=" tw-text-center tw-py-3 tw-bg-indigo-500">
+        <small className="tw-block">© 2024 Nvite Wedding. All Rights Reserved.</small>
+        <small className="tw-block">Design by <a href="https://galang-portfolio.vercel.app/">NexDev</a>. </small>
+        <small className="tw-block">
+          Instagram: <a href="https://www.instagram.com/" className="socmed"><i className="bi bi-instagram" /></a>
+        </small>
       </div>
     </>
   );
@@ -113,7 +183,7 @@ const MainMenu = () => {
       </div>
     );
   }
-  
+
   function imgHero() {
     return (
       <div
@@ -143,12 +213,41 @@ const MainMenu = () => {
     );
   }
 
-  function ourFeatures() {
+  function productList() {
     return (
+      <div id="" className="tw-relative tw-isolate tw-m-10 tw-px-10 tw-pt-14 lg:tw-px-12">
+        <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
+          <div className="tw-col-md-8 tw-col-10 tw-py-5 tw-text-center">
+            <h2 className="tw-text-balance tw-text-5xl tw-font-semibold tw-tracking-tight tw-text-grey-700 sm:tw-text-7xl">Our Products</h2>
+            <p className="tw-mt-2 tw-text-pretty tw-text-lg tw-font-medium tw-text-gray-500 sm:tw-text-xl/8">We have a wide variety of digital invitations for all occasions!</p>
+          </div>
+        </div>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-3 tw-gap-6 tw-mx-auto">
 
-      // <div className="tw-container tw-mx-auto tw-p-5 tw-h-screen tw-flex tw-justify-center tw-items-center tw-mt-8 ">
-      //   <div className="tw-w-6/8 tw-p-4 tw-text-center">       
-      <div id="fiture" className="tw-relative tw-isolate tw-m-10 tw-px-10 tw-pt-14 lg:tw-px-12"> 
+          {invitationCards.map((invitationCard, index) => (
+            <div className="tw-items-center tw-flex tw-justify-center">
+              <div className="tw-w-80 tw-p-2 tw-rounded-xl tw-bg-white tw-shadow-2xl ">
+                <img className="tw-h-40 tw-object-cover tw-rounded-xl" alt="" src={invitationCard.image} />
+                <div className="tw-p-2">
+                  <h2 className="tw-text-lg tw-font-bold tw-text-gray-800">{invitationCard.title}</h2>
+                  <p className="tw-text-sm  tw-text-gray-600">{invitationCard.description}</p>
+                </div>
+                <div className="tw-m-2 tw-flex tw-justify-between tw-items-center">
+                  <a href="#" role="button" className="hover:tw-shadow-lg tw-text-indigo-500 tw-border-2 tw-border-indigo-500 tw-bg-white-500 tw-px-3 tw-py-1 tw-rounded-lg tw-mx-1">preview</a>
+                  <a href="#" role="button" className="hover:tw-shadow-lg tw-text-white tw-border-2 tw-border-indigo-500  tw-bg-indigo-500 tw-px-3 tw-py-1 tw-rounded-lg tw-mx-1">preview</a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    );
+  }
+
+  function ourFeatures() {
+    return (      
+      <div id="fiture" className="tw-relative tw-isolate tw-m-10 tw-mb-10 tw-px-10 tw-pt-14 lg:tw-px-12 ">
         <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
           <div className="tw-col-md-8 tw-col-10 tw-py-5 tw-text-center">
             <h2 className="tw-text-balance tw-text-5xl tw-font-semibold tw-tracking-tight tw-text-grey-700 sm:tw-text-7xl">Our Features</h2>
@@ -156,24 +255,22 @@ const MainMenu = () => {
           </div>
         </div>
         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 tw-gap-6">
-          {featuresData.map((feature, index) => (
-            <div className="tw-col tw-mt-3" key={index}>
-              <div className="tw-card tw-border-2 tw-border-indigo-500 hover:tw-bg-indigo-500 hover:tw-text-indigo-500 tw-bg-gradient-to-tr tw-from-slate-50 tw-to-slate-50 tw-shadow-md tw-rounded-lg tw-p-6" style={{height: '180px'}}>
-                <div className="tw-mb-4 tw-text-center">
-                  <i className={feature.icon} />
-                  <h2 className="tw-text-xl tw-text-center tw-font-bold tw-text-indigo-400">
-                  &nbsp; {feature.title}</h2>
-                </div>
-                <p className="tw-text-gray-700 tw-text-center">
-                {feature.description}
-                </p> 
-              </div> 
-              </div> 
+          {featuresData.map((feature, index) => ( 
+            <div className="tw-items-center tw-flex tw-justify-center">
+              <div className="tw-w-80 tw-p-2 tw-rounded-xl tw-border-2 tw-border-indigo-500 tw-bg-white hover:tw-shadow-2xl tw-shadow-xl "> 
+                <div className="tw-p-2 tw-items-center ">
+                  <h2 className="tw-text-lg tw-text-center tw-font-bold tw-text-gray-800">{feature.title}</h2>
+                  <p className="tw-text-sm  tw-text-gray-600">{feature.description}</p>
+                </div> 
+              </div>
+            </div>
           ))}
-        </div>  
+        </div>
+        <div className="tw-p-10"></div> 
       </div>
     );
   }
+
   function header() {
     return (
       <header className={`tw-fixed tw-inset-x-0 tw-top-0 tw-z-50 ${isScrolled ? 'tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-200' : ''}`}>
@@ -234,35 +331,78 @@ const MainMenu = () => {
       </header>
     );
   }
+
+  function videoSection() {
+    return (
+      <div id="" className="tw-relative tw-p-5 md:tw-py-16 xl:tw-px-[100px] tw-bg-indigo-500">
+        <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
+          <div className="tw-col-md-8 tw-col-10 tw-py-5 tw-text-center">
+            <h2 className="tw-text-balance tw-text-5xl tw-font-semibold tw-tracking-tight tw-text-grey-700 sm:tw-text-7xl">Our Products</h2>
+            <p className="tw-mt-2 tw-text-pretty tw-text-lg tw-font-medium tw-text-white sm:tw-text-xl/8">We have a wide variety of digital invitations for all occasions!</p>
+          </div>
+        </div>
+        <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6 tw-my-8">
+
+          <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
+            <div className="tw-col-md-8 tw-col-10 tw-py-5 tw-text-center">
+              <iframe
+                width="100%"
+                height="500"
+                src="https://www.youtube.com/watch?v=UQLqoX_LxvU"
+                title="My Iframe"
+                frameBorder="0"
+                allowFullScreen // Corrected property name
+              ></iframe>
+            </div>
+          </div>
+          <div className="tw-grid tw-grid-cols-1  tw-gap-6 tw-mx-auto">
+
+            {tutorialSteps.map((tutorialStep, index) => (
+              <div className="tw-items-center tw-flex tw-justify-center">
+                <div className="tw-w-80 tw-p-2 tw-rounded-xl tw-bg-white tw-shadow-2xl ">
+                  <div className="tw-p-2">
+                    <h2 className="tw-text-lg tw-font-bold tw-text-gray-800">{tutorialStep.title}</h2>
+                    <p className="tw-text-sm  tw-text-gray-600">{tutorialStep.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   function dataSection() {
     return (
       <div className="tw-relative tw-p-5 md:tw-py-16 xl:tw-px-[100px] tw-bg-indigo-500">
-          <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6">
-            <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-5 md:tw-py-0 xl:tw-flex-row tw-text-center">
-              <h2 className="tw-text-slate-50 tw-text-[28px] md:tw-text-5xl">
-                <span>1K</span> <span className="tw-font-extralight">+</span>
-              </h2>
-              <h3 className="tw-text-slate-50">
-                <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">We Immortalize Happy Weddings with</p>
-                <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">Magical Touch and Perfection</p>
-              </h3>
-            </div>
-            <div className="tw-p-6"></div>
-            <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-5 md:tw-py-0 xl:tw-flex-row tw-text-center md:tw-text-left">
-              <h2 className="tw-text-slate-50 tw-text-[28px] md:tw-text-5xl">
-                <span>200K</span> <span className="tw-font-extralight">+</span>
-              </h2>
-              <h3 className="tw-text-slate-50">
-                <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">Guests share moments of happiness</p>
-                <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">offline and virtually through Nvite-me</p>
-              </h3>
-            </div>
+        <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6">
+          <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-5 md:tw-py-0 xl:tw-flex-row tw-text-center">
+            <h2 className="tw-text-slate-50 tw-text-[28px] md:tw-text-5xl">
+              <span>1K</span> <span className="tw-font-extralight">+</span>
+            </h2>
+            <h3 className="tw-text-slate-50">
+              <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">We Immortalize Happy Weddings with</p>
+              <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">Magical Touch and Perfection</p>
+            </h3>
           </div>
-          <div className="tw-absolute hidden md:tw-inline tw-top-1/2 tw-left-1/2 tw-transform -translate-x-1/2 -translate-y-1/2 h-10 w-[1px] bg-white md:h-14" />
-          <div className="tw-absolute md:tw-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[1px] w-96 bg-[#3A35411F]" />
-        </div> 
+          <div className="tw-p-6"></div>
+          <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-gap-5 md:tw-py-0 xl:tw-flex-row tw-text-center md:tw-text-left">
+            <h2 className="tw-text-slate-50 tw-text-[28px] md:tw-text-5xl">
+              <span>200K</span> <span className="tw-font-extralight">+</span>
+            </h2>
+            <h3 className="tw-text-slate-50">
+              <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">Guests share moments of happiness</p>
+              <p className="tw-text-slate-50 tw-text-sm md:tw-text-base">offline and virtually through Nvite-me</p>
+            </h3>
+          </div>
+        </div>
+        <div className="tw-absolute hidden md:tw-inline tw-top-1/2 tw-left-1/2 tw-transform -translate-x-1/2 -translate-y-1/2 h-10 w-[1px] bg-white md:h-14" />
+        <div className="tw-absolute md:tw-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[1px] w-96 bg-[#3A35411F]" />
+      </div>
     );
   }
+
 };
 
 export default MainMenu;
