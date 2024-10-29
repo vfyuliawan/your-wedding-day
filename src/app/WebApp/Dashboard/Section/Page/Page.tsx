@@ -804,7 +804,7 @@ const DashboardPage = () => {
 
 
     function openWhatsAppRequest(themeName:string) {
-      const whatsappUrl = `https://wa.me/081283589073?text="Halo Admin Nviteme, Saya Ingin Membeli Thema ini ${themeName}"`;
+      const whatsappUrl = `https://wa.me/6281283589073?text="Halo Admin Nviteme, Saya Ingin Membeli Thema ini ${themeName}"`;
       window.open(whatsappUrl)
     }
 
@@ -940,7 +940,7 @@ const DashboardPage = () => {
   }
 
   function WhatsappButton() {
-    const whatsappUrl = `https://wa.me/081283589073?text="Halo Admin Nviteme, Saya Ingin Bertanya Terkait Pembuatan Undangan Digital"`;
+    const whatsappUrl = `https://wa.me/6281283589073?text="Halo Admin Nviteme, Saya Ingin Bertanya Terkait Pembuatan Undangan Digital"`;
 
     return (
       <button

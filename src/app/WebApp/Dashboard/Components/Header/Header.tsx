@@ -52,7 +52,7 @@ const HeaderDashboard = () => {
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
       {/* <link rel="stylesheet" href="/pink-essence/assets/css/style.css" /> */}
       {/* <link rel="stylesheet" href={`/ThemeStyle/${props.themeName}/assets/css/style.css`} /> */}
-      <link rel="stylesheet" href={`/Global/style-v2.css`} />
+      <link rel="stylesheet" href={`/Global/style-v3.css`} />
     </>
   );
 };
