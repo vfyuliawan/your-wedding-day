@@ -69,6 +69,12 @@ const DashboardPage = () => {
 
   const dataPresetTheme: DataPresetInterface[] = [
     {
+      title: "Soft Magnoli",
+      img: "/image/themeIcon/SoftMagnoli.png",
+      href: "?a=template-3&to=cang&ex=true",
+      onHover: false,
+    },
+    {
       title: "Jade Garden",
       img: "/image/themeIcon/JadeGarden.png",
       href: "?a=template-2&to=cang&ex=true",
@@ -86,6 +92,7 @@ const DashboardPage = () => {
       href: "?a=template-5&to=cang&ex=true",
       onHover: false,
     },
+    
   ];
 
   const [dataPresetState, setdataPresetState] =
