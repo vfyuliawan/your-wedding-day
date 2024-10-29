@@ -19,7 +19,11 @@ export enum IConstantFont {
     Lavishly_Yours="Lavishly Yours",
     Forum="Forum",
     middle = "Delius Swash",
-    normal="Playwrite GB"
+    normal="Playwrite GB",
+
+
+    //SoftMagnolia
+    Corinthia = "Corinthia"
 
   }
   

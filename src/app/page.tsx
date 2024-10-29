@@ -42,6 +42,7 @@ import RedEssence from "./Theme/LuxuryTheme/RedEssence";
 import RomanticDark from "./Theme/LuxuryTheme/RomanticDark";
 import JadeGarden from "./Theme/LuxuryTheme/JadeGarden";
 import DashboardView from "./WebApp/Dashboard/page";
+import SoftMagnolia from "./Theme/LuxuryTheme/SoftMagnolia";
 export default function Home() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -306,6 +307,64 @@ export default function Home() {
           <MobileView>
             <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
               <JadeGarden
+                setDetails={setDetails}
+                getIsTemplate={getIsTemplate}
+                message={message}
+                setMessage={setMessage}
+                details={details}
+                postMessage={postMessage}
+                guest={guest}
+                idGuest={idGuest}
+                getParams={getParams}
+              />
+            </div>
+          </MobileView>
+        </>
+      ): themeName == "Soft Magnolia" ? (
+        <>
+          <BrowserView>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                height: "100vh",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{ width: "70%", height: "100vh", overflow: "hidden" }}
+              >
+                <img
+                  className="kenburns-top"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "center ",
+
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  src={details?.cover.img}
+                  alt="dfasdfsa"
+                />
+              </div>
+              <div style={{ width: "30%", height: "100vh", overflowY: "auto" }}>
+                <SoftMagnolia
+                  setDetails={setDetails}
+                  getIsTemplate={getIsTemplate}
+                  message={message}
+                  setMessage={setMessage}
+                  details={details}
+                  postMessage={postMessage}
+                  guest={guest}
+                  idGuest={idGuest}
+                  getParams={getParams}
+                />
+              </div>
+            </div>
+          </BrowserView>
+          <MobileView>
+            <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
+              <SoftMagnolia
                 setDetails={setDetails}
                 getIsTemplate={getIsTemplate}
                 message={message}
