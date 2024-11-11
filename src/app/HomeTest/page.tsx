@@ -139,9 +139,9 @@ const MainMenu = () => {
       <div className="tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-100">
         {header()}
         <div className="tw-relative tw-isolate tw-px-6 tw-pt-14 lg:tw-px-8">
-          <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6  ">
+          <div className="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-center tw-gap-x-6  ">
             {heroDescMain()}
-            {/*<div className="tw-p-6"></div>*/}
+            <div className="tw-p-6 lg:tw-block hidden"></div>
             {imgHero()}
           </div>
         </div> 
@@ -201,7 +201,7 @@ const MainMenu = () => {
               style={{
                 width: useLayout().isTabletScreen || useLayout().isPhoneScreen ? "105%" : "160%",
               }}
-              src="/image/background/landingPage/main-banner.gif"
+              src="/image/background/landingPage/device-bg.gif"
               className=""
               alt="Mac Frame"
             />
@@ -341,7 +341,7 @@ const MainMenu = () => {
             <p className="tw-mt-2 tw-text-pretty tw-text-lg tw-font-medium tw-text-white sm:tw-text-xl/8">We have a wide variety of digital invitations for all occasions!</p>
           </div>
         </div>
-        <div className="tw-flex tw-items-center tw-justify-center tw-gap-x-6 tw-my-8">
+        <div className="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-center tw-gap-x-6">
 
           <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
             <div className="tw-col-md-8 tw-col-10 tw-py-5 tw-text-center">
