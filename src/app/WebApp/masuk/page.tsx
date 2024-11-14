@@ -1,0 +1,191 @@
+"use client";
+import { useRouter } from 'next/navigation';
+import { useState, FormEvent } from 'react';
+import { ModelLoginRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface';
+import LoginService from '../Dashboard/Domain/Service/LoginService/LoginService';
+import { ResultModelLoginResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface';
+
+interface FormData {
+  username: string;
+  password: string;
+}
+
+const Login = () => {
+    
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  const [formData, setFormData] = useState<FormData>({
+    username: '',
+    password: '',
+  });
+  const [error, setError] = useState<string | null>(null); 
+  const [token, setToken] = useState<string | null>(null); 
+  const router = useRouter();
+
+  // Login function that calls the API service
+  const doLogin = async (username: string, password: string) => {
+    const requestBody: ModelLoginRequestInterface = {
+      username,
+      password,
+    };
+
+    try {
+      const serviceLogin = await LoginService.loginService(requestBody);
+      if (serviceLogin && serviceLogin.result?.token) {
+        setToken(serviceLogin.result.token); // Store token on successful login
+        router.push("/dashboard"); // Redirect to dashboard after successful login
+      } else {
+        setError("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An error occurred. Please try again later.");
+    }
+  };
+
+  // Handle input changes in the form
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    doLogin(formData.username, formData.password);
+  };
+
+  return (
+    <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
+      {header()}
+      <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-p-8 tw-rounded-xl tw-shadow-2xl">
+        <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Login</h2>
+        <form onSubmit={handleSubmit} className="tw-space-y-3">
+          {error && <p className="tw-text-red-500 tw-text-center">{error}</p>} {/* Display error message if there is any */}
+
+          <div>
+            <label htmlFor="username" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              placeholder="Enter your username"
+              className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your Password"
+              required
+              className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+            />
+          </div>
+
+          <div className=" tw-items-center ">
+            <button
+              type="submit"
+              disabled={!formData.username || !formData.password}
+              className="disabled:tw-opacity-25 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
+            >
+              Login
+            </button>
+            <div className="tw-flex tw-items-center tw-justify-center"> 
+            <p className="tw-text-xs tw-font-bold tw-mt-1 tw-px-3 tw-mb-0">
+              Don't have an account?{' '}
+              <button
+                type="button"
+                onClick={() => router.push("/WebApp/daftar")}
+                className="tw-font-bold tw-text-indigo-500 btn"
+              >
+                Sign Up
+              </button>
+            </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+
+  function header() {
+    return (
+      <header className={`tw-fixed tw-inset-x-0 tw-top-0 tw-z-50 ${isScrolled ? 'tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-200' : ''}`}>
+        <nav className="tw-flex tw-items-center tw-justify-between tw-p-6 lg:tw-px-8" aria-label="Global">
+          <div className="tw-flex lg:tw-flex-1">
+            <a href="#" className="tw--m-1.5 tw-p-1.5">
+              <span className="tw-text-indigo-500 font-mono tw-text-2xl tw-font-bold tw-border-indigo-500 hover:tw-text-amber-400 tw-rounded-md">Nvite-Me</span>
+            </a>
+          </div>
+          <div className="tw-flex md:tw-hidden">
+            <button
+              type="button"
+              onClick={toggleMobileMenu}
+              className="tw--m-2.5 tw-inline-flex tw-items-center tw-justify-center tw-rounded-md tw-p-2.5 tw-text-gray-700"
+            >
+              <span className="tw-sr-only">Open main menu</span>
+              <svg className="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+          </div>
+          <div className="tw-hidden lg:tw-flex lg:tw-gap-x-12">
+            {/* {['Home','Product', 'Company'].map(item => (
+              <a key={item} href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
+            ))} */}
+            <a  href="/" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Home</a>
+            <a  href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Product</a>
+            <a  href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Company</a>
+          </div>
+
+          <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
+            {/* <a href="#" className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Login <span aria-hidden="true">→</span></a>
+            <a href="#" className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up</a> */}
+          </div>
+
+          {isMobileMenuOpen && (
+            <div className="tw-absolute tw-top-0 tw-inset-x-0 tw-p-2 tw-z-50 tw-bg-white tw-shadow-md">
+              <div className="tw-flex tw-items-center tw-justify-between tw-p-4">
+                <h5 className="tw-text-lg tw-font-bold tw-text-gray-900">Menu</h5>
+                <button
+                  type="button"
+                  onClick={toggleMobileMenu}
+                  className="tw--m-2.5 tw-inline-flex tw-items-center tw-justify-center tw -rounded-md tw-p-2.5 tw-text-gray-700"
+                >
+                  <span className="tw-sr-only">Close main menu</span>
+                  <svg className="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <ul className="tw-space-y-2">
+                {['Product', 'Features', 'Marketplace', 'Company'].map(item => (
+                  <li key={item}>
+                    <a href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </nav>
+      </header>
+    );
+  }
+};
+
+export default Login;

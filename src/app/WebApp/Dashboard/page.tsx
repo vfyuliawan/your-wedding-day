@@ -90,31 +90,32 @@ const invitationCards = [
 
 const tutorialSteps = [
   {
-    title: 'Step 1',
-    description:
-      'Register to create your invitation account here.',
+    link: 'here',
+    description:'Register to create your invitation account',
+    icon: "bi bi-1-circle",
   },
   {
-    title: 'Step 2',
-    description:
-      'Fill in the Event Info & Profile and also upload photos/gallery. Customize your invitation.',
+    link: 'Customize your invitation.',
+    description: 'Fill in the Event Profile and upload photos/gallery. ',
+    icon: "bi bi-2-circle",
   },
   {
-    title: 'Step 3',
-    description:
-      'Select Preset / Template. See our template list.',
+    link: 'See our template list',
+    description: 'Select Preset / Template. ',
+    icon: "bi bi-3-circle",
   },
   {
-    title: 'Step 4',
-    description:
-      'Activate, and your invitation is ready to be distributed.',
+    link: '',
+    description: 'Activate, and your invitation is ready to be distributed.',
+    icon: "bi bi-4-circle",
   },
 ]
  
 import { useState, useEffect } from "react";
 // import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap-icons/font/bootstrap-icons.css'; // Import Bootstrap Icons CSS
-// import '../styles/globals.css';
+// import '../styles/globals.css'
+import Link from 'next/link';;
 import React from "react"; 
 import FooterDashboard from "./Components/Footer/Footer";
 import NavbarDashboard from "./Components/Navbar/Navbar";
@@ -159,7 +160,7 @@ const DashboardView = () => {
         </div> 
         {dataSection()}
         {ourFeatures()}
-        {videoSection()}
+        {howToCreate()}
         {productList()}
         <div className="tw-p-6"></div> 
       </div>
@@ -188,8 +189,8 @@ const DashboardView = () => {
             <p className="tw-mt-8 tw-text-pretty tw-text-lg tw-font-medium tw-text-gray-500 sm:tw-text-xl/8">Create invitations in minutes, download or share your invitations with online RSVP. We are experts in organizing your wedding guests on your special day.</p>
             <p className="tw-mt-8 tw-text-pretty tw-text-xl tw-font-medium tw-text-amber-400 sm:tw-text-xl/4">Invitations become more modern, cool and efficient</p>
             <div className="tw-mt-10 tw-flex tw-items-center tw-justify-center tw-gap-x-6">
-              <a href="#" className="tw-rounded-md tw-bg-indigo-600 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-text-white tw-shadow-sm tw-hover:tw-bg-indigo-500 tw-focus-visible:tw-outline tw-focus-visible:tw-outline-2 tw-focus-visible:tw-outline-offset-2 tw-focus-visible:tw-outline-indigo-600">Get started</a>
-              {/* <a href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Learn more <span aria-hidden="true">→</span></a> */}
+            <a href="/WebApp/daftar" className="tw-rounded-md tw-bg-indigo-600 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-text-white tw-shadow-sm tw-hover:tw-bg-indigo-500 tw-focus-visible:tw-outline tw-focus-visible:tw-outline-2 tw-focus-visible:tw-outline-offset-2 tw-focus-visible:tw-outline-indigo-600">Sign up</a>
+        {/* <a href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900">Learn more <span aria-hidden="true">→</span></a> */}
             </div>
           </div>
         </div>
@@ -266,21 +267,31 @@ const DashboardView = () => {
               <p className="tw-mt-2 tw-text-pretty tw-text-lg tw-font-medium tw-text-gray-500 sm:tw-text-xl/8">The Nvite Me Digital Invitation website is accompanied by various features that can make it easier for you to invite the people closest to you to your special event.</p>
             </div>
           </div>
-          <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 tw-gap-6">
+          <div className="tw-max-w-6xl tw-mx-auto tw-gap-6 tw-px-3 tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 ">
+          {/* <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 tw-gap-6"> */}
             {featuresData.map((feature, index) => ( 
-              <div className="tw-items-center tw-flex tw-justify-center">
-                <div className="tw-flex tw-items-center tw-h-40 tw-p-2 tw-rounded-xl tw-bg-white hover:tw-shadow-2xl tw-shadow-xl">
-                  <div className='tw-flex-shrink-0'>
-                    <div className='tw-bg-indigo-200 tw-p-6 tw-mx-3 tw-rounded-full tw-text-black'> 
-                      <i className={`${feature.icon} tw-text-indigo-500 tw-text-xl`}></i>
+              <div key={index} className="tw-bg-white tw-rounded-lg tw-px-6 tw-py-4 hover:tw-shadow-2xl tw-shadow-xl">
+                <div className="tw-flex tw-items-center tw-mb-4">
+                    <div className="tw-bg-indigo-100 tw-rounded-full tw-px-3 tw-py-2">
+                        <i className={`${feature.icon} tw-text-indigo-500 tw-text-2xl`}></i>
                     </div>
-                  </div>
-                  <div className="tw-p-2 tw-items-center">
-                    <h4 className="tw-text-xl tw-font-bold tw-text-gray-500">{feature.title}</h4>
-                    <p className="tw-text-sm tw-text-gray-600">{feature.description}</p>
-                  </div>
+                    <h2 className="tw-text-xl tw-font-semibold tw-text-gray-800 tw-ml-4">{feature.title}</h2>
                 </div>
+                <p className="tw-text-md tw-text-gray-600">{feature.description}</p>
               </div>
+              // <div className="tw-items-center tw-flex tw-justify-center">
+              //   <div className="tw-flex tw-items-center tw-h-40 tw-p-2 tw-rounded-xl tw-bg-white hover:tw-shadow-2xl tw-shadow-xl">
+              //     <div className='tw-flex-shrink-0'>
+              //       <div className='tw-bg-indigo-200 tw-p-6 tw-mx-3 tw-rounded-full tw-text-black'> 
+              //         <i className={`${feature.icon} tw-text-indigo-500 tw-text-xl`}></i>
+              //       </div>
+              //     </div>
+              //     <div className="tw-p-2 tw-items-center">
+              //       <h4 className="tw-text-xl tw-font-bold tw-text-gray-500">{feature.title}</h4>
+              //       <p className="tw-text-sm tw-text-gray-600">{feature.description}</p>
+              //     </div>
+              //   </div>
+              // </div>
             ))}
           </div>
           <div className="tw-p-10"></div> 
@@ -349,7 +360,7 @@ const DashboardView = () => {
       );
     }
   
-    function videoSection() {
+    function howToCreate() {
       return (
         <div id="" className="tw-relative tw-p-5 md:tw-py-16 xl:tw-px-[100px] tw-bg-indigo-500">
           <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
@@ -358,9 +369,41 @@ const DashboardView = () => {
               <p className="tw-mt-2 tw-text-pretty tw-text-lg tw-font-medium tw-text-white sm:tw-text-xl/8">We have a wide variety of digital invitations for all occasions!</p>
             </div>
           </div>
-          <div className="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-center tw-gap-x-6">
-  
-            <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
+          <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+            
+            <div className="tw-items-center">
+                <h2 className="tw-text-lg tw-font-bold tw-text-center tw-text-white tw-mb-2">Look The Video</h2>
+                {/* <p className="tw-text-slate-100 tw-text-center tw-mb-4">(Buat Undangan Dengan Mudah)</p> */}
+                <div className="tw-w-full tw-h-64 tw-bg-black tw-rounded-lg tw-flex tw-items-center tw-justify-center">
+                    {/* <i className="fas fa-play tw-text-white tw-text-4xl"></i> */}
+                    <iframe 
+                    
+                      // width="300%"
+                      height="100%"
+                      src="https://s3-figma-videos-production-sig.figma.com/video/1395694106045460061/TEAM/02b0/9b49/-df74-462b-8dbd-c7377d5114fd?Expires=1732492800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J0js8~1ydvRLeyRSgzg8kKfxNGh8PouayheDzLfCr7WpCnprBQYYpmNdrHqECtCkLZiBMk-XVqQuZcwITduA51Ed0rVfLdTSd13GqtyTNaiP~j-huV06Uny-Gl3v5TJH38v-CuQbXBTJgkT24Y6eKb9NfWRpfvQPQy8rs33dfHdfECR2IFE-WB31pPvo2WR8LX7H1YXMGmWdfw5SvbLXJzmQpA9ffYKJ-gF905T98T2U9c091EUuhISFr2nZidFHr-sMqyC3f5qFQtoVaJxWkASKkvJVARhcVTJDdGwPfEUpiB0JgVHmzzzaHSSCjvTCtsUIZ-8Xa-Gv7W26zU8Avw__"
+                      title="My Iframe"
+                      frameBorder="0"
+                      allowFullScreen  
+                    ></iframe>
+                </div>
+            </div>
+            <div>
+              <p className="tw-text-white tw-text-sm tw-mb-6"> An easy way to make invitations, it only takes <span className="tw-font-bold">5 menit</span>  and your invitations can be distributed. </p>
+                    
+              <ol className="tw-list-decimal tw-list-inside tw-space-y-4">
+              {tutorialSteps.map((tutorialStep, index) => (
+                <li className="tw-flex tw-items-start">
+                    <div className="tw-bg-white tw-rounded-full tw-px-2 tw-py-1">
+                        <i className={`${tutorialStep.icon} tw-text-indigo-500 tw-text-lg`}></i>
+                    </div>
+                    <div className="tw-py-2 tw-text-xs tw-px-2 ">
+                        <p className="tw-text-white tw-text-sm">{tutorialStep.description} <a href="#" className="tw-text-amber-500 tw-font-bold">{tutorialStep.link}</a></p>
+                    </div>
+                </li>
+              ))}
+              </ol>
+            </div>
+            {/* <div className="tw-row tw-justify-center tw-items-center tw-mx-auto">
               <div className="tw-col-md-8 tw-col-10 tw-py-5 tw-text-center">
                 <iframe
                   width="200%"
@@ -372,19 +415,25 @@ const DashboardView = () => {
                 ></iframe>
               </div>
             </div>
-            <div className="tw-grid tw-grid-cols-1  tw-gap-6 tw-mx-auto">
+            <div className="tw-grid tw-grid-cols-1 tw-max-h-3xl tw-m-auto tw-gap-6 tw-p-3">
   
               {tutorialSteps.map((tutorialStep, index) => (
-                <div className="tw-items-center tw-flex tw-justify-center">
-                  <div className="tw-p-2 tw-rounded-xl tw-bg-white tw-shadow-2xl " style={{width: "400px"}}>
-                    <div className="tw-p-2">
-                      <h5 className="tw-text-md tw-text-center tw-font-bold tw-text-gray-600">{tutorialStep.title}</h5>
-                      <p className="tw-text-md tw-text-center tw-text-gray-600">{tutorialStep.description}</p>
-                    </div>
+                // <div className="tw-items-center tw-flex tw-justify-center">
+                  // <div className="tw-bg-white tw-rounded-lg tw-py-6 tw-px-4 hover:tw-shadow-2xl tw-shadow-xl"  >
+                  //   <div className="tw-p-2">
+                  //     <h5 className="tw-text-md tw-text-center tw-font-bold tw-text-gray-600">{tutorialStep.title}</h5>
+                  //     <p className="tw-text-md tw-text-center tw-text-gray-600">{tutorialStep.description}</p>
+                  //   </div>
+                  // </div>
+                  <div key={index} className="tw-bg-white tw-rounded-lg tw-px-6 tw-py-4 hover:tw-shadow-2xl tw-shadow-xl">
+                  <div className="tw-flex tw-items-center tw-mb-4"> 
+                      <h2 className="tw-text-xl tw-font-semibold tw-text-gray-800 tw-ml-4">{tutorialStep.title}</h2>
                   </div>
+                  <p className="tw-text-md tw-text-gray-600">{tutorialStep.description}</p>
                 </div>
+                // </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       );
