@@ -238,8 +238,8 @@ const DashboardView = () => {
           <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-3 tw-gap-6 tw-mx-auto">
   
             {invitationCards.map((invitationCard, index) => (
-              <div className="tw-items-center tw-flex tw-justify-center">
-                <div className="tw-w-80 tw-p-2 tw-rounded-xl tw-bg-white tw-shadow-2xl ">
+              <div className="tw-items-center tw-flex tw-justify-center ">
+                <div className="tw-w-80 tw-p-2 tw-rounded-xl tw-bg-white tw-shadow-2xl tw-ring-1 tw-ring-slate-700/10">
                   <img className="tw-h-40 tw-object-cover tw-rounded-xl" alt="" src={invitationCard.image} />
                   <div className="tw-p-2">
                     <h2 className="tw-text-lg tw-font-bold tw-text-gray-800">{invitationCard.title}</h2>
@@ -270,7 +270,7 @@ const DashboardView = () => {
           <div className="tw-max-w-6xl tw-mx-auto tw-gap-6 tw-px-3 tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 ">
           {/* <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-4 tw-gap-6"> */}
             {featuresData.map((feature, index) => ( 
-              <div key={index} className="tw-bg-white tw-rounded-lg tw-px-6 tw-py-4 hover:tw-shadow-2xl tw-shadow-xl">
+              <div key={index} className="tw-bg-white tw-rounded-lg tw-px-6 tw-py-4 hover:tw-shadow-2xl hover:tw-bg-slate-50 tw-shadow-xl tw-ring-1 tw-ring-slate-700/10">
                 <div className="tw-flex tw-items-center tw-mb-4">
                     <div className="tw-bg-indigo-100 tw-rounded-full tw-px-3 tw-py-2">
                         <i className={`${feature.icon} tw-text-indigo-500 tw-text-2xl`}></i>
@@ -332,9 +332,12 @@ const DashboardView = () => {
             </div>
   
             {isMobileMenuOpen && (
-              <div className="tw-absolute tw-top-0 tw-inset-x-0 tw-p-2 tw-z-50 tw-bg-white tw-shadow-md">
+              <div className="tw-absolute tw-top-0 tw-inset-x-0 tw-p-2 tw-z-50 tw-bg-white tw-shadow-md ">
                 <div className="tw-flex tw-items-center tw-justify-between tw-p-4">
-                  <h5 className="tw-text-lg tw-font-bold tw-text-gray-900">Menu</h5>
+                  <div className="tw-flex tw-items-center tw-justify-start tw-p-4">
+                    <h5 className="tw-text-lg tw-font-bold tw-text-gray-900">Menu</h5> 
+                  </div>
+                  
                   <button
                     type="button"
                     onClick={toggleMobileMenu}
@@ -346,13 +349,21 @@ const DashboardView = () => {
                     </svg>
                   </button>
                 </div>
-                <ul className="tw-space-y-2">
-                  {['Product', 'Features', 'Marketplace', 'Company'].map(item => (
-                    <li key={item}>
-                      <a href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
+                <ul className="tw-space-y-2 ">
+                  {['Home','Product', 'Company'].map(item => (
+                    <li key={item} className="tw-flex">
+                      {/* <i className="bi bi-record-fill tw-text-indigo-500 tw-text-lg  "></i> */}
+                      <a href="#" className="tw-text-md tw-font-semibold tw-leading-6 tw-px-4  tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
                     </li>
                   ))}
+                  <div className="tw-flex tw-items-center">
+                    <a href="#" className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Login <span aria-hidden="true">→</span></a>
+                  </div>
+                  <div className="tw-flex tw-items-center"> 
+                    <a href="#" className="tw-rounded-full tw-w-full tw-text-center tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up</a>
+                  </div> 
                 </ul>
+
               </div>
             )}
           </nav>
@@ -388,12 +399,12 @@ const DashboardView = () => {
                 </div>
             </div>
             <div>
-              <p className="tw-text-white tw-text-sm tw-mb-6"> An easy way to make invitations, it only takes <span className="tw-font-bold">5 menit</span>  and your invitations can be distributed. </p>
+              <p className="tw-text-white tw-text-sm tw-text-center tw-mb-6"> An easy way to make invitations, it only takes <span className="tw-font-bold">5 menit</span>  and your invitations can be distributed. </p>
                     
               <ol className="tw-list-decimal tw-list-inside tw-space-y-4">
               {tutorialSteps.map((tutorialStep, index) => (
                 <li className="tw-flex tw-items-start">
-                    <div className="tw-bg-white tw-rounded-full tw-px-2 tw-py-1">
+                    <div className="tw-bg-white tw-rounded-full tw-px-2.5 tw-py-1">
                         <i className={`${tutorialStep.icon} tw-text-indigo-500 tw-text-lg`}></i>
                     </div>
                     <div className="tw-py-2 tw-text-xs tw-px-2 ">
