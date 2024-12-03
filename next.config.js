@@ -9,6 +9,18 @@ const withPWA = require('next-pwa')({
 // Combine PWA with existing Next.js configuration
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async rewrites() {
+        return [
+          {
+            source: '/masuk',
+            destination: '/WebApp/masuk', // The path to your login page
+          },
+          {
+            source: '/daftar',
+            destination: '/WebApp/daftar', // The path to your login page
+          },
+        ];
+      },
     eslint: {
         ignoreDuringBuilds: true,
     },

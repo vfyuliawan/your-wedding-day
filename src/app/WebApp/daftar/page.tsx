@@ -76,6 +76,7 @@ const Signup = () => {
 
   return (
     <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
+      {header()}
       <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-p-8 tw-rounded-xl tw-shadow-2xl">
         <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Sign Up</h2>
         <form onSubmit={handleSubmit} className="tw-space-y-3">
@@ -184,7 +185,7 @@ const Signup = () => {
       <header className={`tw-fixed tw-inset-x-0 tw-top-0 tw-z-50 ${isScrolled ? 'tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-200' : ''}`}>
         <nav className="tw-flex tw-items-center tw-justify-between tw-p-6 lg:tw-px-8" aria-label="Global">
           <div className="tw-flex lg:tw-flex-1">
-            <a href="#" className="tw--m-1.5 tw-p-1.5">
+            <a href="/" className="tw--m-1.5 tw-p-1.5">
               <span className="tw-text-indigo-500 font-mono tw-text-2xl tw-font-bold tw-border-indigo-500 hover:tw-text-amber-400 tw-rounded-md">Nvite-Me</span>
             </a>
           </div>

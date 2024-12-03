@@ -36,7 +36,7 @@ const Login = () => {
       const serviceLogin = await LoginService.loginService(requestBody);
       if (serviceLogin && serviceLogin.result?.token) {
         setToken(serviceLogin.result.token); // Store token on successful login
-        router.push("/dashboard"); // Redirect to dashboard after successful login
+        router.push("/"); // Redirect to dashboard after successful login
       } else {
         setError("Invalid username or password.");
       }
@@ -97,11 +97,11 @@ const Login = () => {
             />
           </div>
 
-          <div className=" tw-items-center ">
+          <div className=" tw-items-center tw-mt-3">
             <button
               type="submit"
               disabled={!formData.username || !formData.password}
-              className="disabled:tw-opacity-25 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
+              className="disabled:tw-opacity-25 tw-mt-3 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
             >
               Login
             </button>
@@ -110,7 +110,7 @@ const Login = () => {
               Don't have an account?{' '}
               <button
                 type="button"
-                onClick={() => router.push("/WebApp/daftar")}
+                onClick={() => router.push("/daftar")}
                 className="tw-font-bold tw-text-indigo-500 btn"
               >
                 Sign Up
@@ -128,7 +128,7 @@ const Login = () => {
       <header className={`tw-fixed tw-inset-x-0 tw-top-0 tw-z-50 ${isScrolled ? 'tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-200' : ''}`}>
         <nav className="tw-flex tw-items-center tw-justify-between tw-p-6 lg:tw-px-8" aria-label="Global">
           <div className="tw-flex lg:tw-flex-1">
-            <a href="#" className="tw--m-1.5 tw-p-1.5">
+            <a href="/" className="tw--m-1.5 tw-p-1.5">
               <span className="tw-text-indigo-500 font-mono tw-text-2xl tw-font-bold tw-border-indigo-500 hover:tw-text-amber-400 tw-rounded-md">Nvite-Me</span>
             </a>
           </div>
@@ -145,12 +145,9 @@ const Login = () => {
             </button>
           </div>
           <div className="tw-hidden lg:tw-flex lg:tw-gap-x-12">
-            {/* {['Home','Product', 'Company'].map(item => (
-              <a key={item} href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
-            ))} */}
-            <a  href="/" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Home</a>
-            <a  href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Product</a>
-            <a  href="#" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Company</a>
+            {['Home','Product', 'About'].map(item => (
+              <a key={item} href="/" className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
+            ))}
           </div>
 
           <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
