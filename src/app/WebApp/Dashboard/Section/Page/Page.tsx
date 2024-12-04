@@ -9,9 +9,9 @@ import ReactLoading from "react-loading";
 import { useMediaQuery } from "react-responsive";
 
 import { useRouter } from "next/navigation";
-import useLayout from "@/app/WebApp/utils/useLayout";
-import { IConstantFont } from "@/app/Utils/ConstantFont";
+import useLayout from "@/app/WebApp/utils/useLayout"; 
 import { Slide } from "react-slideshow-image";
+import { IConstantFont } from "@/app/utils/ConstantFont";
 
 const DashboardPage = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -166,13 +166,7 @@ const DashboardPage = () => {
     setPage(previousPage);
     handleGetMyProjects(previousPage, 5, "");
   };
-
-  // const getIdForEdit = async (projectId: string) => {
-  //   let projectParam = `projectId=${projectId}`;
-  //   let keyEncrypt = new Cryptr("nViteMeKey");
-  //   let encryptedProjectParam = keyEncrypt.encrypt(projectParam);
-  //   window.location.href = `/content-setting?` + encryptedProjectParam;
-  // };
+ 
 
   const getIdForEdit = async (projectId: string) => {
     router.push(`/content-setting?pi=${projectId}`);

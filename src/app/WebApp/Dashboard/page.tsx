@@ -123,6 +123,13 @@ import DashboardPage from "./Section/Page/Page";
 import HeaderView from '@/app/Theme/LuxuryTheme/Section/Header/HeaderView';
 import HeaderDashboard from './Components/Header/Header';
 import useLayout from '../utils/useLayout';
+import { ProjectModelMyprojectResponseInterface } from "./Domain/Models/ModelResponse/MyprojectResponse/ModelMyprojectResponseInterface";
+import { useRouter } from "next/navigation";
+import CekUserLoginService from "./Domain/Service/CekUserLoginService/CekUserLoginService";
+import { ModelMyprojectRequestInterface } from "./Domain/Models/ModelRequest/MyprojectRequest/ModelMyprojectRequestInterface";
+import MyprojectService from "./Domain/Service/MyprojectService/MyprojectService";
+import LogoutService from "./Domain/Service/LogoutService/LogoutService";
+import ReactLoading from "react-loading";
 
 const DashboardView = () => { 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -131,6 +138,16 @@ const DashboardView = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isFormValid, setIsFormValid] = useState(false);
   const [formStatus, setFormStatus] = useState('');
+  const [token, setToken] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [searchQueary, setSearchQueary] = useState("");
+  const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const router = useRouter();
+  const [isLoading, setisLoading] = useState(false);
+  const [isLoadingMain, setisLoadingMain] = useState(false);
 
   const layout = useLayout();
   const handleTabClick = (tab: string) => {
@@ -142,9 +159,16 @@ const DashboardView = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
   
-
   // Effect to handle scroll events
   useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setisLoadingMain(true);
+      setToken(storedToken);
+      checkUserLogin();
+      handleGetMyProjects(page, 5, "");
+    }
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -153,8 +177,94 @@ const DashboardView = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+
   }, []);
   
+  const checkUserLogin = async () => {
+    try {
+      const serviceCheckUserLogin =
+        await CekUserLoginService.cekUserLoginService();
+      if (serviceCheckUserLogin?.result == true) {
+        setIsUserLoggedIn(true);
+        setisLoadingMain(false);
+      } else {
+        await localStorage.removeItem("token");
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("check User Login error:", error);
+      setError("An error occurred. Please try again later.");
+    }
+  };
+
+  const handleNextPage = async () => {
+    // setPage(page + 1);
+    let nextPage = page + 1;
+    setPage(nextPage);
+    handleGetMyProjects(nextPage, 5, "");
+  };
+
+  const handlePreviousPage = async () => {
+    let previousPage = page - 1;
+    setPage(previousPage);
+    handleGetMyProjects(previousPage, 5, "");
+  };
+ 
+  const getIdForEdit = async (projectId: string) => {
+    router.push(`/content-setting?pi=${projectId}`);
+  };
+  
+  const handleGetMyProjects = async (
+    currentPage: number,
+    size: number,
+    title: string
+  ) => {
+    setisLoading(true);
+    const requestParams: ModelMyprojectRequestInterface = {
+      currentPage: currentPage,
+      size: size,
+      title: title,
+    };
+    try {
+      const myprojectServices = await MyprojectService.myprojectService(
+        requestParams
+      );
+      if (myprojectServices && myprojectServices.result?.projects) {
+        console.log(myprojectServices.result.projects);
+
+        setData(myprojectServices.result.projects);
+        setTotalPages(myprojectServices.result.paging?.totalPage);
+        setisLoading(false);
+        // console.log("cekData", myprojectServices);
+      } else {
+        setError("Invalid credentials. Please try again.");
+        setisLoading(false);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setisLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    // Clear token from localStorage
+
+    const logoutService = await LogoutService.logoutService();
+
+    try {
+      if (logoutService?.result == true) {
+        await localStorage.removeItem("token");
+      } else {
+        setError("Invalid credentials. Please try again.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An error occurred. Please try again later.");
+    }
+    // Redirect to login page or any other desired page
+    // router.push("/");
+  };
+
   const validateForm = () => {
     const { name, email, message } = formData;
     setIsFormValid(name.trim() !== '' && email.trim() !== '' && message.trim() !== '');
@@ -184,11 +294,7 @@ const DashboardView = () => {
   };
 
   return (
-    < >  
-      {/* <NavbarDashboard />  */}
-      {/* <HeaderDashboard/>
-      <DashboardPage /> 
-      <FooterDashboard /> */}
+    < >   
       <div className="tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-100">
         {header()}
         {activeTab === 'home' && (
@@ -220,7 +326,217 @@ const DashboardView = () => {
   );
  
   function homePage() {
-    return (
+    return ( <>
+      {token && isUserLoggedIn ? (
+        <section className="home" id="home">
+          <div className="container">
+            <div className="col mb-3 d-flex justify-content-center">
+              <h2>My Invitation</h2>
+            </div>
+
+            <div
+              className="card justify-content-center"
+              style={{
+                // height: "80vh",
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+                border: "none",
+                borderRadius: "12px",
+                padding: "10px",
+              }}
+            > 
+              <div className="col d-flex justify-content-between">
+                <Link
+                  href="/create"
+                  className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
+                  style={{
+                    marginLeft: "15px",
+                    width: "135px", 
+                  }}
+                >
+                  <i className="bi bi-pencil " /> Create
+                </Link>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginRight: "15px",
+                  }}
+                >
+                  <input
+                    style={{
+                      borderColor: "black",
+                      borderRadius: 15,
+                      paddingLeft: 5,
+                      backgroundColor: "white",
+                    }}
+                    placeholder="   Search Your Project"
+                    onChange={(val) => {
+                      setSearchQueary(val.target.value);
+                      setPage(0);
+                    }}
+                  />
+                  <div style={{ width: 5 }}></div>
+                  <button
+                    onClick={() => {
+                      handleGetMyProjects(page, 4, searchQueary);
+                      console.log(totalPages);
+                    }}
+                    className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
+                  >
+                    {" "}
+                    <i className="bi bi-search " />
+                  </button>
+                </div>
+              </div>
+              <div
+                style={{ 
+                  paddingBottom: "30px",
+                  boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+                  border: "none",
+                  padding: "10px",
+                }}
+              >
+                <table className="align-items-center ">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Title</th>
+                      <th>Theme</th>
+                      <th>Music</th>
+                      <th>Create Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  {isLoading ? (
+                    <tbody>
+                      <tr>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "50px", 
+                            }}
+                          >
+                            <ReactLoading
+                              type={"spinningBubbles"}
+                              color={"#116A7B"}
+                              height={50}
+                              width={50}
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ) : (
+                    <>
+                      <tbody>
+                        {data.length > 0 ? (
+                          data.map((item, index) => (
+                            <tr key={item.id}>
+                              <td>{index + 1}</td> 
+                              <td>{item.title}</td>
+                              <td>{item.theme.theme}</td>
+                              <td>{item.theme.music}</td>
+                              <td>
+                                {new Date(item.date).toLocaleDateString(
+                                  "en-GB",
+                                  {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                  }
+                                )}{" "}
+                                {new Date(item.date).toLocaleTimeString(
+                                  "en-GB",
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  }
+                                )}
+                              </td>
+                              <td>
+                                <button
+                                  name="Preview"
+                                  className="btn btn btn-outline-info btn-sm"
+                                  style={{ margin: "3px" }}
+                                >
+                                  <i className="bi bi-eye " />
+                                </button>
+                                <button
+                                  className="btn btn btn-outline-success btn-sm"
+                                  style={{ margin: "3px" }}
+                                  onClick={() => getIdForEdit(item.id)}
+                                >
+                                  <i className="bi bi-pencil-square " />
+                                </button> 
+                              </td>
+                            </tr>
+                          ))
+                        ) : data.length == 0 ? (
+                          <tr>
+                            <td colSpan={6} style={{ textAlign: "center" }}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  height: "50px", // Height can be adjusted as needed
+                                }}
+                              >
+                                <h4 style={{ color: "#116A7B" }}>
+                                  Project Not Found
+                                </h4>
+                              </div>
+                            </td>
+                          </tr>
+                        ) : null}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan={7}>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              {page + 1 > 1 ? (
+                                <button
+                                  className="color-main btn btn-sm"
+                                  onClick={handlePreviousPage}
+                                >
+                                  {"<< Previous Page"}
+                                </button>
+                              ) : (
+                                // <>.</>
+                                <div style={{ color: "white" }}></div>
+                              )}
+                              {page + 1 < totalPages ? (
+                                <button
+                                  className="color-main btn btn-sm"
+                                  onClick={handleNextPage}
+                                >
+                                  {"Next Page >>"}
+                                </button>
+                              ) : (
+                                <div style={{ color: "white" }}></div>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </>
+                  )}
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        
       <>
         <div className="tw-relative tw-isolate tw-px-6 tw-pt-3 lg:tw-px-8">
           <div className="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-center tw-gap-x-6">
@@ -234,6 +550,8 @@ const DashboardView = () => {
         {ourFeatures()}
         {howToCreate()}
         {productSection()}
+      </> 
+      )}
       </>
     );
   } 
@@ -382,11 +700,27 @@ const DashboardView = () => {
             {/* <a  onClick={() => handleTabClick('home')}  className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Home</a>
             <a  onClick={() => handleTabClick('product')}  className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Product</a> */}
           </div>
-
-          <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
-            <a href="/masuk" className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Login <span aria-hidden="true">→</span></a>
-            <a href="/daftar" className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up</a>
-          </div>
+          {isLoadingMain ? 
+            <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
+              <ReactLoading
+                type={"spinningBubbles"}
+                color={"#116A7B"}
+                height={30} // Specify a fixed size
+                width={30} // Specify a fixed size
+              />
+            </div>  
+              : 
+            <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
+              {token && isUserLoggedIn ? 
+              <button onClick={handleLogout} className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Logout</button>
+              :
+              <>
+              <a href="/masuk" className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Login <span aria-hidden="true">→</span></a>
+              <a href="/daftar" className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up</a>
+              </>
+              }
+            </div>
+          }
 
           {isMobileMenuOpen && (
             <div className="tw-absolute tw-top-0 tw-inset-x-0 tw-p-2 tw-z-50 tw-bg-white tw-shadow-md">
@@ -412,12 +746,45 @@ const DashboardView = () => {
                     <a onClick={() => handleTabClick(item)} href="#" className="tw-text-md tw-font-semibold tw-leading-6 tw-px-4 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">{item}</a>
                   </li>
                 ))}
-                <div className="tw-flex tw-items-center">
-                  <a href="#" className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500">Login <span aria-hidden="true">→</span></a>
-                </div>
-                <div className="tw-flex tw-items-center"> 
-                  <a href="#" className="tw-rounded-full tw-w-full tw-text-center tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up</a>
-                </div> 
+
+                {isLoadingMain ? 
+                  <div className="tw-flex tw-items-center"
+                    style={{
+                      display: "grid",
+                      placeItems: "center",
+                    }}
+                  >
+                    <ReactLoading
+                      type={"spinningBubbles"}
+                      color={"#116A7B"}
+                      height={30} // Specify a fixed size
+                      width={30} // Specify a fixed size
+                    />
+                  </div>  
+                    : 
+                  <>
+                    {token && isUserLoggedIn ? 
+                      <div className="tw-flex tw-items-center">
+                        <button
+                              
+                              className="tw-btn tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500"
+                            >
+                              <i className="bi bi-box-arrow-in-right " /> Logout
+                            </button>
+                        <button onClick={handleLogout} className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500">Login <span aria-hidden="true">→</span></button>
+                      </div> 
+                      :
+                      <> 
+                        <div className="tw-flex tw-items-center">
+                          <a href="/masuk" className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500">Login <span aria-hidden="true">→</span></a>
+                        </div>
+                        <div className="tw-flex tw-items-center"> 
+                          <a href="/daftar" className="tw-rounded-full tw-w-full tw-text-center tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up?</a>
+                        </div> 
+                      </>
+                    }
+                  </>
+                }
               </ul>
             </div>
           )}

@@ -17,7 +17,15 @@ const nextConfig = {
           },
           {
             source: '/daftar',
-            destination: '/WebApp/daftar', // The path to your login page
+            destination: '/WebApp/daftar', 
+          },
+          {
+            source: '/content-setting',
+            destination: '/WebApp/content-setting', 
+          },
+          {
+            source: '/create',
+            destination: '/WebApp/create', 
           },
         ];
       },
