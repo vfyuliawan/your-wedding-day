@@ -1,9 +1,10 @@
 "use client";
-import { useRouter } from 'next/navigation';
-import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation'; 
+import { useEffect, useState, FormEvent } from 'react';
 import { ModelLoginRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface';
 import LoginService from '../Dashboard/Domain/Service/LoginService/LoginService';
 import { ResultModelLoginResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface';
+import CekUserLoginService from '../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService';
 
 interface FormData {
   username: string;
@@ -23,8 +24,32 @@ const Login = () => {
   });
   const [error, setError] = useState<string | null>(null); 
   const [token, setToken] = useState<string | null>(null); 
-  const router = useRouter();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const router = useRouter(); 
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token"); 
+    if (storedToken) {
+      setToken(storedToken); // Set token state if found in localStorage
+      checkUserLogin(); 
+    }
+  }, []);
+
+  
+
+  const checkUserLogin = async () => {
+    try {
+      const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
+      if (serviceCheckUserLogin?.result == true) {
+        setIsUserLoggedIn(true);       
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("check User Login error:", error);
+      setError("An error occurred. Please try again later.");
+      
+    }
+  };
   // Login function that calls the API service
   const doLogin = async (username: string, password: string) => {
     const requestBody: ModelLoginRequestInterface = {
@@ -35,7 +60,9 @@ const Login = () => {
     try {
       const serviceLogin = await LoginService.loginService(requestBody);
       if (serviceLogin && serviceLogin.result?.token) {
-        setToken(serviceLogin.result.token); // Store token on successful login
+        
+        localStorage.setItem("token", serviceLogin.result.token);
+        setToken(serviceLogin.result.token); // Store token on successful login  
         router.push("/"); // Redirect to dashboard after successful login
       } else {
         setError("Invalid username or password.");

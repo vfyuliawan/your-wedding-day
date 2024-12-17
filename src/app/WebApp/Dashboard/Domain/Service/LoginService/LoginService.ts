@@ -8,7 +8,7 @@ class LoginService {
   async loginService (
     props: ModelLoginRequestInterface
   ): Promise<ModelLoginResponseInterface | null> {
-    const result = await LoginRepository.login(props);
+    const result = await LoginRepository.login(props);  
     if (result != null) {
       return result;
     }

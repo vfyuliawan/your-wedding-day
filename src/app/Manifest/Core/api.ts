@@ -10,9 +10,10 @@ const versionAppi  = "/api/v1";
 
 export const baseUrl = (): string => {
   const dev =  "https://innovative-emotion-production.up.railway.app";
-  const local = `http://localhost:8000${versionAppi}`;
+  const local = `http://localhost:8000`;
+  // const local = `http://localhost:8000${versionAppi}`;
   const sit =  `https://tight-kora-nviteme-3bdf504d.koyeb.app${versionAppi}`;
-  return sit;
+  return local;
 };
 
 export enum CallBackError {
@@ -188,7 +189,7 @@ interface FetchInterface {
   errorMessage?: ErrorMessageType;
 }
 
-export async function post(props: FetchInterface) {
+export async function post(props: FetchInterface) { 
   return RequestData(
     {
       method: "POST",

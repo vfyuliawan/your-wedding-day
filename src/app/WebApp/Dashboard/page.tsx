@@ -538,7 +538,7 @@ const DashboardView = () => {
       ) : (
         
       <>
-        <div className="tw-relative tw-isolate tw-px-6 tw-pt-3 lg:tw-px-8">
+        <div className="tw-relative tw-isolate tw-px-6 tw-pt-3 lg:tw-px-8"> 
           <div className="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-center tw-gap-x-6">
             {heroDescMain()}
             <div className="tw-p-6 lg:tw-block hidden"></div>
@@ -611,7 +611,7 @@ const DashboardView = () => {
         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-3 tw-gap-6 tw-mx-auto">
 
           {invitationCards.map((invitationCard, index) => (
-            <div className="tw-items-center tw-flex tw-justify-center ">
+            <div key={index} className="tw-items-center tw-flex tw-justify-center ">
               <div className="tw-w-80 tw-p-2 tw-rounded-xl tw-bg-white tw-shadow-2xl tw-ring-1 tw-ring-slate-700/10">
                 <img className="tw-h-40 tw-object-cover tw-rounded-xl" alt="" src={invitationCard.image} />
                 <div className="tw-p-2">
@@ -821,7 +821,7 @@ const DashboardView = () => {
                   
             <ol className="tw-list-decimal tw-list-inside tw-space-y-4">
             {tutorialSteps.map((tutorialStep, index) => (
-              <li className="tw-flex tw-items-start">
+              <li key={index} className="tw-flex tw-items-start">
                   <div className="tw-bg-white tw-rounded-full tw-px-2.5 tw-py-1">
                       <i className={`${tutorialStep.icon} tw-text-indigo-500 tw-text-lg`}></i>
                   </div>

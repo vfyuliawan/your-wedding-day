@@ -1,9 +1,10 @@
 "use client";
 import { useRouter } from 'next/navigation';
-import { useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 import { ModelSignupRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/SignupRequest/ModelSignupRequestInterface';
 import SignupService from '../Dashboard/Domain/Service/SignupService/SignupService';
 import { ResultModelSignupResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/SignupResponse/ModelSignupResponseInterface';
+import CekUserLoginService from '../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService';
 
 interface FormData {
   name: string;
@@ -28,7 +29,31 @@ const Signup = () => {
   
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null); 
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token"); 
+    if (storedToken) {
+      setToken(storedToken); // Set token state if found in localStorage
+      checkUserLogin(); 
+    }
+  }, []);
+
+  
+
+  const checkUserLogin = async () => {
+    try {
+      const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
+      if (serviceCheckUserLogin?.result == true) {
+        setIsUserLoggedIn(true);       
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("check User Login error:", error);
+      setError("An error occurred. Please try again later.");
+      
+    }
+  };
   
   const doSignup = async (username: string, email: string, password: string, name: string) => {
     const requestBody: ModelSignupRequestInterface = {
@@ -36,9 +61,7 @@ const Signup = () => {
       email,
       password,
       name,
-    };
-    console.log('requestBody');
-    console.log(requestBody);
+    }; 
     
     try {
       const serviceSignup = await SignupService.signupService(requestBody); 
