@@ -1,4 +1,5 @@
 import { IConstantFont } from "@/app/Utils/ConstantFont";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const CustomNavbar = () => {
@@ -9,8 +10,11 @@ const CustomNavbar = () => {
     setIsOpen(!isOpen);
   };
 
+
+  const router = useRouter()
+
   useEffect(() => {
-    const handleClickOutside = (event:any) => {
+    const handleClickOutside = (event: any) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setIsOpen(false);
       }
@@ -24,7 +28,7 @@ const CustomNavbar = () => {
 
   return (
     <nav
-    ref={navRef}
+      ref={navRef}
       className="navbar navbar-expand-md sticky-top mynavbar"
       style={{
         display: "flex",
@@ -36,40 +40,47 @@ const CustomNavbar = () => {
       }}
     >
       {/* Logo */}
-      <div style={{display:"flex", flexDirection:"row", justifyContent:"center", alignItems:"center"}}>
       <div
         style={{
-          height: 35,
-          width: 35,
-          borderRadius: 8,
-          backgroundColor: "#E3B480",
-          overflow: "hidden",
           display: "flex",
+          flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
-          color: "white",
-          fontFamily: "cursive",
-          fontWeight:"bold"
         }}
       >
-        Nm<br/>
-        {/* <span style={{fontSize:2, fontFamily:"serif"}}>Digital Wedding</span> */}
+        <div
+          style={{
+            height: 35,
+            width: 35,
+            borderRadius: 8,
+            backgroundColor: "#E3B480",
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            fontFamily: "cursive",
+            fontWeight: "bold",
+          }}
+        >
+          Nm
+          <br />
+          {/* <span style={{fontSize:2, fontFamily:"serif"}}>Digital Wedding</span> */}
+        </div>
+        <a
+          style={{
+            fontFamily: "Maven Pro",
+            fontWeight: "bold",
+            fontSize: 24,
+            marginLeft: 8,
+            color: "var(--main)",
+          }}
+          href="/"
+          className="navbar-brand"
+        >
+          Nvite Me
+        </a>
       </div>
-      <a
-        style={{
-          fontFamily: "Maven Pro",
-          fontWeight: "bold",
-          fontSize:24,
-          marginLeft:8,
-          color: "var(--main)",
-        }}
-        href="/"
-        className="navbar-brand"
-      >
-        Nvite Me
-      </a>
-      </div>
-   
 
       {/* Menu items */}
       <div
@@ -88,18 +99,18 @@ const CustomNavbar = () => {
             top: "100%",
             left: 0,
             right: 0,
-            opacity:0.9,
+            opacity: 0.9,
             backgroundColor: "var(--main)",
             padding: "1rem 0",
-        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4)",
+            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4)",
 
             zIndex: 1,
           }}
         >
-           <a
-           onClick={()=>{
-            setIsOpen(false)
-           }}
+          <a
+            onClick={() => {
+              setIsOpen(false);
+            }}
             href="#home"
             style={{
               padding: "0.8rem 2rem",
@@ -110,11 +121,18 @@ const CustomNavbar = () => {
           >
             Home
           </a>
-          <div style={{width:"100%", height:1, backgroundColor:"white", opacity:0.3}}/>
+          <div
+            style={{
+              width: "100%",
+              height: 1,
+              backgroundColor: "white",
+              opacity: 0.3,
+            }}
+          />
           <a
-          onClick={()=>{
-            setIsOpen(false)
-          }}
+            onClick={() => {
+              setIsOpen(false);
+            }}
             href="#design"
             style={{
               padding: "0.8rem 2rem",
@@ -125,12 +143,19 @@ const CustomNavbar = () => {
           >
             Preset/Design
           </a>
-          <div style={{width:"100%", height:1, backgroundColor:"white", opacity:0.3}}/>
-          
+          <div
+            style={{
+              width: "100%",
+              height: 1,
+              backgroundColor: "white",
+              opacity: 0.3,
+            }}
+          />
+
           <a
-          onClick={()=>{
-            setIsOpen(false)
-          }}
+            onClick={() => {
+              setIsOpen(false);
+            }}
             href="#testimoni"
             style={{
               padding: "0.8rem 2rem",
@@ -141,12 +166,19 @@ const CustomNavbar = () => {
           >
             Testimoni
           </a>
-          <div style={{width:"100%", height:1, backgroundColor:"white", opacity:0.3}}/>
+          <div
+            style={{
+              width: "100%",
+              height: 1,
+              backgroundColor: "white",
+              opacity: 0.3,
+            }}
+          />
 
           <a
-          onClick={()=>{
-            setIsOpen(false)
-          }}
+            onClick={() => {
+              setIsOpen(false);
+            }}
             href="#fiture"
             style={{
               padding: "0.8rem 2rem",
@@ -157,12 +189,18 @@ const CustomNavbar = () => {
           >
             Fiture
           </a>
-          <div style={{width:"100%", height:1, backgroundColor:"white", opacity:0.3}}/>
-
+          <div
+            style={{
+              width: "100%",
+              height: 1,
+              backgroundColor: "white",
+              opacity: 0.3,
+            }}
+          />
           <a
-          onClick={()=>{
-            setIsOpen(false)
-          }}
+            onClick={() => {
+              setIsOpen(false);
+            }}
             href="#tutorial"
             style={{
               padding: "0.8rem 2rem",
@@ -173,7 +211,30 @@ const CustomNavbar = () => {
           >
             Cara Order
           </a>
+          <div
+            style={{
+              width: "100%",
+              height: 1,
+              backgroundColor: "white",
+              opacity: 0.3,
+            }}
+          />
+          <a
+            onClick={() => {
+              router.push("/Login")
+            }}
+            // href="#tutorial"
+            style={{
+              padding: "0.8rem 2rem",
+              color: "white",
+              textDecoration: "none",
+              fontSize: "1rem",
+            }}
+          >
+            Login
+          </a>
         </div>
+        
       </div>
 
       {/* Menu icon for mobile */}
@@ -185,7 +246,7 @@ const CustomNavbar = () => {
           justifyContent: "space-around",
           width: 28,
           height: 28,
-          
+
           cursor: "pointer",
           alignItems: "center",
           padding: "0.4rem",

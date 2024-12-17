@@ -835,7 +835,7 @@ const DashboardPage = () => {
                 Pesan undangan dengan mudah, tanpa pake ribet, bisa isi form
                 undangan sendiri atau di bantu oleh admin kami
               </p>
-              <h2 style={{fontFamily:"serif", color:"red"}}>Buruan!! hanya 45 ribu bebas pilih Tema</h2>
+              {/* <h2 style={{fontFamily:"serif", color:"red"}}>Buruan!! hanya 45 ribu bebas pilih Tema</h2> */}
             </div>
           </div>
 

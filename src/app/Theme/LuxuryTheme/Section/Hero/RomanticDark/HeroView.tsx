@@ -56,14 +56,18 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             backgroundPosition: "center",
           }}
         />
-        <div className="" style={{
-           position: "absolute",
-           bottom: 0,
-           left: 0,
-           width: "100%",
-           height: "30%",
-          background:"linear-gradient(to bottom,rgba(255, 0, 0, 0) 20%,var(--prim) 80%)"
-        }} />
+        <div
+          className=""
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "30%",
+            background:
+              "linear-gradient(to bottom,rgba(255, 0, 0, 0) 20%,var(--prim) 80%)",
+          }}
+        />
         <div
           className="inside"
           style={{
@@ -85,8 +89,8 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
               textShadow: "none",
             }}
           >
-            {`${toEachUpperCase(props.getTitle?.split("-")[0] ??"")} &`}
-            <br /> {toEachUpperCase(props.getTitle?.split("-")[1] ??"")}
+            {`${toEachUpperCase(props.getTitle?.split("-")[0] ?? "")} &`}
+            <br /> {toEachUpperCase(props.getTitle?.split("-")[1] ?? "")}
           </motion.h1>
           <div style={{ width: "100%", height: 1, backgroundColor: "white" }} />
           <motion.p
@@ -113,7 +117,7 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
               textShadow: "none",
               fontFamily: IConstantFont.regulerLight,
               fontSize: 16,
-              letterSpacing:4
+              letterSpacing: 4,
             }}
           >
             {
@@ -132,6 +136,7 @@ const HeroView = forwardRef<any, HeroViewInterface>((props, ref) => {
             {TimeConvertionUSFormat(props.HeroDetail!.date!.toString())}
           </motion.h4> */}
         </div>
+
       </section>
     </>
   );
