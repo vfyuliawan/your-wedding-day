@@ -221,7 +221,7 @@ const CustomNavbar = () => {
           />
           <a
             onClick={() => {
-              router.push("/Login")
+              // router.push("/Login")
             }}
             // href="#tutorial"
             style={{
