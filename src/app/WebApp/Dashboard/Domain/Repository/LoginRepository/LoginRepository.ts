@@ -1,6 +1,6 @@
 import { post } from "@/app/Manifest/Core/api";
 // import { post } from "../../../../../Manifest/Core/api";
-import { ModelLoginRequestInterface } from "../../Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
+import { ConvertModelLoginRequestInterface, ModelLoginRequestInterface, ModelLoginRequestPatch } from "../../Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
 import {
   ConvertModelLoginResponseInterface,
   ModelLoginResponseInterface,
@@ -10,15 +10,11 @@ class LoginRepository {
   constructor() {}
 
   async login  (
-    props: ModelLoginRequestInterface
+    props: ModelLoginRequestPatch
   ): Promise<ModelLoginResponseInterface | null>  {
-    const res = await post({
-      // path: "/auth/authenticate",
+    const res = await post({ 
       path: "/api/v1/auth/authenticate", 
-      reqBody: {
-        username: props.username,
-        password: props.password,
-      },
+      reqBody: ConvertModelLoginRequestInterface.modelLoginRequestInterfaceToJson(props.body),
       isNeedToken: false
     });  
     

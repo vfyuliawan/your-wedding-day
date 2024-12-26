@@ -3,6 +3,9 @@
 //   import { Convert, ModelLoginRequestInterface } from "./file";
 //
 //   const modelLoginRequestInterface = Convert.toModelLoginRequestInterface(json);
+export interface ModelLoginRequestPatch{
+    body:ModelLoginRequestInterface, 
+}
 
 export interface ModelLoginRequestInterface {
     username: string;

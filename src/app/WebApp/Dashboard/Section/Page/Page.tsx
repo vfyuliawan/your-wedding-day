@@ -458,7 +458,7 @@ const DashboardPage = () => {
                               <td>{index + 1}</td>
                               {/* <td>{item.nameProject}</td> */}
                               <td>{item.title}</td>
-                              <td>{item.theme.theme}</td>
+                              <td>{item.theme.theme.themeName}</td>
                               <td>{item.theme.music}</td>
                               <td>
                                 {new Date(item.date).toLocaleDateString(

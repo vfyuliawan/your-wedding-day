@@ -69,7 +69,7 @@ const invitationCards = [
     title: 'Akad Nikah',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, molestiae. Impedit, dolorem? Voluptas, optio voluptatibus!',
-    image: 'https://picsum.photos/600/302',
+    image: 'https://picsum.photos/601/302',
     premium: false,
   },
   {
@@ -143,11 +143,12 @@ const DashboardView = () => {
   const [page, setPage] = useState(0);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [searchQueary, setSearchQueary] = useState("");
-  const [data, setData] = useState<ProjectModelMyprojectResponseInterface[]>([]);
+  const [dataListProject, setDataListProject] = useState<ProjectModelMyprojectResponseInterface[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const router = useRouter();
   const [isLoading, setisLoading] = useState(false);
   const [isLoadingMain, setisLoadingMain] = useState(false);
+  const [isLoginLogout, setisLoginLogout] = useState(false);
 
   const layout = useLayout();
   const handleTabClick = (tab: string) => {
@@ -229,26 +230,21 @@ const DashboardView = () => {
       const myprojectServices = await MyprojectService.myprojectService(
         requestParams
       );
-      if (myprojectServices && myprojectServices.result?.projects) {
-        console.log(myprojectServices.result.projects);
-
-        setData(myprojectServices.result.projects);
-        setTotalPages(myprojectServices.result.paging?.totalPage);
-        setisLoading(false);
-        // console.log("cekData", myprojectServices);
+      if (myprojectServices && myprojectServices.result?.projects) { 
+        setDataListProject(myprojectServices.result.projects);
+        setTotalPages(myprojectServices.result.paging?.totalPage); 
       } else {
         setError("Invalid credentials. Please try again.");
-        setisLoading(false);
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error:", error); 
+    } finally {
       setisLoading(false);
-    }
+    } 
   };
 
-  const handleLogout = async () => {
-    // Clear token from localStorage
-
+  const handleLogout = async () => { 
+    setisLoginLogout(true);
     const logoutService = await LogoutService.logoutService();
 
     try {
@@ -260,9 +256,21 @@ const DashboardView = () => {
     } catch (error) {
       console.error("Login error:", error);
       setError("An error occurred. Please try again later.");
-    }
-    // Redirect to login page or any other desired page
+    } 
     // router.push("/");
+    window.location.reload();
+    setisLoginLogout(false);
+  };
+
+  const handleRoute = async (path: string) => { 
+    setisLoginLogout(true); 
+    try {
+      await router.push(path);
+    } catch (error) {
+        console.error("Navigation error:", error);
+    } finally {
+      setisLoginLogout(false);
+    } 
   };
 
   const validateForm = () => {
@@ -298,7 +306,21 @@ const DashboardView = () => {
       <div className="tw-bg-gradient-to-tr tw-from-pink-100 tw-to-sky-100">
         {header()}
         {activeTab === 'home' && (
-          <> {homePage()}  </>
+          <> {isLoadingMain ? 
+            <div className="tw-flex tw-items-center tw-min-h-screen"
+              style={{
+                display: "grid",
+                placeItems: "center",
+              }}
+            >
+              <ReactLoading className="tw-text-indigo-500"
+                type={"spinningBubbles"}
+                color={"#116A7B"}
+                height={30} // Specify a fixed size
+                width={30} // Specify a fixed size
+              />
+            </div>  
+              :  <>{homePage()} </>   } </>
         )}
         {activeTab === 'product' && ( 
           <div className="tw-relative tw-isolate tw-px-6 tw-pt-7 lg:tw-px-8">
@@ -329,74 +351,29 @@ const DashboardView = () => {
     return ( <>
       {token && isUserLoggedIn ? (
         <section className="home" id="home">
-          <div className="container">
-            <div className="col mb-3 d-flex justify-content-center">
+          <div className="tw-p-16 tw-min-h-screen">
+            <div className=" tw-flex tw-justify-center tw-text-indigo-500">
               <h2>My Invitation</h2>
             </div>
 
-            <div
-              className="card justify-content-center"
-              style={{
-                // height: "80vh",
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
-                border: "none",
-                borderRadius: "12px",
-                padding: "10px",
-              }}
+            <div className="card tw-justify-center tw-text-indigo-500" style={{    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",   border: "none",   borderRadius: "12px",   padding: "10px", }}
             > 
-              <div className="col d-flex justify-content-between">
-                <Link
-                  href="/create"
-                  className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
-                  style={{
-                    marginLeft: "15px",
-                    width: "135px", 
-                  }}
-                >
+              <div className="tw-flex tw-justify-between">
+                <Link href="/create" className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left" style={{   marginLeft: "15px",   width: "135px",  }}>
                   <i className="bi bi-pencil " /> Create
                 </Link>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    marginRight: "15px",
-                  }}
-                >
-                  <input
-                    style={{
-                      borderColor: "black",
-                      borderRadius: 15,
-                      paddingLeft: 5,
-                      backgroundColor: "white",
-                    }}
-                    placeholder="   Search Your Project"
-                    onChange={(val) => {
-                      setSearchQueary(val.target.value);
-                      setPage(0);
-                    }}
-                  />
+
+                <div style={{   display: "flex",   flexDirection: "row",   marginRight: "15px", }}>
+                  <input style={{   borderColor: "black",   borderRadius: 15,   paddingLeft: 5,   backgroundColor: "white", }} placeholder="   Search Your Project" onChange={(val) => {   setSearchQueary(val.target.value);   setPage(0); }}/>
                   <div style={{ width: 5 }}></div>
-                  <button
-                    onClick={() => {
-                      handleGetMyProjects(page, 4, searchQueary);
-                      console.log(totalPages);
-                    }}
-                    className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left"
-                  >
+                  <button onClick={() => {   handleGetMyProjects(page, 4, searchQueary);   console.log(totalPages); }} className="btn custom-btn login-btn custom-btn-bg custom-btn-link text-left">
                     {" "}
                     <i className="bi bi-search " />
                   </button>
                 </div>
               </div>
-              <div
-                style={{ 
-                  paddingBottom: "30px",
-                  boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
-                  border: "none",
-                  padding: "10px",
-                }}
-              >
-                <table className="align-items-center ">
+              <div style={{    paddingBottom: "30px",   boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",   border: "none",   padding: "10px", }}>
+                <table className="tw-items-center tw-text-black">
                   <thead>
                     <tr>
                       <th>No.</th>
@@ -412,20 +389,8 @@ const DashboardView = () => {
                     <tbody>
                       <tr>
                         <td colSpan={6} style={{ textAlign: "center" }}>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              height: "50px", 
-                            }}
-                          >
-                            <ReactLoading
-                              type={"spinningBubbles"}
-                              color={"#116A7B"}
-                              height={50}
-                              width={50}
-                            />
+                          <div style={{   display: "flex",   justifyContent: "center",   alignItems: "center",   height: "50px",  }}> 
+                            <ReactLoading   type={"spinningBubbles"}   color={"#116A7B"}   height={50}   width={50} />
                           </div>
                         </td>
                       </tr>
@@ -433,59 +398,29 @@ const DashboardView = () => {
                   ) : (
                     <>
                       <tbody>
-                        {data.length > 0 ? (
-                          data.map((item, index) => (
+                        {dataListProject.length > 0 ? (
+                          dataListProject.map((item, index) => (
                             <tr key={item.id}>
                               <td>{index + 1}</td> 
                               <td>{item.title}</td>
-                              <td>{item.theme.theme}</td>
+                              <td>{item.theme.theme.themeName}</td>
                               <td>{item.theme.music}</td>
-                              <td>
-                                {new Date(item.date).toLocaleDateString(
-                                  "en-GB",
-                                  {
-                                    day: "2-digit",
-                                    month: "short",
-                                    year: "numeric",
-                                  }
-                                )}{" "}
-                                {new Date(item.date).toLocaleTimeString(
-                                  "en-GB",
-                                  {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                  }
-                                )}
+                              <td> {new Date(item.date).toLocaleDateString(   "en-GB",   {     day: "2-digit",     month: "short",     year: "numeric",   } )}{" "} {new Date(item.date).toLocaleTimeString(   "en-GB",   {     hour: "2-digit",     minute: "2-digit",   } )}
                               </td>
                               <td>
-                                <button
-                                  name="Preview"
-                                  className="btn btn btn-outline-info btn-sm"
-                                  style={{ margin: "3px" }}
-                                >
+                                <button name="Preview" className="btn btn btn-outline-info btn-sm" style={{ margin: "3px" }} > 
                                   <i className="bi bi-eye " />
                                 </button>
-                                <button
-                                  className="btn btn btn-outline-success btn-sm"
-                                  style={{ margin: "3px" }}
-                                  onClick={() => getIdForEdit(item.id)}
-                                >
+                                <button className="btn btn btn-outline-success btn-sm" style={{ margin: "3px" }} onClick={() => getIdForEdit(item.id)}> 
                                   <i className="bi bi-pencil-square " />
                                 </button> 
                               </td>
                             </tr>
                           ))
-                        ) : data.length == 0 ? (
+                        ) : dataListProject.length == 0 ? (
                           <tr>
                             <td colSpan={6} style={{ textAlign: "center" }}>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  height: "50px", // Height can be adjusted as needed
-                                }}
-                              >
+                              <div style={{   display: "flex",   justifyContent: "center",   alignItems: "center",   height: "50px", }}>
                                 <h4 style={{ color: "#116A7B" }}>
                                   Project Not Found
                                 </h4>
@@ -497,28 +432,12 @@ const DashboardView = () => {
                       <tfoot>
                         <tr>
                           <td colSpan={7}>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              {page + 1 > 1 ? (
-                                <button
-                                  className="color-main btn btn-sm"
-                                  onClick={handlePreviousPage}
-                                >
-                                  {"<< Previous Page"}
-                                </button>
-                              ) : (
-                                // <>.</>
+                            <div style={{   display: "flex",   justifyContent: "space-between", }}> 
+                              {page + 1 > 1 ? (   <button     className="color-main btn btn-sm"     onClick={handlePreviousPage}   >     {"<< Previous Page"}   </button> ) : (
                                 <div style={{ color: "white" }}></div>
                               )}
                               {page + 1 < totalPages ? (
-                                <button
-                                  className="color-main btn btn-sm"
-                                  onClick={handleNextPage}
-                                >
+                                <button className="color-main btn btn-sm" onClick={handleNextPage} > 
                                   {"Next Page >>"}
                                 </button>
                               ) : (
@@ -700,7 +619,7 @@ const DashboardView = () => {
             {/* <a  onClick={() => handleTabClick('home')}  className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Home</a>
             <a  onClick={() => handleTabClick('product')}  className="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900 tw-hover:shadow-md tw-transition-shadow">Product</a> */}
           </div>
-          {isLoadingMain ? 
+          {isLoginLogout ? 
             <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
               <ReactLoading
                 type={"spinningBubbles"}
@@ -711,14 +630,24 @@ const DashboardView = () => {
             </div>  
               : 
             <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
-              {token && isUserLoggedIn ? 
-              <button onClick={handleLogout} className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Logout</button>
+              {isLoadingMain ? 
+                  <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
+                    <ReactLoading
+                      type={"spinningBubbles"}
+                      color={"#116A7B"}
+                      height={30} // Specify a fixed size
+                      width={30} // Specify a fixed size
+                    />
+                  </div>
+                :
+              (token && isUserLoggedIn ?              
+                  <button onClick={handleLogout} className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-white hover:tw-text-indigo-500">Logout</button>              
               :
-              <>
-              <a href="/masuk" className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Login <span aria-hidden="true">→</span></a>
-              <a href="/daftar" className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up</a>
-              </>
-              }
+                <>
+                  <button onClick={() => handleRoute("/masuk")} className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-white">Login <span aria-hidden="true">→</span></button>
+                  <button onClick={() => handleRoute("/daftar")} className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-white hover:tw-text-white">Sign Up</button>
+                </>
+              )}
             </div>
           }
 
@@ -767,19 +696,19 @@ const DashboardView = () => {
                       <div className="tw-flex tw-items-center">
                         <button
                               
-                              className="tw-btn tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500"
+                              className="tw-btn tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-white hover:tw-text-indigo-500"
                             >
                               <i className="bi bi-box-arrow-in-right " /> Logout
                             </button>
-                        <button onClick={handleLogout} className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500">Login <span aria-hidden="true">→</span></button>
+                        <button onClick={handleLogout} className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-white hover:tw-text-indigo-500">Logout <span aria-hidden="true">→</span></button>
                       </div> 
                       :
                       <> 
                         <div className="tw-flex tw-items-center">
-                          <a href="/masuk" className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo- 500">Login <span aria-hidden="true">→</span></a>
+                          <a href="/masuk" className="tw-rounded-full tw-w-full tw-text-center tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-white hover:tw-text-indigo-500">Login <span aria-hidden="true">→</span></a>
                         </div>
                         <div className="tw-flex tw-items-center"> 
-                          <a href="/daftar" className="tw-rounded-full tw-w-full tw-text-center tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-indigo-500">Sign Up?</a>
+                          <a href="/daftar" className="tw-rounded-full tw-w-full tw-text-center tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-white hover:tw-text-indigo-500">Sign Up?</a>
                         </div> 
                       </>
                     }
@@ -809,7 +738,8 @@ const DashboardView = () => {
               <div className="tw-w-full tw-h-64 tw-bg-black tw-rounded-lg tw-flex tw-items-center tw-justify-center"> 
                   <iframe  
                     height="100%"
-                    src="https://s3-figma-videos-production-sig.figma.com/video/1395694106045460061/TEAM/02b0/9b49/-df74-462b-8dbd-c7377d5114fd?Expires=1732492800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J0js8~1ydvRLeyRSgzg8kKfxNGh8PouayheDzLfCr7WpCnprBQYYpmNdrHqECtCkLZiBMk-XVqQuZcwITduA51Ed0rVfLdTSd13GqtyTNaiP~j-huV06Uny-Gl3v5TJH38v-CuQbXBTJgkT24Y6eKb9NfWRpfvQPQy8rs33dfHdfECR2IFE-WB31pPvo2WR8LX7H1YXMGmWdfw5SvbLXJzmQpA9ffYKJ-gF905T98T2U9c091EUuhISFr2nZidFHr-sMqyC3f5qFQtoVaJxWkASKkvJVARhcVTJDdGwPfEUpiB0JgVHmzzzaHSSCjvTCtsUIZ-8Xa-Gv7W26zU8Avw__"
+                    src=""
+                    // src="https://s3-figma-videos-production-sig.figma.com/video/1395694106045460061/TEAM/02b0/9b49/-df74-462b-8dbd-c7377d5114fd?Expires=1732492800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J0js8~1ydvRLeyRSgzg8kKfxNGh8PouayheDzLfCr7WpCnprBQYYpmNdrHqECtCkLZiBMk-XVqQuZcwITduA51Ed0rVfLdTSd13GqtyTNaiP~j-huV06Uny-Gl3v5TJH38v-CuQbXBTJgkT24Y6eKb9NfWRpfvQPQy8rs33dfHdfECR2IFE-WB31pPvo2WR8LX7H1YXMGmWdfw5SvbLXJzmQpA9ffYKJ-gF905T98T2U9c091EUuhISFr2nZidFHr-sMqyC3f5qFQtoVaJxWkASKkvJVARhcVTJDdGwPfEUpiB0JgVHmzzzaHSSCjvTCtsUIZ-8Xa-Gv7W26zU8Avw__"
                     title="My Iframe"
                     frameBorder="0"
                     allowFullScreen  

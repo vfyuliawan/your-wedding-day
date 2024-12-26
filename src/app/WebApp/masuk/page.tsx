@@ -1,15 +1,11 @@
 "use client";
 import { useRouter } from 'next/navigation'; 
 import { useEffect, useState, FormEvent } from 'react';
-import { ModelLoginRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface';
+import { ModelLoginRequestInterface, ModelLoginRequestPatch } from '../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface';
 import LoginService from '../Dashboard/Domain/Service/LoginService/LoginService';
 import { ResultModelLoginResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface';
 import CekUserLoginService from '../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService';
-
-interface FormData {
-  username: string;
-  password: string;
-}
+import ReactLoading from 'react-loading'; 
 
 const Login = () => {
     
@@ -18,26 +14,34 @@ const Login = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<ModelLoginRequestInterface>({
     username: '',
     password: '',
   });
+
   const [error, setError] = useState<string | null>(null); 
   const [token, setToken] = useState<string | null>(null); 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isLoadingMain, setisLoadingMain] = useState(false);
+  const [isLoginLogout, setisLoginLogout] = useState(false);
+  
   const router = useRouter(); 
 
   useEffect(() => {
+    setisLoadingMain(true);
     const storedToken = localStorage.getItem("token"); 
     if (storedToken) {
       setToken(storedToken); // Set token state if found in localStorage
       checkUserLogin(); 
-    }
+    } 
+    setisLoadingMain(false);
   }, []);
 
   
 
   const checkUserLogin = async () => {
+    
+    setisLoginLogout(true);
     try {
       const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
       if (serviceCheckUserLogin?.result == true) {
@@ -48,13 +52,14 @@ const Login = () => {
       console.error("check User Login error:", error);
       setError("An error occurred. Please try again later.");
       
-    }
+    } finally {
+      setisLoginLogout(false);
+    } 
   };
   // Login function that calls the API service
   const doLogin = async (username: string, password: string) => {
-    const requestBody: ModelLoginRequestInterface = {
-      username,
-      password,
+    const requestBody: ModelLoginRequestPatch = {
+      body: formData
     };
 
     try {
@@ -80,74 +85,99 @@ const Login = () => {
       ...prevState,
       [name]: value,
     }));
+    
   };
 
   // Handle form submission
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    setisLoadingMain(true);
     e.preventDefault();
     doLogin(formData.username, formData.password);
+    setisLoadingMain(false);
   };
 
   return (
-    <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
-      {header()}
-      <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-p-8 tw-rounded-xl tw-shadow-2xl">
-        <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="tw-space-y-3">
-          {error && <p className="tw-text-red-500 tw-text-center">{error}</p>} {/* Display error message if there is any */}
+    isLoadingMain ? 
+      <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
+        <ReactLoading
+          type={"spinningBubbles"}
+          color={"#116A7B"}
+          height={30} // Specify a fixed size
+          width={30} // Specify a fixed size
+        />
+      </div>  
+    : 
+      <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
+        {header()}
+        <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-p-8 tw-rounded-xl tw-shadow-2xl">
+          <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Login</h2>
+          <form onSubmit={handleSubmit} className="tw-space-y-3">
+            {error && <p className="tw-text-red-500 tw-text-center">{error}</p>} {/* Display error message if there is any */}
 
-          <div>
-            <label htmlFor="username" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-              placeholder="Enter your username"
-              className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your Password"
-              required
-              className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-            />
-          </div>
-
-          <div className=" tw-items-center tw-mt-3">
-            <button
-              type="submit"
-              disabled={!formData.username || !formData.password}
-              className="disabled:tw-opacity-25 tw-mt-3 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
-            >
-              Login
-            </button>
-            <div className="tw-flex tw-items-center tw-justify-center"> 
-            <p className="tw-text-xs tw-font-bold tw-mt-1 tw-px-3 tw-mb-0">
-              Don't have an account?{' '}
-              <button
-                type="button"
-                onClick={() => router.push("/daftar")}
-                className="tw-font-bold tw-text-indigo-500 btn"
-              >
-                Sign Up
-              </button>
-            </p>
+            <div>
+              <label htmlFor="username" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                placeholder="Enter your username"
+                className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+              />
             </div>
-          </div>
-        </form>
+
+            <div>
+              <label htmlFor="password" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your Password"
+                required
+                className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+              />
+            </div>
+
+            <div className=" tw-items-center tw-mt-3">
+              {isLoginLogout ? 
+                <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
+                  <ReactLoading
+                    type={"spinningBubbles"}
+                    color={"#116A7B"}
+                    height={30} // Specify a fixed size
+                    width={30} // Specify a fixed size
+                  />
+                </div>  
+              : 
+                <button
+                  type="submit"
+                  disabled={!formData.username || !formData.password}
+                  className="disabled:tw-opacity-25 tw-mt-3 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
+                >
+                  Login
+                </button>
+              }
+              <div className="tw-flex tw-items-center tw-justify-center"> 
+              <p className="tw-text-xs tw-font-bold tw-mt-1 tw-px-3 tw-mb-0">
+                Don't have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => router.push("/daftar")}
+                  className="tw-font-bold tw-text-indigo-500 btn"
+                >
+                  Sign Up
+                </button>
+              </p>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+
   );
 
   function header() {

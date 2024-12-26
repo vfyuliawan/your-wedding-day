@@ -28,8 +28,21 @@ export interface ThemeModelMyprojectResponseInterface {
     slug:    string;
     alamat:  string;
     embeded: string;
-    theme:   string;
+    theme:   ThemeDetailModelMyprojectResponseInterface;
     music:   string;
+    primaryColor:   string;
+    secondaryColor:   string;
+    thirdColor:   string;
+    textColor1:   string;
+    textColor2:   string;
+}
+export interface ThemeDetailModelMyprojectResponseInterface {
+    slug:    string;
+    primaryColor: string;
+    secondaryColor: string;
+    textColor1: string;
+    textColor2: string;
+    themeName: string;
 }
 
 // Converts JSON strings to/from your types
