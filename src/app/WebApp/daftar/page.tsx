@@ -100,7 +100,7 @@ const Signup = () => {
   return (
     <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
       {header()}
-      <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-p-8 tw-rounded-xl tw-shadow-2xl">
+      <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-m-8 tw-p-6  tw-rounded-xl tw-shadow-2xl">
         <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Sign Up</h2>
         <form onSubmit={handleSubmit} className="tw-space-y-3">
           {error && <p className="tw-text-red-500 tw-text-center">{error}</p>} {/* Display error message if there is any */}

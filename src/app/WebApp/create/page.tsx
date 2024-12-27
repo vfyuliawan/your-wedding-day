@@ -1,15 +1,13 @@
 "use client";
 import { useRouter } from 'next/navigation'; 
 import { useEffect, useState, FormEvent } from 'react';
-import { ModelLoginRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface';
-import LoginService from '../Dashboard/Domain/Service/LoginService/LoginService';
-import { ResultModelLoginResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface';
-import CekUserLoginService from '../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService';
+import 'bootstrap-icons/font/bootstrap-icons.css';import CekUserLoginService from '../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService';
 import ProjectServices from "../Dashboard/Domain/Service/ProjectService/ProjectService";
 import ReactLoading from 'react-loading';
 import { ResultModelGetProjectDetailResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/GetProjectDetailResponse/GetProjectDetailResponse';
-import { ModelProjectRequestInterface, ModelRequestCreateProjectPatch } from '../Dashboard/Domain/Models/ModelRequest/ProjectRequest/ModelProjectRequestInterface';
+import { GiftElementModelProjectRequestInterface, ModelProjectRequestInterface, ModelRequestCreateProjectPatch, StoryElementModelProjectRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/ProjectRequest/ModelProjectRequestInterface';
 import Swal from 'sweetalert2'; 
+import ToggleSwitch from '@/app/Components/ToggleSwitch';
 
 const createProjectPage = () => {
     
@@ -113,7 +111,7 @@ const createProjectPage = () => {
   const [token, setToken] = useState<string | null>(null); 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isLoadingMain, setisLoadingMain] = useState(false);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(false); 
   const [activeId, setActiveId] = useState<string | null>('1');
   const [isLoginLogout, setisLoginLogout] = useState(false);
   const [data, setData] = useState<ResultModelGetProjectDetailResponseInterface | undefined>(undefined);
@@ -128,6 +126,15 @@ const createProjectPage = () => {
       checkUserLogin(); 
     } 
     setisLoadingMain(false);
+    
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleAccordionClick = (id: string) => {
@@ -141,6 +148,8 @@ const createProjectPage = () => {
       const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
       if (serviceCheckUserLogin?.result == true) {
         setIsUserLoggedIn(true);       
+        
+      }else{
         router.push("/");
       }
     } catch (error) {
@@ -197,61 +206,52 @@ const createProjectPage = () => {
         <ReactLoading type={"spinningBubbles"} color={"#116A7B"} height={30}/>
       </div>  
     : 
-      <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
+      <div className="tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
         {header()}
-        <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-p-8  tw-m-20 tw-rounded-xl tw-shadow-2xl">
-          <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Login</h2>
-          <form onSubmit={handleSubmit} className="tw-space-y-3">
-            {error && <p className="tw-text-red-500 tw-text-center">{error}</p>} {/* Display error message if there is any */}
+        <div className='tw-pt-20 tw-pb-4 tw-px-4 tw-h-screen '>
+          <div className="tw-bg-white tw-p-4 tw-rounded-xl tw-shadow-2xl">
+            <h2 className="tw-text-2xl tw-mb-2 tw-font-semibold tw-text-gray-900 tw-text-center">Create</h2>
+            <form onSubmit={handleSubmit} className="tw-space-y-3">
+              {error && <p className="tw-text-red-500 tw-text-center">{error}</p>} {/* Display error message if there is any */}
 
-            <div className=" tw-overflow-y-auto  tw-p-2"
-              // style={{ height: '66.5vh' }}
-              >
-              <AccordionItem title={'Theme'} content={<ThemeView/>} isExpanded={activeId === '1'} onClick={() => handleAccordionClick('1')}/>
-              {/* <AccordionItem title={'Cover'} content={<CoverDepan data={data} setData={setData} />} isExpanded={activeId === '2'} onClick={() => handleAccordionClick('2')}/>
-              <AccordionItem title={'Home'} content={<HomeView data={data} setData={setData} />} isExpanded={activeId === '3'} onClick={() => handleAccordionClick('3')}/>
-              <AccordionItem title={'Hero'} content={<HeroView data={data} setData={setData} />} isExpanded={activeId === '4'} onClick={() => handleAccordionClick('4')}/>
-              <AccordionItem title={'Event'} content={<EventInfo data={data} setData={setData} />} isExpanded={activeId === '5'} onClick={() => handleAccordionClick('5')}/>
-              <AccordionItem title={'Gift'} content={<GiftsView data={data} setData={setData} />} isExpanded={activeId === '6'} onClick={() => handleAccordionClick('6')}/>
-              <AccordionItem title={'Story'} content={<StoryView data={data} setData={setData} />} isExpanded={activeId === '7'} onClick={() => handleAccordionClick('7')}/>
-              <AccordionItem title={'Couple'} content={<CouplesView data={data} setData={setData} />} isExpanded={activeId === '8'} onClick={() => handleAccordionClick('8')}/>
-              <AccordionItem title={'Galery'} content={<GaleryView data={data} setData={setData} />} isExpanded={activeId === '9'} onClick={() => handleAccordionClick('9')}/> */}
-            </div>
-
-            <div className=" tw-items-center tw-mt-3">
-              {isLoginLogout ? 
-                <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
-                  <ReactLoading
-                    type={"spinningBubbles"}
-                    color={"#116A7B"}
-                    height={30} // Specify a fixed size
-                    width={30} // Specify a fixed size
-                  />
-                </div>  
-              : 
-                <button
-                  type="submit"
-                  disabled={!formData.braidInfo || !formData.countdown}
-                  className="disabled:tw-opacity-25 tw-mt-3 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
+              <div className=" tw-overflow-y-auto  tw-p-2"
+                // style={{ height: '66.5vh' }}
                 >
-                  Login
-                </button>
-              }
-              <div className="tw-flex tw-items-center tw-justify-center"> 
-              <p className="tw-text-xs tw-font-bold tw-mt-1 tw-px-3 tw-mb-0">
-                Don't have an account?{' '}
-                <button
-                  type="button"
-                  onClick={() => router.push("/daftar")}
-                  className="tw-font-bold tw-text-indigo-500 btn"
-                >
-                  Sign Up
-                </button>
-              </p>
+                {/* <AccordionItem title={'Theme'} content={<ThemeView/>} isExpanded={activeId === '1'} onClick={() => handleAccordionClick('1')}/> */}
+                {/* <AccordionItem title={'Cover'} content={<CoverDepan />} isExpanded={activeId === '2'} onClick={() => handleAccordionClick('2')}/>
+                <AccordionItem title={'Home'} content={<HomeView />} isExpanded={activeId === '3'} onClick={() => handleAccordionClick('3')}/>
+                <AccordionItem title={'Hero'} content={<HeroView />} isExpanded={activeId === '4'} onClick={() => handleAccordionClick('4')}/>
+                <AccordionItem title={'Event'} content={<EventInfo />} isExpanded={activeId === '5'} onClick={() => handleAccordionClick('5')}/> */}
+                <AccordionItem title={'Gift'} content={<GiftsView />} isExpanded={activeId === '6'} onClick={() => handleAccordionClick('6')}/>
+                {/* <AccordionItem title={'Story'} content={<StoryView />} isExpanded={activeId === '7'} onClick={() => handleAccordionClick('7')}/>
+                <AccordionItem title={'Couple'} content={<CouplesView />} isExpanded={activeId === '8'} onClick={() => handleAccordionClick('8')}/>
+                <AccordionItem title={'Galery'} content={<GaleryView />} isExpanded={activeId === '9'} onClick={() => handleAccordionClick('9')}/> */}
               </div>
-            </div>
-          </form>
+
+              <div className="tw-flex tw-items-center tw-justify-center tw-mt-3">
+                {isLoginLogout ? 
+                  <div className="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end"  >
+                    <ReactLoading
+                      type={"spinningBubbles"}
+                      color={"#116A7B"}
+                      height={30} // Specify a fixed size
+                      width={30} // Specify a fixed size
+                    />
+                  </div>  
+                : 
+                  <button
+                    type="submit"
+                    disabled={!formData.braidInfo || !formData.countdown}
+                    className="disabled:tw-opacity-25 tw-mt-3 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
+                  >
+                    Create
+                  </button>
+                } 
+              </div>
+            </form>
+          </div>
         </div>
+        {footer()}
       </div>
 
   );
@@ -259,8 +259,8 @@ const createProjectPage = () => {
   function ThemeView() {
     const [isSlugFromTitle, setisSlugFromTitle] = useState('');
     return (  
-          <div className="accordion-body" style={{backgroundColor:'white'}}>
-            <div
+          <div className="tw-bg-white  tw-rounded-xl ">
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -281,28 +281,24 @@ const createProjectPage = () => {
                 alt=""
                 srcSet=""
               />
-            </div>
+            </div> */}
   
-            <div className="mb-3">
-              <label htmlFor={`themeName`} className="form-label">
-                Theme
-              </label>
+            <div className="tw-p-3">
+              <label htmlFor={`themeName`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Theme</label>
               <select
                 value={formData.infoAcara.akad.mapAkad} 
-                className="form-select"
+                className="form-select tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                 aria-label="Default select example"              
                 onChange={handleChange}
               >
                 <option>--- Select Theme ---</option> 
               </select>
             </div>
-            <div className="mb-3">
-              <label htmlFor="titleHome" className="form-label">
-                Project Title
-              </label>
+            <div className="tw-p-3">
+              <label htmlFor="titleHome" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Project Title</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                 id="titleTheme"
                 name="title"
                 placeholder="John-Rebecca"
@@ -310,13 +306,11 @@ const createProjectPage = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="slugTheme" className="form-label">
-                Slug
-              </label>
+            <div className="tw-p-3">
+              <label htmlFor="slugTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Slug</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                 disabled
                 id="alamatTheme"
                 name="slug"
@@ -330,13 +324,11 @@ const createProjectPage = () => {
   
               </div>
             </div>
-            <div className="mb-3">
-              <label htmlFor="titleHome" className="form-label">
-                Alamat
-              </label>
+            <div className="tw-p-3">
+              <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Alamat</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                 id="alamatTheme"
                 name="title"
                 placeholder="Alamat"
@@ -344,10 +336,8 @@ const createProjectPage = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="titleHome" className="form-label">
-                Embeded Map
-              </label>
+            <div className="tw-p-3">
+              <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Embeded Map</label>
               <textarea
                 className="form-control"
                 id="embeded"
@@ -364,6 +354,693 @@ const createProjectPage = () => {
     );
   }
 
+  function CoverDepan() {  
+    const [isImageCover, setisImageCover] = useState(false);
+    const [imageData, setImageData] = useState('');
+    return (
+      <div className="tw-bg-white  tw-rounded-xl ">
+        <div className="tw-p-3">
+          <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Cover</label>
+          <input
+            type="text"
+            className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+            id="titleCover"
+            name="title"
+            placeholder="Title Cover"
+            value={formData.infoAcara.akad.mapAkad}              
+                onChange={handleChange}
+          />
+        </div>
+        <div className="tw-p-3">
+          <label htmlFor="imageCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Cover</label>
+          <div>
+          {isImageCover ? (
+            <img
+              id="imageCoverPreview"
+              src={imageData} // Use the state variable to display the image
+              alt={"imageCover"}
+              style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+            />
+          ) : (
+            <></>
+          )}
+            <input
+                type="file"
+                className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                id="imageCover"
+                name="imageCover"
+                onChange={(val) => {
+                const fileImageCover = val?.target?.files?.[0];
+                if (fileImageCover) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(fileImageCover);
+                  reader.onloadend = () => {
+                    const imageDataUrl = reader.result as string;
+                    setImageData(imageDataUrl); // Store the image data in the state variable
+                    const base64Data = imageDataUrl.replace(
+                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                      ""
+                    );             
+                    handleChange
+                    setisImageCover(true);
+                  };
+                }
+              }}
+            />
+          </div>
+        </div>
+        <div className="tw-p-3">
+          <label htmlFor="eventDate" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date</label>
+          <input
+            type="date"
+            className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+            id="eventDate"
+            name="eventDate"
+            placeholder="Event Date" 
+            value={formData.infoAcara.akad.mapAkad}              
+                onChange={handleChange}
+          />
+        </div>
+        <div className="tw-p-3 form-check form-switch">
+          <input
+            className="form-check-input "
+            type="checkbox"
+            role="switch"
+            id="showCoverDepanSwitch"
+            name="showCover" 
+            value={formData.infoAcara.akad.mapAkad}              
+                onChange={handleChange}
+          />
+          <label className="form-check-label tw-text-sm tw-font-medium tw-text-gray-700" htmlFor="showCoverDepanSwitch">Show Cover</label>
+        </div> 
+      </div> 
+    );
+  }
+
+  function HomeView() {
+    const [isImageHomeView, setisImageHomeView] = useState('');
+    return (
+      <div className="tw-bg-white  tw-rounded-xl ">
+        <div className="tw-p-3">
+          <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Title</label>
+          <input
+            type="text"
+            className="form-control"
+            id="titleHome"
+            name="title"
+            placeholder="Title Home" 
+            value={formData.infoAcara.akad.mapAkad}             
+                onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Quote</label>
+          <input
+            type="text"
+            className="form-control"
+            id="quoteHome"
+            name="quote"
+            placeholder="Quote Home" 
+            value={formData.infoAcara.akad.mapAkad}             
+                onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Image</label>
+          <div>
+            {isImageHomeView ? 
+            <img
+              id="imageHomePreview"
+              src={isImageHomeView}
+              alt={"imageHome"}
+              style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+            />:<></>}
+            <input
+              type="file"
+              className="form-control"
+              id="imageHome"
+              name="imageHome"
+              onChange={(val) => {
+                const fileImageHome = val?.target?.files?.[0];
+                
+                if (fileImageHome) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(fileImageHome);
+                  reader.onloadend = () => {
+                    const imageHomeDataUrl = reader.result as string;
+                    
+                setisImageHomeView(imageHomeDataUrl);
+                    const base64HomeData = imageHomeDataUrl.replace(
+                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                      ""
+                    );
+                    handleChange;
+                  };
+                }
+              }}
+            />
+          </div>
+        </div>
+        <div className="mb-3 form-check form-switch">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="showHomeDepanSwitch"
+            name="showHome" 
+            value={formData.infoAcara.akad.mapAkad}             
+                onChange={handleChange}
+          />
+          <label className="form-check-label" htmlFor="showHomeDepanSwitch">
+            Show Home</label>
+        </div> 
+      </div> 
+    );
+  }
+
+  function HeroView() {
+    const [isImageHeroView, setisImageHeroView] = useState('');
+    return (
+    
+      <div className="accordion-body" style={{backgroundColor:'white'}}>
+        <div className="mb-3">
+          <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Hero Title
+      </label>
+          <input
+            type="text"
+            className="form-control"
+            id="titleHero"
+            name="title"
+            placeholder="Title Hero" 
+            
+            value={formData.infoAcara.akad.mapAkad}             
+                onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="titleHero" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Hero
+      </label>
+          <div>
+            {isImageHeroView ? 
+              <img
+                id="imageHeroPreview"
+                src={isImageHeroView}
+                alt={"imageHero"}
+                style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+              /> 
+            : <></>}
+            <input
+              type="file"
+              className="form-control"
+              id="imageHero"
+              name="imageHero"
+              onChange={(val) => {
+                const fileImageHero = val?.target?.files?.[0];
+                if (fileImageHero) {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(fileImageHero);
+                  reader.onloadend = () => {
+                    const imageHeroDataUrl = reader.result as string;
+                    const base64HeroData = imageHeroDataUrl.replace(
+                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                      ""
+                    );
+                    handleChange;
+                    setisImageHeroView(imageHeroDataUrl);
+                  };
+                }
+              }}
+            />
+          </div>
+        </div> 
+        <div className="mb-3 form-check form-switch">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="showHeroSwitch"
+            name="showHero" 
+            
+            value={formData.infoAcara.akad.mapAkad}             
+                onChange={handleChange}
+          />
+          <label
+            className="form-check-label"
+            htmlFor="flexSwitchCheckDefault"
+          >
+            Show Hero
+      </label>
+        </div> 
+      </div> 
+    );
+  }
+  
+  function EventInfo() {
+    const [isImageEvent1View, setisImageEvent1View] = useState('');
+    const [isImageEvent2View, setisImageEvent2View] = useState(''); 
+    
+    return (
+      <div className="accordion-body" style={{backgroundColor:'white'}}>
+        <div className="accordion" id="accordionPanelsStayOpenExample">
+          
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFour-One"
+                aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseFour-One"
+              >
+                Title Event 1
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseFour-One"
+              className="accordion-collapse collapse show"
+            >
+              <div className="accordion-body">
+                <div className="mb-3">
+                  <label htmlFor="titleEvent2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Event 1
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="titleEvent2"
+                    name="title"
+                    placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan" 
+                    
+            value={formData.infoAcara.akad.mapAkad}             
+            onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="placeEvent2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place Event 2
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="placeEvent2"
+                    name="place"
+                    placeholder="place Event 1: e.g. Hotel..., Taman..."            
+                    value={formData.infoAcara.akad.mapAkad}             
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="locationEvent1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Google Maps Event 1
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="locationEvent1"
+                    name="location"
+                    placeholder={"https://maps.app.goo.gl/LeMeridien"}  
+            value={formData.infoAcara.akad.mapAkad}             
+            onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="imageEvent1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Event 1
+                  </label>
+                  <div>
+                    {isImageEvent1View ? 
+                      <img
+                        id="imageEvent1Preview"
+                        src={isImageEvent1View}
+                        alt={"imageEvent1"}
+                        style={{
+                          maxWidth: "180px",
+                          margin: "5px",
+                          borderRadius: "5%",
+                        }}
+                      />
+                    : <></>}
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="imageEvent1"
+                      name="imageEvent1"
+                      onChange={(val) => {
+                        const fileImageEvent1 = val?.target?.files?.[0];
+                        if (fileImageEvent1) {
+                          const reader = new FileReader();
+                          reader.readAsDataURL(fileImageEvent1);
+                          reader.onloadend = () => {
+                            const imageEvent1DataUrl =
+                              reader.result as string;
+                              
+                            setisImageEvent1View(imageEvent1DataUrl);
+                            const base64Event1Data =
+                              imageEvent1DataUrl.replace(
+                                /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                ""
+                              );
+                            handleChange;
+                          };
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="mb-3 col-md-6">
+                    <label htmlFor="eventDate1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date 1</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="eventDate1"
+                      name="eventDate1"
+                      placeholder="Event Date 1" 
+                      onChange={(val) => {
+                        const newDate = new Date(val.target.value);
+                        const timePart = formData.infoAcara.resepsi.dateResepsi
+                          ? new Date(
+                              formData.infoAcara.resepsi.dateResepsi
+                            )
+                              .toISOString()
+                              .split("T")[1]
+                          : "00:00:00";
+                        handleChange;
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <label htmlFor="eventTime1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Time 1</label>
+                    <input
+                      type="time"
+                      className="form-control"
+                      id="eventTime1"
+                      name="eventTime1"
+                      placeholder="Event Time 1" 
+                      onChange={(val) => {
+                        const newTime = val.target.value;
+                        const datePart = formData.infoAcara.resepsi.dateResepsi
+                          ? new Date(
+                              formData.infoAcara.resepsi.dateResepsi
+                            )
+                              .toISOString()
+                              .split("T")[0]
+                          : new Date().toISOString().split("T")[0];
+                        handleChange;
+                      }}
+                    />
+                  </div>
+                </div>             
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFour-Two"
+                aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseFour-Two"
+              >
+                Title Event 2
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseFour-Two"
+              className="accordion-collapse collapse show"
+            >
+              <div className="accordion-body">
+                <div className="mb-3">
+                  <label htmlFor="titleEvent2" className="form-label">
+                    Title Event 2
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="titleEvent2"
+                    name="title"
+                    placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan" 
+                    value={formData.infoAcara.resepsi.titleResepsi}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="placeEvent2" className="form-label">
+                    Place Event 2
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="placeEvent2"
+                    name="place"
+                    placeholder="place Event 1: e.g. Hotel..., Taman..." 
+                    value={formData.infoAcara.resepsi.lokasiResepsi}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="locationEvent2" className="form-label">
+                    Link Google Maps Event 2
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="locationEvent2"
+                    name="location"
+                    placeholder={"https://maps.app.goo.gl/LeMeridien"} 
+                    value={formData.infoAcara.resepsi.mapResepsi}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="imageEvent2" className="form-label">
+                    Image Event 2
+                  </label>
+                  <div>
+                    {isImageEvent2View ? 
+                      <img
+                        id="imageEvent2Preview"
+                        src={isImageEvent2View}
+                        alt={"imageEvent2"}
+                        style={{
+                          maxWidth: "180px",
+                          margin: "5px",
+                          borderRadius: "5%",
+                        }}
+                      />
+                    : <></>}
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="imageEvent2"
+                      name="imageEvent2"
+                      onChange={(val) => {
+                        const fileImageEvent1 = val?.target?.files?.[0];
+                        if (fileImageEvent1) {
+                          const reader = new FileReader();
+                          reader.readAsDataURL(fileImageEvent1);
+                          reader.onloadend = () => {
+                            const imageEvent2DataUrl =
+                              reader.result as string;
+                            const base64Event1Data =
+                              imageEvent2DataUrl.replace(
+                                /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                ""
+                              );
+                            handleChange;
+                            setisImageEvent2View(imageEvent2DataUrl);
+                          };
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="mb-3 col-md-6">
+                    <label htmlFor="eventDate2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date 2</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="eventDate2"
+                      name="eventDate2"
+                      placeholder="Event Date 2" 
+                      onChange={(val) => {
+                        const newDate = new Date(val.target.value);
+                        const timePart = formData.infoAcara.resepsi.dateResepsi
+                          ? new Date(
+                              formData.infoAcara.resepsi.dateResepsi
+                            )
+                              .toISOString()
+                              .split("T")[1]
+                          : "00:00:00";
+                        handleChange;
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <label htmlFor="eventTime2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Time 2</label>
+                    <input
+                      type="time"
+                      className="form-control"
+                      id="eventTime2"
+                      name="eventTime2"
+                      placeholder="Event Time 2" 
+                      onChange={(val) => {
+                        const newTime = val.target.value;
+                        const datePart = formData.infoAcara.resepsi.dateResepsi
+                          ? new Date(
+                              formData.infoAcara.resepsi.dateResepsi
+                            )
+                              .toISOString()
+                              .split("T")[0]
+                          : new Date().toISOString().split("T")[0];
+                        handleChange;
+                      }}
+                    />
+                  </div>
+                </div>             
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div> 
+    );
+  }
+  
+  function GiftsView() { 
+    const handleGiftChange = (index: number, field: keyof GiftElementModelProjectRequestInterface, value: string) => {
+      setFormData((prevState) => {
+        const updatedGifts = [...prevState.gift.gifts];
+        updatedGifts[index] = { ...updatedGifts[index], [field]: value };
+        return {
+          ...prevState,
+          gift: { ...prevState.gift, gifts: updatedGifts },
+        };
+      });
+    };
+    const handleToggleChange = (state: boolean) => {
+      console.log("Toggle state:", state); // Handle state change
+    };
+    // Add a new gift to the formData
+    const addGift = () => {
+      setFormData((prevState) => ({
+        ...prevState,
+        gift: {
+          ...prevState.gift,
+          gifts: [...prevState.gift.gifts, { image: "", name: "", noRek: "" }],
+        },
+      }));
+    };
+
+    const banks = [
+      { value: "BCA", label: "Bank BCA" },
+      { value: "MANDIRI", label: "Bank Mandiri" },
+      { value: "BNI", label: "Bank BNI" },
+      { value: "BRI", label: "Bank BRI" },
+      { value: "BSI", label: "Bank BSI" },
+      { value: "UOB", label: "Bank UOB" },
+      { value: "BTPN", label: "Bank BTPN" },
+      { value: "CIMB", label: "Bank CIMB" },
+      { value: "OCBC", label: "Bank OCBC" },
+      { value: "BJB", label: "Bank BJB" },
+      { value: "MEGA", label: "Bank MEGA" },
+      { value: "BTN", label: "Bank BTN" },
+    ];
+  
+    return (
+      <div className="tw-bg-white  tw-rounded-xl">
+        {formData.gift.gifts.map((gift, index) => (
+          <div key={index} className="tw-p-3">
+            <h2 className=" tw-block tw-text-lg tw-font-medium tw-text-gray-700">Gift {index + 1}</h2>
+            <div className="">
+              <label htmlFor={`bank${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bank</label>
+              <select
+                id={`bank${index + 1}`}
+                className="form-select tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                aria-label="Default select example"
+                value={gift.image}
+                onChange={(e) => handleGiftChange(index, "image", e.target.value)}
+              >
+                <option value="">--- Select Bank ---</option>
+                {banks.map((bank) => (
+                  <option key={bank.value} value={bank.value}>
+                    {bank.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="">
+              <label htmlFor={`bankAccountNumber${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+                Bank Account Number
+              </label>
+              <input
+                type="number"
+                className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                id={`bankAccountNumber${index + 1}`}
+                name={`bankAccountNumber${index + 1}`}
+                placeholder="68123456789"
+                value={gift.noRek}
+              onChange={(e) => handleGiftChange(index, "noRek", e.target.value)}
+              />
+            </div>
+            <div className="">
+              <label htmlFor={`bankAccountName${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+                Bank Account Name
+              </label>
+              <input
+                type="text"
+                className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                id={`bankAccountName${index + 1}`}
+                name={`bankAccountName${index + 1}`}
+                placeholder="John Doe"
+                value={gift.name}
+              onChange={(e) => handleGiftChange(index, "name", e.target.value)}
+              />
+            </div>
+          </div>
+        ))}
+        <div className='tw-flex tw-items-center tw-justify-center tw-p-3'>
+          <button className="tw-mt-3 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"  onClick={addGift}>
+            Add Gift
+          </button>
+        </div>
+        <div className="tw-p-3">
+          <input
+            className="tw-relative tw-inline-block tw-w-12 tw-h-6"
+            type="checkbox"
+            role="switch"
+            id="showgiftSwitch"
+            name="showgift"
+            checked={formData.gift.isShow}
+          onChange={(e) => {
+            setFormData((prevState) => ({
+              ...prevState,
+              gift: { ...prevState.gift, isShow: e.target.checked },
+            }));
+          }}
+          />
+          <label className="tw-block tw-text-sm tw-font-medium tw-text-gray-700" htmlFor="showgiftSwitch">
+            Show Gift
+          </label>
+        </div>
+
+        <div className="tw-flex tw-items-center tw-space-x-4 tw-p-3">
+          <label  className="tw-text-gray-700 tw-font-medium">Toggle:</label>
+
+          <div className="tw-relative tw-inline-block tw-w-12 tw-h-6">
+            <input type="checkbox" id="toggle" className="tw-absolute tw-inset-0 tw-opacity-0" />
+
+            <span className="tw-absolute tw-inset-0 tw-bg-gray-300 tw-rounded-full tw-transition-colors tw-duration-200"></span>
+
+            <span className="tw-absolute tw-top-0 tw-left-0 tw-w-6 tw-h-6 tw-bg-white tw-rounded-full tw-transition-transform tw-duration-200 tw-transform tw-translate-x-0 peer-checked:tw-bg-blue-500 peer-checked:tw-translate-x-6"></span>
+          </div>
+        </div>
+        <ToggleSwitch labelState ={`isActive`} initialState={true} valueState={`true`} onChange={handleToggleChange}/>
+
+      </div>
+    );
+  }
+   
+
   function AccordionItem(params: { 
       title: string; 
       content: React.ReactNode; 
@@ -378,7 +1055,7 @@ const createProjectPage = () => {
           <i className="bi bi-grid-3x2-gap-fill tw-rotate-90" />
         </div>
         <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${params.isExpanded ? "tw-opacity-100" : "tw-opacity-0"}`}>
-          <p className="tw-text-gray-700 tw-text-base">{params.content}</p>
+          <p className="tw-text-gray-700 tw-text-base ">{params.content}</p>
         </div>
       </div>
     );
@@ -442,6 +1119,15 @@ const createProjectPage = () => {
           )}
         </nav>
       </header>
+    );
+  }
+
+  function footer() {
+    return (
+      <div className="tw-text-white tw-text-center tw-py-3 tw-bg-indigo-500">
+      <small className="tw-block">© 2024 Nvite Wedding. All Rights Reserved.</small>
+      <small className="tw-block">Design by <a className='tw-text-white tw-no-underline hover:tw-underline' href="https://honeydew-marten-892884.hostingersite.com/">NexDev</a>. </small>
+    </div>
     );
   }
 };
