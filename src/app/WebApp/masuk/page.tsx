@@ -11,14 +11,7 @@ const Login = () => {
     
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-  const [formData, setFormData] = useState<ModelLoginRequestInterface>({
-    username: '',
-    password: '',
-  });
-
+  const [formData, setFormData] = useState<ModelLoginRequestInterface>({username: '',password: '',});
   const [error, setError] = useState<string | null>(null); 
   const [token, setToken] = useState<string | null>(null); 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -26,7 +19,10 @@ const Login = () => {
   const [isLoginLogout, setisLoginLogout] = useState(false);
   
   const router = useRouter(); 
-
+  
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   useEffect(() => {
     setisLoadingMain(true);
     const storedToken = localStorage.getItem("token"); 
