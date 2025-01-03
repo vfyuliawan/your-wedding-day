@@ -195,25 +195,7 @@ const createProjectPage = () => {
         setError("An error occurred. Please try again later.");
       }
     };
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    
-  };
+   
 
 
   // Handle form submission
@@ -246,7 +228,7 @@ const createProjectPage = () => {
                 <AccordionItem title={'Home'} content={<HomeView />} isExpanded={activeId === '3'} onClick={() => handleAccordionClick('3')}/>
                 <AccordionItem title={'Hero'} content={<HeroView />} isExpanded={activeId === '4'} onClick={() => handleAccordionClick('4')}/>
                 <AccordionItem title={'Event'} content={<EventInfo />} isExpanded={activeId === '5'} onClick={() => handleAccordionClick('5')}/> */}
-                <AccordionItem title={'Gift'} content={<GiftsView />} isExpanded={activeId === '6'} checkedSwitch={formData.gift.isShow} 
+                {/* <AccordionItem title={'Gift'} content={<GiftsView />} isExpanded={activeId === '6'} checkedSwitch={formData.gift.isShow} 
                   onChangeSwitch={(newState) => {
                     setFormData((prevState) => ({
                       ...prevState,
@@ -254,7 +236,7 @@ const createProjectPage = () => {
                     }));
                   }}
                   onClick={() => handleAccordionClick('6')}
-                />
+                /> */}
                 {/* <AccordionItem title={'Story'} content={<StoryView />} isExpanded={activeId === '7'} onClick={() => handleAccordionClick('7')}/>
                 <AccordionItem title={'Couple'} content={<CouplesView />} isExpanded={activeId === '8'} onClick={() => handleAccordionClick('8')}/>
                 <AccordionItem title={'Galery'} content={<GaleryView />} isExpanded={activeId === '9'} onClick={() => handleAccordionClick('9')}/> */}
@@ -289,17 +271,18 @@ const createProjectPage = () => {
   );
 
   function ThemeView() {
-    const handleThemeChange = (field: keyof ThemeModelProjectRequestInterface, value: string) => {
-      setFormData((prevState) => {
-        console.log('theme', prevState.theme);
-        return {
-          ...prevState,
-          theme: { ...prevState.theme, [field]: value },
-          
-        };
-        
-      });
+
+    const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const { name, value } = e.target;
+      setFormData((prevState) => ({
+        ...prevState,
+        theme: {
+          ...prevState.theme,
+          [name]: value,  
+        },
+      }));
     };
+
     const [isSlugFromTitle, setisSlugFromTitle] = useState('');
     const theme = [
       { id:1, value: "Theme1", label: "Theme 1" },
@@ -317,16 +300,20 @@ const createProjectPage = () => {
           <div className="tw-bg-white  tw-rounded-xl "> 
             <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
               <div className="tw-mx-3 tw-w-full"> 
-                <input
-                type="text"
-                id="username"
-                name="username"
-                value={formDataLogin.username}
-                onChange={handleChange2}
-                required
-                placeholder="Enter your username"
-                className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-              />
+                <label htmlFor="titleHome" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Theme Title</label>
+                <select
+                  id='theme'
+                  name='theme'
+                  className="form-select tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                  aria-label="Default select example"              
+                  value={formData.theme.theme}  
+                  onChange={handleThemeChange}
+                >
+                  <option>--- Select Theme ---</option> 
+                  {theme.map((item) => (
+                    <option key={item.id} value={item.value}>{item.label}</option>
+                  ))}
+                </select>
               </div>
               <div className="tw-mx-3 tw-w-full">
                 <label htmlFor="titleHome" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Project Title</label>
@@ -334,7 +321,7 @@ const createProjectPage = () => {
                   type="text"
                   className="form-control tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                   id="titleTheme"
-                  name="title"
+                  name="slug"
                   placeholder="John-Rebecca"
                   value={formData.theme.slug}                              
                   onChange={(val) => {
@@ -356,11 +343,11 @@ const createProjectPage = () => {
                   type="text"
                   className="form-control tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                   disabled
-                  id="alamatTheme"
+                  id="slug"
                   name="slug"
                   placeholder="slug"
                   value={formData.theme.slug}  
-                  onChange={(e) => handleThemeChange('slug', e.target.value)}
+                  onChange={handleThemeChange}
                 />
                 <div style={{display:'flex', flexDirection:'row'}}>
                 <i style={{color:'red'}} className="bi bi-info-circle-fill"></i>
@@ -375,11 +362,11 @@ const createProjectPage = () => {
                 <input
                   type="text"
                   className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                  id="alamatTheme"
-                  name="alamatTheme"
+                  id="alamat"
+                  name="alamat"
                   placeholder="Alamat"
                   value={formData.theme.alamat}   
-                  onChange={(e) => handleThemeChange('alamat', e.target.value)}
+                  onChange={handleThemeChange}
                 />
               </div>
               <div className="tw-mx-3 tw-w-full">
@@ -387,20 +374,22 @@ const createProjectPage = () => {
                 <input
                   type="text"
                   className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                  id="embededTheme"
-                  name="embededTheme"
+                  id="embeded"
+                  name="embeded"
                   placeholder="https://maps.google.com/maps"
                   value={formData.theme.embeded} 
-                  onChange={(e) => handleThemeChange('embeded', e.target.value)}
+                  onChange={handleThemeChange}
                 />
               </div>
               <div className="tw-mx-3 tw-w-full">
                 <label htmlFor="MusicTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Music</label>
                 <select
+                  id='music'
+                  name='music'
                   className="form-select tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                   aria-label="Default select example"              
                   value={formData.theme.music}  
-                  onChange={(e) => handleThemeChange('music', e.target.value)}
+                  onChange={handleThemeChange}
                 >
                   <option>--- Select Music ---</option> 
                   {musicTheme.map((item) => (
@@ -411,28 +400,28 @@ const createProjectPage = () => {
             </div> 
             <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
               <div className="tw-mx-3 tw-w-full">
-                <label htmlFor="primaryColorTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Primary Color</label>
+                <label htmlFor="primaryColor" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Primary Color</label>
                 <input
                   type="text"
                   className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                   id="primaryColor"
                   name="primaryColor"
                   placeholder="Primary Color"
-                  value={formDataTheme.primaryColor} 
-                  onChange={handleChange2}
+                  value={formData.theme.primaryColor} 
+                  onChange={handleThemeChange}
                   // onChange={(e) => handleThemeChange('primaryColor', e.target.value)}
                 />
               </div> 
               <div className="tw-mx-3 tw-w-full">
-                <label htmlFor="secondaryColorTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Secondary Color</label>
+                <label htmlFor="secondaryColor" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Secondary Color</label>
                 <input
                   type="text"
                   className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                  id="secondaryColorTheme"
-                  name="secondaryColorTheme"
+                  id="secondaryColor"
+                  name="secondaryColor"
                   placeholder="secondary Color"
                   value={formData.theme.secondaryColor}
-                  onChange={(e) => handleThemeChange('secondaryColor', e.target.value)}
+                  onChange={handleThemeChange}
                 />
               </div> 
             </div> 
@@ -440,660 +429,647 @@ const createProjectPage = () => {
     );
   }
 
-  function CoverDepan() {  
-    const [isImageCover, setisImageCover] = useState(false);
-    const [imageData, setImageData] = useState('');
-    return (
-      <div className="tw-bg-white  tw-rounded-xl ">
-        <div className="tw-p-3">
-          <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Cover</label>
-          <input
-            type="text"
-            className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-            id="titleCover"
-            name="title"
-            placeholder="Title Cover"
-            value={formData.infoAcara.akad.mapAkad}              
-                onChange={handleChange}
-          />
-        </div>
-        <div className="tw-p-3">
-          <label htmlFor="imageCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Cover</label>
-          <div>
-          {isImageCover ? (
-            <img
-              id="imageCoverPreview"
-              src={imageData} // Use the state variable to display the image
-              alt={"imageCover"}
-              style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
-            />
-          ) : (
-            <></>
-          )}
-            <input
-                type="file"
-                className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                id="imageCover"
-                name="imageCover"
-                onChange={(val) => {
-                const fileImageCover = val?.target?.files?.[0];
-                if (fileImageCover) {
-                  const reader = new FileReader();
-                  reader.readAsDataURL(fileImageCover);
-                  reader.onloadend = () => {
-                    const imageDataUrl = reader.result as string;
-                    setImageData(imageDataUrl); // Store the image data in the state variable
-                    const base64Data = imageDataUrl.replace(
-                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                      ""
-                    );             
-                    handleChange
-                    setisImageCover(true);
-                  };
-                }
-              }}
-            />
-          </div>
-        </div>
-        <div className="tw-p-3">
-          <label htmlFor="eventDate" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date</label>
-          <input
-            type="date"
-            className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-            id="eventDate"
-            name="eventDate"
-            placeholder="Event Date" 
-            value={formData.infoAcara.akad.mapAkad}              
-                onChange={handleChange}
-          />
-        </div>
-        <div className="tw-p-3 form-check form-switch">
-          <input
-            className="form-check-input "
-            type="checkbox"
-            role="switch"
-            id="showCoverDepanSwitch"
-            name="showCover" 
-            value={formData.infoAcara.akad.mapAkad}              
-                onChange={handleChange}
-          />
-          <label className="form-check-label tw-text-sm tw-font-medium tw-text-gray-700" htmlFor="showCoverDepanSwitch">Show Cover</label>
-        </div> 
-      </div> 
-    );
-  }
+  // function CoverDepan() {  
+  //   const [isImageCover, setisImageCover] = useState(false);
+  //   const [imageData, setImageData] = useState('');
+  //   return (
+  //     <div className="tw-bg-white  tw-rounded-xl ">
+  //       <div className="tw-p-3">
+  //         <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Cover</label>
+  //         <input
+  //           type="text"
+  //           className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+  //           id="titleCover"
+  //           name="title"
+  //           placeholder="Title Cover"
+  //           value={formData.infoAcara.akad.mapAkad}              
+  //               onChange={handleChange}
+  //         />
+  //       </div>
+  //       <div className="tw-p-3">
+  //         <label htmlFor="imageCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Cover</label>
+  //         <div>
+  //         {isImageCover ? (
+  //           <img
+  //             id="imageCoverPreview"
+  //             src={imageData} // Use the state variable to display the image
+  //             alt={"imageCover"}
+  //             style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+  //           />
+  //         ) : (
+  //           <></>
+  //         )}
+  //           <input
+  //               type="file"
+  //               className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+  //               id="imageCover"
+  //               name="imageCover"
+  //               onChange={(val) => {
+  //               const fileImageCover = val?.target?.files?.[0];
+  //               if (fileImageCover) {
+  //                 const reader = new FileReader();
+  //                 reader.readAsDataURL(fileImageCover);
+  //                 reader.onloadend = () => {
+  //                   const imageDataUrl = reader.result as string;
+  //                   setImageData(imageDataUrl); // Store the image data in the state variable
+  //                   const base64Data = imageDataUrl.replace(
+  //                     /^data:image\/(jpg|jpeg|png|gif);base64,/,
+  //                     ""
+  //                   );             
+  //                   handleChange
+  //                   setisImageCover(true);
+  //                 };
+  //               }
+  //             }}
+  //           />
+  //         </div>
+  //       </div>
+  //       <div className="tw-p-3">
+  //         <label htmlFor="eventDate" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date</label>
+  //         <input
+  //           type="date"
+  //           className="form-control  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+  //           id="eventDate"
+  //           name="eventDate"
+  //           placeholder="Event Date" 
+  //           value={formData.infoAcara.akad.mapAkad}              
+  //               onChange={handleChange}
+  //         />
+  //       </div>
+  //       <div className="tw-p-3 form-check form-switch">
+  //         <input
+  //           className="form-check-input "
+  //           type="checkbox"
+  //           role="switch"
+  //           id="showCoverDepanSwitch"
+  //           name="showCover" 
+  //           value={formData.infoAcara.akad.mapAkad}              
+  //               onChange={handleChange}
+  //         />
+  //         <label className="form-check-label tw-text-sm tw-font-medium tw-text-gray-700" htmlFor="showCoverDepanSwitch">Show Cover</label>
+  //       </div> 
+  //     </div> 
+  //   );
+  // }
 
-  function HomeView() {
-    const [isImageHomeView, setisImageHomeView] = useState('');
-    return (
-      <div className="tw-bg-white  tw-rounded-xl ">
-        <div className="tw-p-3">
-          <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Title</label>
-          <input
-            type="text"
-            className="form-control"
-            id="titleHome"
-            name="title"
-            placeholder="Title Home" 
-            value={formData.infoAcara.akad.mapAkad}             
-                onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Quote</label>
-          <input
-            type="text"
-            className="form-control"
-            id="quoteHome"
-            name="quote"
-            placeholder="Quote Home" 
-            value={formData.infoAcara.akad.mapAkad}             
-                onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Image</label>
-          <div>
-            {isImageHomeView ? 
-            <img
-              id="imageHomePreview"
-              src={isImageHomeView}
-              alt={"imageHome"}
-              style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
-            />:<></>}
-            <input
-              type="file"
-              className="form-control"
-              id="imageHome"
-              name="imageHome"
-              onChange={(val) => {
-                const fileImageHome = val?.target?.files?.[0];
+  // function HomeView() {
+  //   const [isImageHomeView, setisImageHomeView] = useState('');
+  //   return (
+  //     <div className="tw-bg-white  tw-rounded-xl ">
+  //       <div className="tw-p-3">
+  //         <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Title</label>
+  //         <input
+  //           type="text"
+  //           className="form-control"
+  //           id="titleHome"
+  //           name="title"
+  //           placeholder="Title Home" 
+  //           value={formData.infoAcara.akad.mapAkad}             
+  //               onChange={handleChange}
+  //         />
+  //       </div>
+  //       <div className="mb-3">
+  //         <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Quote</label>
+  //         <input
+  //           type="text"
+  //           className="form-control"
+  //           id="quoteHome"
+  //           name="quote"
+  //           placeholder="Quote Home" 
+  //           value={formData.infoAcara.akad.mapAkad}             
+  //               onChange={handleChange}
+  //         />
+  //       </div>
+  //       <div className="mb-3">
+  //         <label htmlFor="titleHome" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Home Image</label>
+  //         <div>
+  //           {isImageHomeView ? 
+  //           <img
+  //             id="imageHomePreview"
+  //             src={isImageHomeView}
+  //             alt={"imageHome"}
+  //             style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+  //           />:<></>}
+  //           <input
+  //             type="file"
+  //             className="form-control"
+  //             id="imageHome"
+  //             name="imageHome"
+  //             onChange={(val) => {
+  //               const fileImageHome = val?.target?.files?.[0];
                 
-                if (fileImageHome) {
-                  const reader = new FileReader();
-                  reader.readAsDataURL(fileImageHome);
-                  reader.onloadend = () => {
-                    const imageHomeDataUrl = reader.result as string;
+  //               if (fileImageHome) {
+  //                 const reader = new FileReader();
+  //                 reader.readAsDataURL(fileImageHome);
+  //                 reader.onloadend = () => {
+  //                   const imageHomeDataUrl = reader.result as string;
                     
-                setisImageHomeView(imageHomeDataUrl);
-                    const base64HomeData = imageHomeDataUrl.replace(
-                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                      ""
-                    );
-                    handleChange;
-                  };
-                }
-              }}
-            />
-          </div>
-        </div>
-        <div className="mb-3 form-check form-switch">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="showHomeDepanSwitch"
-            name="showHome" 
-            value={formData.infoAcara.akad.mapAkad}             
-                onChange={handleChange}
-          />
-          <label className="form-check-label" htmlFor="showHomeDepanSwitch">
-            Show Home</label>
-        </div> 
-      </div> 
-    );
-  }
+  //               setisImageHomeView(imageHomeDataUrl);
+  //                   const base64HomeData = imageHomeDataUrl.replace(
+  //                     /^data:image\/(jpg|jpeg|png|gif);base64,/,
+  //                     ""
+  //                   );
+  //                   handleChange;
+  //                 };
+  //               }
+  //             }}
+  //           />
+  //         </div>
+  //       </div>
+  //       <div className="mb-3 form-check form-switch">
+  //         <input
+  //           className="form-check-input"
+  //           type="checkbox"
+  //           role="switch"
+  //           id="showHomeDepanSwitch"
+  //           name="showHome" 
+  //           value={formData.infoAcara.akad.mapAkad}             
+  //               onChange={handleChange}
+  //         />
+  //         <label className="form-check-label" htmlFor="showHomeDepanSwitch">
+  //           Show Home</label>
+  //       </div> 
+  //     </div> 
+  //   );
+  // }
 
-  function HeroView() {
-    const [isImageHeroView, setisImageHeroView] = useState('');
-    return (
+  // function HeroView() {
+  //   const [isImageHeroView, setisImageHeroView] = useState('');
+  //   return (
     
-      <div className="accordion-body" style={{backgroundColor:'white'}}>
-        <div className="mb-3">
-          <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Hero Title
-      </label>
-          <input
-            type="text"
-            className="form-control"
-            id="titleHero"
-            name="title"
-            placeholder="Title Hero" 
+  //     <div className="accordion-body" style={{backgroundColor:'white'}}>
+  //       <div className="mb-3">
+  //         <label htmlFor="titleCover" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Hero Title
+  //     </label>
+  //         <input
+  //           type="text"
+  //           className="form-control"
+  //           id="titleHero"
+  //           name="title"
+  //           placeholder="Title Hero" 
             
-            value={formData.infoAcara.akad.mapAkad}             
-                onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="titleHero" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Hero
-      </label>
-          <div>
-            {isImageHeroView ? 
-              <img
-                id="imageHeroPreview"
-                src={isImageHeroView}
-                alt={"imageHero"}
-                style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
-              /> 
-            : <></>}
-            <input
-              type="file"
-              className="form-control"
-              id="imageHero"
-              name="imageHero"
-              onChange={(val) => {
-                const fileImageHero = val?.target?.files?.[0];
-                if (fileImageHero) {
-                  const reader = new FileReader();
-                  reader.readAsDataURL(fileImageHero);
-                  reader.onloadend = () => {
-                    const imageHeroDataUrl = reader.result as string;
-                    const base64HeroData = imageHeroDataUrl.replace(
-                      /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                      ""
-                    );
-                    handleChange;
-                    setisImageHeroView(imageHeroDataUrl);
-                  };
-                }
-              }}
-            />
-          </div>
-        </div> 
-        <div className="mb-3 form-check form-switch">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="showHeroSwitch"
-            name="showHero" 
+  //           value={formData.infoAcara.akad.mapAkad}             
+  //               onChange={handleChange}
+  //         />
+  //       </div>
+  //       <div className="mb-3">
+  //         <label htmlFor="titleHero" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Hero
+  //     </label>
+  //         <div>
+  //           {isImageHeroView ? 
+  //             <img
+  //               id="imageHeroPreview"
+  //               src={isImageHeroView}
+  //               alt={"imageHero"}
+  //               style={{ maxWidth: "180px", margin: "5px", borderRadius: "5%" }}
+  //             /> 
+  //           : <></>}
+  //           <input
+  //             type="file"
+  //             className="form-control"
+  //             id="imageHero"
+  //             name="imageHero"
+  //             onChange={(val) => {
+  //               const fileImageHero = val?.target?.files?.[0];
+  //               if (fileImageHero) {
+  //                 const reader = new FileReader();
+  //                 reader.readAsDataURL(fileImageHero);
+  //                 reader.onloadend = () => {
+  //                   const imageHeroDataUrl = reader.result as string;
+  //                   const base64HeroData = imageHeroDataUrl.replace(
+  //                     /^data:image\/(jpg|jpeg|png|gif);base64,/,
+  //                     ""
+  //                   );
+  //                   handleChange;
+  //                   setisImageHeroView(imageHeroDataUrl);
+  //                 };
+  //               }
+  //             }}
+  //           />
+  //         </div>
+  //       </div> 
+  //       <div className="mb-3 form-check form-switch">
+  //         <input
+  //           className="form-check-input"
+  //           type="checkbox"
+  //           role="switch"
+  //           id="showHeroSwitch"
+  //           name="showHero" 
             
-            value={formData.infoAcara.akad.mapAkad}             
-                onChange={handleChange}
-          />
-          <label
-            className="form-check-label"
-            htmlFor="flexSwitchCheckDefault"
-          >
-            Show Hero
-      </label>
-        </div> 
-      </div> 
-    );
-  }
+  //           value={formData.infoAcara.akad.mapAkad}             
+  //               onChange={handleChange}
+  //         />
+  //         <label
+  //           className="form-check-label"
+  //           htmlFor="flexSwitchCheckDefault"
+  //         >
+  //           Show Hero
+  //     </label>
+  //       </div> 
+  //     </div> 
+  //   );
+  // }
   
-  function EventInfo() {
-    const [isImageEvent1View, setisImageEvent1View] = useState('');
-    const [isImageEvent2View, setisImageEvent2View] = useState(''); 
+  // function EventInfo() {
+  //   const [isImageEvent1View, setisImageEvent1View] = useState('');
+  //   const [isImageEvent2View, setisImageEvent2View] = useState(''); 
     
-    return (
-      <div className="accordion-body" style={{backgroundColor:'white'}}>
-        <div className="accordion" id="accordionPanelsStayOpenExample">
+  //   return (
+  //     <div className="accordion-body" style={{backgroundColor:'white'}}>
+  //       <div className="accordion" id="accordionPanelsStayOpenExample">
           
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseFour-One"
-                aria-expanded="true"
-                aria-controls="panelsStayOpen-collapseFour-One"
-              >
-                Title Event 1
-              </button>
-            </h2>
-            <div
-              id="panelsStayOpen-collapseFour-One"
-              className="accordion-collapse collapse show"
-            >
-              <div className="accordion-body">
-                <div className="mb-3">
-                  <label htmlFor="titleEvent2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Event 1
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="titleEvent2"
-                    name="title"
-                    placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan"               
-                    value={formData.infoAcara.akad.mapAkad}             
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="placeEvent2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place Event 2
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="placeEvent2"
-                    name="place"
-                    placeholder="place Event 1: e.g. Hotel..., Taman..."            
-                    value={formData.infoAcara.akad.mapAkad}             
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="locationEvent1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Google Maps Event 1
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="locationEvent1"
-                    name="location"
-                    placeholder={"https://maps.app.goo.gl/LeMeridien"}  
-            value={formData.infoAcara.akad.mapAkad}             
-            onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="imageEvent1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Event 1
-                  </label>
-                  <div>
-                    {isImageEvent1View ? 
-                      <img
-                        id="imageEvent1Preview"
-                        src={isImageEvent1View}
-                        alt={"imageEvent1"}
-                        style={{
-                          maxWidth: "180px",
-                          margin: "5px",
-                          borderRadius: "5%",
-                        }}
-                      />
-                    : <></>}
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="imageEvent1"
-                      name="imageEvent1"
-                      onChange={(val) => {
-                        const fileImageEvent1 = val?.target?.files?.[0];
-                        if (fileImageEvent1) {
-                          const reader = new FileReader();
-                          reader.readAsDataURL(fileImageEvent1);
-                          reader.onloadend = () => {
-                            const imageEvent1DataUrl =
-                              reader.result as string;
+  //         <div className="accordion-item">
+  //           <h2 className="accordion-header">
+  //             <button
+  //               className="accordion-button"
+  //               type="button"
+  //               data-bs-toggle="collapse"
+  //               data-bs-target="#panelsStayOpen-collapseFour-One"
+  //               aria-expanded="true"
+  //               aria-controls="panelsStayOpen-collapseFour-One"
+  //             >
+  //               Title Event 1
+  //             </button>
+  //           </h2>
+  //           <div
+  //             id="panelsStayOpen-collapseFour-One"
+  //             className="accordion-collapse collapse show"
+  //           >
+  //             <div className="accordion-body">
+  //               <div className="mb-3">
+  //                 <label htmlFor="titleEvent2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Event 1
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="titleEvent2"
+  //                   name="title"
+  //                   placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan"               
+  //                   value={formData.infoAcara.akad.mapAkad}             
+  //                   onChange={handleChange}
+  //                 />
+  //               </div>
+  //               <div className="mb-3">
+  //                 <label htmlFor="placeEvent2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place Event 2
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="placeEvent2"
+  //                   name="place"
+  //                   placeholder="place Event 1: e.g. Hotel..., Taman..."            
+  //                   value={formData.infoAcara.akad.mapAkad}             
+  //                   onChange={handleChange}
+  //                 />
+  //               </div>
+  //               <div className="mb-3">
+  //                 <label htmlFor="locationEvent1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Google Maps Event 1
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="locationEvent1"
+  //                   name="location"
+  //                   placeholder={"https://maps.app.goo.gl/LeMeridien"}  
+  //           value={formData.infoAcara.akad.mapAkad}             
+  //           onChange={handleChange}
+  //                 />
+  //               </div>
+  //               <div className="mb-3">
+  //                 <label htmlFor="imageEvent1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Event 1
+  //                 </label>
+  //                 <div>
+  //                   {isImageEvent1View ? 
+  //                     <img
+  //                       id="imageEvent1Preview"
+  //                       src={isImageEvent1View}
+  //                       alt={"imageEvent1"}
+  //                       style={{
+  //                         maxWidth: "180px",
+  //                         margin: "5px",
+  //                         borderRadius: "5%",
+  //                       }}
+  //                     />
+  //                   : <></>}
+  //                   <input
+  //                     type="file"
+  //                     className="form-control"
+  //                     id="imageEvent1"
+  //                     name="imageEvent1"
+  //                     onChange={(val) => {
+  //                       const fileImageEvent1 = val?.target?.files?.[0];
+  //                       if (fileImageEvent1) {
+  //                         const reader = new FileReader();
+  //                         reader.readAsDataURL(fileImageEvent1);
+  //                         reader.onloadend = () => {
+  //                           const imageEvent1DataUrl =
+  //                             reader.result as string;
                               
-                            setisImageEvent1View(imageEvent1DataUrl);
-                            const base64Event1Data =
-                              imageEvent1DataUrl.replace(
-                                /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                                ""
-                              );
-                            handleChange;
-                          };
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="mb-3 col-md-6">
-                    <label htmlFor="eventDate1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date 1</label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="eventDate1"
-                      name="eventDate1"
-                      placeholder="Event Date 1" 
-                      onChange={(val) => {
-                        const newDate = new Date(val.target.value);
-                        const timePart = formData.infoAcara.resepsi.dateResepsi
-                          ? new Date(
-                              formData.infoAcara.resepsi.dateResepsi
-                            )
-                              .toISOString()
-                              .split("T")[1]
-                          : "00:00:00";
-                        handleChange;
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3 col-md-6">
-                    <label htmlFor="eventTime1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Time 1</label>
-                    <input
-                      type="time"
-                      className="form-control"
-                      id="eventTime1"
-                      name="eventTime1"
-                      placeholder="Event Time 1" 
-                      onChange={(val) => {
-                        const newTime = val.target.value;
-                        const datePart = formData.infoAcara.resepsi.dateResepsi
-                          ? new Date(
-                              formData.infoAcara.resepsi.dateResepsi
-                            )
-                              .toISOString()
-                              .split("T")[0]
-                          : new Date().toISOString().split("T")[0];
-                        handleChange;
-                      }}
-                    />
-                  </div>
-                </div>             
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseFour-Two"
-                aria-expanded="true"
-                aria-controls="panelsStayOpen-collapseFour-Two"
-              >
-                Title Event 2
-              </button>
-            </h2>
-            <div
-              id="panelsStayOpen-collapseFour-Two"
-              className="accordion-collapse collapse show"
-            >
-              <div className="accordion-body">
-                <div className="mb-3">
-                  <label htmlFor="titleEvent2" className="form-label">
-                    Title Event 2
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="titleEvent2"
-                    name="title"
-                    placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan" 
-                    value={formData.infoAcara.resepsi.titleResepsi}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="placeEvent2" className="form-label">
-                    Place Event 2
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="placeEvent2"
-                    name="place"
-                    placeholder="place Event 1: e.g. Hotel..., Taman..." 
-                    value={formData.infoAcara.resepsi.lokasiResepsi}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="locationEvent2" className="form-label">
-                    Link Google Maps Event 2
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="locationEvent2"
-                    name="location"
-                    placeholder={"https://maps.app.goo.gl/LeMeridien"} 
-                    value={formData.infoAcara.resepsi.mapResepsi}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="imageEvent2" className="form-label">
-                    Image Event 2
-                  </label>
-                  <div>
-                    {isImageEvent2View ? 
-                      <img
-                        id="imageEvent2Preview"
-                        src={isImageEvent2View}
-                        alt={"imageEvent2"}
-                        style={{
-                          maxWidth: "180px",
-                          margin: "5px",
-                          borderRadius: "5%",
-                        }}
-                      />
-                    : <></>}
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="imageEvent2"
-                      name="imageEvent2"
-                      onChange={(val) => {
-                        const fileImageEvent1 = val?.target?.files?.[0];
-                        if (fileImageEvent1) {
-                          const reader = new FileReader();
-                          reader.readAsDataURL(fileImageEvent1);
-                          reader.onloadend = () => {
-                            const imageEvent2DataUrl =
-                              reader.result as string;
-                            const base64Event1Data =
-                              imageEvent2DataUrl.replace(
-                                /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                                ""
-                              );
-                            handleChange;
-                            setisImageEvent2View(imageEvent2DataUrl);
-                          };
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="mb-3 col-md-6">
-                    <label htmlFor="eventDate2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date 2</label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="eventDate2"
-                      name="eventDate2"
-                      placeholder="Event Date 2" 
-                      onChange={(val) => {
-                        const newDate = new Date(val.target.value);
-                        const timePart = formData.infoAcara.resepsi.dateResepsi
-                          ? new Date(
-                              formData.infoAcara.resepsi.dateResepsi
-                            )
-                              .toISOString()
-                              .split("T")[1]
-                          : "00:00:00";
-                        handleChange;
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3 col-md-6">
-                    <label htmlFor="eventTime2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Time 2</label>
-                    <input
-                      type="time"
-                      className="form-control"
-                      id="eventTime2"
-                      name="eventTime2"
-                      placeholder="Event Time 2" 
-                      onChange={(val) => {
-                        const newTime = val.target.value;
-                        const datePart = formData.infoAcara.resepsi.dateResepsi
-                          ? new Date(
-                              formData.infoAcara.resepsi.dateResepsi
-                            )
-                              .toISOString()
-                              .split("T")[0]
-                          : new Date().toISOString().split("T")[0];
-                        handleChange;
-                      }}
-                    />
-                  </div>
-                </div>             
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div> 
-    );
-  }
+  //                           setisImageEvent1View(imageEvent1DataUrl);
+  //                           const base64Event1Data =
+  //                             imageEvent1DataUrl.replace(
+  //                               /^data:image\/(jpg|jpeg|png|gif);base64,/,
+  //                               ""
+  //                             );
+  //                           handleChange;
+  //                         };
+  //                       }
+  //                     }}
+  //                   />
+  //                 </div>
+  //               </div>
+  //               <div className="row">
+  //                 <div className="mb-3 col-md-6">
+  //                   <label htmlFor="eventDate1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date 1</label>
+  //                   <input
+  //                     type="date"
+  //                     className="form-control"
+  //                     id="eventDate1"
+  //                     name="eventDate1"
+  //                     placeholder="Event Date 1" 
+  //                     onChange={(val) => {
+  //                       const newDate = new Date(val.target.value);
+  //                       const timePart = formData.infoAcara.resepsi.dateResepsi
+  //                         ? new Date(
+  //                             formData.infoAcara.resepsi.dateResepsi
+  //                           )
+  //                             .toISOString()
+  //                             .split("T")[1]
+  //                         : "00:00:00";
+  //                       handleChange;
+  //                     }}
+  //                   />
+  //                 </div>
+  //                 <div className="mb-3 col-md-6">
+  //                   <label htmlFor="eventTime1" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Time 1</label>
+  //                   <input
+  //                     type="time"
+  //                     className="form-control"
+  //                     id="eventTime1"
+  //                     name="eventTime1"
+  //                     placeholder="Event Time 1" 
+  //                     onChange={(val) => {
+  //                       const newTime = val.target.value;
+  //                       const datePart = formData.infoAcara.resepsi.dateResepsi
+  //                         ? new Date(
+  //                             formData.infoAcara.resepsi.dateResepsi
+  //                           )
+  //                             .toISOString()
+  //                             .split("T")[0]
+  //                         : new Date().toISOString().split("T")[0];
+  //                       handleChange;
+  //                     }}
+  //                   />
+  //                 </div>
+  //               </div>             
+  //             </div>
+  //           </div>
+  //         </div>
+  //         <div className="accordion-item">
+  //           <h2 className="accordion-header">
+  //             <button
+  //               className="accordion-button"
+  //               type="button"
+  //               data-bs-toggle="collapse"
+  //               data-bs-target="#panelsStayOpen-collapseFour-Two"
+  //               aria-expanded="true"
+  //               aria-controls="panelsStayOpen-collapseFour-Two"
+  //             >
+  //               Title Event 2
+  //             </button>
+  //           </h2>
+  //           <div
+  //             id="panelsStayOpen-collapseFour-Two"
+  //             className="accordion-collapse collapse show"
+  //           >
+  //             <div className="accordion-body">
+  //               <div className="mb-3">
+  //                 <label htmlFor="titleEvent2" className="form-label">
+  //                   Title Event 2
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="titleEvent2"
+  //                   name="title"
+  //                   placeholder="Title Event 2: e.g. Akad, Resepsi, Pemberkatan" 
+  //                   value={formData.infoAcara.resepsi.titleResepsi}
+  //                   onChange={handleChange}
+  //                 />
+  //               </div>
+  //               <div className="mb-3">
+  //                 <label htmlFor="placeEvent2" className="form-label">
+  //                   Place Event 2
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="placeEvent2"
+  //                   name="place"
+  //                   placeholder="place Event 1: e.g. Hotel..., Taman..." 
+  //                   value={formData.infoAcara.resepsi.lokasiResepsi}
+  //                   onChange={handleChange}
+  //                 />
+  //               </div>
+  //               <div className="mb-3">
+  //                 <label htmlFor="locationEvent2" className="form-label">
+  //                   Link Google Maps Event 2
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="locationEvent2"
+  //                   name="location"
+  //                   placeholder={"https://maps.app.goo.gl/LeMeridien"} 
+  //                   value={formData.infoAcara.resepsi.mapResepsi}
+  //                   onChange={handleChange}
+  //                 />
+  //               </div>
+  //               <div className="mb-3">
+  //                 <label htmlFor="imageEvent2" className="form-label">
+  //                   Image Event 2
+  //                 </label>
+  //                 <div>
+  //                   {isImageEvent2View ? 
+  //                     <img
+  //                       id="imageEvent2Preview"
+  //                       src={isImageEvent2View}
+  //                       alt={"imageEvent2"}
+  //                       style={{
+  //                         maxWidth: "180px",
+  //                         margin: "5px",
+  //                         borderRadius: "5%",
+  //                       }}
+  //                     />
+  //                   : <></>}
+  //                   <input
+  //                     type="file"
+  //                     className="form-control"
+  //                     id="imageEvent2"
+  //                     name="imageEvent2"
+  //                     onChange={(val) => {
+  //                       const fileImageEvent1 = val?.target?.files?.[0];
+  //                       if (fileImageEvent1) {
+  //                         const reader = new FileReader();
+  //                         reader.readAsDataURL(fileImageEvent1);
+  //                         reader.onloadend = () => {
+  //                           const imageEvent2DataUrl =
+  //                             reader.result as string;
+  //                           const base64Event1Data =
+  //                             imageEvent2DataUrl.replace(
+  //                               /^data:image\/(jpg|jpeg|png|gif);base64,/,
+  //                               ""
+  //                             );
+  //                           handleChange;
+  //                           setisImageEvent2View(imageEvent2DataUrl);
+  //                         };
+  //                       }
+  //                     }}
+  //                   />
+  //                 </div>
+  //               </div>
+  //               <div className="row">
+  //                 <div className="mb-3 col-md-6">
+  //                   <label htmlFor="eventDate2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Date 2</label>
+  //                   <input
+  //                     type="date"
+  //                     className="form-control"
+  //                     id="eventDate2"
+  //                     name="eventDate2"
+  //                     placeholder="Event Date 2" 
+  //                     onChange={(val) => {
+  //                       const newDate = new Date(val.target.value);
+  //                       const timePart = formData.infoAcara.resepsi.dateResepsi
+  //                         ? new Date(
+  //                             formData.infoAcara.resepsi.dateResepsi
+  //                           )
+  //                             .toISOString()
+  //                             .split("T")[1]
+  //                         : "00:00:00";
+  //                       handleChange;
+  //                     }}
+  //                   />
+  //                 </div>
+  //                 <div className="mb-3 col-md-6">
+  //                   <label htmlFor="eventTime2" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Event Time 2</label>
+  //                   <input
+  //                     type="time"
+  //                     className="form-control"
+  //                     id="eventTime2"
+  //                     name="eventTime2"
+  //                     placeholder="Event Time 2" 
+  //                     onChange={(val) => {
+  //                       const newTime = val.target.value;
+  //                       const datePart = formData.infoAcara.resepsi.dateResepsi
+  //                         ? new Date(
+  //                             formData.infoAcara.resepsi.dateResepsi
+  //                           )
+  //                             .toISOString()
+  //                             .split("T")[0]
+  //                         : new Date().toISOString().split("T")[0];
+  //                       handleChange;
+  //                     }}
+  //                   />
+  //                 </div>
+  //               </div>             
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div> 
+  //     </div> 
+  //   );
+  // }
   
-  function GiftsView() { 
-    const handleGiftChange = (index: number, field: keyof GiftElementModelProjectRequestInterface, value: string) => {
-      setFormData((prevState) => {
-        const updatedGifts = [...prevState.gift.gifts];
-        updatedGifts[index] = { ...updatedGifts[index], [field]: value };
-        return {
-          ...prevState,
-          gift: { ...prevState.gift, gifts: updatedGifts },
-        };
-      });
-    };
-    const handleToggleChange = (state: boolean) => {
-      console.log("Toggle state:", state); // Handle state change
-    };
-    // Add a new gift to the formData
-    const addGift = () => {
-      setFormData((prevState) => ({
-        ...prevState,
-        gift: {
-          ...prevState.gift,
-          gifts: [...prevState.gift.gifts, { image: "", name: "", noRek: "" }],
-        },
-      }));
-    };
+  // function GiftsView() {  
+  //   const handleToggleChange = (state: boolean) => {
+  //     console.log("Toggle state:", state); // Handle state change
+  //   };
+  //   // Add a new gift to the formData
+  //   const addGift = () => {
+  //     setFormData((prevState) => ({
+  //       ...prevState,
+  //       gift: {
+  //         ...prevState.gift,
+  //         gifts: [...prevState.gift.gifts, { image: "", name: "", noRek: "" }],
+  //       },
+  //     }));
+  //   };
 
-    const banks = [
-      { value: "BCA", label: "Bank BCA" },
-      { value: "MANDIRI", label: "Bank Mandiri" },
-      { value: "BNI", label: "Bank BNI" },
-      { value: "BRI", label: "Bank BRI" },
-      { value: "BSI", label: "Bank BSI" },
-      { value: "UOB", label: "Bank UOB" },
-      { value: "BTPN", label: "Bank BTPN" },
-      { value: "CIMB", label: "Bank CIMB" },
-      { value: "OCBC", label: "Bank OCBC" },
-      { value: "BJB", label: "Bank BJB" },
-      { value: "MEGA", label: "Bank MEGA" },
-      { value: "BTN", label: "Bank BTN" },
-    ];
+  //   const banks = [
+  //     { value: "BCA", label: "Bank BCA" },
+  //     { value: "MANDIRI", label: "Bank Mandiri" },
+  //     { value: "BNI", label: "Bank BNI" },
+  //     { value: "BRI", label: "Bank BRI" },
+  //     { value: "BSI", label: "Bank BSI" },
+  //     { value: "UOB", label: "Bank UOB" },
+  //     { value: "BTPN", label: "Bank BTPN" },
+  //     { value: "CIMB", label: "Bank CIMB" },
+  //     { value: "OCBC", label: "Bank OCBC" },
+  //     { value: "BJB", label: "Bank BJB" },
+  //     { value: "MEGA", label: "Bank MEGA" },
+  //     { value: "BTN", label: "Bank BTN" },
+  //   ];
   
-    return (
-      <div className="tw-bg-white  tw-rounded-xl">
-        {formData.gift.gifts.map((gift, index) => (
-          <div key={index} className="tw-p-3">
-            <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Gift {index + 1}</h2>
-            <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
-              <div className="tw-mx-3 tw-w-full">
-                <label htmlFor={`bank${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bank</label>
-                <select
-                  id={`bank${index + 1}`}
-                  className="form-select tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                  aria-label="Default select example"
-                  value={gift.image}
-                  onChange={(e) => handleGiftChange(index, "image", e.target.value)}
-                >
-                  <option value="">--- Select Bank ---</option>
-                  {banks.map((bank) => (
-                    <option key={bank.value} value={bank.value}>
-                      {bank.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="tw-mx-3 tw-w-full">
-                <label htmlFor={`bankAccountNumber${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
-                  Bank Account Number
-                </label>
-                <input
-                  type="number"
-                  className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                  id={`bankAccountNumber${index + 1}`}
-                  name={`bankAccountNumber${index + 1}`}
-                  placeholder="68123456789"
-                  value={gift.noRek}
-                onChange={(e) => handleGiftChange(index, "noRek", e.target.value)}
-                />
-              </div>
-              <div className="tw-mx-3 tw-w-full">
-                <label htmlFor={`bankAccountName${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
-                  Bank Account Name
-                </label>
-                <input
-                  type="text"
-                  className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                  id={`bankAccountName${index + 1}`}
-                  name={`bankAccountName${index + 1}`}
-                  placeholder="John Doe"
-                  value={gift.name}
-                onChange={(e) => handleGiftChange(index, "name", e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-        ))} 
-        <div className="tw-p-3 tw-flex tw-items-center tw-justify-center  ">   
-          <button className="tw-mx-3 tw-w-1/4 tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"  onClick={addGift}>
-            Add Gift
-          </button>
-        </div>  
+  //   return (
+  //     <div className="tw-bg-white  tw-rounded-xl">
+  //       {formData.gift.gifts.map((gift, index) => (
+  //         <div key={index} className="tw-p-3">
+  //           <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Gift {index + 1}</h2>
+  //           <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+  //             <div className="tw-mx-3 tw-w-full">
+  //               <label htmlFor={`bank${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bank</label>
+  //               <select
+  //                 id={`bank${index + 1}`}
+  //                 className="form-select tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+  //                 aria-label="Default select example"
+  //                 value={gift.image}
+  //               >
+  //                 <option value="">--- Select Bank ---</option>
+  //                 {banks.map((bank) => (
+  //                   <option key={bank.value} value={bank.value}>
+  //                     {bank.label}
+  //                   </option>
+  //                 ))}
+  //               </select>
+  //             </div>
+  //             <div className="tw-mx-3 tw-w-full">
+  //               <label htmlFor={`bankAccountNumber${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+  //                 Bank Account Number
+  //               </label>
+  //               <input
+  //                 type="number"
+  //                 className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+  //                 id={`bankAccountNumber${index + 1}`}
+  //                 name={`bankAccountNumber${index + 1}`}
+  //                 placeholder="68123456789"
+  //                 value={gift.noRek}
+  //               />
+  //             </div>
+  //             <div className="tw-mx-3 tw-w-full">
+  //               <label htmlFor={`bankAccountName${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+  //                 Bank Account Name
+  //               </label>
+  //               <input
+  //                 type="text"
+  //                 className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+  //                 id={`bankAccountName${index + 1}`}
+  //                 name={`bankAccountName${index + 1}`}
+  //                 placeholder="John Doe"
+  //                 value={gift.name}
+  //               />
+  //             </div>
+  //           </div>
+  //         </div>
+  //       ))} 
+  //       <div className="tw-p-3 tw-flex tw-items-center tw-justify-center  ">   
+  //         <button className="tw-mx-3 tw-w-1/4 tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"  onClick={addGift}>
+  //           Add Gift
+  //         </button>
+  //       </div>  
 
-      </div>
-    );
-  }
+  //     </div>
+  //   );
+  // }
    
   
   function AccordionItem(params: { 

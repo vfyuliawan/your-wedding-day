@@ -5,18 +5,103 @@ import { ModelSignupRequestInterface, ModelSignupRequestPatch } from '../Dashboa
 import SignupService from '../Dashboard/Domain/Service/SignupService/SignupService';
 import { ResultModelSignupResponseInterface } from '../Dashboard/Domain/Models/ModelResponse/SignupResponse/ModelSignupResponseInterface';
 import CekUserLoginService from '../Dashboard/Domain/Service/CekUserLoginService/CekUserLoginService';
-
+import { ModelProjectRequestInterface, ModelRequestCreateProjectPatch } from '../Dashboard/Domain/Models/ModelRequest/ProjectRequest/ModelProjectRequestInterface';
+import ProjectServices from "../Dashboard/Domain/Service/ProjectService/ProjectService";
 const Signup = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-  const [formData, setFormData] = useState<ModelSignupRequestInterface>({
-    name: '',
-    username: '',
-    email: '',
-    password: '',
+  const [formData, setFormData] = useState<ModelProjectRequestInterface>({
+    infoAcara: {
+      akad: {
+        titleAkad: "",
+        mapAkad: "",
+        imgAkad: "",
+        lokasiAkad: "",
+        dateAkad: null,
+      },
+      resepsi: {
+        titleResepsi: "",
+        mapResepsi: "",
+        imgResepsi: "",
+        lokasiResepsi: "",
+        dateResepsi: null,
+      },
+    },
+    healtProtocol: true,
+    livelink: "",
+    theme: {
+      primaryColor: "",
+      music: "",
+      theme: "",
+      alamat: "",
+      slug: "",
+      secondaryColor: "",
+      embeded: "",
+      textColor1: "",
+      textColor2: "",
+      thirdColor: "",
+    },
+    gift: {
+      gifts: [
+        {
+          image: "",
+          name: "",
+          noRek: "",
+        },
+      ],
+      isShow: true,
+    },
+    countdown: null,
+    story: {
+      stories: [
+        {
+          title: "",
+          text: "",
+          image: "",
+          date: null,
+        },
+      ],
+      isShow: true,
+    },
+    videoLink: "",
+    igFilter: "",
+    cover: {
+      img: "",
+      isShow: true,
+    },
+    title: "",
+    isShowLinkFilter: true,
+    galery: {
+      galeries: [""],
+      isShow: true,
+    },
+    braidInfo: {
+      male: {
+        name: "",
+        mom: "",
+        dad: "",
+        photo: "",
+      },
+      female: {
+        name: "",
+        mom: "",
+        dad: "",
+        photo: "",
+      },
+      isShow: true,
+    },
+    hero: {
+      img: "",
+      isShow: true,
+    },
+    home: {
+      quotes: "",
+      img: "",
+      isShow: true,
+    },
   });
   const [passwordAgain, setPasswordAgain] = useState('');
   
@@ -39,7 +124,7 @@ const Signup = () => {
       const serviceCheckUserLogin = await CekUserLoginService.cekUserLoginService();
       if (serviceCheckUserLogin?.result == true) {
         setIsUserLoggedIn(true);       
-        router.push("/");
+        // router.push("/");
       }
     } catch (error) {
       console.error("check User Login error:", error);
@@ -48,14 +133,13 @@ const Signup = () => {
     }
   };
   
-  const doSignup = async (username: string, email: string, password: string, name: string) => {
-    const requestBody: ModelSignupRequestPatch = {body: formData};   
+  const doSignup = async () => {
+    const requestBody: ModelRequestCreateProjectPatch = {body: formData};   
     try {
-      const serviceSignup = await SignupService.signupService(requestBody); 
-      if (serviceSignup && serviceSignup.result?.token) { 
-        console.log(serviceSignup, "serviceSignup");
-        setToken(serviceSignup.result.token); 
-        router.push("/WebApp/Login");  
+      const resultCreateResponseService = await ProjectServices.createProjectService(requestBody); 
+      if (resultCreateResponseService && resultCreateResponseService.result) { 
+        // console.log(serviceSignup, "serviceSignup"); 
+        router.push("/");  
       } else { 
         setError("Invalid credentials. Please try again.");
       }
@@ -69,24 +153,67 @@ const Signup = () => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      theme: {
+        ...prevState.theme,
+        [name]: value,  
+      },
     }));
   };
-
+  const handleChange3 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      home: {
+        ...prevState.home,
+        [name]: value,  
+      },
+    }));
+  };
+  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target; 
+    
+    setFormData((prevState) => ({
+      ...prevState,
+      infoAcara: {
+        ...prevState.infoAcara,
+        resepsi: {
+          ...prevState.infoAcara.resepsi,
+          [name]: value, // Dynamically update titleResepsi or any other field
+        },
+      },
+    }));
+  };
+  const handleChange5 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target; 
+    const nameParts1 = name.split('.')[0];
+    const nameParts2 = name.split('.')[1];
+    setFormData((prevState) => ({
+      ...prevState,
+      infoAcara: {
+        ...prevState.infoAcara,
+        [nameParts1]: {
+          ...prevState.infoAcara.akad,
+          [nameParts2]: value, 
+        },
+      },
+    }));
+  };
+  
+  
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formData.password !== passwordAgain) {
-      setError('Passwords do not match!');
+    if (formData.livelink == '') {
+      setError('field cannot be empty');
       return;
     }
 
-    doSignup(formData.username, formData.email, formData.password, formData.name);
+    doSignup();
   };
 
   return (
     <div className="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-gradient-to-tr tw-from-pink-200 tw-to-sky-200">
-      {header()}
+      {/* {header()} */}
       <div className="tw-w-full sm:tw-max-w-md tw-bg-white tw-m-8 tw-p-6  tw-rounded-xl tw-shadow-2xl">
         <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-900 tw-text-center">Sign Up</h2>
         <form onSubmit={handleSubmit} className="tw-space-y-3">
@@ -96,10 +223,10 @@ const Signup = () => {
             <label htmlFor="name" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Full Name</label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
+              id="akad.titleAkad"
+              name="akad.titleAkad"
+              value={formData.infoAcara.akad.titleAkad}
+              onChange={handleChange5}
               required
               placeholder="Enter a valid name"
               className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
@@ -110,10 +237,10 @@ const Signup = () => {
             <label htmlFor="username" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Username</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
+              id="titleResepsi"
+              name="titleResepsi"
+              value={formData.infoAcara.resepsi.titleResepsi}
+              onChange={handleChange2}
               required
               placeholder="Enter a valid username"
               className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
@@ -124,9 +251,9 @@ const Signup = () => {
             <label htmlFor="email" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Email Address</label>
             <input
               type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              id="theme"
+              name="theme"
+              value={formData.theme.theme}
               onChange={handleChange}
               placeholder="john@doe.com"
               required
@@ -137,36 +264,23 @@ const Signup = () => {
           <div>
             <label htmlFor="password" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Password</label>
             <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
+              type="text"
+              id="quotes"
+              name="quotes"
+              value={formData.home.quotes}
+              onChange={handleChange3}
               placeholder="Password"
               required
               className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
             />
           </div>
-
-          <div>
-            <label htmlFor="retypePassword" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              id="retypePassword"
-              name="retypePassword"
-              value={passwordAgain}
-              onChange={(e) => setPasswordAgain(e.target.value)}
-              placeholder="Confirm Password"
-              required
-              className="tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-            />
-          </div>
+ 
 
           <div className="tw-items-center">
             <button
               type="submit"
               disabled={
-                !formData.username || !formData.email || !formData.password || !passwordAgain || !formData.name || (formData.password !== passwordAgain)
+                !formData.theme.theme || !formData.livelink 
               }
               className="disabled:tw-opacity-25 tw-w-full tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"
             >
