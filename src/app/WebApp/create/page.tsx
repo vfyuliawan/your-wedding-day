@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from 'next/navigation'; 
-import { useEffect, useState, FormEvent } from 'react'; 
+import React, { useEffect, useState, FormEvent } from 'react'; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
@@ -13,9 +13,12 @@ import Swal from 'sweetalert2';
 import ToggleSwitch from '@/app/Components/ToggleSwitch';
 import { ModelLoginRequestInterface } from '../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface';
 
+import { Calendar } from 'primereact/calendar';
+import { FloatLabel } from 'primereact/floatlabel';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';import 'flowbite';
+import TimeInput from '@/app/Components/TimeInput';
 const createProjectPage = () => {
   const router = useRouter(); 
   const themeData = [
@@ -150,7 +153,7 @@ const createProjectPage = () => {
   const [isLoginLogout, setisLoginLogout] = useState(false);
   const [data, setData] = useState<ResultModelGetProjectDetailResponseInterface | undefined>(undefined); 
   const [isSlugFromTitle, setisSlugFromTitle] = useState('');
-  const [activeIndex, setActiveIndex] = useState();
+  const [activeIndex, setActiveIndex] = useState(); 
   
   const addGift = () => {
     setFormData((prevState) => ({
@@ -161,9 +164,19 @@ const createProjectPage = () => {
       },
     }));
   };
+  const addStory = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      story: {
+        ...prevState.story,
+        stories: [...prevState.story.stories, { image: "", text: "", title: "", date: null }],
+      },
+    }));
+  };
 
 
   useEffect(() => {
+    
     setisLoadingMain(true);
     const storedToken = localStorage.getItem("token"); 
     if (storedToken) {
@@ -224,7 +237,7 @@ const createProjectPage = () => {
         }
       } catch (error) {
         console.error("Login error:", error);
-        Swal.fire({title: "Failed!", text: "Failed Create New Project", icon: "info", });
+        // Swal.fire({title: "Failed!", text: "Failed Create New Project", icon: "info", });
         setError("An error occurred. Please try again later.");
       }
     };
@@ -250,16 +263,20 @@ const createProjectPage = () => {
       infoAcara: { ...prevState.infoAcara, resepsi: { ...prevState.infoAcara.resepsi, [name]: value } },
     }));
   };
-
-  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target; 
-    
+  const handleChangeBraidMale = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      braidInfo: { ...prevState.braidInfo, male: { ...prevState.braidInfo.male, [name]: value } },
     }));
-    
-  };
+  }; 
+  const handleChangeBraidFemale = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      braidInfo: { ...prevState.braidInfo, female: { ...prevState.braidInfo.female, [name]: value } },
+    }));
+  };  
 
   const handleGiftChange = (index: number, field: keyof GiftElementModelProjectRequestInterface, value: string) => {
     setFormData((prevState) => {
@@ -268,6 +285,16 @@ const createProjectPage = () => {
       return {
         ...prevState,
         gift: { ...prevState.gift, gifts: updatedGifts },
+      };
+    });
+  };
+  const handleStoryChange = (index: number, field: keyof StoryElementModelProjectRequestInterface, value: string) => {
+    setFormData((prevState) => {
+      const updatedStories = [...prevState.story.stories];
+      updatedStories[index] = { ...updatedStories[index], [field]: value };
+      return {
+        ...prevState,
+        story: { ...prevState.story, stories: updatedStories },
       };
     });
   };
@@ -462,7 +489,7 @@ const createProjectPage = () => {
                                 <label htmlFor="secondaryColorTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Upload</label>                           
                                   {formData.cover.img ? 
                                     <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
-                                        <img id="imagecoverPreview" className='tw-max-h-48 tw-w-full' src={formData.cover.img} alt={"imagecover"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                        <img id="imagecoverPreview" className='tw-max-h-48' src={formData.cover.img} alt={"imagecover"} style={{ margin: "5px", borderRadius: "5%" }}/>
                                     </div>:<></>
                                   }
                                 <input
@@ -522,7 +549,7 @@ const createProjectPage = () => {
                                 <label htmlFor="secondaryColorTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Upload</label>                           
                                   {formData.hero.img ? 
                                     <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
-                                        <img id="imageheroPreview" className='tw-max-h-48 tw-w-full' src={formData.hero.img} alt={"imagehero"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                        <img id="imageheroPreview" className='tw-max-h-48' src={formData.hero.img} alt={"imagehero"} style={{ margin: "5px", borderRadius: "5%" }}/>
                                     </div>:<></>
                                   }
                                 <input
@@ -582,7 +609,7 @@ const createProjectPage = () => {
                                 <label htmlFor="secondaryColorTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Upload</label>                           
                                   {formData.home.img ? 
                                     <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
-                                        <img id="imageHomePreview" className='tw-max-h-48 tw-w-full' src={formData.home.img} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                        <img id="imageHomePreview" className='tw-max-h-48' src={formData.home.img} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
                                     </div>:<></>
                                   }
                                 <input
@@ -642,7 +669,7 @@ const createProjectPage = () => {
                     <div className={`tw-bg-gradient-to-r tw-from-indigo-100 tw-to-sky-200 tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '5' ? "" : "tw-max-h-14"}`}>
                       <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer">
                         <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '5' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('5')} />
-                        <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('5')}>Event Information</div>
+                        <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('5')}>Event Info</div>
                         <div className='tw-w-24 tw-items-center tw-text-center '>
                           {<i className="bi bi-grid-3x2-gap-fill tw-rotate-90" />}
                         </div>
@@ -650,157 +677,297 @@ const createProjectPage = () => {
                       <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '5' ? "tw-opacity-100" : "tw-opacity-0"}`}>
                         <div className="tw-text-gray-700 tw-text-base">
                           <div className="tw-bg-white  tw-rounded-xl "> 
-                            <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Event 1</h2>
-                            <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
-                              <div className="tw-mx-3 tw-w-full">
-                                <label htmlFor="alamatTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Event 1</label>
-                                <input
-                                  type="text"
-                                  className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                                  id="titleAkad"
-                                  name="titleAkad"
-                                  placeholder="e.g. Akad, Resepsi, Pemberkatan, etc"
-                                  value={formData.infoAcara.akad.titleAkad}   
-                                  onChange={handleChangeResepsi}
-                                />
-                              </div>
-                              <div className="tw-mx-3 tw-w-full">
-                                <label htmlFor="alamatTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place</label>
-                                <input
-                                  type="text"
-                                  className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                                  id="lokasiAkad"
-                                  name="lokasiAkad"
-                                  placeholder="Le Meridien Hotel"
-                                  value={formData.infoAcara.akad.lokasiAkad}   
-                                  onChange={handleChangeResepsi}
-                                />
-                              </div>
-                              <div className="tw-mx-3 tw-w-full">
-                                <label htmlFor="embededTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Map</label>
-                                <input
-                                  type="text"
-                                  className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                                  id="mapAkad"
-                                  name="mapAkad"
-                                  placeholder="https://maps.google.com/maps"
-                                  value={formData.infoAcara.akad.mapAkad} 
-                                  onChange={handleChangeResepsi}
-                                />
+                            <div className="tw-p-3"> 
+                              <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Event 1</h2>
+                              <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="titleAkad" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Event 1</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="titleAkad"
+                                    name="titleAkad"
+                                    placeholder="e.g. Akad, Resepsi, Pemberkatan, etc"
+                                    value={formData.infoAcara.akad.titleAkad}   
+                                    onChange={handleChangeAkad}
+                                  />
+                                </div>
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="alamatTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="lokasiAkad"
+                                    name="lokasiAkad"
+                                    placeholder="Le Meridien Hotel"
+                                    value={formData.infoAcara.akad.lokasiAkad}   
+                                    onChange={handleChangeAkad}
+                                  />
+                                </div>
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="embededTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Map</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="mapAkad"
+                                    name="mapAkad"
+                                    placeholder="https://maps.google.com/maps"
+                                    value={formData.infoAcara.akad.mapAkad} 
+                                    onChange={handleChangeAkad}
+                                  />
+                                </div> 
                               </div> 
-                            </div> 
-                            <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
-                              <div className="tw-mx-3 tw-w-full">
-                                <label htmlFor="imageakadPreview" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Upload</label>                           
-                                  {formData.infoAcara.akad.imgAkad ? 
-                                    <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
-                                        <img id="imageakadPreview" className='tw-max-h-48 tw-w-full' src={formData.infoAcara.akad.imgAkad} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
-                                    </div>:<></>
-                                  }
-                                <input
-                                  type="file"
-                                  className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                                  id="imgAkad"
-                                  name="imgAkad"
-                                  onChange={(val) => {
-                                    const fileImageHome = val?.target?.files?.[0];
-                                    
-                                    if (fileImageHome) {
-                                      const reader = new FileReader();
-                                      reader.readAsDataURL(fileImageHome);
-                                      reader.onloadend = () => {
-                                        const imageHomeDataUrl = reader.result as string;
+                              <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="imageakadPreview" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Upload</label>                           
+                                    {formData.infoAcara.akad.imgAkad ? 
+                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
+                                          <img id="imageakadPreview" className='tw-max-h-48' src={formData.infoAcara.akad.imgAkad} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                      </div>:<></>
+                                    }
+                                  <input
+                                    type="file"
+                                    className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="imgAkad"
+                                    name="imgAkad"
+                                    onChange={(val) => {
+                                      const fileImageHome = val?.target?.files?.[0];
+                                      
+                                      if (fileImageHome) {
+                                        const reader = new FileReader();
+                                        reader.readAsDataURL(fileImageHome);
+                                        reader.onloadend = () => {
+                                          const imageHomeDataUrl = reader.result as string;
+                                          
+                                          setFormData((prevState) => ({
+                                            ...prevState,
+                                            infoAcara: { ...prevState.infoAcara, akad: { ...prevState.infoAcara.akad, imgAkad: imageHomeDataUrl } },
+                                          }));
+                                          const base64HomeData = imageHomeDataUrl.replace(
+                                            /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                            ""
+                                          );
+                                          
+                                        };
+                                      }
+                                    }}
+                                  />
+                                  
+                                </div> 
+                                <div className="tw-mx-3 tw-w-1/2">
+                                  <label htmlFor="timeEvent" className="tw-w-full tw-px-2 form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Date</label>
+                                  <Calendar 
+                                    id="calendar-24h"  
+                                    className="tw-h-12 tw-mt-1 tw-w-full tw-px-1" 
+                                    value={formData.infoAcara.akad.dateAkad} 
+                                    placeholder='Date event 1'
+                                    onChange={(e) =>  {
+                                      setFormData((prevData) => ({
+                                        ...prevData,
+                                        infoAcara: {
+                                          ...prevData.infoAcara,
+                                          akad: {
+                                            ...prevData.infoAcara.akad,
+                                            dateAkad: e.value ? e.value : null,
+                                          },
+                                        },
+                                      })) }
+                                      
+                                    } 
+                                    showTime hourFormat="24" 
+                                  />  
+                                </div> 
+                              </div> 
+                            </div>
+                            <div className="tw-p-3"> 
+                              <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Event 2</h2>
+                              <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="alamatTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title Event 1</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="titleResepsi"
+                                    name="titleResepsi"
+                                    placeholder="e.g. Resepsi, Resepsi, Pemberkatan, etc"
+                                    value={formData.infoAcara.resepsi.titleResepsi}   
+                                    onChange={handleChangeResepsi}
+                                  />
+                                </div>
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="alamatTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="lokasiResepsi"
+                                    name="lokasiResepsi"
+                                    placeholder="Le Meridien Hotel"
+                                    value={formData.infoAcara.resepsi.lokasiResepsi}   
+                                    onChange={handleChangeResepsi}
+                                  />
+                                </div>
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="embededTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Map</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="mapResepsi"
+                                    name="mapResepsi"
+                                    placeholder="https://maps.google.com/maps"
+                                    value={formData.infoAcara.resepsi.mapResepsi} 
+                                    onChange={handleChangeResepsi}
+                                  />
+                                </div> 
+                              </div> 
+                              <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="imageResepsiPreview" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image Upload</label>                           
+                                    {formData.infoAcara.resepsi.imgResepsi ? 
+                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
+                                          <img id="imageResepsiPreview" className='tw-max-h-48' src={formData.infoAcara.resepsi.imgResepsi} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                      </div>:<></>
+                                    }
+                                  <input
+                                    type="file"
+                                    className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="imgResepsi"
+                                    name="imgResepsi"
+                                    onChange={(val) => {
+                                      const fileImageHome = val?.target?.files?.[0];
+                                      
+                                      if (fileImageHome) {
+                                        const reader = new FileReader();
+                                        reader.readAsDataURL(fileImageHome);
+                                        reader.onloadend = () => {
+                                          const imageHomeDataUrl = reader.result as string;
+                                          
+                                          setFormData((prevState) => ({
+                                            ...prevState,
+                                            infoAcara: { ...prevState.infoAcara, resepsi: { ...prevState.infoAcara.resepsi, imgResepsi: imageHomeDataUrl } },
+                                          }));
+                                          const base64HomeData = imageHomeDataUrl.replace(
+                                            /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                            ""
+                                          );
+                                          
+                                        };
+                                      }
+                                    }}
+                                  />
+                                  
+                                </div> 
+                                <div className="tw-mx-3 tw-w-1/2">
+                                  <label htmlFor="timeEvent" className="tw-w-full tw-px-2 form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Date</label>
+                                  <Calendar 
+                                    id="calendar-24h"  
+                                    className="tw-h-12 tw-mt-1 tw-w-full tw-px-1" 
+                                    value={formData.infoAcara.resepsi.dateResepsi} 
+                                    placeholder='Date event 2'
+                                    onChange={(e) =>  {
+                                      setFormData((prevData) => ({
+                                        ...prevData,
+                                        infoAcara: {
+                                          ...prevData.infoAcara,
+                                          resepsi: {
+                                            ...prevData.infoAcara.resepsi,
+                                            dateResepsi: e.value ? e.value : null,
+                                          },
+                                        },
+                                      })) }
+                                      
+                                    } 
+                                    showTime hourFormat="24" 
+                                  /> 
+                                  {/* <div className="tw-flex tw-items-start tw-justify-center  ">
+                                    <input
+                                      type="date"
+                                      className="form-control tw-h-12 tw-m-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                      id="dateAkad"
+                                      name="dateAkad"
+                                      value={
+                                        formData.infoAcara.akad.dateAkad
+                                          ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[0]
+                                          : ''
+                                      }
+                                      onChange={(e) => {
+                                        const newDate = new Date(e.target.value);
+                                        const timePart = formData.infoAcara.akad.dateAkad
+                                          ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[1]
+                                          : '00:00:00';
                                         
-                                        setFormData((prevState) => ({
-                                          ...prevState,
-                                          infoAcara: { ...prevState.infoAcara, akad: { ...prevState.infoAcara.akad, imgAkad: imageHomeDataUrl } },
+                                        // Update dateAkad with both date and time parts
+                                        setFormData((prevData) => ({
+                                          ...prevData,
+                                          infoAcara: {
+                                            ...prevData.infoAcara,
+                                            akad: {
+                                              ...prevData.infoAcara.akad,
+                                              dateAkad: newDate ? new Date(`${newDate.toISOString().split('T')[0]}T${timePart}`) : null,
+                                            },
+                                          },
                                         }));
-                                        const base64HomeData = imageHomeDataUrl.replace(
-                                          /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                                          ""
-                                        );
-                                        
-                                      };
-                                    }
-                                  }}
-                                />
-                                
-                              </div> 
-                              <div className="tw-dateAkad-3 tw-w-1/2">
-                                <div className="tw-flex tw-items-start tw-justify-center  ">
-                                  <label htmlFor="timeEvent" className="tw-w-36 tw-px-2 form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Date</label>
-                                  <label htmlFor="timeEvent" className="tw-w-36 tw-px-2 form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Time</label>
-                                </div>
-                                {formData.infoAcara.akad.imgAkad ? 
-                                    <div className='tw-h-56 tw-w-full tw-rounded-lg tw-p-2'> 
-                                    </div>:<></>
-                                  }
-                                <div className="tw-flex tw-items-start tw-justify-center  ">
-                                  <input
-                                    type="date"
-                                    className="form-control tw-h-12 tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
-                                    id="dateAkad"
-                                    name="dateAkad"
-                                    value={
-                                      formData.infoAcara.akad.dateAkad
-                                        ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[0]
-                                        : ''
-                                    }
-                                    onChange={(e) => {
-                                      const newDate = new Date(e.target.value);
-                                      const timePart = formData.infoAcara.akad.dateAkad
-                                        ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[1]
-                                        : '00:00:00';
-                                      
-                                      // Update dateAkad with both date and time parts
-                                      setFormData((prevData) => ({
-                                        ...prevData,
-                                        infoAcara: {
-                                          ...prevData.infoAcara,
-                                          akad: {
-                                            ...prevData.infoAcara.akad,
-                                            dateAkad: newDate ? new Date(`${newDate.toISOString().split('T')[0]}T${timePart}`) : null,
-                                          },
-                                        },
-                                      }));
-                                    }}
-                                  />
 
-                                  <input
-                                    type="time" 
-                                    className="form-control"
-                                    id="timeAkad"
-                                    name="timeAkad"
-                                    value={
-                                      formData.infoAcara.akad.dateAkad
-                                        ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[1].slice(0, 5)
-                                        : ''
-                                    }
-                                    onChange={(e) => {
-                                      const newTime = e.target.value;
-                                      console.log('newTime');
-                                      console.log(newTime);
-                                      
-                                      const datePart = formData.infoAcara.akad.dateAkad
-                                        ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[0]
-                                        : new Date().toISOString().split('T')[0];
-                                      
-                                      // Update dateAkad with new time and current date part
-                                      setFormData((prevData) => ({
-                                        ...prevData,
-                                        infoAcara: {
-                                          ...prevData.infoAcara,
-                                          akad: {
-                                            ...prevData.infoAcara.akad,
-                                            dateAkad: new Date(`${datePart}T${newTime}:00`),
-                                          },
-                                        },
-                                      }));
-                                    }}
-                                  />
-                                </div>
+                                        console.log(formData.infoAcara.akad.dateAkad);
+                                        console.log(timePart);
+                                        
+                                      }}
+                                    />   
+                                    {formData.infoAcara.akad.dateAkad ? <>
+                                      <input
+                                        type="time" 
+                                        className="form-control tw-bg-sky-500 time-input-with-icon tw-h-12 tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                        id="timeAkad"
+                                        name="timeAkad"
+                                        onChange={(e) => {       
+                                          const dateToday =  new Date().toISOString().split('T')[0];
+                                          const datePart = formData.infoAcara.akad.dateAkad
+                                            ? new Date(formData.infoAcara.akad.dateAkad).toISOString().split('T')[0]
+                                            : dateToday; 
+                                          setFormData((prevData) => ({
+                                            ...prevData,
+                                            infoAcara: {
+                                              ...prevData.infoAcara,
+                                              akad: {
+                                                ...prevData.infoAcara.akad,
+                                                dateAkad: new Date(`${datePart}T${e.target.value}`),
+                                              },
+                                            },
+                                          }));
+                                          setTempTime(e.target.value);  
+                                        }}
+                                        
+                                        value={tempTime}
+                                      />   
+          
+                                      <input
+                                        type="time" 
+                                        className="form-control time-input-with-icon tw-h-12 tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                        id="dateResepsi"
+                                        name="dateResepsi"
+                                        onChange={(e) => {       
+                                          const dateToday =  new Date().toISOString().split('T')[0];
+                                          const datePart = formData.infoAcara.resepsi.dateResepsi
+                                            ? new Date(formData.infoAcara.resepsi.dateResepsi).toISOString().split('T')[0]
+                                            : dateToday; 
+                                          setFormData((prevData) => ({
+                                            ...prevData,
+                                            infoAcara: {
+                                              ...prevData.infoAcara,
+                                              resepsi: {
+                                                ...prevData.infoAcara.resepsi,
+                                                dateResepsi: new Date(`${datePart}T${e.target.value}`),
+                                              },
+                                            },
+                                          }));
+                                          setTempTime(e.target.value);  
+                                        }} 
+                                        value={tempTime}
+                                      />
+                                    </> : <div className='tw-w-full'></div>}
+                                  </div> */}
+                                </div> 
                               </div> 
-                            </div> 
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -855,7 +1022,7 @@ const createProjectPage = () => {
                                       name={`bankAccountNumber${index + 1}`}
                                       placeholder="68123456789"
                                       value={gift.noRek}
-                                    onChange={(e) => handleGiftChange(index, "noRek", e.target.value)}
+                                      onChange={(e) => handleGiftChange(index, "noRek", e.target.value)}
                                     />
                                   </div>
                                   <div className="tw-mx-3 tw-w-full">
@@ -869,7 +1036,7 @@ const createProjectPage = () => {
                                       name={`bankAccountName${index + 1}`}
                                       placeholder="John Doe"
                                       value={gift.name}
-                                    onChange={(e) => handleGiftChange(index, "name", e.target.value)}
+                                      onChange={(e) => handleGiftChange(index, "name", e.target.value)}
                                     />
                                   </div>
                                 </div>
@@ -884,9 +1051,388 @@ const createProjectPage = () => {
                         </div>
                       </div>
                     </div>  
-                    {/* <AccordionItem title={'Story'} content={<StoryView />} isExpanded={activeId === '7'} onClick={() => handleAccordionClick('7')}/>
-                    <AccordionItem title={'Couple'} content={<CouplesView />} isExpanded={activeId === '8'} onClick={() => handleAccordionClick('8')}/>
-                    <AccordionItem title={'Galery'} content={<GaleryView />} isExpanded={activeId === '9'} onClick={() => handleAccordionClick('9')}/> */}
+                    {/* story*/}
+                    <div className={`tw-bg-gradient-to-r tw-from-indigo-100 tw-to-sky-200 tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '7' ? "" : "tw-max-h-14"}`}>
+                      <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer">
+                        <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '7' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('7')} />
+                        <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('7')}>Story</div>
+                        <div className='tw-w-24 tw-items-center tw-text-center'>
+                          {<ToggleSwitch initialState={formData.gift.isShow} onChange={(newState) => {
+                              setFormData((prevState) => ({
+                                ...prevState,
+                                gift: { ...prevState.gift, isShow: newState },
+                              }));
+                            }} /> 
+                          }
+                        </div>
+                      </div>
+                      <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '7' ? "tw-opacity-100" : "tw-opacity-0"}`}>
+                        <div className="tw-text-gray-700 tw-text-base">
+                          <div className="tw-bg-white  tw-rounded-xl">
+                            {formData.story.stories.map((story, index) => (
+                              <div key={index} className="tw-p-3">
+                                <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Story {index + 1}</h2>                                
+                                <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                  <div className="tw-mx-3 tw-w-1/2">
+                                    <label htmlFor={`storyTitle${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+                                      Title
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="tw-mt-1 tw-h-12 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                      id={`storyTitle${index + 1}`}
+                                      name={`storyTitle${index + 1}`}
+                                      placeholder="First Meeting"
+                                      value={story.title}
+                                      onChange={(e) => handleStoryChange(index, "title", e.target.value)}
+                                    />
+                                  </div>
+                                  <div className="tw-mx-3 tw-w-full">
+                                    <label htmlFor={`storyText${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
+                                      Description
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="tw-mt-1 tw-h-12 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                      id={`storyText${index + 1}`}
+                                      name={`storyText${index + 1}`}
+                                      placeholder="It start when ..."
+                                      value={story.text}
+                                      onChange={(e) => handleStoryChange(index, "text", e.target.value)}
+                                    />
+                                  </div>
+                                  <div className="tw-mx-3 tw-w-1/2">
+                                    <label htmlFor={`storyDate${index + 1}`} className="tw-w-full tw-px-2 form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Date</label>
+                                    <Calendar 
+                                      id={`storyDate${index + 1}`}
+                                      name={`storyDate${index + 1}`}
+                                      className="tw-h-12 tw-w-full tw-px-1" 
+                                      value={story.date} 
+                                      placeholder={`Date Story ${index + 1}`}
+                                      onChange={(e) =>  {
+                                        setFormData((prevState) => {
+                                          const updatedStories = [...prevState.story.stories];
+                                          updatedStories[index] = { ...updatedStories[index], date: e.value ? e.value : null };
+                                          return {
+                                            ...prevState,
+                                            story: { ...prevState.story, stories: updatedStories },
+                                          };
+                                        });
+                                      }
+                                        
+                                      } 
+                                      showButtonBar 
+                                    />
+                                  </div> 
+                                </div>
+                                <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                  <div className="tw-mx-3 tw-w-full">
+                                    <label htmlFor={`storyImage${index + 1}`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image</label>
+                                    {story.image ? 
+                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
+                                          <img id={`storyImagePreview${index + 1}`} className='tw-max-h-48' src={story.image} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                      </div>:<></>
+                                    }
+                                    <input
+                                      type="file"
+                                      className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                      id={`storyImage${index + 1}`}
+                                      name={`storyImage${index + 1}`}
+                                      onChange={(val) => {
+                                        const fileImagehero = val?.target?.files?.[0];
+                                        
+                                        if (fileImagehero) {
+                                          const reader = new FileReader();
+                                          reader.readAsDataURL(fileImagehero);
+                                          reader.onloadend = () => {
+                                            const imageheroDataUrl = reader.result as string;
+                                            handleStoryChange(index, "image", imageheroDataUrl) ;  
+                                            const base64heroData = imageheroDataUrl.replace(
+                                              /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                              ""
+                                            );
+                                            
+                                          };
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            ))} 
+                            <div className="tw-p-3 tw-flex tw-items-center tw-justify-center  ">   
+                              <button className="tw-mx-3 tw-w-1/4 tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"  onClick={addStory}>
+                                Add Story
+                              </button>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                    </div>   
+                    {/* info braid */}
+                    <div className={`tw-bg-gradient-to-r tw-from-indigo-100 tw-to-sky-200 tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '8' ? "" : "tw-max-h-14"}`}>
+                      <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer">
+                        <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '8' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('8')} />
+                        <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('8')}>Braid Info</div>
+                        <div className='tw-w-24 tw-items-center tw-text-center '>
+                          {<i className="bi bi-grid-3x2-gap-fill tw-rotate-90" />}
+                        </div>
+                      </div>
+                      <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '8' ? "tw-opacity-100" : "tw-opacity-0"}`}>
+                        <div className="tw-text-gray-700 tw-text-base">
+                          <div className="tw-bg-white  tw-rounded-xl "> 
+                            <div className="tw-p-3"> 
+                              <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Groom</h2>
+                              <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="maleName" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Groom's Name</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="maleName"
+                                    name="name"
+                                    placeholder="John Doe"
+                                    value={formData.braidInfo.male.name}   
+                                    onChange={handleChangeBraidMale}
+                                  />
+                                </div>
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="groomsFather" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Groom's Father</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="groomsFather"
+                                    name="dad"
+                                    placeholder="Father's Name"
+                                    value={formData.braidInfo.male.dad}   
+                                    onChange={handleChangeBraidMale}
+                                  />
+                                </div> 
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="groomsMother" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Groom's Mother</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="groomsMother"
+                                    name="mom"
+                                    placeholder="Mother's Name"
+                                    value={formData.braidInfo.male.mom}   
+                                    onChange={handleChangeBraidMale}
+                                  />
+                                </div> 
+                              </div> 
+                              <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="imageGroom" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Groom's Photo</label>                           
+                                    {formData.braidInfo.male.photo ? 
+                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
+                                          <img id="imageGroomPreview" className='tw-max-h-48' src={formData.braidInfo.male.photo} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                      </div>:<></>
+                                    }
+                                  <input
+                                    type="file"
+                                    className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="imageGroom"
+                                    name="photo"
+                                    onChange={(val) => {
+                                      const fileImageHome = val?.target?.files?.[0];
+                                      
+                                      if (fileImageHome) {
+                                        const reader = new FileReader();
+                                        reader.readAsDataURL(fileImageHome);
+                                        reader.onloadend = () => {
+                                          const imageHomeDataUrl = reader.result as string;
+                                          
+                                          const base64HomeData = imageHomeDataUrl.replace(
+                                            /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                            ""
+                                          );
+                                          setFormData((prevState) => ({
+                                            ...prevState,
+                                            braidInfo: { ...prevState.braidInfo, male: { ...prevState.braidInfo.male, photo: imageHomeDataUrl } },
+                                          }));
+                                          
+                                        };
+                                      }
+                                    }}
+                                  />
+                                  
+                                </div>  
+                              </div> 
+                            </div> 
+                            <div className="tw-p-3"> 
+                              <h2 className="tw-mx-2 tw-text-bold tw-block tw-text-lg tw-font-medium tw-text-gray-700">Bride</h2>
+                              <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="femaleName" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bride's Name</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="femaleName"
+                                    name="name"
+                                    placeholder="Anna Johnson"
+                                    value={formData.braidInfo.female.name}   
+                                    onChange={handleChangeBraidFemale}
+                                  />
+                                </div>
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="brideFather" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bride's Father</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="brideFather"
+                                    name="dad"
+                                    placeholder="Father's Name"
+                                    value={formData.braidInfo.female.dad}   
+                                    onChange={handleChangeBraidFemale}
+                                  />
+                                </div> 
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="BrideMother" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bride's Mother</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="BrideMother"
+                                    name="mom"
+                                    placeholder="Mother's Name"
+                                    value={formData.braidInfo.female.mom}   
+                                    onChange={handleChangeBraidFemale}
+                                  />
+                                </div> 
+                              </div> 
+                              <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="imageBride" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Bride's Photo</label>                           
+                                    {formData.braidInfo.female.photo ? 
+                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indgo-300 tw-p-2'>
+                                          <img id="imageBridePreview" className='tw-max-h-48' src={formData.braidInfo.female.photo} alt={"imageHome"} style={{ margin: "5px", borderRadius: "5%" }}/>
+                                      </div>:<></>
+                                    }
+                                  <input
+                                    type="file"
+                                    className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="imageBride"
+                                    name="photo"
+                                    onChange={(val) => {
+                                      const fileImageHome = val?.target?.files?.[0];
+                                      
+                                      if (fileImageHome) {
+                                        const reader = new FileReader();
+                                        reader.readAsDataURL(fileImageHome);
+                                        reader.onloadend = () => {
+                                          const imageHomeDataUrl = reader.result as string;
+                                          
+                                          setFormData((prevState) => ({
+                                            ...prevState,
+                                            braidInfo: { ...prevState.braidInfo, female: { ...prevState.braidInfo.female, photo: imageHomeDataUrl } },
+                                          }));
+                                          const base64HomeData = imageHomeDataUrl.replace(
+                                            /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                            ""
+                                          );
+                                          
+                                        };
+                                      }
+                                    }}
+                                  />
+                                  
+                                </div>  
+                              </div> 
+                            </div> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>  
+                    {/* gallery*/}
+                    <div className={`tw-bg-gradient-to-r tw-from-indigo-100 tw-to-sky-200 tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '9' ? "" : "tw-max-h-14"}`}>
+                      <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer">
+                        <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '9' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('9')} />
+                        <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('9')}>Gallery</div>
+                        <div className='tw-w-24 tw-items-center tw-text-center'>
+                          {<ToggleSwitch initialState={formData.galery.isShow} onChange={(newState) => {
+                              setFormData((prevState) => ({
+                                ...prevState,
+                                galery: { ...prevState.galery, isShow: newState },
+                              }));
+                            }} /> 
+                          }
+                        </div>
+                      </div>
+                      <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '9' ? "tw-opacity-100" : "tw-opacity-0"}`}>
+                        <div className="tw-text-gray-700 tw-text-base">
+                          <div className="tw-bg-white  tw-rounded-xl"> 
+                              <div className="tw-p-3"> 
+                                <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
+                                  <div className="tw-mx-3 tw-w-full">
+                                    <label htmlFor={`galleryImage`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image</label>
+                                    {formData.galery.galeries && formData.galery.galeries.length > 1 ? 
+                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indigo-300 tw-p-2'>
+                                        {formData.galery.galeries.map((item, index) => {
+                                          
+    console.log('formData.galery.galeries');
+    console.log(formData.galery.galeries.length);
+    console.log(formData.galery.galeries);
+                                          
+                                          return (
+                                            <img 
+                                              key={`galleryImagePreview${index + 1}`} // Added key prop
+                                              id={`galleryImagePreview${index + 1}`} 
+                                              className='tw-max-h-48' 
+                                              // src={item} 
+                                              src={formData.galery.galeries ? "data:image/jpeg;base64," + item : ""}
+                                              alt={`imageHome${index + 1}`} 
+                                              style={{ margin: "5px", borderRadius: "5%" }} 
+                                            />
+                                          );
+                                        })}
+                                      </div> 
+                                      : <></>}
+                                    <input
+                                      type="file"
+                                      className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                      id={`galleryImage`}
+                                      name={`galleryImage`}
+                                      onChange={(val) => {
+                                        const fileImagegallery = val?.target?.files?.[0];
+                                        
+                                        if (fileImagegallery) {
+                                          const reader = new FileReader();
+                                          reader.readAsDataURL(fileImagegallery);
+                                          reader.onloadend = () => {
+                                            const imagegalleryDataUrl = reader.result as string;   
+                                            const base64galleryData = imagegalleryDataUrl.replace(
+                                              /^data:image\/(jpg|jpeg|png|gif);base64,/,
+                                              ""
+                                            );
+                                            setFormData((prev) => {
+                                              return {
+                                                ...prev,
+                                                galery: {
+                                                  ...prev?.galery,
+                                                  galeries: [
+                                                    ...(prev?.galery?.galeries ?? []),
+                                                    base64galleryData,
+                                                  ],
+                                                },
+                                              }  
+                                            });
+                                            
+                                          };
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              </div> 
+                            <div className="tw-p-3 tw-flex tw-items-center tw-justify-center  ">   
+                              <button className="tw-mx-3 tw-w-1/4 tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"  onClick={addStory}>
+                                Add Story
+                              </button>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                    </div>  
                   </div>
                   <div className="tw-flex tw-items-center tw-justify-center tw-mt-3"> 
                       <button

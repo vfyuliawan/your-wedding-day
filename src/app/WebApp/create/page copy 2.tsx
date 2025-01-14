@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.min.js";
 // import "bootstrap-icons/font/bootstrap-icons.min.css";
-import { ModelLoginRequestInterface } from "../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
+import { ModelLoginRequestInterface, ModelLoginRequestPatch } from "../Dashboard/Domain/Models/ModelRequest/LoginRequest/ModelLoginRequestInterface";
 import { ResultModelLoginResponseInterface } from "../Dashboard/Domain/Models/ModelResponse/LoginResponse/ModelLoginResponseInterface";
 import LoginService from "../Dashboard/Domain/Service/LoginService/LoginService";
 // import Service from "../services/Service";
@@ -67,10 +67,9 @@ const LoginDashboard = () => {
   };
   
   const doLogin = async (username: string, password: string) => {
-      const requestBody: ModelLoginRequestInterface = {
-          username: username,
-          password: password,
-        };
+    const requestBody: ModelLoginRequestPatch = {
+      body: formData
+    };
         try {
           const serviceLogin = await LoginService.loginService(requestBody);
       

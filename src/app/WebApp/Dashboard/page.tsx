@@ -644,7 +644,18 @@ const DashboardView = () => {
                   <button onClick={handleLogout} className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-white hover:tw-text-indigo-500">Logout</button>              
               :
                 <>
-                  <button onClick={() => handleRoute("/masuk")} className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-white">Login <span aria-hidden="true">→</span></button>
+                  <button onClick={() => handleRoute("/masuk")} disabled={isLoginLogout} className="tw-rounded-full tw-mx-3 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-indigo-500 tw-shadow-sm hover:tw-bg-indigo-500 hover:tw-text-white">
+                    {isLoginLogout ? (
+                        <ReactLoading
+                          type={"spinningBubbles"}
+                          color={"#116A7B"}
+                          height={30}
+                          width={30}
+                        />
+                      ) : (
+                        <>Login <span aria-hidden="true">→</span></>
+                      )}
+                  </button>
                   <button onClick={() => handleRoute("/daftar")} className="tw-rounded-full tw-bg-indigo-500 tw-border-2 tw-border-indigo-500 tw-px-3.5 tw-py-2.5 tw-text-sm tw-font-semibold tw-border-solid tw-text-white tw-shadow-sm hover:tw-bg-white hover:tw-text-white">Sign Up</button>
                 </>
               )}

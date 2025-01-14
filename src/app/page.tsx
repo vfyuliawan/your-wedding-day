@@ -6,7 +6,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Service from "./Firebase/services/Service";
 import { useEffect, useState } from "react";
 import { app } from "./Firebase/api/firebase";
-
+import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Tema
+import 'primereact/resources/primereact.min.css';  // Gaya komponen
+import 'primeicons/primeicons.css'; 
 import {
   CollectionReference,
   DocumentData,
