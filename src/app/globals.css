@@ -16,7 +16,7 @@ body {
   /* overflow-x: hidden; */
 } 
  
-.p-datepicker-calendar tbody, .p-timepicker, .p-datepicker-buttonbar{
+.p-datepicker-calendar tbody, .p-timepicker, .p-datepicker-buttonbar, .p-datepicker-header{
   background-color: white;
 }
 

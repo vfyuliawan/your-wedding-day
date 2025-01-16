@@ -114,7 +114,7 @@ const createProjectPage = () => {
     title: "",
     isShowLinkFilter: true,
     galery: {
-      galeries: [""],
+      galeries: [],
       isShow: true,
     },
     braidInfo: {
@@ -233,7 +233,7 @@ const createProjectPage = () => {
           router.push("/"); // Redirect to dashboard after successful login
         } else {
           setloading(false);
-          Swal.fire({title: "Failed!", text: "Failed Create New Project", icon: "info", });
+          // Swal.fire({title: "Failed!", text: "Failed Create New Project", icon: "info", });
         }
       } catch (error) {
         console.error("Login error:", error);
@@ -277,6 +277,13 @@ const createProjectPage = () => {
       braidInfo: { ...prevState.braidInfo, female: { ...prevState.braidInfo.female, [name]: value } },
     }));
   };  
+  const handleAdditionalChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value ,
+    }));
+  };  
 
   const handleGiftChange = (index: number, field: keyof GiftElementModelProjectRequestInterface, value: string) => {
     setFormData((prevState) => {
@@ -297,7 +304,7 @@ const createProjectPage = () => {
         story: { ...prevState.story, stories: updatedStories },
       };
     });
-  };
+  }; 
   // Handle form submission
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     setisLoadingMain(true);
@@ -693,7 +700,7 @@ const createProjectPage = () => {
                                   />
                                 </div>
                                 <div className="tw-mx-3 tw-w-full">
-                                  <label htmlFor="alamatTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place</label>
+                                  <label htmlFor="lokasiAkad" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Place</label>
                                   <input
                                     type="text"
                                     className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
@@ -705,7 +712,7 @@ const createProjectPage = () => {
                                   />
                                 </div>
                                 <div className="tw-mx-3 tw-w-full">
-                                  <label htmlFor="embededTheme" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Map</label>
+                                  <label htmlFor="mapAkad" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Link Map</label>
                                   <input
                                     type="text"
                                     className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
@@ -1057,10 +1064,10 @@ const createProjectPage = () => {
                         <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '7' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('7')} />
                         <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('7')}>Story</div>
                         <div className='tw-w-24 tw-items-center tw-text-center'>
-                          {<ToggleSwitch initialState={formData.gift.isShow} onChange={(newState) => {
+                          {<ToggleSwitch initialState={formData.story.isShow} onChange={(newState) => {
                               setFormData((prevState) => ({
                                 ...prevState,
-                                gift: { ...prevState.gift, isShow: newState },
+                                story: { ...prevState.story, isShow: newState },
                               }));
                             }} /> 
                           }
@@ -1174,8 +1181,14 @@ const createProjectPage = () => {
                       <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer">
                         <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '8' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('8')} />
                         <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('8')}>Braid Info</div>
-                        <div className='tw-w-24 tw-items-center tw-text-center '>
-                          {<i className="bi bi-grid-3x2-gap-fill tw-rotate-90" />}
+                        <div className='tw-w-24 tw-items-center tw-text-center'>
+                          {<ToggleSwitch initialState={formData.braidInfo.isShow} onChange={(newState) => {
+                              setFormData((prevState) => ({
+                                ...prevState,
+                                braidInfo: { ...prevState.braidInfo, isShow: newState },
+                              }));
+                            }} /> 
+                          }
                         </div>
                       </div>
                       <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '8' ? "tw-opacity-100" : "tw-opacity-0"}`}>
@@ -1365,24 +1378,31 @@ const createProjectPage = () => {
                                 <div className="tw-p-3 tw-flex tw-items-center tw-justify-center ">
                                   <div className="tw-mx-3 tw-w-full">
                                     <label htmlFor={`galleryImage`} className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Image</label>
-                                    {formData.galery.galeries && formData.galery.galeries.length > 1 ? 
-                                      <div className='tw-h-56 tw-w-full tw-rounded-lg tw-border tw-border-indigo-300 tw-p-2'>
-                                        {formData.galery.galeries.map((item, index) => {
-                                          
-    console.log('formData.galery.galeries');
-    console.log(formData.galery.galeries.length);
-    console.log(formData.galery.galeries);
-                                          
+                                    {formData.galery.galeries && formData.galery.galeries.length > 0 ? 
+                                       <div className="tw-flex tw-flex-wrap tw-gap-2 tw-border tw-border-indigo-300 tw-p-2 tw-rounded-lg">
+                                          {formData.galery.galeries.map((item, index) => { 
                                           return (
-                                            <img 
-                                              key={`galleryImagePreview${index + 1}`} // Added key prop
-                                              id={`galleryImagePreview${index + 1}`} 
-                                              className='tw-max-h-48' 
-                                              // src={item} 
-                                              src={formData.galery.galeries ? "data:image/jpeg;base64," + item : ""}
-                                              alt={`imageHome${index + 1}`} 
-                                              style={{ margin: "5px", borderRadius: "5%" }} 
-                                            />
+                                            <div key={`galleryImagePreview${index}`} className="tw-relative">
+                                              <img
+                                                className="tw-max-h-48 tw-rounded-lg"
+                                                src={`data:image/jpeg;base64,${item}`}
+                                                alt={`imageHome${index + 1}`}
+                                                style={{ margin: '5px' }}
+                                              />
+                                              <button
+                                                type="button"
+                                                className="tw-absolute tw-top-0 tw-right-0 tw-h-10 tw-w-10 tw-bg-red-500 tw-text-white tw-p-1 tw-rounded-full"
+                                                onClick={() => setFormData((prev) => ({
+                                                  ...prev,
+                                                  galery: {
+                                                    ...prev?.galery,
+                                                    galeries: prev?.galery?.galeries?.filter((_, i) => i !== index),
+                                                  },
+                                                }))}
+                                              >
+                                                X
+                                              </button>
+                                            </div>
                                           );
                                         })}
                                       </div> 
@@ -1392,43 +1412,148 @@ const createProjectPage = () => {
                                       className="tw-mt-1 tw-inline tw-items-center tw-text-center tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 w-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
                                       id={`galleryImage`}
                                       name={`galleryImage`}
+                                      multiple
                                       onChange={(val) => {
-                                        const fileImagegallery = val?.target?.files?.[0];
-                                        
-                                        if (fileImagegallery) {
-                                          const reader = new FileReader();
-                                          reader.readAsDataURL(fileImagegallery);
-                                          reader.onloadend = () => {
-                                            const imagegalleryDataUrl = reader.result as string;   
-                                            const base64galleryData = imagegalleryDataUrl.replace(
-                                              /^data:image\/(jpg|jpeg|png|gif);base64,/,
-                                              ""
-                                            );
-                                            setFormData((prev) => {
-                                              return {
-                                                ...prev,
-                                                galery: {
-                                                  ...prev?.galery,
-                                                  galeries: [
-                                                    ...(prev?.galery?.galeries ?? []),
-                                                    base64galleryData,
-                                                  ],
-                                                },
-                                              }  
-                                            });
-                                            
-                                          };
+                                        const files = val?.target?.files;
+                                        if (files) {
+                                          Array.from(files).forEach((file) => {
+                                            const reader = new FileReader();
+                                            reader.readAsDataURL(file);
+                                            reader.onloadend = () => {
+                                              if (typeof reader.result === "string") {
+                                                const imageDataUrl = reader.result;
+                                                const base64Data = imageDataUrl.replace(/^data:image\/(jpg|jpeg|png|gif);base64,/, "");
+
+                                                setFormData((prev) => ({
+                                                  ...prev,
+                                                  galery: {
+                                                    ...prev?.galery,
+                                                    galeries: [
+                                                      ...(prev?.galery?.galeries ?? []),
+                                                      base64Data,
+                                                    ],
+                                                  },
+                                                }));
+                                              }
+                                            };
+                                          });
                                         }
                                       }}
                                     />
                                   </div>
                                 </div>
+                              </div>  
+                          </div>
+                        </div>
+                      </div>
+                    </div>  
+                    {/* main */}
+                    <div className={`tw-bg-gradient-to-r tw-from-indigo-100 tw-to-sky-200 tw-shadow-lg tw-rounded-3xl tw-mb-1 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '10' ? "" : "tw-max-h-14"}`}>
+                      <div className="tw-flex tw-justify-between tw-items-start tw-p-4 tw-cursor-pointer">
+                        <i className={`bi bi-caret-right-fill tw-text-1xl tw-transition-all tw-duration-300 ${activeId === '10' ? "tw-rotate-45" : ""}`} onClick={() => handleAccordionClick('10')} />
+                        <div className="tw-text-1xl tw-font-bold" onClick={() => handleAccordionClick('10')}>Additional Info</div>
+                        <div className='tw-w-24 tw-items-center tw-text-center '>
+                          {<i className="bi bi-grid-3x2-gap-fill tw-rotate-90" />}
+                        </div>
+                      </div>
+                      <div className={`tw-px-5 tw-pb-6 tw-overflow-hidden tw-transition-all tw-duration-300 ${activeId === '10' ? "tw-opacity-100" : "tw-opacity-0"}`}>
+                        <div className="tw-text-gray-700 tw-text-base">
+                          <div className="tw-bg-white  tw-rounded-xl "> 
+                            <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                              <div className="tw-mx-3 tw-w-full">
+                                <label htmlFor="title" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Title</label>
+                                <input
+                                  type="text"
+                                  className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                  id="title"
+                                  name="title"
+                                  placeholder="Wedding of john and marie"
+                                  value={formData.title}   
+                                  onChange={handleAdditionalChange}
+                                />
                               </div> 
-                            <div className="tw-p-3 tw-flex tw-items-center tw-justify-center  ">   
-                              <button className="tw-mx-3 tw-w-1/4 tw-bg-indigo-500 tw-text-white tw-font-semibold tw-py-2 tw-rounded-lg tw-shadow-sm hover:tw-bg-indigo-500 focus:tw-outline-2 focus:tw-outline-indigo-600"  onClick={addStory}>
-                                Add Story
-                              </button>
-                            </div>  
+                              <div className="tw-mx-3 tw-w-1/2">
+                                <label htmlFor="countdown" className="tw-w-full tw-px-2 form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Countdown</label>
+                                <Calendar 
+                                  id="countdown"  
+                                  className="tw-h-12 tw-w-full tw-px-1" 
+                                  value={formData.countdown} 
+                                  placeholder='Countdown Date'
+                                  onChange={(e) =>  {
+                                    setFormData((prevData) => ({
+                                      ...prevData,
+                                      countdown: e.value ? e.value : null,
+                                    })) }
+                                    
+                                  } 
+                                  showTime hourFormat="24" 
+                                />  
+                              </div> 
+                              <div className="tw-mx-3 tw-w-1/4">
+                                <label htmlFor="igfilter" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700 ">Health Protocol</label>
+                                <div  className="tw-p-3 tw-items-start ">
+                                  {<ToggleSwitch initialState={formData.healtProtocol} onChange={(newState) => {
+                                      setFormData((prevState) => ({
+                                        ...prevState,
+                                        healtProtocol: newState ,
+                                      }));
+                                    }} /> 
+                                  } 
+                                </div>   
+                              </div> 
+                            </div> 
+                            <div className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                              <div className="tw-mx-3 tw-w-full">
+                                <label htmlFor="videoLink" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Video Link</label>
+                                <input
+                                  type="text"
+                                  className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                  id="videoLink"
+                                  name="videoLink"
+                                  placeholder="Https://www.youtube.com/qwerty"
+                                  value={formData.videoLink}   
+                                  onChange={handleAdditionalChange}
+                                />
+                              </div> 
+                              <div className="tw-mx-3 tw-w-full">
+                                <label htmlFor="liveLink" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Live Link</label>
+                                <input
+                                  type="text"
+                                  className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                  id="liveLink"
+                                  name="liveLink"
+                                  placeholder="Https://www.youtube.com/qwerty"
+                                  value={formData.livelink}   
+                                  onChange={handleAdditionalChange}
+                                />
+                              </div> 
+                              <div className="tw-w-full tw-flex tw-items-start ">
+                                <div className="tw-mx-3 tw-w-full">
+                                  <label htmlFor="igfilter" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700">Ig filter</label>
+                                  <input
+                                    type="text"
+                                    className="form-control tw-h-12  tw-mt-1 tw-block tw-w-full tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-py-2 tw-text-sm tw-text-gray-900 focus:tw-ring-2 focus:tw-ring-indigo-500 focus:tw-outline-none"
+                                    id="igfilter"
+                                    name="igFilter"
+                                    placeholder="Https://www.instagram.com/username"
+                                    value={formData.igFilter}   
+                                    onChange={handleAdditionalChange}
+                                  />
+                                </div> 
+                                <div className="tw-mx-3 tw-w-1/4">
+                                  <label htmlFor="igfilter" className="form-label tw-block tw-text-sm tw-font-medium tw-text-gray-700 tw-text-white">.</label>
+                                  <div  className="tw-p-3 tw-flex tw-items-start tw-justify-center  ">
+                                    {<ToggleSwitch initialState={formData.isShowLinkFilter} onChange={(newState) => {
+                                        setFormData((prevState) => ({
+                                          ...prevState,
+                                          isShowLinkFilter: newState ,
+                                        }));
+                                      }} /> 
+                                    }                              
+                                  </div>
+                                </div> 
+                              </div> 
+                            </div>
                           </div>
                         </div>
                       </div>
